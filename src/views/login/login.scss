@@ -1,0 +1,117 @@
+.loginBox {
+  background-color: rgba(0, 85, 184, 0.10);
+  background-image: url('../../assets/login/BG@2x.jpg');
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  .loginContentBox {
+    position: absolute;
+    left: calc(50% - 241px);
+    top: calc((100% - 400px) * 0.45);
+    opacity: 0.9;
+    background: #FFFFFF;
+    padding: 20px 40px 20px 40px;
+    width: 442px;
+    .headerBox {
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      h2{
+        margin-bottom: 0;
+        font-size: 18px;
+        small{
+          font-size: 12px;
+        }
+      }
+    }
+    .formBox {
+      padding-bottom: 17px;
+      .inputBox:first-child {
+        .v-input {
+          margin-top: 13px;
+        }
+      }
+      /deep/ .inputBox {
+        .v-input__slot::before {
+          border-color: #CCC
+        }
+        .v-input__prepend-inner {
+          padding-right: 12px;
+          .v-input__icon {
+            min-width: 20px;
+            width: 20px;
+            min-height: 20px;
+            height: 20px;
+            .v-icon {
+              font-size: 20px;
+              color: #BBB !important;
+            }
+          }
+        }
+        .v-text-field__slot {
+          input {
+            padding: 6px 0 10px;
+            text-align: left;
+          }
+        }
+        .v-select__slot {
+          input {
+            padding: 6px 0 10px;
+            text-align: left;
+          }
+        }
+      }
+    }
+    .loginBtnBox {
+      .v-btn {
+        width: 360px;
+        margin: 0;
+        height: 44px;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 0.5px;
+        background-color: $bg-blue !important;
+        border-radius: 100px;
+      }
+    }
+    .bottomBtn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      /deep/ .v-input {
+        .v-input--selection-controls__input{
+          margin-right: 0;
+        }
+        .v-label {
+          top: -1px;
+          font-size: 12px;
+          color: #555555;
+          letter-spacing: 0.38px;
+          line-height: 12px;
+        }
+      }
+      a {
+        font-size: 12px;
+        color: #555555;
+        letter-spacing: 0.38px;
+        line-height: 12px;
+        &:focus{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .bottomBox {
+    position: absolute;
+    left: calc(50% - 241px);
+    bottom: calc((100% - 507px) * 0.094);
+  }
+}

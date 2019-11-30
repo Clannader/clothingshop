@@ -1,0 +1,44 @@
+// 可能这样也能从根目录引入样式??
+// @import "~@/style/color.scss";
+
+html {
+  overflow-y: auto;
+}
+
+//右侧滚动条样式Begin
+.scroll {
+  overflow: auto;
+  padding-bottom: 20px;
+  margin-right: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F2F2F2;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar {
+  border-radius: 7px;
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-thumb:hover {
+  background: $bg-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $bg-blue;
+  border-radius: 7px;
+}
+
+//End
+
+//iconfont 样式
+[class^="icon-"], [class*="icon-"] {
+  font-size: 20px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
