@@ -9,20 +9,20 @@
 </template>
 
 <script>
-  import AppFab from './components/AppFab'
-  import AppFooter from './components/AppFooter'
-  import AppContent from './components/AppContent'
-  import AppNavigation from './components/AppNavigation'
-  import AppToolbar from './components/AppToolbar'
+import AppFab from './components/AppFab'
+import AppFooter from './components/AppFooter'
+import AppContent from './components/AppContent'
+import AppNavigation from './components/AppNavigation'
+import AppToolbar from './components/AppToolbar'
 
-  export default {
-    name: 'HomePage',
-    components: {
-      AppFab,
-      AppFooter,
-      AppContent,
-      AppNavigation,
-      AppToolbar
-    }
+export default {
+  name: 'HomePage',
+  components: {
+    AppFab,
+    AppFooter,
+    AppContent,
+    AppNavigation,
+    AppToolbar
   }
+}
 </script>

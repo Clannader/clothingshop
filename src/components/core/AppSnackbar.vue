@@ -10,28 +10,28 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppSnackbar',
-    props: {
-      color: {
-        type: String,
-        default: 'info'
-      },
-      timeout: {
-        type: Number,
-        default: 0
-      },
-      message: {
-        type: String,
-        default: ''
-      }
+export default {
+  name: 'AppSnackbar',
+  props: {
+    color: {
+      type: String,
+      default: 'info'
     },
-    data() {
-      return {
-        show: true
-      }
+    timeout: {
+      type: Number,
+      default: 0
+    },
+    message: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      show: true
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -18,7 +18,7 @@
       <v-list-tile
         v-for="menu in menuRouter"
         :key="menu.name"
-        @click=""
+        @click="nothing"
       >
         <v-list-tile-action>
           <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
@@ -33,21 +33,26 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-  export default {
-    name: 'AppNavigation',
-    data() {
-      return {
-        mini: false
-      }
-    },
-    computed: {
-      ...mapGetters([
-        'menuRouter'
-      ])
+export default {
+  name: 'AppNavigation',
+  data() {
+    return {
+      mini: false
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'menuRouter'
+    ])
+  },
+  methods: {
+    nothing() {
+
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

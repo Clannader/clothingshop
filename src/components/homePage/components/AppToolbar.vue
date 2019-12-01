@@ -43,31 +43,31 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppToolbar',
-    data() {
-      return {
-        // mini: false,
-        userName: '',
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ]
-      }
-    },
-    created() {
-      // const sidebarStatus = localStorage.getItem('sidebarStatus')
-      // this.mini = sidebarStatus && sidebarStatus === 'true'
-      this.userName = sessionStorage.getItem('userName')
-    },
-    methods: {
-      changeSidebar() {
-        // 初始化侧边栏状态,是收缩还是展开
-        // this.mini = !this.mini
-        // localStorage.setItem('sidebarStatus', this.mini)
-      }
+export default {
+  name: 'AppToolbar',
+  data() {
+    return {
+      // mini: false,
+      userName: '',
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ]
+    }
+  },
+  created() {
+    // const sidebarStatus = localStorage.getItem('sidebarStatus')
+    // this.mini = sidebarStatus && sidebarStatus === 'true'
+    this.userName = sessionStorage.getItem('userName')
+  },
+  methods: {
+    changeSidebar() {
+      // 初始化侧边栏状态,是收缩还是展开
+      // this.mini = !this.mini
+      // localStorage.setItem('sidebarStatus', this.mini)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
