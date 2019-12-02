@@ -1,5 +1,6 @@
 import AppSnackbarComponent from '../core/AppSnackbar'
 import Vue from 'vue'
+
 const AppSnackbar = {}
 
 AppSnackbar.info = (color, message, duration = 3000) => {

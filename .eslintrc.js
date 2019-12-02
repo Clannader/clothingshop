@@ -41,7 +41,9 @@ module.exports = {
       'after': true
     }],
     'handle-callback-err': [2, '^(err|error)$'],
-    'indent': [2, 2, {
+
+    // indent缩进校验
+    'indent': [0, 2, {
       'SwitchCase': 1
     }],
     'jsx-quotes': [2, 'prefer-single'],

@@ -18,6 +18,7 @@ import store from './store'
 import router from './router'
 
 import { Table, Upload, Icon, Input } from 'ant-design-vue'
+
 Vue.component(Table.name, Table)
 Vue.component(Table.Column.name, Table.Column)
 Vue.component(Table.ColumnGroup.name, Table.ColumnGroup)

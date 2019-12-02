@@ -7,9 +7,9 @@
 </template>
 
 <script>
-export default {
-  name: 'AppContent'
-}
+  export default {
+    name: 'AppContent'
+  }
 </script>
 
 <style lang="scss" scoped>

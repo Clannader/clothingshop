@@ -33,30 +33,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
 
-export default {
-  name: 'AppNavigation',
-  data() {
-    return {
-      mini: false
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'menuRouter'
-    ])
-  },
-  methods: {
-    nothing() {
+  export default {
+    name: 'AppNavigation',
+    data() {
+      return {
+        mini: false
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'menuRouter'
+      ])
+    },
+    methods: {
+      nothing() {
 
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-  .bar-title{
+  .bar-title {
     z-index: 88;
     background-color: $bg-blue;
     color: #fff;

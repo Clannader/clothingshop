@@ -10,32 +10,32 @@
 </template>
 
 <script>
-export default {
-  name: 'AppSnackbar',
-  props: {
-    color: {
-      type: String,
-      default: 'info'
+  export default {
+    name: 'AppSnackbar',
+    props: {
+      color: {
+        type: String,
+        default: 'info'
+      },
+      timeout: {
+        type: Number,
+        default: 0
+      },
+      message: {
+        type: String,
+        default: ''
+      }
     },
-    timeout: {
-      type: Number,
-      default: 0
-    },
-    message: {
-      type: String,
-      default: ''
-    }
-  },
-  data() {
-    return {
-      show: true
+    data() {
+      return {
+        show: true
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-  .v-snack--top{
+  .v-snack--top {
     top: 20px;
   }
 </style>

@@ -1,11 +1,11 @@
 <template>
-
+  <div></div>
 </template>
 
 <script>
-export default {
-  name: 'AppDialog'
-}
+  export default {
+    name: 'AppDialog'
+  }
 </script>
 
 <style scoped>

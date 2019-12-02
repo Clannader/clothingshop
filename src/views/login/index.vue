@@ -60,111 +60,111 @@
 </template>
 
 <script scope>
-import { login } from './api.js'
-import CryptoJS from 'crypto.js'
+  import { login } from './api.js'
+  import CryptoJS from 'crypto.js'
 
-export default {
-  data() {
-    return {
-      hackReset: true,
-      isRemember: true,
-      showPassword: false,
-      valid: true,
-      userName: '',
-      userNameRules: [
-        v => !!v || `${this.$t('login.userName')}`,
-        v => /^[\w\u4e00-\u9fa5\@\.]+$/.test(v) || `${this.$t('login.errorUsername')}`
-      ],
+  export default {
+    data() {
+      return {
+        hackReset: true,
+        isRemember: true,
+        showPassword: false,
+        valid: true,
+        userName: '',
+        userNameRules: [
+          v => !!v || `${this.$t('login.userName')}`,
+          v => /^[\w\u4e00-\u9fa5\@\.]+$/.test(v) || `${this.$t('login.errorUsername')}`
+        ],
 
-      password: '',
-      passwordRules: [
-        v => !!v || `${this.$t('login.password')}`,
-        v => /^[\w]+$/.test(v) || `${this.$t('login.errorPassword')}`
-      ],
-      userNameList: [],
-      languageList: []
-    }
-  },
-  created() {
-    if (localStorage.getItem('userNameList')) {
-      try {
-        this.userNameList = JSON.parse(localStorage.getItem('userNameList'))
-      } catch (e) {
-        this.userNameList = []
+        password: '',
+        passwordRules: [
+          v => !!v || `${this.$t('login.password')}`,
+          v => /^[\w]+$/.test(v) || `${this.$t('login.errorPassword')}`
+        ],
+        userNameList: [],
+        languageList: []
       }
-      if (this.userNameList.length > 0) {
-        this.userName = this.userNameList[0]
+    },
+    created() {
+      if (localStorage.getItem('userNameList')) {
+        try {
+          this.userNameList = JSON.parse(localStorage.getItem('userNameList'))
+        } catch (e) {
+          this.userNameList = []
+        }
+        if (this.userNameList.length > 0) {
+          this.userName = this.userNameList[0]
+        }
       }
-    }
-    this.languageList = this.staticVal.LanguageList
-    // 全局enter按键登录
-    this.publicMethods.hotkeys(this.submit, 'Enter')
-  },
-  computed: {
-    language: {
-      get() {
-        return this.$store.state.tagsView.language
+      this.languageList = this.staticVal.LanguageList
+      // 全局enter按键登录
+      this.publicMethods.hotkeys(this.submit, 'Enter')
+    },
+    computed: {
+      language: {
+        get() {
+          return this.$store.state.tagsView.language
+        },
+        set(lang) {
+          this.languagesChange(lang)
+          this.changeLang()
+          // this.$refs.form.reset()
+        }
+      }
+    },
+    methods: {
+      // 改变语言时重载登录Input部分
+      // 改变的是错误提示的Input
+      changeLang() {
+        this.hackReset = false
+        this.$nextTick(() => {
+          this.hackReset = true
+        })
       },
-      set(lang) {
-        this.languagesChange(lang)
-        this.changeLang()
-        // this.$refs.form.reset()
-      }
-    }
-  },
-  methods: {
-    // 改变语言时重载登录Input部分
-    // 改变的是错误提示的Input
-    changeLang() {
-      this.hackReset = false
-      this.$nextTick(() => {
-        this.hackReset = true
-      })
-    },
-    // switch language
-    languagesChange(lang) {
-      this.$i18n.locale = lang
-      this.$store.dispatch('setLanguage', lang)
-    },
-    submit() {
-      if (this.$refs.form.validate()) {
-        this.userLogin()
-      }
-    },
-    changeShowPassword() {
-      this.showPassword = !this.showPassword
-    },
-    async userLogin() {
-      const params = {
-        adminId: this.userName,
-        adminPws: CryptoJS.sha256(this.password)
-      }
-      const [err, data] = await this.publicMethods.getPromise(login(params))
-      if (err) {
-        // this.$toask.info('success', 'sss')
-        // console.log(err)
-        return
-      }
-      if (data.code === this.staticVal.Code.Success) {
-        if (this.isRemember) {
-          if (this.userNameList.indexOf(this.userName) === -1) {
-            this.userNameList.unshift(this.userName)
+      // switch language
+      languagesChange(lang) {
+        this.$i18n.locale = lang
+        this.$store.dispatch('setLanguage', lang)
+      },
+      submit() {
+        if (this.$refs.form.validate()) {
+          this.userLogin()
+        }
+      },
+      changeShowPassword() {
+        this.showPassword = !this.showPassword
+      },
+      async userLogin() {
+        const params = {
+          adminId: this.userName,
+          adminPws: CryptoJS.sha256(this.password)
+        }
+        const [err, data] = await this.publicMethods.getPromise(login(params))
+        if (err) {
+          // this.$toask.info('success', 'sss')
+          // console.log(err)
+          return
+        }
+        if (data.code === this.staticVal.Code.Success) {
+          if (this.isRemember) {
+            if (this.userNameList.indexOf(this.userName) === -1) {
+              this.userNameList.unshift(this.userName)
+            } else if (this.userNameList.indexOf(this.userName) > -1) {
+              this.userNameList.splice(this.userNameList.indexOf(this.userName), 1)
+              this.userNameList.unshift(this.userName)
+            }
           } else if (this.userNameList.indexOf(this.userName) > -1) {
             this.userNameList.splice(this.userNameList.indexOf(this.userName), 1)
-            this.userNameList.unshift(this.userName)
           }
-        } else if (this.userNameList.indexOf(this.userName) > -1) {
-          this.userNameList.splice(this.userNameList.indexOf(this.userName), 1)
+          localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
+          sessionStorage.setItem('userName', this.userName)
+          this.publicMethods.setUserSession(data['credential'])
+          document.onkeydown = undefined
+          this.$router.push({ name: 'Home' })
         }
-        localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
-        sessionStorage.setItem('userName', this.userName)
-        this.publicMethods.setUserSession(data['credential'])
-        document.onkeydown = undefined
-        this.$router.push({ name: 'Home' })
       }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

@@ -14,9 +14,9 @@
 </template>
 
 <script>
-export default {
-  name: 'AppFooter'
-}
+  export default {
+    name: 'AppFooter'
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -26,10 +26,11 @@ export default {
     //border-top: 1px solid #d2d6de;
     //这里之所以这个属性无效,是因为用了color=white,被覆盖属性了
     strong {
-     padding: 0 10px 0 10px;
+      padding: 0 10px 0 10px;
     }
   }
-  .white{
+
+  .white {
     border-top: 1px solid #d2d6de !important;
   }
 </style>
