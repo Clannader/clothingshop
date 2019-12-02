@@ -19,18 +19,18 @@ module.exports = {
     config.resolve.alias.set('components', resolve('src/components'))
 
     // 添加scss规则
-    config.module.rule('scss')
-      .test(/\\.scss$/)
-      .use('sass-loader')
-      .loader('sass-loader')
-      .end()
+    const scssRule = config.module.rule('scss').test(/\\.scss$/)
+    scssRule.use('sass-loader').loader('sass-loader').end()
+    scssRule.use('vue-style-loader').loader('vue-style-loader').end()
 
     // 添加js规则
-    // config.module.rule('js')
-    //   .test(/\\.js$/)
-    //   .use('babel-loader')
-    //   .loader('babel-loader')
-    //   .end()
+    const jsRule = config.module.rule('js').test(/\\.js/)
+    jsRule.use('babel-loader').loader('babel-loader').end()
+    
+    // const vueRule = config.module.rule('vue').test(/\\.vue/)
+    // vueRule.use('vue-style-loader').loader('vue-style-loader').end()
+    // console.log(config.module.rules.get('vue'))
+    // console.log(config.module.rules.get('vue').store)
   },
   // configureWebpack: config => {
   //

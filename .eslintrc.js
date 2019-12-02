@@ -122,7 +122,7 @@ module.exports = {
     'no-sparse-arrays': 2,
     'no-this-before-super': 2,
     'no-throw-literal': 2,
-    'no-trailing-spaces': 0,// 是否允许代码有空行
+    'no-trailing-spaces': 0, // 是否允许代码有空行
     'no-undef': 2,
     'no-undef-init': 2,
     'no-unexpected-multiline': 2,
