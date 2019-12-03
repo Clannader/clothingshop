@@ -1,5 +1,7 @@
 // 可能这样也能从根目录引入样式??
-// @import "~@/style/color.scss";
+//@import "~@/style/color.scss";
+// TODO
+@import "./color.scss";
 
 html {
   overflow-y: auto;
