@@ -32,10 +32,8 @@ Vue.config.productionTip = false
 Vue.use(Vuetify)
 
 new Vue({
-  el: '#app',
   router,
-  i18n,
   store,
-  components: { App },
-  template: '<App/>'
-})
+  i18n,
+  render: h => h(App)
+}).$mount('#app')
