@@ -10,10 +10,11 @@ module.exports = {
   assetsDir: 'static',
   // 生产环境打包不产生map文件
   productionSourceMap: false,
-  runtimeCompiler: true,
+  // runtimeCompiler: true,
   // vue 2.x版本的原先BASE_URL，vue 4.x改名为publicPath
   // 这里有个不好的地方就是无法设置多个环境的配置文件
-  publicPath: process.env.NODE_ENV === 'production' ? '/cms/h5' : 'https://cc:3001/cms/h5',
+  // 这个配置有问题
+  // publicPath: process.env.NODE_ENV === 'production' ? '/cms/h5' : 'https://cc:3001/cms/h5',
   // 对应vue 2.x webpack.base.conf的配置
   chainWebpack: config => {
     // 设置路径名的别名引用
