@@ -57,7 +57,7 @@
 
 <style lang="scss" scoped>
   // TODO 暂时这样写再说
-  @import "~@/style/color.scss";
+  @import "@/style/color.scss";
 
   .bar-title {
     z-index: 88;

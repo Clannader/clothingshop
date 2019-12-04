@@ -1,4 +1,4 @@
-import AppSnackbarComponent from '../core/AppSnackbar'
+import AppSnackbarComponent from 'components/core/AppSnackbar'
 import Vue from 'vue'
 
 const AppSnackbar = {}

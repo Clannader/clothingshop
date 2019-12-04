@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-import snackbar from '@/components/plugin/appSnackbar'
+import snackbar from '@/plugins/core/appSnackbar'
 import staticVal from './globalVariable'
 
 // 创建axios 实例
@@ -37,6 +37,7 @@ service.interceptors.response.use(
     }
   },
   error => {
+    snackbar.info('error', error)
     return Promise.reject(error)
   }
 )

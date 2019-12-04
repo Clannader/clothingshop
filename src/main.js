@@ -1,12 +1,13 @@
 'use strict'
 
 import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'ant-design-vue/dist/antd.min.css'
 import './style/icon/iconfont.css'
 import './style/style.scss'
 
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import vuetify from './plugins/vuetify'
 // 翻译资源文件
 import i18n from './i18n'
 // 公共方法
@@ -29,11 +30,12 @@ Vue.component(Input.name, Input)
 
 Vue.config.productionTip = false
 
-Vue.use(Vuetify)
+// Vue.use(Vuetify)
 
 new Vue({
   router,
   store,
   i18n,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
