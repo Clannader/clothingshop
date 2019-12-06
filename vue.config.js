@@ -10,11 +10,16 @@ module.exports = {
   assetsDir: 'static',
   // 生产环境打包不产生map文件
   productionSourceMap: false,
+  devServer: {
+    host: 'localhost',
+    port: '9800',
+    proxy: 'http://localhost:3000'
+  },
   // runtimeCompiler: true,
   // vue 2.x版本的原先BASE_URL，vue 4.x改名为publicPath
   // 这里有个不好的地方就是无法设置多个环境的配置文件
   // 这个配置有问题
-  // publicPath: process.env.NODE_ENV === 'production' ? '/cms/h5' : 'https://cc:3001/cms/h5',
+  publicPath: '/cms/h5',
   // 对应vue 2.x webpack.base.conf的配置
   chainWebpack: config => {
     // 设置路径名的别名引用
@@ -33,28 +38,36 @@ module.exports = {
     // vueRule.use('vue-style-loader').loader('vue-style-loader').end()
     // console.log(config.module.rules.get('vue'))
     // console.log(config.module.rules.get('vue').store)
-  }
+  },
   // configureWebpack: config => {
   //
   // },
-  // pages: {
-  //   index: {
-  //     entry: [
-  //       // 为了兼容IE,暂时注掉
-  //       // 'babel-polyfill',
-  //       './src/main.js'
-  //     ]
-  //   }
-  // },
+  pages: {
+    index: {
+      entry: [
+        // 为了兼容IE,暂时注掉
+        // 'babel-polyfill',
+        './src/main.js'
+      ],
+      title: 'Clothingshop'
+    }
+  }
   // css: {
   //   loaderOptions: {
   //     scss: {
-        // @/ 是 src/ 的别名
-        // 所以这里假设你有 `src/color.scss` 这个文件
-        // 注意：在 sass-loader v7 中，这个选项名是 "data"
-        // 作用是全局引用这个scss
-        // prependData: `@import "~@/style/color.scss"`
+  //       // @/ 是 src/ 的别名
+  //       // 所以这里假设你有 `src/color.scss` 这个文件
+  //       // 注意：在 sass-loader v7 中，这个选项名是 "data"
+  //       // 作用是全局引用这个scss
+  //       // prependData: `@import "./src/style/color.scss"`
   //     }
+  //   }
+  // },
+  // pluginOptions: {
+  //   'sass-resources-loader': {
+  //     preProcessor: 'scss',
+  //     // 需要通过less-loader自动引入的资源，集合类型
+  //     patterns: [resolve('src/style/color.scss')]
   //   }
   // }
 }

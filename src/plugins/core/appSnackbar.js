@@ -10,6 +10,7 @@ AppSnackbar.info = (color, message, duration = 3000) => {
   document.body.appendChild(instance.$el)
   instance.color = color
   instance.message = message
+  // color的问题是没有在v-application下,查看.v-application .error
   // setTimeout(() => {
   //   instance.show = false
   // }, duration)
