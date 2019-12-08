@@ -1,4 +1,5 @@
 const path = require('path')
+
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 function resolve(dir) {
@@ -13,13 +14,13 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: '9800',
-    proxy: 'http://localhost:3000'
+    proxy: 'http://localhost:3000/cms/h5'
   },
   // runtimeCompiler: true,
   // vue 2.x版本的原先BASE_URL，vue 4.x改名为publicPath
   // 这里有个不好的地方就是无法设置多个环境的配置文件
   // 这个配置有问题
-  publicPath: '/cms/h5',
+  // publicPath: '/cms/h5',
   // 对应vue 2.x webpack.base.conf的配置
   chainWebpack: config => {
     // 设置路径名的别名引用
@@ -33,7 +34,7 @@ module.exports = {
     // 添加js规则
     // const jsRule = config.module.rule('js').test(/\\.js/)
     // jsRule.use('babel-loader').loader('babel-loader').end()
-    
+
     // const vueRule = config.module.rule('vue').test(/\\.vue/)
     // vueRule.use('vue-style-loader').loader('vue-style-loader').end()
     // console.log(config.module.rules.get('vue'))
@@ -47,7 +48,7 @@ module.exports = {
       entry: [
         // 为了兼容IE,暂时注掉
         // 'babel-polyfill',
-        './src/main.js'
+        resolve('src/main.js')
       ],
       title: 'Clothingshop'
     }
@@ -62,7 +63,7 @@ module.exports = {
   //       // prependData: `@import "./src/style/color.scss"`
   //     }
   //   }
-  // },
+  // }
   // pluginOptions: {
   //   'sass-resources-loader': {
   //     preProcessor: 'scss',
