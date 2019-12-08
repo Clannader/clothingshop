@@ -30,8 +30,6 @@ Vue.component(Input.name, Input)
 
 Vue.config.productionTip = false
 
-// Vue.use(Vuetify)
-
 new Vue({
   router,
   store,

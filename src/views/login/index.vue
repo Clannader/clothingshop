@@ -53,8 +53,7 @@
             color="primary"
           ></v-checkbox>
         </div>
-        <!-- h5使用的是span标签-->
-        <a href="javascript:void (0)">{{$t('login.forgot')}}?</a>
+        <span>{{$t('login.forgot')}}?</span>
       </div>
     </div>
   </div>
