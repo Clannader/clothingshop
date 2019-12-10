@@ -1,5 +1,5 @@
-1.vue-cli3.0无法引入color.scss全局样式,sass-loader,使用7.1.0试试
-2.目前登录页面的样式优先级vuetify>style.scss
+1.vue-cli3.0无法引入color.scss全局样式,sass-loader,使用7.1.0试试√
+2.目前登录页面的样式优先级vuetify>style.scss√ 暂时解决了,不知道是不是样式覆盖的原因
 3.无法配置多个环境的变量,例如dev.config.js,prod.config.js等
 4.主页样式混乱
 5.snackbar的样式不在app里面
