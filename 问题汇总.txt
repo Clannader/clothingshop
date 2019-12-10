@@ -3,3 +3,4 @@
 3.无法配置多个环境的变量,例如dev.config.js,prod.config.js等
 4.主页样式混乱
 5.snackbar的样式不在app里面
+6.打包合成一个js,打包去掉console打印语句

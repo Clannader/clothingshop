@@ -56,11 +56,11 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-  //       // @/ 是 src/ 的别名
-  //       // 所以这里假设你有 `src/color.scss` 这个文件
-  //       // 注意：在 sass-loader v7 中，这个选项名是 "data"
-  //       // 作用是全局引用这个scss
-           // 这里最坑爹的是最后必须要有一个;号,否则编译报错
+        // @/ 是 src/ 的别名
+        // 所以这里假设你有 `src/style/color.scss` 这个文件
+        // 注意：在 sass-loader v7 中，这个选项名是 "data"
+        // 作用是全局引用这个scss
+        // 这里最坑爹的是最后必须要有一个;号,否则编译报错
         data: `@import "@/style/color.scss";`
       }
     }

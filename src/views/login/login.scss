@@ -63,11 +63,13 @@
             //.v-icon {
             //  font-size: 20px;
             //}
-          }
-          .v-icon {
-            &.v-icon {
-              font-size: 20px;
-              color: #BBB !important;
+
+            // 这个icon的大小有毒啊,就是比不上vuetify的样式优先级高
+            .v-icon {
+              &.v-icon {
+                font-size: 20px;
+                color: #BBB !important;
+              }
             }
           }
         }
