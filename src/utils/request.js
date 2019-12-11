@@ -5,7 +5,7 @@ import staticVal from './globalVariable'
 
 // 创建axios 实例
 const service = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 30000, // 请求超时设置
   headers: { // 自定义请求头
     'Content-Type': 'application/json',
@@ -16,6 +16,9 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   config => {
+    console.log(process.env.BASE_URL)
+    console.log(process.env.VUE_APP_BASE_ROUTER)
+    console.log(JSON.stringify(process.env))
     config.headers['credential'] = sessionStorage.getItem('credential') || ''
     config.headers['language'] = store.getters.language
     return config

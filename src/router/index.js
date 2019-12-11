@@ -41,7 +41,7 @@ const routes = [
 const router = new VueRouter({
   // 如果服务器没有设置重定向,那么下面2句必须注掉
   mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
-  base: process.env.BASE_ROUTER,
+  base: process.env.VUE_APP_BASE_ROUTER,
   routes: routes
 })
 
