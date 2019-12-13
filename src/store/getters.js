@@ -8,6 +8,7 @@ const getters = {
     }
     return lang
   },
-  menuRouter: state => state.tagsView.menuRouter // 获取左侧菜单路由
+  menuRouter: state => state.tagsView.menuRouter, // 获取左侧菜单路由
+  showSnackbar: state => state.tagsView.showSnackbar
 }
 export default getters

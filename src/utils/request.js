@@ -16,8 +16,7 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   config => {
-    console.log(process.env.BASE_URL)
-    console.log(process.env.VUE_APP_BASE_ROUTER)
+    // TODO 后面删除
     console.log(JSON.stringify(process.env))
     config.headers['credential'] = sessionStorage.getItem('credential') || ''
     config.headers['language'] = store.getters.language
@@ -33,14 +32,14 @@ service.interceptors.response.use(
   response => {
     const code = response.data.code
     if (code === staticVal.Code.Fail) {
-      snackbar.info('error', response.data.msg)
+      snackbar.error(response.data.msg)
       return Promise.reject(response.data)
     } else if (code === staticVal.Code.Success) {
       return response.data
     }
   },
   error => {
-    snackbar.info('error', error)
+    snackbar.error(error)
     return Promise.reject(error)
   }
 )

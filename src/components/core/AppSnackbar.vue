@@ -5,11 +5,13 @@
     :color="color"
     :timeout="timeout">
     {{message}}
-    <v-btn dark text @click="show = false">Close</v-btn>
+    <v-btn dark text @click="close()">Close</v-btn>
   </v-snackbar>
 </template>
 
 <script>
+  import store from '@/store'
+
   export default {
     name: 'AppSnackbar',
     props: {
@@ -29,6 +31,12 @@
     data() {
       return {
         show: true
+      }
+    },
+    methods: {
+      close() {
+        this.show = false
+        store.dispatch('setShowSnackbar')
       }
     }
   }
