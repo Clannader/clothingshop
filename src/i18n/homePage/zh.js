@@ -7,5 +7,8 @@ export default {
   rights: '版权所有',
   version: '版本',
   close: '关闭',
-  toTop: '回到顶部'
+  toTop: '回到顶部',
+  lang: '语言',
+  logout: '退出',
+  userName: '当前用户'
 }

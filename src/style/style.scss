@@ -42,3 +42,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+// 这个很坑,全部按钮的英文都大写..
+.v-btn {
+  text-transform: capitalize;
+}

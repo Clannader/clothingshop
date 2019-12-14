@@ -9,6 +9,7 @@
     "open": "vue-cli-service serve --open"
   },
   "dependencies": {
+    "@mdi/font": "^4.7.95",
     "ant-design-vue": "^1.4.8",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",

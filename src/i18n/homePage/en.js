@@ -7,5 +7,8 @@ export default {
   rights: 'All rights reserved.',
   version: 'Version',
   close: 'Close',
-  toTop: 'Scroll to top'
+  toTop: 'Scroll to top',
+  lang: 'Language',
+  logout: 'Logout',
+  userName: 'Current User'
 }

@@ -30,7 +30,9 @@
         const top = window.pageYOffset ||
           document.documentElement.offsetTop ||
           0
-        this.fab = top > 100
+        this.fab = top > 138
+        // 这个计算方式是main的padding的高度*2+padding的底部
+        // 50*2 + 38 = 138
       },
       toTop() {
         // 升级之后,这句话要注释掉,否则走了2次相同路由就会报错

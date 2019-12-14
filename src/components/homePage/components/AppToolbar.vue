@@ -1,59 +1,47 @@
 <template>
-  <v-toolbar
+  <v-app-bar
+    app
     dark
     flat
     fixed
     height="50"
     color="primary"
   >
-    <v-app-bar-nav-icon @click.stop="changeSidebar()"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon
+      @click.stop="changeSidebar()"
+    >
+    </v-app-bar-nav-icon>
+
     <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn text>{{userName}}</v-btn>
-      <v-menu
-        attach
-        bottom
-        left
-        offset-y
-        max-height="500"
-        v-slot:activator="{ on }"
-      >
-        <v-btn
-          :aria-label="$t('homePage.version')"
-          text
-          v-on="on"
-        >
-          <span
-            class="hidden-sm-and-down mr-1"
-            v-text="$t('homePage.version')"
-          />
-          <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-          <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
-        </v-btn>
-        <v-list dense>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            no-markdown
-          >{{item.title}}
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-toolbar-items>
-  </v-toolbar>
+
+    <v-btn
+      text
+      :title="$t('homePage.userName')"
+    >{{userName}}</v-btn>
+
+    <app-lang></app-lang>
+
+    <v-btn
+      icon
+      :title="$t('homePage.logout')"
+    >
+      <v-icon>
+        mdi-export
+      </v-icon>
+    </v-btn>
+  </v-app-bar>
 </template>
 
 <script>
+  import AppLang from '../toolbar/AppLang'
+
   export default {
     name: 'AppToolbar',
+    components: { AppLang },
     data() {
       return {
         // mini: false,
-        userName: '',
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ]
+        userName: ''
       }
     },
     created() {
@@ -72,9 +60,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .v-toolbar__items {
-    .v-btn {
-      text-transform: capitalize;
-    }
-  }
+
 </style>
