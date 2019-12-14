@@ -1,27 +1,27 @@
 <template>
   <v-toolbar
-    app
     dark
     flat
     fixed
     height="50"
     color="primary"
   >
-    <v-toolbar-side-icon @click.stop="changeSidebar()"></v-toolbar-side-icon>
+    <v-app-bar-nav-icon @click.stop="changeSidebar()"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>{{userName}}</v-btn>
+      <v-btn text>{{userName}}</v-btn>
       <v-menu
         attach
         bottom
         left
         offset-y
         max-height="500"
+        v-slot:activator="{ on }"
       >
         <v-btn
           :aria-label="$t('homePage.version')"
-          flat
-          slot="activator"
+          text
+          v-on="on"
         >
           <span
             class="hidden-sm-and-down mr-1"
@@ -31,12 +31,12 @@
           <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
         </v-btn>
         <v-list dense>
-          <v-list-tile
+          <v-list-item
             v-for="item in items"
             :key="item.title"
             no-markdown
           >{{item.title}}
-          </v-list-tile>
+          </v-list-item>
         </v-list>
       </v-menu>
     </v-toolbar-items>
