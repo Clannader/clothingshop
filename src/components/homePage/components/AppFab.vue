@@ -3,6 +3,7 @@
     <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      aria-label="Scroll to top"
       fab
       dark
       fixed
@@ -10,6 +11,7 @@
       right
       @click="toTop"
       class="fab-color"
+      :title="$t('homePage.toTop')"
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
@@ -31,7 +33,8 @@
         this.fab = top > 100
       },
       toTop() {
-        this.$router.push({ hash: '' })
+        // 升级之后,这句话要注释掉,否则走了2次相同路由就会报错
+        // this.$router.push({ hash: '' })
         this.$vuetify.goTo(0)
       }
     }

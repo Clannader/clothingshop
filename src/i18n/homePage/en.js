@@ -6,5 +6,6 @@
 export default {
   rights: 'All rights reserved.',
   version: 'Version',
-  close: 'Close'
+  close: 'Close',
+  toTop: 'Scroll to top'
 }

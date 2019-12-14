@@ -6,5 +6,6 @@
 export default {
   rights: '版权所有',
   version: '版本',
-  close: '关闭'
+  close: '关闭',
+  toTop: '回到顶部'
 }
