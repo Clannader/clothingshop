@@ -27,8 +27,19 @@
       <v-list-item
         v-for="lang in languageList"
         :key="lang.code"
-        no-markdown
-      >{{lang.desc}}
+        @click="translateI18n(lang)"
+      >
+
+        <v-list-item-avatar
+          tile
+          size="24px"
+        >
+          <v-img
+            :src="`../../../assets/i18n/${lang.code}.png`"
+            width="24px"
+          />
+        </v-list-item-avatar>
+        <v-list-item-title v-text="lang.desc" />
       </v-list-item>
     </v-list>
   </v-menu>
@@ -49,6 +60,13 @@
       currentLanguage() {
         const locale = this.$i18n.locale
         return this.languageList.find(l => l.code === locale)
+      }
+    },
+    methods: {
+      translateI18n(lang) {
+        const locale = lang.code
+        this.$i18n.locale = locale
+        this.$store.dispatch('setLanguage', locale)
       }
     }
   }
