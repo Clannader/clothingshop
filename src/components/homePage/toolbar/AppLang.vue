@@ -34,12 +34,14 @@
           tile
           size="24px"
         >
+          <!-- https://cdn.vuetifyjs.com/images/flags/cn.png -->
+          <!-- `../../../assets/i18n/${lang.code}.png` -->
           <v-img
-            :src="`../../../assets/i18n/${lang.code}.png`"
+            :src="require(`@/assets/i18n/${lang.code}.png`)"
             width="24px"
           />
         </v-list-item-avatar>
-        <v-list-item-title v-text="lang.desc" />
+        <v-list-item-title v-text="lang.desc"/>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -65,8 +67,11 @@
     methods: {
       translateI18n(lang) {
         const locale = lang.code
-        this.$i18n.locale = locale
-        this.$store.dispatch('setLanguage', locale)
+        const currentLocale = this.$i18n.locale
+        if (locale !== currentLocale) {
+          this.$i18n.locale = locale
+          this.$store.dispatch('setLanguage', locale)
+        }
       }
     }
   }
