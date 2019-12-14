@@ -9,7 +9,7 @@
     <strong>Copyright &copy; 2017-{{ new Date().getFullYear() }} Oliver.wu</strong>
     {{$t('homePage.rights')}}
     <v-spacer></v-spacer>
-    <strong>{{$t('homePage.version')}}</strong>2.0.0.0
+    <strong>{{$t('homePage.version')}}</strong>1.0.0.0
   </v-footer>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
-  <v-app id="cmsApp">
+  <div id="cmsApp">
     <app-navigation></app-navigation>
     <app-toolbar></app-toolbar>
     <app-content></app-content>
     <app-footer></app-footer>
     <app-fab></app-fab>
-  </v-app>
+  </div>
 </template>
 
 <script>

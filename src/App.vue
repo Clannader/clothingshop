@@ -1,9 +1,7 @@
 <template>
-  <div id="cmsApp">
-    <v-app>
-      <router-view/>
-    </v-app>
-  </div>
+  <v-app>
+    <router-view/>
+  </v-app>
 </template>
 
 <script>

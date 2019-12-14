@@ -135,6 +135,9 @@
         this.showPassword = !this.showPassword
       },
       async userLogin() {
+        if (this.$store.state.tagsView.showSnackbar) {
+          return
+        }
         const params = {
           adminId: this.userName,
           adminPws: CryptoJS.sha256(this.password)
