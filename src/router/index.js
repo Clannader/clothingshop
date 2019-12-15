@@ -65,6 +65,13 @@ router.beforeEach((to, from, next) => {
 router.afterEach(to => {
 })
 
+// 这里处理多次点击当前路由报错,其实就是屏蔽错误,vue那边的坑
+// 解决重复点击导航路由报错 vue-router 3.1.3版本还有问题,等升级后再说吧,暂时屏蔽错误，不影响功能
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push() {
+  return originalPush.apply(this, Array.prototype.slice.apply(arguments)).catch(err => err)
+}
+
 export const menuRouter = menuRoutes
 
 export default router

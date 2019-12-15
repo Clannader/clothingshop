@@ -12,25 +12,27 @@
       class="bar-title"
       @click="gotoHome()"
     >
-      <span><b>Clothing Shop </b>MS</span>
+      <span v-if="!mini"><b>Clothing Shop </b>MS</span>
+      <span v-else><b>CMS</b></span>
     </v-toolbar-title>
 
     <v-list class="pt-0" dense>
-      <v-divider></v-divider>
+      <template v-for="menu in menuRouter">
+        <v-list-item :key="menu.name" @click="nothing(menu)">
+          <v-tooltip right :disabled="!mini" nudge-right="5">
+            <template #activator="{ on: nav }">
+              <v-list-item-icon v-on="nav">
+                <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
+              </v-list-item-icon>
 
-      <v-list-item
-        v-for="menu in menuRouter"
-        :key="menu.name"
-        @click="nothing"
-      >
-        <v-list-item-action>
-          <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
-        </v-list-item-action>
-
-        <v-list-item-content>
-          <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <span v-text="$t(menu.meta.title)"></span>
+          </v-tooltip>
+        </v-list-item>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -41,18 +43,26 @@
   export default {
     name: 'AppNavigation',
     data() {
-      return {
-      }
+      return {}
     },
     computed: {
       ...mapGetters([
-        'menuRouter',
-        'mini'
-      ])
+        'menuRouter'
+      ]),
+      mini: {
+        get() {
+          return this.$store.getters.mini
+        },
+        set(val) {
+          // 我就纳闷了,如果不这样写,左侧栏缩小后点击就会报错...
+        }
+      }
     },
     methods: {
-      nothing() {
-
+      nothing(router) {
+        this.$router.push({
+          name: router.name
+        })
       },
       gotoHome() {
         this.$router.push({ name: 'Home' })
