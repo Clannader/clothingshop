@@ -57,7 +57,7 @@
     methods: {
       changeSidebar() {
         // 初始化侧边栏状态,是收缩还是展开
-        this.$store.dispatch('setMini', !this.$store.state.tagsView.mini)
+        this.$store.dispatch('setMini', !this.$store.getters.mini)
       },
       logout() {
         console.log('22')
