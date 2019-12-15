@@ -8,7 +8,10 @@
     :mini-variant.sync="mini"
     mini-variant-width="50"
   >
-    <v-toolbar-title class="bar-title">
+    <v-toolbar-title
+      class="bar-title"
+      @click="gotoHome()"
+    >
       <span><b>Clothing Shop </b>MS</span>
     </v-toolbar-title>
 
@@ -50,6 +53,9 @@
     methods: {
       nothing() {
 
+      },
+      gotoHome() {
+        this.$router.push({ name: 'Home' })
       }
     }
   }

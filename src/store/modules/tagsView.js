@@ -5,6 +5,7 @@
 import { menuRouter } from '@/router'
 
 const tagsView = {
+  // 这里的state也可以传一个无参的方法进行初始化默认值
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
     menuRouter: menuRouter, // 全局左侧导航栏
