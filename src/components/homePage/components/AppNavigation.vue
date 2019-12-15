@@ -39,12 +39,12 @@
     name: 'AppNavigation',
     data() {
       return {
-        mini: false
       }
     },
     computed: {
       ...mapGetters([
-        'menuRouter'
+        'menuRouter',
+        'mini'
       ])
     },
     methods: {
@@ -56,15 +56,13 @@
 </script>
 
 <style lang="scss" scoped>
-
   .bar-title {
     z-index: 88;
     background-color: $bg-blue;
     color: #fff;
     border-bottom: 0 solid transparent;
-    /*padding: 0 15px;*/
     line-height: 50px;
-    cursor: default;
+    cursor: pointer;
     text-align: center;
     font-size: 18px;
   }

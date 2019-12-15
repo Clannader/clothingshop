@@ -8,7 +8,8 @@ const tagsView = {
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
     menuRouter: menuRouter, // 全局左侧导航栏
-    showSnackbar: false // 全局是否弹消息条,如果弹了,则不能再弹
+    showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
+    mini: localStorage.getItem('sidebarStatus') || false // 是否收缩左侧栏
   },
   mutations: {
     // 设置语言
@@ -18,6 +19,10 @@ const tagsView = {
     },
     SetShowSnackbar: (state, show = false) => {
       state.showSnackbar = show
+    },
+    SetMini: (state, drawer = false) => {
+      state.mini = drawer
+      localStorage.setItem('sidebarStatus', drawer)
     }
   },
   actions: {
@@ -26,6 +31,9 @@ const tagsView = {
     },
     setShowSnackbar({ commit }, show) {
       commit('SetShowSnackbar', show)
+    },
+    setMini({ commit }, drawer) {
+      commit('SetMini', drawer)
     }
   }
 }

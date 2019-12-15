@@ -17,13 +17,21 @@
     <v-btn
       text
       :title="$t('homePage.userName')"
-    >{{userName}}</v-btn>
+    >
+      <v-img
+        left
+        :src="require('@/assets/user/default.jpg')"
+        class="user-img"
+      ></v-img>
+      {{userName}}
+    </v-btn>
 
     <app-lang></app-lang>
 
     <v-btn
       icon
       :title="$t('homePage.logout')"
+      @click="logout()"
     >
       <v-icon>
         mdi-export
@@ -40,25 +48,29 @@
     components: { AppLang },
     data() {
       return {
-        // mini: false,
         userName: ''
       }
     },
     created() {
-      // const sidebarStatus = localStorage.getItem('sidebarStatus')
-      // this.mini = sidebarStatus && sidebarStatus === 'true'
       this.userName = sessionStorage.getItem('userName')
     },
     methods: {
       changeSidebar() {
         // 初始化侧边栏状态,是收缩还是展开
-        // this.mini = !this.mini
-        // localStorage.setItem('sidebarStatus', this.mini)
+        this.$store.dispatch('setMini', !this.$store.state.tagsView.mini)
+      },
+      logout() {
+        console.log('22')
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
+  .user-img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 </style>

@@ -61,6 +61,10 @@ const methods = {
       temp.push(obj)
     })
     return temp
+  },
+
+  convertStringToBoolean(str = '') {
+    return (typeof str === 'string' && str === 'true') || (typeof str === 'boolean' && str)
   }
 }
 
