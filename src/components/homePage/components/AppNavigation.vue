@@ -17,22 +17,24 @@
     </v-toolbar-title>
 
     <v-list class="pt-0" dense>
-      <template v-for="menu in menuRouter">
-        <v-list-item :key="menu.name" @click="nothing(menu)">
-          <v-tooltip right :disabled="!mini" nudge-right="5">
-            <template #activator="{ on: nav }">
-              <v-list-item-icon v-on="nav">
-                <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
-              </v-list-item-icon>
+      <v-list-item
+        v-for="menu in menuRouter"
+        :key="menu.name"
+        @click="gotoView(menu)"
+      >
+        <v-tooltip right :disabled="!mini" nudge-right="5">
+          <template #activator="{ on: nav }">
+            <v-list-item-icon v-on="nav">
+              <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
+            </v-list-item-icon>
 
-              <v-list-item-content>
-                <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
-              </v-list-item-content>
-            </template>
-            <span v-text="$t(menu.meta.title)"></span>
-          </v-tooltip>
-        </v-list-item>
-      </template>
+            <v-list-item-content>
+              <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <span v-text="$t(menu.meta.title)"></span>
+        </v-tooltip>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -59,7 +61,7 @@
       }
     },
     methods: {
-      nothing(router) {
+      gotoView(router) {
         this.$router.push({
           name: router.name
         })

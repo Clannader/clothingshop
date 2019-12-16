@@ -8,7 +8,7 @@ const homeRouter = {
   name: 'Home',
   meta: {
     title: 'menu.home',
-    icon: 'shouye',
+    icon: 'c-home',
     right: 'ALL'
   },
   component: () => import('@/views/home')

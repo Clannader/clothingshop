@@ -36,7 +36,7 @@
       },
       toTop() {
         // 升级之后,这句话要注释掉,否则走了2次相同路由就会报错
-        // this.$router.push({ hash: '' })
+        this.$router.push({ hash: '' })
         this.$vuetify.goTo(0)
       }
     }
