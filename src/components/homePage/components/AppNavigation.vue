@@ -15,21 +15,25 @@
       <span v-if="!mini"><b>Clothing Shop </b>MS</span>
       <span v-else><b>CMS</b></span>
     </v-toolbar-title>
-
+    <v-divider></v-divider>
     <v-list class="pt-0" dense>
       <v-list-item
-        v-for="menu in menuRouter"
-        :key="menu.name"
-        @click="gotoView(menu)"
+        v-for="(menu, i) in menuRouter"
+        :key="i"
+        @click="gotoView(i, menu)"
+        :class="{ 'nav-light' : i === lightIndex }"
       >
         <v-tooltip right :disabled="!mini" nudge-right="5">
           <template #activator="{ on: nav }">
             <v-list-item-icon v-on="nav">
-              <v-icon>iconfont icon-{{menu.meta.icon}}</v-icon>
+              <v-icon :class="{'nav-item-title' : i === lightIndex}">
+                iconfont icon-{{menu.meta.icon}}
+              </v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
-              <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
+              <v-list-item-title :class="{'nav-item-title' : i === lightIndex}">
+                {{$t(menu.meta.title)}}
+              </v-list-item-title>
             </v-list-item-content>
           </template>
           <span v-text="$t(menu.meta.title)"></span>
@@ -45,7 +49,9 @@
   export default {
     name: 'AppNavigation',
     data() {
-      return {}
+      return {
+        lightIndex: 0
+      }
     },
     computed: {
       ...mapGetters([
@@ -61,10 +67,11 @@
       }
     },
     methods: {
-      gotoView(router) {
+      gotoView(index, router) {
         this.$router.push({
           name: router.name
         })
+        this.lightIndex = index
       },
       gotoHome() {
         this.$router.push({ name: 'Home' })
@@ -76,12 +83,20 @@
 <style lang="scss" scoped>
   .bar-title {
     z-index: 88;
-    background-color: $bg-blue;
-    color: #fff;
+    background-color: white;
+    color: $bg-blue;
     border-bottom: 0 solid transparent;
-    line-height: 50px;
+    line-height: 49px;
     cursor: pointer;
     text-align: center;
     font-size: 18px;
+  }
+
+  .nav-light {
+    background-color: lighten($bg-blue, 30%);
+  }
+
+  .nav-item-title {
+    color: #FFFFFF;
   }
 </style>
