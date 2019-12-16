@@ -8,7 +8,7 @@ const otherSettingsRouter = {
   name: 'Settings',
   meta: {
     title: 'menu.settings',
-    icon: 'c-settings',
+    icon: 'fa-gears',
     right: 'ALL'
   },
   component: () => import('@/views/home')

@@ -26,7 +26,12 @@
         <v-tooltip right :disabled="!mini" nudge-right="5">
           <template #activator="{ on: nav }">
             <v-list-item-icon v-on="nav">
-              <v-icon :class="{'nav-item-title' : i === lightIndex}">
+              <v-icon
+                :class="{'nav-item-title' : i === lightIndex}"
+                v-if="menu.meta.icon.startsWith('fa')">
+                fa {{menu.meta.icon}}
+              </v-icon>
+              <v-icon :class="{'nav-item-title' : i === lightIndex}" v-else>
                 iconfont icon-{{menu.meta.icon}}
               </v-icon>
             </v-list-item-icon>
