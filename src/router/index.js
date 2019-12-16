@@ -5,11 +5,17 @@ import Login from '@/views/login'
 import HomePage from 'components/homePage'
 import Frontdesk from './frontdesk'
 import Home from './home'
+import Logs from './logs'
+import Settings from './settings'
+import Statistics from './statistics'
+import Monitor from './monitor'
+import Miscellaneous from './miscellaneous'
 
 Vue.use(VueRouter)
 
 const menuRoutes = [
-  Home, Frontdesk
+  Home, Frontdesk, Logs, Settings,
+  Statistics, Monitor, Miscellaneous
 ]
 
 const routes = [

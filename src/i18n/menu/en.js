@@ -6,6 +6,11 @@
 export default {
   home: 'Home',
   frontdesk: 'Frontdesk',
-  shopInfo: 'ShopInfo'
+  shopInfo: 'ShopInfo',
+  miscellaneous: 'Miscellaneous',
+  monitor: 'Monitor',
+  statistics: 'Data statistics',
+  settings: 'Settings',
+  logs: 'Logs'
 }
 
