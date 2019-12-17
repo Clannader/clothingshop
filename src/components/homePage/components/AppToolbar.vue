@@ -60,7 +60,7 @@
         this.$store.dispatch('setMini', !this.$store.getters.mini)
       },
       logout() {
-        console.log('22')// 测试贡献111
+        console.log('22')// 测试贡献
       }
     }
   }
