@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer
     class="aside-shadow"
-    width="230"
+    width="200"
     fixed
     app
     permanent
     :mini-variant.sync="mini"
-    mini-variant-width="50"
+    mini-variant-width="55"
   >
     <v-toolbar-title
       class="bar-title"
@@ -17,31 +17,33 @@
     </v-toolbar-title>
     <v-divider></v-divider>
     <v-list class="pt-0" dense>
-      <v-list-item
-        v-for="(menu, i) in menuRouter"
-        :key="i"
-        @click="gotoView(i, menu)"
-        :class="{ 'nav-light' : i === lightIndex }"
-      >
-        <v-tooltip right :disabled="!mini" nudge-right="5">
-          <template #activator="{ on: nav }">
-            <v-list-item-icon v-on="nav">
-              <v-icon
-                :class="{'nav-item-title' : i === lightIndex}"
-                >
-                <template v-if="menu.meta.icon.startsWith('fa')">fa {{menu.meta.icon}}</template>
-                <template v-else>iconfont icon-{{menu.meta.icon}}</template>
-              </v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title :class="{'nav-item-title' : i === lightIndex}">
-                {{$t(menu.meta.title)}}
-              </v-list-item-title>
-            </v-list-item-content>
-          </template>
-          <span v-text="$t(menu.meta.title)"></span>
-        </v-tooltip>
-      </v-list-item>
+      <template v-for="(menu, i) in menuRouter">
+        <div
+          :key="i"
+          @click="gotoView(i, menu)"
+          :class="{ 'nav-light' : i === lightIndex }"
+          >
+          <v-tooltip right :disabled="!mini" nudge-right="10">
+            <v-list-item
+              :key="menu.name"
+              class="nav-list"
+              exact slot="activator"
+            >
+              <v-list-item-icon>
+                <v-icon>
+                  {{menu.meta.icon}}
+                </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{$t(menu.meta.title)}}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <span v-text="$t(menu.meta.title)"></span>
+          </v-tooltip>
+        </div>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -95,11 +97,31 @@
     font-size: 18px;
   }
 
+  .nav-item-title {
+    color: #FFFFFF;
+  }
+
   .nav-light {
     background-color: lighten($bg-blue, 30%);
   }
 
-  .nav-item-title {
-    color: #FFFFFF;
+  .nav-list {
+    &.v-list-item {
+      padding: 0 13px;
+    }
+
+    .v-icon {
+      &.v-icon {
+        font-size: 20px;
+      }
+    }
+
+  }
+
+  /deep/ .v-list-item {
+    height: 44px !important;
+    line-height: 44px !important;
+    cursor: pointer;
+    padding: 0 25px;
   }
 </style>
