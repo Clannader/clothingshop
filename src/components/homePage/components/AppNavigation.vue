@@ -17,33 +17,29 @@
     </v-toolbar-title>
     <v-divider></v-divider>
     <v-list class="pt-0" dense>
-      <template v-for="(menu, i) in menuRouter">
-        <div
-          :key="i"
-          @click="gotoView(i, menu)"
-          :class="{ 'nav-light' : i === lightIndex }"
-          >
-          <v-tooltip right :disabled="!mini" nudge-right="10">
-            <v-list-item
-              :key="menu.name"
-              class="nav-list"
-              exact slot="activator"
-            >
-              <v-list-item-icon>
-                <v-icon>
-                  {{menu.meta.icon}}
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{$t(menu.meta.title)}}
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <span v-text="$t(menu.meta.title)"></span>
-          </v-tooltip>
-        </div>
-      </template>
+      <v-list-item
+        v-for="(menu, i) in menuRouter"
+        :key="i"
+        @click="gotoView(i, menu)"
+        :class="{ 'nav-light' : i === lightIndex }"
+        class="nav-list"
+      >
+        <v-tooltip right :disabled="!mini" nudge-right="10">
+          <template #activator="{ on: nav }">
+            <v-list-item-icon v-on="nav">
+              <v-icon>
+                {{menu.meta.icon}}
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{$t(menu.meta.title)}}
+              </v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <span v-text="$t(menu.meta.title)"></span>
+        </v-tooltip>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -90,38 +86,25 @@
     z-index: 88;
     background-color: white;
     color: $bg-blue;
-    border-bottom: 0 solid transparent;
-    line-height: 49px;
+    /*border-bottom: 0 solid transparent;*/
+    line-height: 50px;
     cursor: pointer;
     text-align: center;
-    font-size: 18px;
-  }
-
-  .nav-item-title {
-    color: #FFFFFF;
+    font-size: 16px;
   }
 
   .nav-light {
     background-color: lighten($bg-blue, 30%);
+    .v-icon,.v-list-item__content{
+      color: #FFFFFF;
+    }
   }
 
   .nav-list {
-    &.v-list-item {
-      padding: 0 13px;
-    }
-
     .v-icon {
       &.v-icon {
-        font-size: 20px;
+        font-size: 24px;
       }
     }
-
-  }
-
-  /deep/ .v-list-item {
-    height: 44px !important;
-    line-height: 44px !important;
-    cursor: pointer;
-    padding: 0 25px;
   }
 </style>
