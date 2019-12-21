@@ -10,5 +10,9 @@ export default {
   toTop: '回到顶部',
   lang: '语言',
   logout: '退出',
-  userName: '当前用户'
+  userName: '当前用户',
+  logoutSys: '退出系统',
+  logoutConfirm: '您确定退出系统 ？',
+  yes: '是',
+  no: '否'
 }

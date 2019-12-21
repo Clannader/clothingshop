@@ -10,5 +10,9 @@ export default {
   toTop: 'Scroll to top',
   lang: 'Language',
   logout: 'Logout',
-  userName: 'Current User'
+  userName: 'Current User',
+  logoutSys: 'Logout System',
+  logoutConfirm: 'Are you sure you want to log out ?',
+  yes: 'Yes',
+  no: 'No'
 }
