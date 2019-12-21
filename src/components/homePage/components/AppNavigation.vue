@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer
     class="aside-shadow"
-    width="230"
+    width="200"
     fixed
     app
     permanent
     :mini-variant.sync="mini"
-    mini-variant-width="50"
+    mini-variant-width="55"
   >
     <v-toolbar-title
       class="bar-title"
@@ -22,19 +22,17 @@
         :key="i"
         @click="gotoView(i, menu)"
         :class="{ 'nav-light' : i === lightIndex }"
+        class="nav-list"
       >
-        <v-tooltip right :disabled="!mini" nudge-right="5">
+        <v-tooltip right :disabled="!mini" nudge-right="10">
           <template #activator="{ on: nav }">
             <v-list-item-icon v-on="nav">
-              <v-icon
-                :class="{'nav-item-title' : i === lightIndex}"
-                >
-                <template v-if="menu.meta.icon.startsWith('fa')">fa {{menu.meta.icon}}</template>
-                <template v-else>iconfont icon-{{menu.meta.icon}}</template>
+              <v-icon>
+                {{menu.meta.icon}}
               </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title :class="{'nav-item-title' : i === lightIndex}">
+              <v-list-item-title>
                 {{$t(menu.meta.title)}}
               </v-list-item-title>
             </v-list-item-content>
@@ -88,18 +86,25 @@
     z-index: 88;
     background-color: white;
     color: $bg-blue;
-    border-bottom: 0 solid transparent;
-    line-height: 49px;
+    /*border-bottom: 0 solid transparent;*/
+    line-height: 50px;
     cursor: pointer;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .nav-light {
     background-color: lighten($bg-blue, 30%);
+    .v-icon,.v-list-item__content{
+      color: #FFFFFF;
+    }
   }
 
-  .nav-item-title {
-    color: #FFFFFF;
+  .nav-list {
+    .v-icon {
+      &.v-icon {
+        font-size: 24px;
+      }
+    }
   }
 </style>

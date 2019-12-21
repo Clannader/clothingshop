@@ -8,7 +8,7 @@ const statisticsRouter = {
   name: 'Statistics',
   meta: {
     title: 'menu.statistics',
-    icon: 'c-statistics',
+    icon: 'iconfont icon-c-statistics',
     right: 'ALL'
   },
   component: () => import('@/views/home')
