@@ -2,22 +2,16 @@
   <div class="text-xs-center">
     <v-dialog v-model="dialog" width="320" persistent>
       <v-card>
-        <v-card-title class="optionsTitle">
+        <v-card-title class="dialog-title">
           {{$t('homePage.logoutSys')}}
         </v-card-title>
-        <v-card-text>
-          <v-container grid-list-md style="padding:0 12px">
-            <v-layout wrap>
-              <v-flex xs12 class="radio-box">
-                {{$t('homePage.logoutConfirm')}}
-              </v-flex>
-            </v-layout>
-          </v-container>
+        <v-card-text class="dialog-text">
+            {{$t('homePage.logoutConfirm')}}
         </v-card-text>
-        <v-card-actions style="padding:0 24px 24px 0">
+        <v-card-actions class="dialog-footer app-btn">
           <v-spacer></v-spacer>
-          <v-btn color="#F6F6F" depressed @click="quit">{{$t('homePage.yes')}}</v-btn>
-          <v-btn color="#F6F6F" depressed @click="close">{{$t('homePage.no')}}</v-btn>
+          <v-btn depressed @click="quit">{{$t('homePage.yes')}}</v-btn>
+          <v-btn depressed @click="close">{{$t('homePage.no')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
