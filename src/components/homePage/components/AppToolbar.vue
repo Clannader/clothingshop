@@ -60,7 +60,7 @@
         this.$store.dispatch('setMini', !this.$store.getters.mini)
       },
       logout() {
-        console.log('2266')
+        console.log('')
       }
     }
   }
