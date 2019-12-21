@@ -8,7 +8,7 @@ const logsRouter = {
   name: 'Logs',
   meta: {
     title: 'menu.logs',
-    icon: 'c-logs',
+    icon: 'iconfont icon-c-logs',
     right: 'ALL'
   },
   component: () => import('@/views/home')

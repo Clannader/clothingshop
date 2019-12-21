@@ -8,7 +8,7 @@ const monitorRouter = {
   name: 'Monitor',
   meta: {
     title: 'menu.monitor',
-    icon: 'c-sys-monitor',
+    icon: 'iconfont icon-c-sys-monitor',
     right: 'ALL'
   },
   component: () => import('@/views/home')
