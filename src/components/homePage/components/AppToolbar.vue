@@ -37,18 +37,24 @@
         mdi-export
       </v-icon>
     </v-btn>
+    <component :is="children" @closeDialog="closeDialog()"></component>
   </v-app-bar>
 </template>
 
 <script>
   import AppLang from '../toolbar/AppLang'
+  import LogoutDialog from '../toolbar/LogoutDialog'
 
   export default {
     name: 'AppToolbar',
-    components: { AppLang },
+    components: {
+      AppLang,
+      LogoutDialog
+    },
     data() {
       return {
-        userName: ''
+        userName: '',
+        children: ''
       }
     },
     created() {
@@ -60,7 +66,10 @@
         this.$store.dispatch('setMini', !this.$store.getters.mini)
       },
       logout() {
-        console.log('22')// 测试贡献
+        this.children = LogoutDialog
+      },
+      closeDialog() {
+        this.children = ''
       }
     }
   }

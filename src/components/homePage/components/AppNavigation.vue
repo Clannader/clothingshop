@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer
     class="aside-shadow"
-    width="200"
+    width="230"
     fixed
     app
     permanent
     :mini-variant.sync="mini"
-    mini-variant-width="55"
+    mini-variant-width="56"
   >
     <v-toolbar-title
       class="bar-title"
@@ -17,29 +17,39 @@
     </v-toolbar-title>
     <v-divider></v-divider>
     <v-list class="pt-0" dense>
-      <v-list-item
+      <template
         v-for="(menu, i) in menuRouter"
-        :key="i"
-        @click="gotoView(i, menu)"
-        :class="{ 'nav-light' : i === lightIndex }"
-        class="nav-list"
       >
-        <v-tooltip right :disabled="!mini" nudge-right="10">
-          <template #activator="{ on: nav }">
-            <v-list-item-icon v-on="nav">
-              <v-icon>
-                {{menu.meta.icon}}
-              </v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{$t(menu.meta.title)}}
-              </v-list-item-title>
-            </v-list-item-content>
+        <v-list-group
+          :key="`group-${i}`"
+          @click="gotoView(i, menu)"
+          :prepend-icon="menu.meta.icon"
+          v-if="menu.children && menu.children.length > 0"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
           </template>
-          <span v-text="$t(menu.meta.title)"></span>
-        </v-tooltip>
-      </v-list-item>
+        </v-list-group>
+
+        <v-list-item
+          :key="`item-${i}`"
+          @click="gotoView(i, menu)"
+          :class="{ 'nav-light' : i === lightIndex }"
+          class="nav-list"
+          v-else
+        >
+          <v-list-item-icon>
+            <v-icon>
+              {{menu.meta.icon}}
+            </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{$t(menu.meta.title)}}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -95,7 +105,8 @@
 
   .nav-light {
     background-color: lighten($bg-blue, 30%);
-    .v-icon,.v-list-item__content{
+
+    .v-icon, .v-list-item__content {
       color: #FFFFFF;
     }
   }

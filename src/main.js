@@ -2,7 +2,6 @@
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import 'font-awesome/css/font-awesome.css'
 import 'ant-design-vue/dist/antd.min.css'
 import './style/icon/iconfont.css'
 import './style/style.scss'
