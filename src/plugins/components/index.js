@@ -5,4 +5,5 @@
 
 import Vue from 'vue'
 
-Vue.component('app-group', () => import('@/components/core/AppGroup'))
+Vue.component('menu-group', () => import('@/components/core/MenuGroup'))
+Vue.component('menu-item', () => import('@/components/core/MenuItem'))
