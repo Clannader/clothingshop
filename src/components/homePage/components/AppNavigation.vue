@@ -20,35 +20,17 @@
       <template
         v-for="(menu, i) in menuRouter"
       >
-        <v-list-group
-          :key="`group-${i}`"
-          @click="gotoView(i, menu)"
-          :prepend-icon="menu.meta.icon"
+        <menu-group
           v-if="menu.children && menu.children.length > 0"
-        >
-          <template v-slot:activator>
-            <v-list-item-title>{{$t(menu.meta.title)}}</v-list-item-title>
-          </template>
-        </v-list-group>
+          :key="`group-${i}`"
+          :item="menu"
+        />
 
-        <v-list-item
-          :key="`item-${i}`"
-          @click="gotoView(i, menu)"
-          :class="{ 'nav-light' : i === lightIndex }"
-          class="nav-list"
+        <menu-item
           v-else
-        >
-          <v-list-item-icon>
-            <v-icon>
-              {{menu.meta.icon}}
-            </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{$t(menu.meta.title)}}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          :key="`item-${i}`"
+          :item="menu"
+        />
       </template>
     </v-list>
   </v-navigation-drawer>

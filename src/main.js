@@ -1,5 +1,9 @@
 'use strict'
 
+// Polyfills for IE Support
+import 'babel-polyfill'
+import 'event-source-polyfill'
+
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'ant-design-vue/dist/antd.min.css'
@@ -27,6 +31,9 @@ Vue.component(Upload.name, Upload)
 Vue.component(Upload.Dragger.name, Upload.Dragger)
 Vue.component(Icon.name, Icon)
 Vue.component(Input.name, Input)
+
+// 注册全局自定义组件
+import './plugins/components'
 
 Vue.config.productionTip = false
 
