@@ -40,10 +40,12 @@
         })
       },
       subItem: {
+        // 是否是子item
         type: Boolean,
         default: false
       },
       mini: {
+        // 左侧栏是否关闭,关闭则开启tooltip
         type: Boolean,
         default: false
       }
