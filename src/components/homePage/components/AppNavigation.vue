@@ -34,6 +34,7 @@
           v-else
           :key="`item-${i}`"
           :item="menu"
+          :mini="mini"
         />
       </template>
     </v-list>

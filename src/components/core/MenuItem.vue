@@ -1,20 +1,29 @@
 <template>
-  <v-list-item
-    @click="gotoView(item)"
+  <v-tooltip
+    right
+    :disabled="!mini"
   >
-    <v-list-item-icon v-if="!subItem">
-      <v-icon v-text="item.meta.icon"/>
-    </v-list-item-icon>
-    <v-list-item-content>
-      <v-list-item-title v-text="$t(item.meta.title)"/>
-    </v-list-item-content>
+    <template #activator="{ on: itemTip }">
+      <v-list-item
+        @click="gotoView(item)"
+        v-on="itemTip"
+      >
+        <v-list-item-icon v-if="!subItem">
+          <v-icon v-text="item.meta.icon"/>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title v-text="$t(item.meta.title)"/>
+        </v-list-item-content>
 
-    <!-- 如果这是子item,那么icon放右边-->
-    <v-list-item-icon v-if="subItem">
-      <v-icon v-text="item.meta.icon"/>
-    </v-list-item-icon>
-  </v-list-item
-    @click="gotoView(item)">
+        <!-- 如果这是子item,那么icon放右边-->
+        <v-list-item-icon v-if="subItem">
+          <v-icon v-text="item.meta.icon"/>
+        </v-list-item-icon>
+      </v-list-item>
+    </template>
+    <!-- 这里是显示tips的内容-->
+    <span v-text="$t(item.meta.title)"></span>
+  </v-tooltip>
 </template>
 
 <script>
@@ -31,6 +40,10 @@
         })
       },
       subItem: {
+        type: Boolean,
+        default: false
+      },
+      mini: {
         type: Boolean,
         default: false
       }
@@ -54,11 +67,4 @@
     }
   }
 
-  .nav-sub-item {
-    padding-left: 32px !important;
-    padding-right: 8px !important;
-    .v-list-item__icon {
-      margin-right: 16px !important;
-    }
-  }
 </style>
