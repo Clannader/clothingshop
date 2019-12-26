@@ -18,7 +18,7 @@ const frontdeskRouter = {
       name: 'ShopInfo',
       meta: {
         title: 'menu.shopInfo',
-        icon: 'iconfont icon-shopinfo',
+        icon: 'iconfont icon-c-shopinfo',
         right: ''
       },
       component: () => import('@/views/frontdesk/shopInfo')

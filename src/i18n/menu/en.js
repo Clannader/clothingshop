@@ -11,6 +11,7 @@ export default {
   monitor: 'Monitor',
   statistics: 'Data statistics',
   settings: 'Settings',
-  logs: 'Logs'
+  logs: 'Logs',
+  userLogs: 'User Logs'
 }
 

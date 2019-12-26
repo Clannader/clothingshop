@@ -11,7 +11,19 @@ const logsRouter = {
     icon: 'iconfont icon-c-logs',
     right: 'ALL'
   },
-  component: () => import('@/views/home')
+  component: () => import('@/views/home'),
+  children: [
+    {
+      path: 'userLogs',
+      name: 'UserLogs',
+      meta: {
+        title: 'menu.userLogs',
+        icon: 'iconfont icon-c-opera-logs',
+        right: ''
+      },
+      component: () => import('@/views/frontdesk/shopInfo')
+    }
+  ]
 }
 
 export default logsRouter
