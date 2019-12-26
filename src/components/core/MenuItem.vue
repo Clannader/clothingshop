@@ -1,15 +1,20 @@
 <template>
   <v-list-item
     @click="gotoView(item)"
-    :class="subItem ? 'nav-sub-item' : ''"
   >
-    <v-list-item-icon>
+    <v-list-item-icon v-if="!subItem">
       <v-icon v-text="item.meta.icon"/>
     </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title v-text="$t(item.meta.title)"/>
     </v-list-item-content>
-  </v-list-item>
+
+    <!-- 如果这是子item,那么icon放右边-->
+    <v-list-item-icon v-if="subItem">
+      <v-icon v-text="item.meta.icon"/>
+    </v-list-item-icon>
+  </v-list-item
+    @click="gotoView(item)">
 </template>
 
 <script>
@@ -50,10 +55,10 @@
   }
 
   .nav-sub-item {
-    padding-left: 32px;
-    padding-right: 8px;
+    padding-left: 32px !important;
+    padding-right: 8px !important;
     .v-list-item__icon {
-      margin-right: 16px;
+      margin-right: 16px !important;
     }
   }
 </style>

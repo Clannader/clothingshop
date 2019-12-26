@@ -25,7 +25,7 @@
         v-for="(menu, i) in menuRouter"
       >
         <menu-group
-          v-if="menu.children && menu.children.length > 0"
+          v-if="menu.children && menu.children.length > 0 && !mini"
           :key="`group-${i}`"
           :item="menu"
         />
