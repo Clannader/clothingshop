@@ -69,4 +69,8 @@
     }
   }
 
+  .v-list-group--no-action > .v-list-group__items > div > .v-list-item {
+    padding-left: 88px;
+  }
+
 </style>
