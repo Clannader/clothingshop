@@ -1,6 +1,7 @@
 <template>
   <v-list-item
     @click="gotoView(item)"
+    :class="subItem ? 'nav-sub-item' : ''"
   >
     <v-list-item-icon>
       <v-icon v-text="item.meta.icon"/>
@@ -23,6 +24,10 @@
             title: ''
           }
         })
+      },
+      subItem: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -35,6 +40,20 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .nav-light {
+    background-color: lighten($bg-blue, 30%);
 
+    .v-icon, .v-list-item__content {
+      color: #FFFFFF;
+    }
+  }
+
+  .nav-sub-item {
+    padding-left: 32px;
+    padding-right: 8px;
+    .v-list-item__icon {
+      margin-right: 16px;
+    }
+  }
 </style>

@@ -16,7 +16,11 @@
       <span v-else><b>CMS</b></span>
     </v-toolbar-title>
     <v-divider></v-divider>
-    <v-list class="pt-0" dense>
+    <v-list
+      class="pt-0"
+      dense
+      expand
+    >
       <template
         v-for="(menu, i) in menuRouter"
       >
@@ -41,11 +45,6 @@
 
   export default {
     name: 'AppNavigation',
-    data() {
-      return {
-        lightIndex: 0
-      }
-    },
     computed: {
       ...mapGetters([
         'menuRouter'
@@ -60,12 +59,6 @@
       }
     },
     methods: {
-      gotoView(index, router) {
-        this.$router.push({
-          name: router.name
-        })
-        this.lightIndex = index
-      },
       gotoHome() {
         this.$router.push({ name: 'Home' })
       }
@@ -83,21 +76,5 @@
     cursor: pointer;
     text-align: center;
     font-size: 16px;
-  }
-
-  .nav-light {
-    background-color: lighten($bg-blue, 30%);
-
-    .v-icon, .v-list-item__content {
-      color: #FFFFFF;
-    }
-  }
-
-  .nav-list {
-    .v-icon {
-      &.v-icon {
-        font-size: 24px;
-      }
-    }
   }
 </style>
