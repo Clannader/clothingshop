@@ -1,14 +1,29 @@
 <template>
-  <v-list-item
-    @click="gotoView(item)"
+  <v-tooltip
+    right
+    :disabled="!mini"
   >
-    <v-list-item-icon>
-      <v-icon v-text="item.meta.icon"/>
-    </v-list-item-icon>
-    <v-list-item-content>
-      <v-list-item-title v-text="$t(item.meta.title)"/>
-    </v-list-item-content>
-  </v-list-item>
+    <template #activator="{ on: itemTip }">
+      <v-list-item
+        @click="gotoView(item)"
+        v-on="itemTip"
+      >
+        <v-list-item-icon v-if="!subItem">
+          <v-icon v-text="item.meta.icon"/>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title v-text="$t(item.meta.title)"/>
+        </v-list-item-content>
+
+        <!-- 如果这是子item,那么icon放右边-->
+        <v-list-item-icon v-if="subItem">
+          <v-icon v-text="item.meta.icon"/>
+        </v-list-item-icon>
+      </v-list-item>
+    </template>
+    <!-- 这里是显示tips的内容-->
+    <span v-text="$t(item.meta.title)"></span>
+  </v-tooltip>
 </template>
 
 <script>
@@ -23,6 +38,16 @@
             title: ''
           }
         })
+      },
+      subItem: {
+        // 是否是子item
+        type: Boolean,
+        default: false
+      },
+      mini: {
+        // 左侧栏是否关闭,关闭则开启tooltip
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -35,6 +60,17 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .nav-light {
+    background-color: lighten($bg-blue, 30%);
+
+    .v-icon, .v-list-item__content {
+      color: #FFFFFF;
+    }
+  }
+
+  .v-list-group--no-action > .v-list-group__items > div > .v-list-item {
+    padding-left: 88px;
+  }
 
 </style>

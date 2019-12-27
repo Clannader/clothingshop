@@ -11,5 +11,6 @@ export default {
   monitor: '系统监控',
   statistics: '数据统计',
   settings: '其他设置',
-  logs: '日志管理'
+  logs: '日志管理',
+  userLogs: '用户日志'
 }
