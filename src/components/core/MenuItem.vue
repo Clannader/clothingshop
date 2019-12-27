@@ -14,7 +14,6 @@
         <v-list-item-content>
           <v-list-item-title v-text="$t(item.meta.title)"/>
         </v-list-item-content>
-
         <!-- 如果这是子item,那么icon放右边-->
         <v-list-item-icon v-if="subItem">
           <v-icon v-text="item.meta.icon"/>
@@ -61,13 +60,6 @@
 </script>
 
 <style scoped lang="scss">
-  .nav-light {
-    background-color: lighten($bg-blue, 30%);
-
-    .v-icon, .v-list-item__content {
-      color: #FFFFFF;
-    }
-  }
 
   .v-list-group--no-action > .v-list-group__items > div > .v-list-item {
     padding-left: 88px;

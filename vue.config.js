@@ -12,7 +12,7 @@ module.exports = {
   // 生产环境打包不产生map文件
   productionSourceMap: false,
   devServer: {
-    host: 'localhost',
+    // host: 'localhost',
     port: '9800'
     // proxy: 'http://localhost:3000/cms/h5'
   },

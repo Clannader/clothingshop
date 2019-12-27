@@ -1,6 +1,6 @@
 <template>
   <v-list-group
-    :prepend-icon="item.meta.icon"
+    :prepend-icon="subGroup ? '' : item.meta.icon"
     :sub-group="subGroup"
     no-action
   >

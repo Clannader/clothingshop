@@ -38,7 +38,7 @@ const frontdeskRouter = {
       name: 'Shopchildren',
       meta: {
         title: 'menu.shopInfo',
-        // icon: 'iconfont icon-c-shopinfo',
+        icon: 'iconfont icon-c-shopinfo',
         right: ''
       },
       component: () => import('@/views/frontdesk/shopInfo'),
@@ -70,7 +70,7 @@ const frontdeskRouter = {
       name: 'Shopchildren1',
       meta: {
         title: 'menu.shopInfo',
-        // icon: 'iconfont icon-c-shopinfo',
+        icon: 'iconfont icon-c-shopinfo',
         right: ''
       },
       component: () => import('@/views/frontdesk/shopInfo'),

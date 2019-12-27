@@ -50,13 +50,8 @@
       ...mapGetters([
         'menuRouter'
       ]),
-      mini: {
-        get() {
-          return this.$store.getters.mini
-        },
-        set(val) {
-          // 我就纳闷了,如果不这样写,左侧栏缩小后点击就会报错...
-        }
+      mini() {
+        return this.$store.getters.mini
       }
     },
     methods: {
