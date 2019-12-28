@@ -9,6 +9,7 @@
         <v-list-item-title v-text="$t(item.meta.title)"/>
       </v-list-item-content>
     </template>
+
     <template v-for="(child, i) in item.children">
       <menu-sub-group
         v-if="child.children && child.children.length > 0"

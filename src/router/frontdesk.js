@@ -19,6 +19,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopInfo',
         icon: 'iconfont icon-c-shopinfo',
+        chip: 'new',
         right: ''
       },
       component: () => import('@/views/frontdesk/shopInfo')

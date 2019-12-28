@@ -7,6 +7,13 @@ Vue.use(Vuetify)
 const opts = {
   icons: {
     iconfont: ['mdiSvg'] // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
+  },
+  theme: {
+    themes: {
+      light: {
+        primary: '#0055b8'
+      }
+    }
   }
 }
 
