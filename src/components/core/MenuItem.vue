@@ -1,24 +1,37 @@
 <template>
   <v-tooltip
-    right
-    :disabled="!mini"
+    :right="mini && !subItem"
+    :bottom="!mini && subItem"
+    :disabled="showTips"
   >
     <template #activator="{ on: itemTip }">
       <v-list-item
         @click="gotoView(item)"
+        color="primary"
         v-on="itemTip"
       >
         <v-list-item-icon v-if="!subItem">
           <v-icon v-text="item.meta.icon"/>
         </v-list-item-icon>
+
         <v-list-item-content>
           <v-list-item-title v-text="$t(item.meta.title)"/>
         </v-list-item-content>
 
         <!-- 如果这是子item,那么icon放右边-->
-        <v-list-item-icon v-if="subItem">
+        <v-list-item-icon v-if="subItem && !item.meta.chip">
           <v-icon v-text="item.meta.icon"/>
         </v-list-item-icon>
+
+        <v-chip
+          v-if="item.meta.chip"
+          :color="chipColor"
+          x-small
+          text-color="white"
+        >
+          {{ item.meta.chip }}
+        </v-chip>
+
       </v-list-item>
     </template>
     <!-- 这里是显示tips的内容-->
@@ -56,21 +69,43 @@
           name: router.name
         })
       }
+    },
+    computed: {
+      chipColor() {
+        switch (this.item.meta.chip) {
+          case 'new':
+            return 'primary'
+          case 'updated':
+            return 'warning'
+          case 'deprecated':
+            return 'black'
+          case 'help':
+            return 'error'
+          default:
+            return 'primary'
+        }
+      },
+      showTips() {
+        if (this.mini) {
+          return false
+        } else if (!this.mini && this.subItem) {
+          return false
+        }
+        return true
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .nav-light {
-    background-color: lighten($bg-blue, 30%);
-
-    .v-icon, .v-list-item__content {
-      color: #FFFFFF;
-    }
-  }
 
   .v-list-group--no-action > .v-list-group__items > div > .v-list-item {
-    padding-left: 88px;
+    padding-left: 88px; // 原本是88px
+  }
+
+  .v-list-item__subtitle,
+  .v-list-item__title {
+    overflow: visible;
   }
 
 </style>
