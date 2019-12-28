@@ -3,7 +3,7 @@
     v-model="show"
     top
     :color="color"
-    :timeout="timeout">
+    >
     {{message}}
     <v-btn dark text @click="close()">Close</v-btn>
   </v-snackbar>
@@ -30,13 +30,30 @@
     },
     data() {
       return {
-        show: true
+        show: false,
+        activeTimeout: -1
       }
+    },
+    created() {
+      if (store.getters.showSnackbar) {
+        return
+      }
+      this.show = true
+    },
+    mounted() {
+      this.setTimeout()
+      store.dispatch('setShowSnackbar', true)
     },
     methods: {
       close() {
         this.show = false
-        store.dispatch('setShowSnackbar')
+        store.dispatch('setShowSnackbar', false)
+        window.clearTimeout(this.activeTimeout)
+      },
+      setTimeout() {
+        this.activeTimeout = window.setTimeout(() => {
+          this.close()
+        }, this.timeout)
       }
     }
   }
