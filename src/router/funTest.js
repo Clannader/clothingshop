@@ -45,7 +45,7 @@ const TestRouter = {
       component: () => import('@/views/blank'),
       children: [
         {
-          path: 'four',
+          path: 'one',
           name: 'TestFour',
           meta: {
             title: 'menu.test',
@@ -55,7 +55,7 @@ const TestRouter = {
           component: () => import('@/views/blank')
         },
         {
-          path: 'five',
+          path: 'two',
           name: 'TestFive',
           meta: {
             title: 'menu.test',
