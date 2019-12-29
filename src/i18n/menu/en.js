@@ -12,6 +12,25 @@ export default {
   statistics: 'Data statistics',
   settings: 'Settings',
   logs: 'Logs',
-  userLogs: 'User Logs'
+  userLogs: 'User',
+  shopCategory: 'Category',
+  clothing: 'Clothing',
+  shopOrder: 'Order',
+  serverLogs: 'Server',
+  mailLogs: 'Mail',
+  supplierList: 'Supplier',
+  shopList: 'Shop',
+  userList: 'User',
+  rightList: 'Rights',
+  systemList: 'System',
+  mailList: 'Mail',
+  repair: 'Repair',
+  staShopOrder: 'Order',
+  staIncome: 'Income',
+  staUserAccess: 'Access',
+  userMonitor: 'User',
+  apiMonitor: 'Api',
+  databaseMonitor: 'Database',
+  test: 'Test'
 }
 

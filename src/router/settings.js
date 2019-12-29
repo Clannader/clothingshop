@@ -14,7 +14,7 @@ const otherSettingsRouter = {
   component: () => import('@/views/settings'),
   children: [
     {
-      path: 'supplierList',
+      path: 'supplier',
       name: 'SupplierList',
       meta: {
         title: 'menu.supplierList',
@@ -24,7 +24,7 @@ const otherSettingsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'shopList',
+      path: 'shop',
       name: 'ShopList',
       meta: {
         title: 'menu.shopList',
@@ -34,7 +34,7 @@ const otherSettingsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'userList',
+      path: 'user',
       name: 'UserList',
       meta: {
         title: 'menu.userList',
@@ -44,7 +44,7 @@ const otherSettingsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'rightList',
+      path: 'right',
       name: 'RightList',
       meta: {
         title: 'menu.rightList',
@@ -54,20 +54,20 @@ const otherSettingsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'systemList',
+      path: 'system',
       name: 'SystemList',
       meta: {
-        title: 'menu.SystemList',
+        title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
         right: ''
       },
       component: () => import('@/views/blank')
     },
     {
-      path: 'mailList',
+      path: 'mail',
       name: 'MailList',
       meta: {
-        title: 'menu.MailList',
+        title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
         right: ''
       },

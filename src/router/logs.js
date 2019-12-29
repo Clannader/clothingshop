@@ -14,7 +14,7 @@ const logsRouter = {
   component: () => import('@/views/logs'),
   children: [
     {
-      path: 'userLogs',
+      path: 'user',
       name: 'UserLogs',
       meta: {
         title: 'menu.userLogs',
@@ -24,7 +24,7 @@ const logsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'serverLogs',
+      path: 'server',
       name: 'ServerLogs',
       meta: {
         title: 'menu.serverLogs',
@@ -34,7 +34,7 @@ const logsRouter = {
       component: () => import('@/views/blank')
     },
     {
-      path: 'mailLogs',
+      path: 'mail',
       name: 'MailLogs',
       meta: {
         title: 'menu.mailLogs',
