@@ -10,7 +10,7 @@
         @click="gotoView(item)"
         color="primary"
         v-on="itemTip"
-        :class="current.name === item.name ? 'v-list-item--active' : ''"
+        :class="isActiveClass(item)"
       >
         <v-list-item-icon v-if="!subItem">
           <v-icon v-text="item.meta.icon"/>
@@ -70,6 +70,16 @@
         this.$router.push({
           name: router.name
         })
+      },
+      isActiveClass(item) {
+        const current = this.$store.state.tagsView.currentRouter
+        let clazz = ''
+        if (current.name === item.name) {
+          clazz = 'v-list-item--active'
+        } else if (item.redirect && current.name === item.redirect.name) {
+          clazz = 'v-list-item--active'
+        }
+        return clazz
       }
     },
     computed: {
@@ -94,10 +104,10 @@
           return false
         }
         return true
-      },
-      current() {
-        return this.$store.state.tagsView.currentRouter
       }
+      // current() {
+      //   return this.$store.state.tagsView.currentRouter
+      // }
     }
   }
 </script>

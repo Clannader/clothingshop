@@ -12,7 +12,7 @@ const miscellRouter = {
     chip: 'new',
     right: 'ALL'
   },
-  component: () => import('@/views/home')
+  component: () => import('@/views/blank')
 }
 
 export default miscellRouter

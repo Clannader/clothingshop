@@ -25,13 +25,13 @@
         v-for="(menu, i) in menuRouter"
       >
         <menu-group
-          v-if="menu.children && menu.children.length > 0 && !mini"
+          v-if="isShowGroupNav(menu)"
           :key="`group-${i}`"
           :item="menu"
         />
 
         <menu-item
-          v-else
+          v-else-if="isShowItemNav(menu)"
           :key="`item-${i}`"
           :item="menu"
           :mini="mini"
@@ -62,6 +62,32 @@
     methods: {
       gotoHome() {
         this.$router.push({ name: 'Home' })
+      },
+      isShowGroupNav(item) {
+        // 是否显示大组的左侧栏
+        // 有子路由,并且子路由个数不为0,并且不是收缩的状态
+        if (item.meta.hidden) {
+          return false
+        }
+        let len = item.children && item.children.length > 0 && !this.mini
+        if (len) {
+          // 如果子路由全部都隐藏则不显示
+          len = item.children.find(child => !child.meta.hidden)
+        }
+        return len
+      },
+      isShowItemNav(item) {
+        if (this.mini) {
+          if (item.children && item.children.length > 0) {
+            // 判断是否是组
+            return item.children.find(child => !child.meta.hidden)
+          } else {
+            // 不是组则判断一个条件
+            return !item.meta.hidden
+          }
+        } else {
+          return !item.meta.hidden && !item.children
+        }
       }
     }
   }

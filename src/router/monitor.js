@@ -11,8 +11,20 @@ const monitorRouter = {
     icon: 'iconfont icon-c-sys-monitor',
     right: 'ALL'
   },
+  redirect: {
+    name: 'MonitorSubMenu'
+  },
   component: () => import('@/views/monitor'),
   children: [
+    {
+      path: ' ', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
+      name: 'MonitorSubMenu',
+      meta: {
+        title: 'menu.monitor',
+        hidden: true
+      },
+      component: () => import('@/views/common/SubItem')
+    },
     {
       path: 'user',
       name: 'UserMonitor',

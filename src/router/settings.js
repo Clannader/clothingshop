@@ -11,8 +11,20 @@ const otherSettingsRouter = {
     icon: 'iconfont icon-c-settings',
     right: 'ALL'
   },
+  redirect: {
+    name: 'SettingsSubMenu'
+  },
   component: () => import('@/views/settings'),
   children: [
+    {
+      path: ' ', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
+      name: 'SettingsSubMenu',
+      meta: {
+        title: 'menu.settings',
+        hidden: true
+      },
+      component: () => import('@/views/common/SubItem')
+    },
     {
       path: 'supplier',
       name: 'SupplierList',
