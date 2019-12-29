@@ -69,6 +69,10 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
+  if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
+    const app = router.app
+    app.$store.dispatch('setCurrentRouter', to)
+  }
 })
 
 // 这里处理多次点击当前路由报错,其实就是屏蔽错误,vue那边的坑

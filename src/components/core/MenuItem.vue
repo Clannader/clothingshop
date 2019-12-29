@@ -4,11 +4,13 @@
     :bottom="!mini && subItem"
     :disabled="showTips"
   >
-    <template #activator="{ on: itemTip }">
+    <!--  v-tooltip的源码里面必须这样写才能绑定tip,并且是{on:value}这样的键值对-->
+    <template v-slot:activator="{ on : itemTip }">
       <v-list-item
         @click="gotoView(item)"
         color="primary"
         v-on="itemTip"
+        :class="current.name === item.name ? 'v-list-item--active' : ''"
       >
         <v-list-item-icon v-if="!subItem">
           <v-icon v-text="item.meta.icon"/>
@@ -92,6 +94,9 @@
           return false
         }
         return true
+      },
+      current() {
+        return this.$store.state.tagsView.currentRouter
       }
     }
   }
