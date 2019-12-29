@@ -11,6 +11,8 @@ export default {
   rememberMe: 'Remember Me',
   forgot: 'I forgot my password',
   errorUsername: 'Username can only contain letters, numbers, and Chinese',
-  errorPassword: 'Password can only contain letters, numbers'
+  errorPassword: 'Password can only contain letters, numbers',
+  deleteUserTitle: 'Delete username',
+  deleteUserConfirm: 'Are you sure you want to delete ({user}) username ?'
 }
 
