@@ -9,6 +9,7 @@ const miscellRouter = {
   meta: {
     title: 'menu.miscellaneous',
     icon: 'iconfont icon-c-miscellaneous',
+    chip: 'new',
     right: 'ALL'
   },
   component: () => import('@/views/home')

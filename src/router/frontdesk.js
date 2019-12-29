@@ -19,84 +19,39 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopInfo',
         icon: 'iconfont icon-c-shopinfo',
-        chip: 'new',
         right: ''
       },
       component: () => import('@/views/frontdesk/shopInfo')
     },
     {
-      path: 'shop',
-      name: 'Shop',
+      path: 'category',
+      name: 'ShopCategory',
       meta: {
-        title: 'menu.shopInfo',
-        icon: 'iconfont icon-c-shopinfo',
+        title: 'menu.shopCategory',
+        icon: 'iconfont icon-c-category',
         right: ''
       },
-      component: () => import('@/views/frontdesk/shopInfo')
+      component: () => import('@/views/blank')
     },
     {
-      path: 'shopchildren',
-      name: 'Shopchildren',
+      path: 'clothing',
+      name: 'clothing',
       meta: {
-        title: 'menu.shopInfo',
-        icon: 'iconfont icon-c-shopinfo',
+        title: 'menu.clothing',
+        icon: 'iconfont icon-c-clothing',
         right: ''
       },
-      component: () => import('@/views/frontdesk/shopInfo'),
-      children: [
-        {
-          path: 'shop2',
-          name: 'Shop2',
-          meta: {
-            title: 'menu.shopInfo',
-            icon: 'iconfont icon-c-shopinfo',
-            right: ''
-          },
-          component: () => import('@/views/frontdesk/shopInfo')
-        },
-        {
-          path: 'shop3',
-          name: 'Shop3',
-          meta: {
-            title: 'menu.shopInfo',
-            icon: 'iconfont icon-c-shopinfo',
-            right: ''
-          },
-          component: () => import('@/views/frontdesk/shopInfo')
-        }
-      ]
+      component: () => import('@/views/blank')
     },
     {
-      path: 'shopchildren1',
-      name: 'Shopchildren1',
+      path: 'order',
+      name: 'ShopOrder',
       meta: {
-        title: 'menu.shopInfo',
-        icon: 'iconfont icon-c-shopinfo',
+        title: 'menu.shopOrder',
+        icon: 'iconfont icon-c-order-setup',
         right: ''
       },
-      component: () => import('@/views/frontdesk/shopInfo'),
-      children: [
-        {
-          path: 'shop21',
-          name: 'Shop21',
-          meta: {
-            title: 'menu.shopInfo',
-            icon: 'iconfont icon-c-shopinfo',
-            right: ''
-          },
-          component: () => import('@/views/frontdesk/shopInfo')
-        },
-        {
-          path: 'shop31',
-          name: 'Shop31',
-          meta: {
-            title: 'menu.shopInfo',
-            icon: 'iconfont icon-c-shopinfo',
-            right: ''
-          },
-          component: () => import('@/views/frontdesk/shopInfo')
-        }
-      ]
+      component: () => import('@/views/blank')
     }
   ]
 }

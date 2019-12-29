@@ -11,7 +11,7 @@ const logsRouter = {
     icon: 'iconfont icon-c-logs',
     right: 'ALL'
   },
-  component: () => import('@/views/home'),
+  component: () => import('@/views/logs'),
   children: [
     {
       path: 'userLogs',
@@ -21,7 +21,27 @@ const logsRouter = {
         icon: 'iconfont icon-c-opera-logs',
         right: ''
       },
-      component: () => import('@/views/frontdesk/shopInfo')
+      component: () => import('@/views/blank')
+    },
+    {
+      path: 'serverLogs',
+      name: 'ServerLogs',
+      meta: {
+        title: 'menu.serverLogs',
+        icon: 'iconfont icon-c-server-logs',
+        right: ''
+      },
+      component: () => import('@/views/blank')
+    },
+    {
+      path: 'mailLogs',
+      name: 'MailLogs',
+      meta: {
+        title: 'menu.mailLogs',
+        icon: 'iconfont icon-c-mail-logs',
+        right: ''
+      },
+      component: () => import('@/views/blank')
     }
   ]
 }
