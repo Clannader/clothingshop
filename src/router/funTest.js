@@ -46,6 +46,40 @@ const TestRouter = {
       component: () => import('@/views/blank')
     },
     {
+      path: 'four11',
+      name: 'TestSix11',
+      meta: {
+        title: 'menu.test',
+        chip: 'hidden',
+        right: ''
+      },
+      component: () => import('@/views/blank'),
+      children: [
+        {
+          path: 'foureee',
+          name: 'TestSixeee',
+          meta: {
+            title: 'menu.test',
+            chip: 'hidden',
+            // hidden: true,
+            right: ''
+          },
+          component: () => import('@/views/blank')
+        },
+        {
+          path: 'fourfff',
+          name: 'TestSixfff',
+          meta: {
+            title: 'menu.test',
+            chip: 'hidden',
+            // hidden: true,
+            right: ''
+          },
+          component: () => import('@/views/blank')
+        }
+      ]
+    },
+    {
       path: 'three',
       name: 'TestThree',
       meta: {
