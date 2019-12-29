@@ -15,7 +15,24 @@
               :items="userNameList"
               :placeholder="$t('login.userName')"
               prepend-inner-icon="iconfont icon-c-login-user"
-            ></v-combobox>
+            >
+              <template v-slot:item="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{item}}
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action @click.stop>
+                  <v-btn
+                    icon
+                    small
+                    @click.stop.prevent="openDeleteUserDialog(item)"
+                  >
+                    <v-icon>clear</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </template>
+            </v-combobox>
           </div>
           <div class="inputBox">
             <v-text-field
@@ -56,14 +73,19 @@
         <span>{{$t('login.forgot')}}?</span>
       </div>
     </div>
+    <component :is="children" @closeDialog="deleteUserName()"></component>
   </div>
 </template>
 
 <script scope>
   import { login } from './api.js'
   import CryptoJS from 'crypto.js'
+  import DeleteUserDialog from './components/DeleteUserDialog'
 
   export default {
+    components: {
+      DeleteUserDialog
+    },
     data() {
       return {
         hackReset: true,
@@ -82,7 +104,8 @@
           v => /^[\w]+$/.test(v) || `${this.$t('login.errorPassword')}`
         ],
         userNameList: [],
-        languageList: []
+        languageList: [],
+        children: ''
       }
     },
     created() {
@@ -165,6 +188,18 @@
           document.onkeydown = undefined
           this.$router.push({ name: 'Home' })
         }
+      },
+      deleteUserName(item) {
+        // 如何删除的元素和当前选中的用户名一样,那么当前的用户名需要清空
+        // if (this.userName === item) {
+        //   this.userName = ''
+        // }
+        // this.userNameList.splice(this.userNameList.indexOf(item), 1)
+        // localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
+        this.children = ''
+      },
+      openDeleteUserDialog() {
+        this.children = DeleteUserDialog
       }
     }
   }
