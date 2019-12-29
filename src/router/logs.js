@@ -11,8 +11,20 @@ const logsRouter = {
     icon: 'iconfont icon-c-logs',
     right: 'ALL'
   },
+  redirect: {
+    name: 'LogsSubMenu'
+  },
   component: () => import('@/views/logs'),
   children: [
+    {
+      path: ' ', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
+      name: 'LogsSubMenu',
+      meta: {
+        title: 'menu.logs',
+        hidden: true
+      },
+      component: () => import('@/views/common/SubItem')
+    },
     {
       path: 'user',
       name: 'UserLogs',

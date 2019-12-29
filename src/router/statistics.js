@@ -11,8 +11,20 @@ const statisticsRouter = {
     icon: 'iconfont icon-c-statistics',
     right: 'ALL'
   },
+  redirect: {
+    name: 'StatisticsSubMenu'
+  },
   component: () => import('@/views/statistics'),
   children: [
+    {
+      path: ' ', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
+      name: 'StatisticsSubMenu',
+      meta: {
+        title: 'menu.statistics',
+        hidden: true
+      },
+      component: () => import('@/views/common/SubItem')
+    },
     {
       path: 'order',
       name: 'StaShopOrder',
