@@ -10,6 +10,7 @@
         @click="gotoView(item)"
         color="primary"
         v-on="itemTip"
+        :class="current.name === item.name ? 'v-list-item--active' : ''"
       >
         <v-list-item-icon v-if="!subItem">
           <v-icon v-text="item.meta.icon"/>
@@ -93,6 +94,9 @@
           return false
         }
         return true
+      },
+      current() {
+        return this.$store.state.tagsView.currentRouter
       }
     }
   }

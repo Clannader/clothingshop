@@ -10,7 +10,8 @@ const tagsView = {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
     menuRouter: menuRouter, // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
-    mini: localStorage.getItem('sidebarStatus') || false // 是否收缩左侧栏
+    mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
+    currentRouter: {}
   },
   mutations: {
     // 设置语言
@@ -18,12 +19,18 @@ const tagsView = {
       state.language = language
       localStorage.setItem('language', language)
     },
+    // 设置是否显示snackbar
     SetShowSnackbar: (state, show = false) => {
       state.showSnackbar = show
     },
+    // 设置左侧栏是否收缩
     SetMini: (state, drawer = false) => {
       state.mini = drawer
       localStorage.setItem('sidebarStatus', drawer)
+    },
+    // 设置当前路由的Name
+    SetCurrentRouter: (state, router = {}) => {
+      state.currentRouter = router
     }
   },
   actions: {
@@ -35,6 +42,9 @@ const tagsView = {
     },
     setMini({ commit }, drawer) {
       commit('SetMini', drawer)
+    },
+    setCurrentRouter({ commit }, router) {
+      commit('SetCurrentRouter', router)
     }
   }
 }
