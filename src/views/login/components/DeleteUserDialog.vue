@@ -6,12 +6,12 @@
           {{$t('login.deleteUserTitle')}}
         </v-card-title>
         <v-card-text class="dialog-text">
-          {{$t('login.deleteUserConfirm')}}
+          {{$t('login.deleteUserConfirm', { user: this.userName})}}
         </v-card-text>
         <v-card-actions class="dialog-footer app-btn">
           <v-spacer></v-spacer>
-          <v-btn depressed @click="deleteUserName">{{$t('homePage.yes')}}</v-btn>
-          <v-btn depressed @click="close">{{$t('homePage.no')}}</v-btn>
+          <v-btn depressed @click="close(true)">{{$t('homePage.yes')}}</v-btn>
+          <v-btn depressed @click="close(false)">{{$t('homePage.no')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -21,17 +21,20 @@
 <script>
   export default {
     name: 'DeleteUserDialog',
+    props: {
+      userName: {
+        type: String,
+        default: ''
+      }
+    },
     data() {
       return {
         dialog: true
       }
     },
     methods: {
-      close() {
-        this.$emit('closeDialog')
-      },
-      deleteUserName() {
-        this.close()
+      close(isAction) {
+        this.$emit('closeDialog', isAction)
       }
     }
   }

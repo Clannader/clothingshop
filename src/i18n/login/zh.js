@@ -13,5 +13,5 @@ export default {
   errorUsername: '用户名只能包含字母、数字和中文',
   errorPassword: '密码只能包含字母、数字',
   deleteUserTitle: '删除用户',
-  deleteUserConfirm: '您确定删除 ({0}) 用户？'
+  deleteUserConfirm: '您确定删除 ({user}) 用户？'
 }

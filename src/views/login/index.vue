@@ -73,7 +73,11 @@
         <span>{{$t('login.forgot')}}?</span>
       </div>
     </div>
-    <component :is="children" @closeDialog="deleteUserName()"></component>
+    <component
+      :is="children"
+      :userName="clickItem"
+      @closeDialog="deleteUserName"
+    ></component>
   </div>
 </template>
 
@@ -105,7 +109,8 @@
         ],
         userNameList: [],
         languageList: [],
-        children: ''
+        children: '',
+        clickItem: ''// 当前点击用户名下拉框的值
       }
     },
     created() {
@@ -189,17 +194,21 @@
           this.$router.push({ name: 'Home' })
         }
       },
-      deleteUserName(item) {
-        // 如何删除的元素和当前选中的用户名一样,那么当前的用户名需要清空
-        // if (this.userName === item) {
-        //   this.userName = ''
-        // }
-        // this.userNameList.splice(this.userNameList.indexOf(item), 1)
-        // localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
+      deleteUserName(isAction) {
         this.children = ''
+        // 如果子组件返回true,那么就是需要执行删除效果
+        if (isAction) {
+          // 如何删除的元素和当前选中的用户名一样,那么当前的用户名需要清空
+          if (this.userName === this.clickItem) {
+            this.userName = ''
+          }
+          this.userNameList.splice(this.userNameList.indexOf(this.clickItem), 1)
+          localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
+        }
       },
-      openDeleteUserDialog() {
+      openDeleteUserDialog(item) {
         this.children = DeleteUserDialog
+        this.clickItem = item
       }
     }
   }

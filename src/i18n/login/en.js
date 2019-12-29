@@ -13,6 +13,6 @@ export default {
   errorUsername: 'Username can only contain letters, numbers, and Chinese',
   errorPassword: 'Password can only contain letters, numbers',
   deleteUserTitle: 'Delete username',
-  deleteUserConfirm: 'Are you sure you want to delete ({0}) username ?'
+  deleteUserConfirm: 'Are you sure you want to delete ({user}) username ?'
 }
 
