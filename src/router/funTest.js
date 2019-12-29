@@ -35,6 +35,17 @@ const TestRouter = {
       component: () => import('@/views/blank')
     },
     {
+      path: 'four',
+      name: 'TestSix',
+      meta: {
+        title: 'menu.test',
+        chip: 'hidden',
+        hidden: true,
+        right: ''
+      },
+      component: () => import('@/views/blank')
+    },
+    {
       path: 'three',
       name: 'TestThree',
       meta: {
