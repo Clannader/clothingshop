@@ -10,12 +10,13 @@ import Settings from './settings'
 import Statistics from './statistics'
 import Monitor from './monitor'
 import Miscellaneous from './miscellaneous'
+import FunctionTest from './funTest'
 
 Vue.use(VueRouter)
 
 const menuRoutes = [
   Home, Frontdesk, Logs, Settings,
-  Statistics, Monitor, Miscellaneous
+  Statistics, Monitor, Miscellaneous, FunctionTest
 ]
 
 const routes = [
