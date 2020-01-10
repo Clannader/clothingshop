@@ -11,7 +11,8 @@ const tagsView = {
     menuRouter: menuRouter, // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
     mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
-    currentRouter: {}
+    currentRouter: {}, // 当前路由对象
+    addViews: [] // 当前面包屑
   },
   mutations: {
     // 设置语言
@@ -31,6 +32,10 @@ const tagsView = {
     // 设置当前路由的Name
     SetCurrentRouter: (state, router = {}) => {
       state.currentRouter = router
+    },
+    // 设置当前面包屑数据
+    SetAddViews: (state, views = []) => {
+      state.addViews = views
     }
   },
   actions: {
@@ -45,6 +50,15 @@ const tagsView = {
     },
     setCurrentRouter({ commit }, router) {
       commit('SetCurrentRouter', router)
+    },
+    setAddViews({ commit }, router) {
+      const views = []
+      views.push({
+        text: 'Dashboard',
+        disabled: false,
+        to: 'breadcrumbs_dashboard'
+      })
+      commit('SetAddViews', views)
     }
   }
 }

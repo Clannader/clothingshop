@@ -1,14 +1,20 @@
 <template>
   <v-content class="layout-content-box">
     <v-container fluid class="main-content">
+      <app-breadcrumbs></app-breadcrumbs>
       <router-view></router-view>
     </v-container>
   </v-content>
 </template>
 
 <script>
+  import AppBreadcrumbs from './AppBreadcrumbs'
+
   export default {
-    name: 'AppContent'
+    name: 'AppContent',
+    components: {
+      AppBreadcrumbs
+    }
   }
 </script>
 
