@@ -57,6 +57,10 @@ const tagsView = {
         text: 'Dashboard',
         disabled: false,
         to: 'breadcrumbs_dashboard'
+      }, {
+        text: 'Dashboard',
+        disabled: false,
+        to: 'breadcrumbs_dashboard'
       })
       commit('SetAddViews', views)
     }
