@@ -17,9 +17,9 @@
     </v-toolbar-title>
     <v-divider></v-divider>
     <v-list
-      class="pt-0"
       dense
       expand
+      nav
     >
       <template
         v-for="(menu, i) in menuRouter"

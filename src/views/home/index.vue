@@ -1,6 +1,5 @@
 <template>
     <div>
-        <p style="height: 1000px">Home</p>
     </div>
 </template>
 
