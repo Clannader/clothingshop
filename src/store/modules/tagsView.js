@@ -73,8 +73,9 @@ const tagsView = {
         // 需求制定
         // 1.进入首页不显示面包屑
         // 2.首页永远是第一个
-        // const indexEle = views[index]
-
+        if (item.name === 'Home') {
+          return
+        }
         // 拷贝一个对象出来,否则对象地址一样,修改值会影响views里面的元素
         const lastEle = Object.assign({}, views[views.length - 1], {
           disabled: false

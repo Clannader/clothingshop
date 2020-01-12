@@ -27,13 +27,18 @@
       breadcrumbs() {
         // 是否第一次加载组件
         if (this.isFirst) {
+          // 其实这个第一次进来有点坑,如果是进入首页,由于不首页不加载该组件,导致不是第一次进来
           let views = []
           try {
-            views = JSON.parse(sessionStorage.getItem('addViews'))
+            views = sessionStorage.getItem('addViews')
+              ? JSON.parse(sessionStorage.getItem('addViews'))
+              : []
           } catch (e) {
             views = []
           }
-          this.$store.commit('SetAddViews', views)
+          if (!(views.length === 1 && views[0].name === 'Home')) {
+            this.$store.commit('SetAddViews', views)
+          }
           // 这里的意思是computed方法里面不建议对变量赋值
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           // this.isFirst = false
