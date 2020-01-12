@@ -36,6 +36,22 @@
           } catch (e) {
             views = []
           }
+          // 如果仅有一个元素,并且第一个是Home页面,则不改变store里面的views
+          if (views.length === 0) {
+            views.push({
+              text: 'menu.home',
+              name: 'Home',
+              disabled: false
+            })
+            if (this.isShow) {
+              const current = this.$store.state.tagsView.currentRouter
+              views.push({
+                text: current.meta.title,
+                name: current.name,
+                disabled: true
+              })
+            }
+          }
           if (!(views.length === 1 && views[0].name === 'Home')) {
             this.$store.commit('SetAddViews', views)
           }

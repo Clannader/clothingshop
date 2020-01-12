@@ -80,6 +80,7 @@ const tagsView = {
         const lastEle = Object.assign({}, views[views.length - 1], {
           disabled: false
         })
+        // 2个元素交换位置,先把其中一个插入到原本位置,再把另一个插入到另一个位置
         views.splice(index, 1, lastEle)
         views.splice(views.length - 1, 1, item)
         return
