@@ -13,6 +13,7 @@ const methods = {
       api.post('/api/user/logout', {}).finally(() => {
         sessionStorage.removeItem('credential')
         sessionStorage.removeItem('userName')
+        sessionStorage.removeItem('addViews')
       })
     }
   },

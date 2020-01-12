@@ -123,4 +123,15 @@
     overflow: visible;
   }
 
+  .v-application--is-ltr .v-list--dense.v-list--nav {
+    .v-list-group--no-action.v-list-group--sub-group {
+      & > .v-list-group__items > div > .v-list-item {
+        padding-left: 74px;
+      }
+    }
+  }
+
+  .v-icon.v-icon{
+    font-size: 22px;
+  }
 </style>
