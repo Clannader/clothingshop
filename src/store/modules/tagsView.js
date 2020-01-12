@@ -60,17 +60,6 @@ const tagsView = {
       const views = state.addViews // 获取当前views的值,第一次进来时,该值是[]
       // 寻找当前路由是否已存在
       const index = views.findIndex(v => v.name === router.name)
-
-      // 第一次进来index为-1
-      if (index !== -1) {
-        // 路由已存在,那么与最后一个元素调换位置即可
-      }
-
-      // 遍历全部值,把disabled改成false
-      views.map(item => {
-        item.disabled = false
-      })
-
       // 加入当前路由值
       const item = {
         text: router.meta.title,
@@ -78,21 +67,50 @@ const tagsView = {
         disabled: true
       }
 
-      // views最多保留5个,这里判断如果原值已经是5个,那么删除第一个
-      if (views.length === 5) {
-        // 先取出第一个元素
-        // const first = views[0]
-        // TODO 这里判断第一个元素是否是资源锁列表的路由,如果是,那么需要解锁
-        // 由于这块业务没有写,先注释掉,以后再说吧
+      // 第一次进来index为-1
+      if (index !== -1) {
+        // 路由已存在,那么与最后一个元素调换位置即可
+        // 需求制定
+        // 1.进入首页不显示面包屑
+        // 2.首页永远是第一个
+        // const indexEle = views[index]
 
-        // 这里直接删除第一个元素
-        views.shift()
+        // 拷贝一个对象出来,否则对象地址一样,修改值会影响views里面的元素
+        const lastEle = Object.assign({}, views[views.length - 1], {
+          disabled: false
+        })
+        views.splice(index, 1, lastEle)
+        views.splice(views.length - 1, 1, item)
+        return
       }
 
+      // 遍历全部值,把disabled改成false
+      views.map(item => {
+        item.disabled = false
+      })
+
+      // views最多保留6个,这里判断如果原值已经是6个,那么删除第二个,因为第一个是首页,不能删除
+      if (views.length >= 6) {
+        // 先取出第二个元素
+        // const two = views[1]
+        // TODO 这里判断第二个元素是否是资源锁列表的路由,如果是,那么需要解锁
+        // 由于这块业务没有写,先注释掉,以后再说吧
+
+        // 这里直接删除第二个元素
+        views.splice(1, 1)
+        // 加这一句的原因是,怕views已经是大于6个了,即使删除第二个元素还是大于6个,直接把后面的全删了
+        // 删除第二个元素后,应该只剩5个
+        // 避免代码出bug
+        if (views.length > 5) {
+          // TODO 这里需要调用循环解锁路由,以后写一个解锁路由的方法,一个个循环即可
+          views.splice(5, views.length - 5)
+        }
+      }
       views.push(item)
       commit('SetAddViews', views)
     },
     clearViews({ commit }) {
+      // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
       commit('ClearViews')
     }
   }

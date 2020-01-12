@@ -2,6 +2,7 @@
   <v-breadcrumbs
     :items="breadcrumbs"
     class="bread-content"
+    v-if="isShow"
   >
     <template v-slot:item="{ item }">
       <v-breadcrumbs-item
@@ -41,6 +42,9 @@
           this.setFirst()
         }
         return this.$store.state.tagsView.addViews
+      },
+      isShow() {
+        return this.$store.state.tagsView.currentRouter.name !== 'Home'
       }
     },
     methods: {
