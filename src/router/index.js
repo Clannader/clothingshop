@@ -73,7 +73,10 @@ router.afterEach(to => {
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     app.$store.dispatch('setCurrentRouter', to)
-    app.$store.dispatch('setAddViews', to)
+    app.$store.dispatch('setAddViews', to).then(() => {
+      // 最后保存路由
+      sessionStorage.setItem('addViews', JSON.stringify(app.$store.state.tagsView.addViews))
+    })
   }
 })
 

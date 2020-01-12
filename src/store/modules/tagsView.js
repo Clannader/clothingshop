@@ -38,7 +38,6 @@ const tagsView = {
     },
     ClearViews: (state) => {
       state.addViews = []
-      sessionStorage.setItem('addViews', JSON.stringify([]))
     }
   },
   actions: {
@@ -55,10 +54,14 @@ const tagsView = {
       commit('SetCurrentRouter', router)
     },
     setAddViews({ commit, state }, router) {
-      const views = state.addViews // 获取当前views的值
+      // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来
+      // 首先先申明加载顺序,进入路由,调用setAddViews方法,再进入组件,然后才调用setAddViews的then方法
+      // 所以保存路由不能在setAddViews中保存,需要在then方法后面执行
+      const views = state.addViews // 获取当前views的值,第一次进来时,该值是[]
       // 寻找当前路由是否已存在
       const index = views.findIndex(v => v.name === router.name)
 
+      // 第一次进来index为-1
       if (index !== -1) {
         // 路由已存在,那么与最后一个元素调换位置即可
       }
@@ -87,7 +90,6 @@ const tagsView = {
       }
 
       views.push(item)
-      sessionStorage.setItem('addViews', JSON.stringify(views))
       commit('SetAddViews', views)
     },
     clearViews({ commit }) {
