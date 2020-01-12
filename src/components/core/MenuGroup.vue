@@ -65,6 +65,10 @@
 
 <style scoped lang="scss">
   /deep/ .v-list-group--sub-group .v-list-group__header {
-    padding-left: 32px !important;
+    padding-left: 24px !important; /*从32变成了24*/
+  }
+
+  /deep/ .v-icon.v-icon{
+    font-size: 22px;
   }
 </style>

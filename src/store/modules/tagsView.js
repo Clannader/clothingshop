@@ -5,7 +5,6 @@
 import { menuRouter } from '@/router'
 
 const tagsView = {
-  // 这里的state也可以传一个无参的方法进行初始化默认值
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
     menuRouter: menuRouter, // 全局左侧导航栏
@@ -36,6 +35,10 @@ const tagsView = {
     // 设置当前面包屑数据
     SetAddViews: (state, views = []) => {
       state.addViews = views
+    },
+    ClearViews: (state) => {
+      state.addViews = []
+      sessionStorage.setItem('addViews', JSON.stringify([]))
     }
   },
   actions: {
@@ -51,18 +54,44 @@ const tagsView = {
     setCurrentRouter({ commit }, router) {
       commit('SetCurrentRouter', router)
     },
-    setAddViews({ commit }, router) {
-      const views = []
-      views.push({
-        text: 'Dashboard',
-        disabled: false,
-        to: 'breadcrumbs_dashboard'
-      }, {
-        text: 'Dashboard',
-        disabled: false,
-        to: 'breadcrumbs_dashboard'
+    setAddViews({ commit, state }, router) {
+      const views = state.addViews // 获取当前views的值
+      // 寻找当前路由是否已存在
+      const index = views.findIndex(v => v.name === router.name)
+
+      if (index !== -1) {
+        // 路由已存在,那么与最后一个元素调换位置即可
+      }
+
+      // 遍历全部值,把disabled改成false
+      views.map(item => {
+        item.disabled = false
       })
+
+      // 加入当前路由值
+      const item = {
+        text: router.meta.title,
+        name: router.name,
+        disabled: true
+      }
+
+      // views最多保留5个,这里判断如果原值已经是5个,那么删除第一个
+      if (views.length === 5) {
+        // 先取出第一个元素
+        // const first = views[0]
+        // TODO 这里判断第一个元素是否是资源锁列表的路由,如果是,那么需要解锁
+        // 由于这块业务没有写,先注释掉,以后再说吧
+
+        // 这里直接删除第一个元素
+        views.shift()
+      }
+
+      views.push(item)
+      sessionStorage.setItem('addViews', JSON.stringify(views))
       commit('SetAddViews', views)
+    },
+    clearViews({ commit }) {
+      commit('ClearViews')
     }
   }
 }

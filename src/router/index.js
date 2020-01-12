@@ -73,6 +73,7 @@ router.afterEach(to => {
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     app.$store.dispatch('setCurrentRouter', to)
+    app.$store.dispatch('setAddViews', to)
   }
 })
 

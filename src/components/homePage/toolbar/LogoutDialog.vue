@@ -37,8 +37,8 @@
         this.$emit('closeDialog')
       },
       quit() {
+        this.$store.dispatch('clearViews')
         this.$router.push({ path: '/' })
-        // TODO 后期清除面包屑的数组保存
         this.close()
       }
     }
