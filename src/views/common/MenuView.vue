@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'SubItem',
+    name: 'MenuView',
     data() {
       return {
         items: []
@@ -42,19 +42,22 @@
         redirect = redirect.substring(0, redirect.length - 1)
       }
       const groupRouter = allRouter.find(route => redirect === `/${route.path}`)
-      this.items = this.getItems(groupRouter.children)
+      this.items = groupRouter.children
     },
     methods: {
-      getItems(items) {
-        const temp = []
-        items.map(item => {
-          if (!item.meta.hidden) {
-            temp.push(item)
-          } else if (item.children && item.children.length > 0) {
-            temp.push(this.getItems(item.children))
-          }
-        })
-        return temp
+      isShowGroupNav(item) {
+        if (item.meta.hidden) {
+          return false
+        }
+        let len = item.children && item.children.length > 0
+        if (len) {
+          // 如果子路由全部都隐藏则不显示
+          len = item.children.find(child => !child.meta.hidden)
+        }
+        return len
+      },
+      isShowItemNav(item) {
+        return !item.meta.hidden && !item.children
       }
     }
   }
@@ -63,12 +66,5 @@
 <style lang="scss" scoped>
   .padding-16 {
     padding: 16px;
-  }
-
-  .item-content {
-    cursor: pointer;
-    flex: 3;
-    text-align: center;
-    border-radius: 6px;
   }
 </style>
