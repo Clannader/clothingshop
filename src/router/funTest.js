@@ -92,6 +92,7 @@ const TestRouter = {
             title: 'menu.test',
             i18nParams: { num: 7 },
             chip: 'hidden',
+            icon: 'crop',
             // hidden: true,
             right: ''
           },

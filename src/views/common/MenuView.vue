@@ -9,16 +9,21 @@
         md="4"
         lg="3"
       >
-        <v-card outlined>
-          <menu-item
-            :item="item"
-            no-markdown
-          >
-            <v-list-item-action>
-              <v-icon>mdi-arrow-right</v-icon>
-            </v-list-item-action>
-          </menu-item>
-        </v-card>
+        <v-hover>
+          <template v-slot="{ hover }">
+            <v-card outlined :elevation="hover ? 10 : 3" >
+              <menu-item
+                :item="item"
+                no-markdown
+                view-item
+              >
+                <v-list-item-action>
+                  <v-icon>mdi-arrow-right</v-icon>
+                </v-list-item-action>
+              </menu-item>
+            </v-card>
+          </template>
+        </v-hover>
       </v-col>
     </v-row>
   </div>
