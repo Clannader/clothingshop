@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>ShopInfo</p>
   </div>
 </template>
 

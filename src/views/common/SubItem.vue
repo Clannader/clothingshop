@@ -2,7 +2,7 @@
   <div>
     <template v-for="(item,index) in items">
       <v-card :key="index">
-        <div>
+        <div style="height: 50px">
           <div v-text="$t(item.meta.title)"/>
         </div>
       </v-card>
