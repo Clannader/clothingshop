@@ -23,7 +23,7 @@ const statisticsRouter = {
         title: 'menu.statistics',
         hidden: true
       },
-      component: () => import('@/views/common/SubItem')
+      component: () => import('@/views/common/MenuView')
     },
     {
       path: 'order',

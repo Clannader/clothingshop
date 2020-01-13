@@ -23,7 +23,7 @@ const monitorRouter = {
         title: 'menu.monitor',
         hidden: true
       },
-      component: () => import('@/views/common/SubItem')
+      component: () => import('@/views/common/MenuView')
     },
     {
       path: 'user',

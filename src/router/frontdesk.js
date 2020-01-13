@@ -23,7 +23,7 @@ const frontdeskRouter = {
         title: 'menu.frontdesk',
         hidden: true
       },
-      component: () => import('@/views/common/SubItem')
+      component: () => import('@/views/common/MenuView')
     },
     {
       path: 'shopInfo',

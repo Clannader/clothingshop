@@ -25,7 +25,7 @@ const TestRouter = {
         i18nParams: { num: 1 },
         hidden: true // 路由是否显示在左侧栏
       },
-      component: () => import('@/views/common/SubItem')
+      component: () => import('@/views/common/MenuView')
     },
     {
       path: 'one',
@@ -80,7 +80,7 @@ const TestRouter = {
             title: 'menu.test',
             i18nParams: { num: 6 },
             chip: 'hidden',
-            // hidden: true,
+            hidden: true,
             right: ''
           },
           component: () => import('@/views/blank')

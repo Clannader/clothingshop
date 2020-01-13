@@ -23,7 +23,7 @@ const otherSettingsRouter = {
         title: 'menu.settings',
         hidden: true
       },
-      component: () => import('@/views/common/SubItem')
+      component: () => import('@/views/common/MenuView')
     },
     {
       path: 'supplier',

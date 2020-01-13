@@ -38,7 +38,7 @@
       </v-list-item>
     </template>
     <!-- 这里是显示tips的内容-->
-    <span v-text="$t(item.meta.title)"></span>
+    <span v-text="$t(item.meta.title, item.meta.i18nParams)"></span>
   </v-tooltip>
 </template>
 
@@ -134,5 +134,9 @@
 
   .v-icon.v-icon{
     font-size: 22px;
+  }
+
+  /deep/ .v-list-item__action:last-of-type:not(:only-child){
+    margin-left: 8px !important;
   }
 </style>
