@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>saddas</p>
     <template v-for="(item,index) in items">
       <v-card :key="index">
         <div>
@@ -24,7 +23,7 @@
       const allRouter = this.$store.getters.menuRouter
       const current = this.$store.state.tagsView.currentRouter
       // 因为这里进来的都是通过重定向进来的,所以这样重定向的值肯定是有的,那么他的值就是那个大组的
-      let redirect = current.redirectedFrom
+      let redirect = current.redirectedFrom || current.fullPath
       // 刷新页面时,redirect的值在最后会加多一个/
       if (redirect.endsWith('/')) {
         redirect = redirect.substring(0, redirect.length - 1)

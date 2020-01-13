@@ -17,7 +17,7 @@ const logsRouter = {
   component: () => import('@/views/logs'),
   children: [
     {
-      path: ' ', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
+      path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
       name: 'LogsSubMenu',
       meta: {
         title: 'menu.logs',

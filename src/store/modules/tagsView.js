@@ -74,6 +74,11 @@ const tagsView = {
         // 1.进入首页不显示面包屑
         // 2.首页永远是第一个
         if (item.name === 'Home') {
+          // 如果进入首页,清空views
+          // TODO 记得解锁
+          if (views.length > 1) {
+            views.splice(1, views.length - 1)
+          }
           return
         }
         // 拷贝一个对象出来,否则对象地址一样,修改值会影响views里面的元素
