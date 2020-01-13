@@ -20,7 +20,7 @@
 
 <style lang="scss" scoped>
   .layout-content-box /deep/ .v-content__wrap {
-    height: 100% !important;
+    /*height: 100% !important;*/
   }
 
   .main-content {

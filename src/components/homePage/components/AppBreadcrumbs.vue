@@ -2,14 +2,13 @@
   <v-breadcrumbs
     :items="breadcrumbs"
     class="bread-content"
-    v-if="isShow"
   >
     <template v-slot:item="{ item }">
       <v-breadcrumbs-item
         :disabled="item.disabled"
         @click="gotoView(item)"
       >
-        <span class="bread-text">{{ $t(item.text) }}</span>
+        <span class="bread-text">{{ $t(item.text, item.i18nParams) }}</span>
       </v-breadcrumbs-item>
     </template>
   </v-breadcrumbs>
@@ -36,9 +35,28 @@
           } catch (e) {
             views = []
           }
-          if (!(views.length === 1 && views[0].name === 'Home')) {
-            this.$store.commit('SetAddViews', views)
+          // 避免有人删除sessionStorage里面的存的内容
+          if (views.length === 0) {
+            views.push({
+              text: 'menu.home',
+              name: 'Home',
+              disabled: false
+            })
+            if (this.isShow) {
+              const current = this.$store.state.tagsView.currentRouter
+              views.push({
+                text: current.meta.title,
+                name: current.name,
+                i18nParams: current.meta.i18nParams,
+                disabled: true
+              })
+            }
           }
+          // 如果仅有一个元素,并且第一个是Home页面,则不改变store里面的views
+          // 当登录后进入Home,再点击其他页面的时候触发
+          // if (!(views.length === 1 && views[0].name === 'Home')) {
+            this.$store.commit('SetAddViews', views)
+          // }
           // 这里的意思是computed方法里面不建议对变量赋值
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           // this.isFirst = false

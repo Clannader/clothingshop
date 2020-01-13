@@ -6,7 +6,7 @@
   >
     <template v-slot:activator>
       <v-list-item-content>
-        <v-list-item-title v-text="$t(item.meta.title)"/>
+        <v-list-item-title v-text="$t(item.meta.title, item.meta.i18nParams)"/>
       </v-list-item-content>
     </template>
 

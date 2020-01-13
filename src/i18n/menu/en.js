@@ -31,6 +31,6 @@ export default {
   userMonitor: 'User',
   apiMonitor: 'Api',
   databaseMonitor: 'Database',
-  test: 'Test'
+  test: 'Test {num}'
 }
 

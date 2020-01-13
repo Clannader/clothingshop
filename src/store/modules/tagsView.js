@@ -64,6 +64,7 @@ const tagsView = {
       const item = {
         text: router.meta.title,
         name: router.name,
+        i18nParams: router.meta.i18nParams,
         disabled: true
       }
 
@@ -74,12 +75,18 @@ const tagsView = {
         // 1.进入首页不显示面包屑
         // 2.首页永远是第一个
         if (item.name === 'Home') {
+          // 如果进入首页,清空views
+          // TODO 记得解锁
+          if (views.length > 1) {
+            views.splice(1, views.length - 1)
+          }
           return
         }
         // 拷贝一个对象出来,否则对象地址一样,修改值会影响views里面的元素
         const lastEle = Object.assign({}, views[views.length - 1], {
           disabled: false
         })
+        // 2个元素交换位置,先把其中一个插入到原本位置,再把另一个插入到另一个位置
         views.splice(index, 1, lastEle)
         views.splice(views.length - 1, 1, item)
         return
