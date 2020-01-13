@@ -1,12 +1,25 @@
 <template>
-  <div>
-    <template v-for="(item,index) in items">
-      <v-card :key="index">
-        <div style="height: 50px">
-          <div v-text="$t(item.meta.title)"/>
-        </div>
-      </v-card>
-    </template>
+  <div class="padding-16">
+    <v-row>
+      <v-col
+        v-for="(item, index) in items"
+        :key="index"
+        cols="12"
+        md="4"
+        lg="3"
+      >
+        <v-card outlined>
+          <menu-item
+            :item="item"
+            no-markdown
+          >
+            <v-list-item-action>
+              <v-icon>mdi-arrow-right</v-icon>
+            </v-list-item-action>
+          </menu-item>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -29,11 +42,33 @@
         redirect = redirect.substring(0, redirect.length - 1)
       }
       const groupRouter = allRouter.find(route => redirect === `/${route.path}`)
-      this.items = groupRouter.children
+      this.items = this.getItems(groupRouter.children)
+    },
+    methods: {
+      getItems(items) {
+        const temp = []
+        items.map(item => {
+          if (!item.meta.hidden) {
+            temp.push(item)
+          } else if (item.children && item.children.length > 0) {
+            temp.push(this.getItems(item.children))
+          }
+        })
+        return temp
+      }
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .padding-16 {
+    padding: 16px;
+  }
 
+  .item-content {
+    cursor: pointer;
+    flex: 3;
+    text-align: center;
+    border-radius: 6px;
+  }
 </style>

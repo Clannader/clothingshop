@@ -64,6 +64,7 @@ const tagsView = {
       const item = {
         text: router.meta.title,
         name: router.name,
+        i18nParams: router.meta.i18nParams,
         disabled: true
       }
 

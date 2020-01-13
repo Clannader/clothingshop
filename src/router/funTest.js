@@ -4,24 +4,26 @@
 'use strict'
 
 const TestRouter = {
-  path: 'test',
-  name: 'FunctionTest',
+  path: 'test', // 路径
+  name: 'FunctionTest', // 路由名
   meta: {
-    title: 'menu.test',
-    icon: 'crop',
-    right: 'ALL'
+    title: 'menu.test', // 路由名 翻译
+    i18nParams: { num: 0 }, // 路由名翻译参数
+    icon: 'crop', // 路由图标
+    right: 'ALL' // 路由权限
   },
   redirect: {
-    name: 'FunctionTestSubMenu'
+    name: 'FunctionTestSubMenu' // 路由重定向地址
   },
-  component: () => import('@/views/test'),
+  component: () => import('@/views/test'), // 路由组件
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
       name: 'FunctionTestSubMenu',
       meta: {
         title: 'menu.test',
-        hidden: true
+        i18nParams: { num: 1 },
+        hidden: true // 路由是否显示在左侧栏
       },
       component: () => import('@/views/common/SubItem')
     },
@@ -30,6 +32,7 @@ const TestRouter = {
       name: 'TestOne',
       meta: {
         title: 'menu.test',
+        i18nParams: { num: 2 },
         icon: 'crop',
         right: ''
       },
@@ -40,6 +43,7 @@ const TestRouter = {
       name: 'TestTwo',
       meta: {
         title: 'menu.test',
+        i18nParams: { num: 3 },
         icon: 'crop',
         chip: 'new',
         right: ''
@@ -51,6 +55,7 @@ const TestRouter = {
       name: 'TestSix',
       meta: {
         title: 'menu.test',
+        i18nParams: { num: 4 },
         chip: 'hidden',
         hidden: true,
         right: ''
@@ -62,6 +67,7 @@ const TestRouter = {
       name: 'TestSix11',
       meta: {
         title: 'menu.test',
+        i18nParams: { num: 5 },
         chip: 'hidden',
         right: ''
       },
@@ -72,6 +78,7 @@ const TestRouter = {
           name: 'TestSixeee',
           meta: {
             title: 'menu.test',
+            i18nParams: { num: 6 },
             chip: 'hidden',
             // hidden: true,
             right: ''
@@ -83,6 +90,7 @@ const TestRouter = {
           name: 'TestSixfff',
           meta: {
             title: 'menu.test',
+            i18nParams: { num: 7 },
             chip: 'hidden',
             // hidden: true,
             right: ''
@@ -96,6 +104,7 @@ const TestRouter = {
       name: 'TestThree',
       meta: {
         title: 'menu.test',
+        i18nParams: { num: 8 },
         icon: 'crop',
         right: ''
       },
@@ -106,6 +115,7 @@ const TestRouter = {
           name: 'TestFour',
           meta: {
             title: 'menu.test',
+            i18nParams: { num: 9 },
             icon: 'crop',
             right: ''
           },
@@ -116,6 +126,7 @@ const TestRouter = {
           name: 'TestFive',
           meta: {
             title: 'menu.test',
+            i18nParams: { num: 10 },
             icon: 'crop',
             right: ''
           },

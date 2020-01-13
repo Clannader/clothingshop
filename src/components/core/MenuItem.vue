@@ -17,7 +17,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title v-text="$t(item.meta.title)"/>
+          <v-list-item-title v-text="$t(item.meta.title, item.meta.i18nParams)"/>
         </v-list-item-content>
 
         <!-- 如果这是子item,那么icon放右边-->
@@ -34,6 +34,7 @@
           {{ item.meta.chip }}
         </v-chip>
 
+        <slot />
       </v-list-item>
     </template>
     <!-- 这里是显示tips的内容-->

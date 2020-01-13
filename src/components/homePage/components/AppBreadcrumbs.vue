@@ -8,7 +8,7 @@
         :disabled="item.disabled"
         @click="gotoView(item)"
       >
-        <span class="bread-text">{{ $t(item.text) }}</span>
+        <span class="bread-text">{{ $t(item.text, item.i18nParams) }}</span>
       </v-breadcrumbs-item>
     </template>
   </v-breadcrumbs>
@@ -47,6 +47,7 @@
               views.push({
                 text: current.meta.title,
                 name: current.name,
+                i18nParams: current.meta.i18nParams,
                 disabled: true
               })
             }
