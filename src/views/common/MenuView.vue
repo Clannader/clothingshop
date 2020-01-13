@@ -5,6 +5,7 @@
         v-for="(item, index) in items"
         :key="index"
         cols="12"
+        sm="6"
         md="4"
         lg="3"
       >
@@ -42,7 +43,7 @@
         redirect = redirect.substring(0, redirect.length - 1)
       }
       const groupRouter = allRouter.find(route => redirect === `/${route.path}`)
-      this.items = groupRouter.children
+      this.items = this.getAllItems(groupRouter.children)
     },
     methods: {
       isShowGroupNav(item) {
@@ -58,6 +59,17 @@
       },
       isShowItemNav(item) {
         return !item.meta.hidden && !item.children
+      },
+      getAllItems(items) {
+        let temp = []
+        items.map(item => {
+          if (this.isShowGroupNav(item)) {
+            temp = temp.concat(this.getAllItems(item.children))
+          } else if (this.isShowItemNav(item)) {
+            temp.push(item)
+          }
+        })
+        return temp
       }
     }
   }
