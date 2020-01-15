@@ -28,6 +28,7 @@ const userInfo = {
       }
       const roles = data.roles.split(',')
       commit('SetRoles', roles)
+      data.roles = roles
       return Promise.resolve(data)
     }
   }

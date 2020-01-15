@@ -51,8 +51,8 @@ const routes = [
 const createRouter = () => new VueRouter({
   // 如果服务器没有设置重定向,那么下面2句必须注掉
   mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
-  base: process.env.VUE_APP_BASE_ROUTER,
-  routes: routes
+  base: process.env.VUE_APP_BASE_ROUTER
+  // routes: routes
 })
 
 const router = createRouter()
@@ -66,6 +66,7 @@ router.beforeEach(async(to, from, next) => {
   }
   const isLogin = app.publicMethods.getUserSession()
   if (!isLogin) {
+    // 如果没有登录,则跳回登录页
     if (to.path !== '/login') {
       next({
         path: '/login'
@@ -78,6 +79,7 @@ router.beforeEach(async(to, from, next) => {
     // 这里要注意的是,每次刷新页面时都会去获取一遍权限,如果不刷新页面,权限则使用内存值
     const userRoles = store.getters.roles
     if (userRoles) {
+      // 内存中有权限,则放行
       next()
     } else {
       // 获取用户权限
@@ -88,6 +90,7 @@ router.beforeEach(async(to, from, next) => {
         result = e
       }
 
+      // 如果请求接口返回无效的凭证,则需要回到登录页
       if (result.code === app.staticVal.Code.Invalid) {
         // 这里是无效的凭证判断,需要返回登录页面
         // TODO 这里估计要清除面包屑
@@ -95,7 +98,17 @@ router.beforeEach(async(to, from, next) => {
           path: '/login'
         })
       } else {
-        next()
+        // generate accessible routes map based on roles
+        const roles = result.roles
+        // 生成动态路由
+        const accessRoutes = await store.dispatch('generateRoutes', roles)
+
+        // dynamically add accessible routes
+        router.addRoutes(accessRoutes)
+
+        // hack method to ensure that addRoutes is complete
+        // set the replace: true, so the navigation will not leave a history record
+        next({ ...to, replace: true })
       }
     }
   }

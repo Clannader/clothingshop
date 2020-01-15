@@ -2,12 +2,12 @@
  * Create by CC on 2018/12/12
  */
 'use strict'
-import { menuRouter } from '@/router'
+import { menuRouter, constantRoutes } from '@/router'
 
 const tagsView = {
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
-    menuRouter: menuRouter, // 全局左侧导航栏
+    menuRouter: [], // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
     mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
     currentRouter: {}, // 当前路由对象
@@ -32,12 +32,16 @@ const tagsView = {
     SetCurrentRouter: (state, router = {}) => {
       state.currentRouter = router
     },
-    // 设置当前面包屑数据
+    // 设置当前面包屑视图
     SetAddViews: (state, views = []) => {
       state.addViews = views
     },
+    // 清除面包屑视图
     ClearViews: (state) => {
       state.addViews = []
+    },
+    SetMenuRouter: (state, menuRouter) => {
+      state.menuRouter = menuRouter
     }
   },
   actions: {
@@ -120,6 +124,16 @@ const tagsView = {
     clearViews({ commit }) {
       // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
       commit('ClearViews')
+    },
+    // 生成权限路由
+    generateRoutes({ commit }, roles) {
+      // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
+      const loginIndex = constantRoutes.findIndex(v => v.path === '/')
+      const loginRoutes = constantRoutes[loginIndex]
+      loginRoutes.children = loginRoutes.children.concat(menuRouter)
+
+      commit('SetMenuRouter', loginRoutes.children)
+      return Promise.resolve(constantRoutes)
     }
   }
 }
