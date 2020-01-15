@@ -130,12 +130,41 @@ const tagsView = {
       // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
       const loginIndex = constantRoutes.findIndex(v => v.path === '/')
       const loginRoutes = constantRoutes[loginIndex]
-      loginRoutes.children = loginRoutes.children.concat(menuRouter)
+
+      // 根据权限计算好menuRouter
+      const router = filterAsyncRoutes(menuRouter, roles)
+      loginRoutes.children = loginRoutes.children.concat(router)
 
       commit('SetMenuRouter', loginRoutes.children)
       return Promise.resolve(constantRoutes)
     }
   }
+}
+
+const filterAsyncRoutes = function(routes, roles) {
+  const tempRoutes = []
+
+  routes.forEach(route => {
+    const temp = { ...route }
+    if (temp.children && temp.children.length > 0) {
+      // 有子路由的情况
+      const groupRoutes = filterAsyncRoutes(temp.children, roles)
+      if (groupRoutes.length > 0) {
+        temp.children = groupRoutes
+        tempRoutes.push(temp)
+      }
+    } else {
+      // 没有子路由时
+      if (!temp.meta.right) {
+        // 没有right节点的时候默认开放路由
+        tempRoutes.push(temp)
+      } else if (roles.indexOf(temp.meta.right) !== -1) {
+        tempRoutes.push(temp)
+      }
+    }
+  })
+
+  return tempRoutes
 }
 
 export default tagsView

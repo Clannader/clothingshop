@@ -115,6 +115,7 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach(to => {
+  // TODO 这里404要处理一下setAddViews才得
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     // 设置当前路由对象
