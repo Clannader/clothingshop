@@ -143,7 +143,8 @@ const tagsView = {
 
 const filterAsyncRoutes = function(routes, roles) {
   const tempRoutes = []
-
+  // TODO 第一次登录会出现2个多余的页签
+  // 路由名重复加载问题
   routes.forEach(route => {
     const temp = { ...route }
     if (temp.children && temp.children.length > 0) {

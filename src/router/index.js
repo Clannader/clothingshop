@@ -51,8 +51,8 @@ const routes = [
 const createRouter = () => new VueRouter({
   // 如果服务器没有设置重定向,那么下面2句必须注掉
   mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
-  base: process.env.VUE_APP_BASE_ROUTER
-  // routes: routes
+  base: process.env.VUE_APP_BASE_ROUTER,
+  routes: routes
 })
 
 const router = createRouter()
@@ -100,6 +100,8 @@ router.beforeEach(async(to, from, next) => {
       } else {
         // generate accessible routes map based on roles
         const roles = result.roles
+
+        // resetRouter()
         // 生成动态路由
         const accessRoutes = await store.dispatch('generateRoutes', roles)
 
