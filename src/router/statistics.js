@@ -8,8 +8,7 @@ const statisticsRouter = {
   name: 'Statistics',
   meta: {
     title: 'menu.statistics',
-    icon: 'iconfont icon-c-statistics',
-    right: 'ALL'
+    icon: 'iconfont icon-c-statistics'
   },
   redirect: {
     name: 'StatisticsSubMenu'
@@ -21,6 +20,7 @@ const statisticsRouter = {
       name: 'StatisticsSubMenu',
       meta: {
         title: 'menu.statistics',
+        right: '5001',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -31,7 +31,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staShopOrder',
         icon: 'iconfont icon-c-shop-order',
-        right: ''
+        right: '5002'
       },
       component: () => import('@/views/blank')
     },
@@ -41,7 +41,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staIncome',
         icon: 'iconfont icon-c-income',
-        right: ''
+        right: '5003'
       },
       component: () => import('@/views/blank')
     },
@@ -51,7 +51,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staUserAccess',
         icon: 'iconfont icon-c-user-access',
-        right: ''
+        right: '5004'
       },
       component: () => import('@/views/blank')
     }

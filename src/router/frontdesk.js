@@ -8,8 +8,7 @@ const frontdeskRouter = {
   name: 'Frontdesk',
   meta: {
     title: 'menu.frontdesk',
-    icon: 'iconfont icon-frontdesk',
-    right: ''
+    icon: 'iconfont icon-frontdesk'
   },
   redirect: {
     name: 'FrontDeskSubMenu'
@@ -21,6 +20,7 @@ const frontdeskRouter = {
       name: 'FrontDeskSubMenu',
       meta: {
         title: 'menu.frontdesk',
+        right: '2001',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -31,7 +31,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopInfo',
         icon: 'iconfont icon-c-shopinfo',
-        right: ''
+        right: '2002'
       },
       component: () => import('@/views/frontdesk/shopInfo')
     },
@@ -41,7 +41,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopCategory',
         icon: 'iconfont icon-c-category',
-        right: ''
+        right: '2003'
       },
       component: () => import('@/views/blank')
     },
@@ -51,7 +51,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.clothing',
         icon: 'iconfont icon-c-clothing',
-        right: ''
+        right: '2004'
       },
       component: () => import('@/views/blank')
     },
@@ -61,7 +61,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopOrder',
         icon: 'iconfont icon-c-order-setup',
-        right: ''
+        right: '2005'
       },
       component: () => import('@/views/blank')
     }

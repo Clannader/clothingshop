@@ -75,6 +75,7 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     // 进到这里说明已经登录成功了,首先先判断是否取了用户权限,如果内存中没有取,那么就去取
+    // 这里要注意的是,每次刷新页面时都会去获取一遍权限,如果不刷新页面,权限则使用内存值
     const userRoles = store.getters.roles
     if (userRoles) {
       next()
@@ -88,6 +89,7 @@ router.beforeEach(async(to, from, next) => {
       }
 
       if (result.code === app.staticVal.Code.Invalid) {
+        // 这里是无效的凭证判断,需要返回登录页面
         // TODO 这里估计要清除面包屑
         next({
           path: '/login'

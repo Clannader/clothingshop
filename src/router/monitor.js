@@ -8,8 +8,7 @@ const monitorRouter = {
   name: 'Monitor',
   meta: {
     title: 'menu.monitor',
-    icon: 'iconfont icon-c-sys-monitor',
-    right: 'ALL'
+    icon: 'iconfont icon-c-sys-monitor'
   },
   redirect: {
     name: 'MonitorSubMenu'
@@ -21,6 +20,7 @@ const monitorRouter = {
       name: 'MonitorSubMenu',
       meta: {
         title: 'menu.monitor',
+        right: '6001',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -31,7 +31,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.userMonitor',
         icon: 'iconfont icon-c-user-monitor',
-        right: ''
+        right: '6002'
       },
       component: () => import('@/views/blank')
     },
@@ -41,7 +41,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.apiMonitor',
         icon: 'iconfont icon-c-api-monitor',
-        right: ''
+        right: '6003'
       },
       component: () => import('@/views/blank')
     },
@@ -51,7 +51,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.databaseMonitor',
         icon: 'iconfont icon-c-database',
-        right: ''
+        right: '6004'
       },
       component: () => import('@/views/blank')
     }

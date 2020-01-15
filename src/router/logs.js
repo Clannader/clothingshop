@@ -8,8 +8,7 @@ const logsRouter = {
   name: 'Logs',
   meta: {
     title: 'menu.logs',
-    icon: 'iconfont icon-c-logs',
-    right: 'ALL'
+    icon: 'iconfont icon-c-logs'
   },
   redirect: {
     name: 'LogsSubMenu'
@@ -21,7 +20,8 @@ const logsRouter = {
       name: 'LogsSubMenu',
       meta: {
         title: 'menu.logs',
-        hidden: true
+        hidden: true,
+        right: '3001'
       },
       component: () => import('@/views/common/MenuView')
     },
@@ -31,7 +31,7 @@ const logsRouter = {
       meta: {
         title: 'menu.userLogs',
         icon: 'iconfont icon-c-opera-logs',
-        right: ''
+        right: '3002'
       },
       component: () => import('@/views/blank')
     },
@@ -41,7 +41,7 @@ const logsRouter = {
       meta: {
         title: 'menu.serverLogs',
         icon: 'iconfont icon-c-server-logs',
-        right: ''
+        right: '3003'
       },
       component: () => import('@/views/blank')
     },
@@ -51,7 +51,7 @@ const logsRouter = {
       meta: {
         title: 'menu.mailLogs',
         icon: 'iconfont icon-c-mail-logs',
-        right: ''
+        right: '3004'
       },
       component: () => import('@/views/blank')
     }

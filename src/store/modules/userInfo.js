@@ -15,9 +15,11 @@ const userInfo = {
     }
   },
   actions: {
+    // 设置用户权限
     setRoles({ commit }) {
       commit('SetRoles', undefined)
     },
+    // 获取用户权限
     async getRoles({ commit }) {
       const [err, data] = await request.post('/api/user/roles', {})
         .then(data => [null, data]).catch(err => [err])

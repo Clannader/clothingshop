@@ -10,7 +10,7 @@ const miscellRouter = {
     title: 'menu.miscellaneous',
     icon: 'iconfont icon-c-miscellaneous',
     chip: 'new',
-    right: 'ALL'
+    right: '7000'
   },
   component: () => import('@/views/blank')
 }

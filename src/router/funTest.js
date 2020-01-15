@@ -10,7 +10,7 @@ const TestRouter = {
     title: 'menu.test', // 路由名 翻译
     i18nParams: { num: 0 }, // 路由名翻译参数
     icon: 'crop', // 路由图标
-    right: 'ALL' // 路由权限
+    right: '8000' // 路由权限
   },
   redirect: {
     name: 'FunctionTestSubMenu' // 路由重定向地址
@@ -22,6 +22,7 @@ const TestRouter = {
       name: 'FunctionTestSubMenu',
       meta: {
         title: 'menu.test',
+        right: '8001',
         i18nParams: { num: 1 },
         hidden: true // 路由是否显示在左侧栏
       },
@@ -34,7 +35,7 @@ const TestRouter = {
         title: 'menu.test',
         i18nParams: { num: 2 },
         icon: 'crop',
-        right: ''
+        right: '8002'
       },
       component: () => import('@/views/blank')
     },
@@ -46,7 +47,7 @@ const TestRouter = {
         i18nParams: { num: 3 },
         icon: 'crop',
         chip: 'new',
-        right: ''
+        right: '8003'
       },
       component: () => import('@/views/blank')
     },
@@ -58,7 +59,7 @@ const TestRouter = {
         i18nParams: { num: 4 },
         chip: 'hidden',
         hidden: true,
-        right: ''
+        right: '8004'
       },
       component: () => import('@/views/blank')
     },
@@ -69,7 +70,7 @@ const TestRouter = {
         title: 'menu.test',
         i18nParams: { num: 5 },
         chip: 'hidden',
-        right: ''
+        right: '8005'
       },
       component: () => import('@/views/blank'),
       children: [
@@ -81,7 +82,7 @@ const TestRouter = {
             i18nParams: { num: 6 },
             chip: 'hidden',
             hidden: true,
-            right: ''
+            right: '8006'
           },
           component: () => import('@/views/blank')
         },
@@ -94,7 +95,7 @@ const TestRouter = {
             chip: 'hidden',
             icon: 'crop',
             // hidden: true,
-            right: ''
+            right: '8007'
           },
           component: () => import('@/views/blank')
         }
@@ -107,7 +108,7 @@ const TestRouter = {
         title: 'menu.test',
         i18nParams: { num: 8 },
         icon: 'crop',
-        right: ''
+        right: '8008'
       },
       component: () => import('@/views/blank'),
       children: [
@@ -118,7 +119,7 @@ const TestRouter = {
             title: 'menu.test',
             i18nParams: { num: 9 },
             icon: 'crop',
-            right: ''
+            right: '8009'
           },
           component: () => import('@/views/blank')
         },
@@ -129,7 +130,7 @@ const TestRouter = {
             title: 'menu.test',
             i18nParams: { num: 10 },
             icon: 'crop',
-            right: ''
+            right: '8010'
           },
           component: () => import('@/views/blank')
         }
