@@ -12,10 +12,13 @@ import Monitor from './monitor'
 import Miscellaneous from './miscellaneous'
 import FunctionTest from './funTest'
 
+import store from '@/store'
+
 Vue.use(VueRouter)
 
+// 这些是有权限的路由
 const menuRoutes = [
-  Home, Frontdesk, Logs, Settings,
+  Frontdesk, Logs, Settings,
   Statistics, Monitor, Miscellaneous, FunctionTest
 ]
 
@@ -25,7 +28,7 @@ const routes = [
     redirect: '/login',
     component: HomePage,
     children: [
-      ...menuRoutes
+      Home
     ]
   },
   {
@@ -45,34 +48,63 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
   // 如果服务器没有设置重定向,那么下面2句必须注掉
   mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
   base: process.env.VUE_APP_BASE_ROUTER,
   routes: routes
 })
 
-router.beforeEach((to, from, next) => {
+const router = createRouter()
+
+router.beforeEach(async(to, from, next) => {
   // 这个app就是vue对象
   const app = router.app
   if (to.path === '/login') {
     // 退出登录操作
-    app.publicMethods.removeUserSession()
+    await app.publicMethods.removeUserSession()
   }
   const isLogin = app.publicMethods.getUserSession()
-  if (!isLogin && to.path !== '/login') {
-    next({
-      path: '/login'
-    })
+  if (!isLogin) {
+    if (to.path !== '/login') {
+      next({
+        path: '/login'
+      })
+    } else {
+      next()
+    }
   } else {
-    next()
+    // 进到这里说明已经登录成功了,首先先判断是否取了用户权限,如果内存中没有取,那么就去取
+    const userRoles = store.getters.roles
+    if (userRoles) {
+      next()
+    } else {
+      // 获取用户权限
+      let result
+      try {
+        result = await store.dispatch('getRoles')
+      } catch (e) {
+        result = e
+      }
+
+      if (result.code === app.staticVal.Code.Invalid) {
+        // TODO 这里估计要清除面包屑
+        next({
+          path: '/login'
+        })
+      } else {
+        next()
+      }
+    }
   }
 })
 
 router.afterEach(to => {
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
+    // 设置当前路由对象
     app.$store.dispatch('setCurrentRouter', to)
+    // 设置面包屑视图
     app.$store.dispatch('setAddViews', to).then(() => {
       // 最后保存路由
       sessionStorage.setItem('addViews', JSON.stringify(app.$store.state.tagsView.addViews))
@@ -87,6 +119,13 @@ VueRouter.prototype.push = function push() {
   return originalPush.apply(this, Array.prototype.slice.apply(arguments)).catch(err => err)
 }
 
-export const menuRouter = menuRoutes
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // 重设路由
+}
+
+export const menuRouter = menuRoutes // 有权限的路由列表
+
+export const constantRoutes = routes // 无需权限的路由列表
 
 export default router

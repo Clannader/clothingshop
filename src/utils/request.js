@@ -43,11 +43,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const code = response.data.code
-    if (code === staticVal.Code.Fail) {
+    if (code === staticVal.Code.Success) {
+      return response.data
+    } else {
       snackbar.error(response.data.msg)
       return Promise.reject(response.data)
-    } else if (code === staticVal.Code.Success) {
-      return response.data
     }
   },
   error => {

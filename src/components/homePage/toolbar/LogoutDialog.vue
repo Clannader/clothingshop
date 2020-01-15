@@ -37,7 +37,6 @@
         this.$emit('closeDialog')
       },
       quit() {
-        this.$store.dispatch('clearViews')
         this.$router.push({ path: '/' })
         this.close()
       }
