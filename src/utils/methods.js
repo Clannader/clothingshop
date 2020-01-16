@@ -12,13 +12,18 @@ const methods = {
     if (this.getUserSession()) {
       // 这个ajax请求,如果没有参数,也得必须填一个参数{},否则不会执行请求操作
       await this.getPromise(api.post('/api/user/logout', {}))
+      // 这里据说由于动态路由的坑,需要重新刷新浏览器才行...
+      // location.reload()
+    } else {
+      store.commit('SetMenuRouter', []) // 清除menuRouter
+      store.dispatch('setRoles') // 清除权限
       store.dispatch('clearViews') // 清除面包屑视图
       store.dispatch('setCurrentRouter', {}) // 清除当前路由
-      store.dispatch('setRoles') // 清除权限
-      sessionStorage.removeItem('credential')
-      sessionStorage.removeItem('userName')
-      sessionStorage.removeItem('addViews')
     }
+    sessionStorage.removeItem('credential')
+    sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('addViews')
+
   },
 
   getUserSession() {

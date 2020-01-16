@@ -21,7 +21,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // TODO 后面删除
-    console.log(JSON.stringify(process.env))
+    // console.log(JSON.stringify(process.env))
     // if (store.getters.showSnackbar) {
     //   if (typeof cancel === 'function') {
     //     cancel('取消请求')

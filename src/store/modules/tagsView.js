@@ -2,7 +2,7 @@
  * Create by CC on 2018/12/12
  */
 'use strict'
-import { menuRouter, constantRoutes } from '@/router'
+import { menuRoutes, constantRoutes } from '@/router'
 
 const tagsView = {
   state: {
@@ -132,7 +132,7 @@ const tagsView = {
       const loginRoutes = constantRoutes[loginIndex]
 
       // 根据权限计算好menuRouter
-      const router = filterAsyncRoutes(menuRouter, roles)
+      const router = filterAsyncRoutes(menuRoutes, roles)
       loginRoutes.children = loginRoutes.children.concat(router)
 
       commit('SetMenuRouter', loginRoutes.children)

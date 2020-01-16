@@ -36,9 +36,11 @@
         document.onkeydown = undefined
         this.$emit('closeDialog')
       },
-      quit() {
-        this.$router.push({ path: '/' })
+      async quit() {
         this.close()
+        await this.publicMethods.removeUserSession()
+        location.reload()
+        // this.$router.push({ path: '/login' })
       }
     }
   }

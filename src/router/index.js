@@ -16,29 +16,22 @@ import store from '@/store'
 
 Vue.use(VueRouter)
 
-// 这些是有权限的路由
-const menuRoutes = [
-  Home, Frontdesk, Logs, Settings,
-  Statistics, Monitor, Miscellaneous, FunctionTest
-]
-
-const routes = [
+// 无需权限的路由列表
+export const constantRoutes = [
   {
     path: '/',
     redirect: '/login',
     component: HomePage,
-    children: [
-
-    ]
+    children: []
   },
   {
     path: '/login',
-    name: 'Login',
+    // name: 'Login', // 定义动态路由时,初始路由不能有name,否则报警告
     component: Login
   },
   {
     path: '/404',
-    name: 'NotFound',
+    // name: 'NotFound',
     component: () => import('@/views/NotFound')
   },
   {
@@ -52,7 +45,7 @@ const createRouter = () => new VueRouter({
   // 如果服务器没有设置重定向,那么下面2句必须注掉
   mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
   base: process.env.VUE_APP_BASE_ROUTER,
-  routes: routes
+  routes: constantRoutes
 })
 
 const router = createRouter()
@@ -68,6 +61,7 @@ router.beforeEach(async(to, from, next) => {
   if (!isLogin) {
     // 如果没有登录,则跳回登录页
     if (to.path !== '/login') {
+      await app.publicMethods.removeUserSession()
       next({
         path: '/login'
       })
@@ -94,6 +88,7 @@ router.beforeEach(async(to, from, next) => {
       if (result.code === app.staticVal.Code.Invalid) {
         // 这里是无效的凭证判断,需要返回登录页面
         // TODO 这里估计要清除面包屑
+        await app.publicMethods.removeUserSession()
         next({
           path: '/login'
         })
@@ -142,8 +137,10 @@ export function resetRouter() {
   router.matcher = newRouter.matcher // 重设路由
 }
 
-export const menuRouter = menuRoutes // 有权限的路由列表
-
-export const constantRoutes = routes // 无需权限的路由列表
+// 有权限的路由列表
+export const menuRoutes = [
+  Home, Frontdesk, Logs, Settings,
+  Statistics, Monitor, Miscellaneous, FunctionTest
+]
 
 export default router
