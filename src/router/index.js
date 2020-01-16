@@ -18,7 +18,7 @@ Vue.use(VueRouter)
 
 // 这些是有权限的路由
 const menuRoutes = [
-  Frontdesk, Logs, Settings,
+  Home, Frontdesk, Logs, Settings,
   Statistics, Monitor, Miscellaneous, FunctionTest
 ]
 
@@ -28,7 +28,7 @@ const routes = [
     redirect: '/login',
     component: HomePage,
     children: [
-      Home
+
     ]
   },
   {
