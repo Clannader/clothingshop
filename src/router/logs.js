@@ -6,6 +6,7 @@
 const logsRouter = {
   path: 'logs',
   name: 'Logs',
+  to: 'logs',
   meta: {
     title: 'menu.logs',
     icon: 'iconfont icon-c-logs'

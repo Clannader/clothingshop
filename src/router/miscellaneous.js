@@ -6,6 +6,7 @@
 const miscellRouter = {
   path: 'miscellaneous',
   name: 'Miscellaneous',
+  to: 'miscellaneous',
   meta: {
     title: 'menu.miscellaneous',
     icon: 'iconfont icon-c-miscellaneous',

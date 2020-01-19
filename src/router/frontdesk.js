@@ -6,6 +6,7 @@
 const frontdeskRouter = {
   path: 'frontdesk',
   name: 'Frontdesk',
+  to: 'frontdesk',
   meta: {
     title: 'menu.frontdesk',
     icon: 'iconfont icon-frontdesk'
@@ -47,7 +48,7 @@ const frontdeskRouter = {
     },
     {
       path: 'clothing',
-      name: 'clothing',
+      name: 'Clothing',
       meta: {
         title: 'menu.clothing',
         icon: 'iconfont icon-c-clothing',

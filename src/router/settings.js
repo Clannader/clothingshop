@@ -6,6 +6,7 @@
 const otherSettingsRouter = {
   path: 'settings',
   name: 'Settings',
+  to: 'settings',
   meta: {
     title: 'menu.settings',
     icon: 'iconfont icon-c-settings'

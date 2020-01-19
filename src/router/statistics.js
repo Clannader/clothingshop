@@ -6,6 +6,7 @@
 const statisticsRouter = {
   path: 'statistics',
   name: 'Statistics',
+  to: 'statistics',
   meta: {
     title: 'menu.statistics',
     icon: 'iconfont icon-c-statistics'

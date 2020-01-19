@@ -6,6 +6,7 @@
 const TestRouter = {
   path: 'test', // 路径
   name: 'FunctionTest', // 路由名
+  to: 'test', // 使用path跳转,相当于fullPath
   meta: {
     title: 'menu.test', // 路由名 翻译
     i18nParams: { num: 0 }, // 路由名翻译参数

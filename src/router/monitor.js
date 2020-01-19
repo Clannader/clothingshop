@@ -6,6 +6,7 @@
 const monitorRouter = {
   path: 'monitor',
   name: 'Monitor',
+  to: 'monitor',
   meta: {
     title: 'menu.monitor',
     icon: 'iconfont icon-c-sys-monitor'
