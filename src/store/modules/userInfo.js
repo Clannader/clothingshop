@@ -4,6 +4,7 @@
 
 'use strict'
 import request from '@/utils/request'
+import router, { resetRouter } from '@/router'
 
 const userInfo = {
   state: {
@@ -30,6 +31,13 @@ const userInfo = {
       commit('SetRoles', roles)
       data.roles = roles
       return Promise.resolve(data)
+    },
+    async changeRoles({ commit, dispatch }) {
+      const result = await dispatch('getRoles')
+      const roles = result.roles
+      resetRouter()
+      const accessRoutes = await dispatch('generateRoutes', roles)
+      router.addRoutes(accessRoutes)
     }
   }
 }

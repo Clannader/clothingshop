@@ -133,7 +133,7 @@ const tagsView = {
 
       // 根据权限计算好menuRouter
       const router = filterAsyncRoutes(menuRoutes, roles)
-      loginRoutes.children = loginRoutes.children.concat(router)
+      loginRoutes.children = router
 
       commit('SetMenuRouter', loginRoutes.children)
       return Promise.resolve(constantRoutes)
