@@ -191,7 +191,7 @@
           sessionStorage.setItem('userName', this.userName)
           this.publicMethods.setUserSession(data['credential'])
           document.onkeydown = undefined
-          this.$router.push({ name: 'Home' })
+          this.$router.push({ path: '/home' })
         }
       },
       deleteUserName(isAction) {

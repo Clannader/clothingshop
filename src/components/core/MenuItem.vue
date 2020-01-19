@@ -74,7 +74,7 @@
     methods: {
       gotoView(router) {
         this.$router.push({
-          name: router.name
+          path: `/${router.to}`
         })
       },
       isActiveClass(item) {

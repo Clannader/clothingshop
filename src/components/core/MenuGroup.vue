@@ -1,5 +1,6 @@
 <template>
   <v-list-group
+    :group="group"
     :prepend-icon="subGroup ? '' : item.meta.icon"
     :sub-group="subGroup"
     no-action
@@ -10,7 +11,7 @@
       </v-list-item-content>
     </template>
 
-    <template v-for="(child, i) in item.children">
+    <template v-for="(child, i) in children">
       <menu-sub-group
         v-if="isShowGroupNav(child)"
         :key="`sub-group-${i}`"
@@ -58,6 +59,28 @@
           len = item.children.find(child => !child.meta.hidden)
         }
         return len
+      },
+      genGroup(groupPath, children) {
+        return children.map(item => {
+          let group = `${groupPath}/${item.path}`
+
+          if (item.children) {
+            group = `${group}|${this.genGroup(item.path, item.children)}`
+          }
+
+          return group
+        }).join('|')
+      }
+    },
+    computed: {
+      children() {
+        return this.item.children.map(item => ({
+          ...item,
+          to: this.item.to ? `${this.item.to}/${item.path}` : `${this.item.path}/${item.path}`
+        }))
+      },
+      group() {
+        return this.genGroup(this.item.path, this.item.children)
       }
     }
   }

@@ -39,14 +39,14 @@
           if (views.length === 0) {
             views.push({
               text: 'menu.home',
-              name: 'Home',
+              path: '/home',
               disabled: false
             })
             if (this.isShow) {
               const current = this.$store.state.tagsView.currentRouter
               views.push({
                 text: current.meta.title,
-                name: current.name,
+                path: current.fullPath,
                 i18nParams: current.meta.i18nParams,
                 disabled: true
               })
@@ -73,7 +73,7 @@
     methods: {
       gotoView(router) {
         this.$router.push({
-          name: router.name
+          path: router.path
         })
       },
       setFirst() {

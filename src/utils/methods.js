@@ -4,18 +4,26 @@
  */
 'use strict'
 import api from './request'
+import store from '@/store'
 
 const methods = {
-  removeUserSession() {
+  async removeUserSession() {
     // 判断用户是否登录过,避免频繁调退出登录操作
     if (this.getUserSession()) {
       // 这个ajax请求,如果没有参数,也得必须填一个参数{},否则不会执行请求操作
-      api.post('/api/user/logout', {}).finally(() => {
-        sessionStorage.removeItem('credential')
-        sessionStorage.removeItem('userName')
-        sessionStorage.removeItem('addViews')
-      })
+      await this.getPromise(api.post('/api/user/logout', {}))
+      // 这里据说由于动态路由的坑,需要重新刷新浏览器才行...
+      // location.reload()
+    } else {
+      store.commit('SetMenuRouter', []) // 清除menuRouter
+      store.dispatch('setRoles') // 清除权限
+      store.dispatch('clearViews') // 清除面包屑视图
+      store.dispatch('setCurrentRouter', {}) // 清除当前路由
     }
+    sessionStorage.removeItem('credential')
+    sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('addViews')
+
   },
 
   getUserSession() {

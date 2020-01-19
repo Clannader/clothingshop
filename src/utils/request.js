@@ -21,7 +21,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // TODO 后面删除
-    console.log(JSON.stringify(process.env))
+    // console.log(JSON.stringify(process.env))
     // if (store.getters.showSnackbar) {
     //   if (typeof cancel === 'function') {
     //     cancel('取消请求')
@@ -43,11 +43,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const code = response.data.code
-    if (code === staticVal.Code.Fail) {
+    if (code === staticVal.Code.Success) {
+      return response.data
+    } else {
       snackbar.error(response.data.msg)
       return Promise.reject(response.data)
-    } else if (code === staticVal.Code.Success) {
-      return response.data
     }
   },
   error => {

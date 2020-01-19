@@ -6,10 +6,10 @@
 const otherSettingsRouter = {
   path: 'settings',
   name: 'Settings',
+  to: 'settings',
   meta: {
     title: 'menu.settings',
-    icon: 'iconfont icon-c-settings',
-    right: 'ALL'
+    icon: 'iconfont icon-c-settings'
   },
   redirect: {
     name: 'SettingsSubMenu'
@@ -21,6 +21,7 @@ const otherSettingsRouter = {
       name: 'SettingsSubMenu',
       meta: {
         title: 'menu.settings',
+        right: '4001',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -31,7 +32,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.supplierList',
         icon: 'iconfont icon-c-supplier',
-        right: ''
+        right: '4002'
       },
       component: () => import('@/views/blank')
     },
@@ -41,7 +42,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.shopList',
         icon: 'iconfont icon-c-shop-add',
-        right: ''
+        right: '4003'
       },
       component: () => import('@/views/blank')
     },
@@ -51,7 +52,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.userList',
         icon: 'iconfont icon-c-user-setup',
-        right: ''
+        right: '4004'
       },
       component: () => import('@/views/blank')
     },
@@ -61,7 +62,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.rightList',
         icon: 'iconfont icon-c-right',
-        right: ''
+        right: '4005'
       },
       component: () => import('@/views/blank')
     },
@@ -71,7 +72,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
-        right: ''
+        right: '4006'
       },
       component: () => import('@/views/blank')
     },
@@ -81,7 +82,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
-        right: ''
+        right: '4007'
       },
       component: () => import('@/views/blank')
     },
@@ -91,7 +92,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.repair',
         icon: 'iconfont icon-c-repair',
-        right: ''
+        right: '4008'
       },
       component: () => import('@/views/blank')
     }
