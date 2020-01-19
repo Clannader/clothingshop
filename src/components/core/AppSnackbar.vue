@@ -30,11 +30,14 @@
     },
     data() {
       return {
+        // 是否显示弹框
         show: false,
+        // 这个是定时器
         activeTimeout: -1
       }
     },
     created() {
+      // 如果判断已经弹了框,则后面的弹的框都不显示
       if (store.getters.showSnackbar) {
         return
       }

@@ -7,7 +7,7 @@ import { menuRoutes, constantRoutes } from '@/router'
 const tagsView = {
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
-    menuRouter: [], // 全局左侧导航栏
+    menuRouter: menuRoutes, // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
     mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
     currentRouter: {}, // 当前路由对象
@@ -63,11 +63,11 @@ const tagsView = {
       // 所以保存路由不能在setAddViews中保存,需要在then方法后面执行
       const views = state.addViews // 获取当前views的值,第一次进来时,该值是[]
       // 寻找当前路由是否已存在
-      const index = views.findIndex(v => v.name === router.name)
+      const index = views.findIndex(v => v.path === router.fullPath)
       // 加入当前路由值
       const item = {
         text: router.meta.title,
-        name: router.name,
+        path: router.fullPath,
         i18nParams: router.meta.i18nParams,
         disabled: true
       }
@@ -78,7 +78,7 @@ const tagsView = {
         // 需求制定
         // 1.进入首页不显示面包屑
         // 2.首页永远是第一个
-        if (item.name === 'Home') {
+        if (item.path === '/home') {
           // 如果进入首页,清空views
           // TODO 记得解锁
           if (views.length > 1) {
