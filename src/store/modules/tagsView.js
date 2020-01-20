@@ -3,11 +3,12 @@
  */
 'use strict'
 import { menuRoutes, constantRoutes } from '@/router'
+import Methods from '@/utils/methods'
 
 const tagsView = {
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
-    menuRouter: menuRoutes, // 全局左侧导航栏
+    menuRouter: [], // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
     mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
     currentRouter: {}, // 当前路由对象
@@ -72,6 +73,12 @@ const tagsView = {
         disabled: true
       }
 
+      // 由于动态路由可能导致路由不存在,也加进了views里面
+      // 如果没有text,则不加进去
+      if (!item.text) {
+        return
+      }
+
       // 第一次进来index为-1
       if (index !== -1) {
         // 路由已存在,那么与最后一个元素调换位置即可
@@ -128,22 +135,23 @@ const tagsView = {
     // 生成权限路由
     generateRoutes({ commit }, roles) {
       // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
-      const loginIndex = constantRoutes.findIndex(v => v.path === '/')
-      const loginRoutes = constantRoutes[loginIndex]
+      // 克隆一个对象
+      const cloneRoutes = Methods.extend(true, [], constantRoutes)
+      const loginIndex = cloneRoutes.findIndex(v => v.path === '/')
+      const loginRoutes = cloneRoutes[loginIndex]
 
       // 根据权限计算好menuRouter
       const router = filterAsyncRoutes(menuRoutes, roles)
       loginRoutes.children = router
 
       commit('SetMenuRouter', loginRoutes.children)
-      return Promise.resolve(constantRoutes)
+      return Promise.resolve(cloneRoutes)
     }
   }
 }
 
 const filterAsyncRoutes = function(routes, roles) {
   const tempRoutes = []
-  // TODO 第一次登录会出现2个多余的页签
   // 路由名重复加载问题
   routes.forEach(route => {
     const temp = { ...route }

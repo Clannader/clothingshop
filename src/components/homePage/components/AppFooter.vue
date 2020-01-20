@@ -10,12 +10,28 @@
     {{$t('homePage.rights')}}
     <v-spacer></v-spacer>
     <strong>{{$t('homePage.version')}}</strong>1.0.0.0
+    <v-btn
+      icon
+      x-small
+      @click="refreshRouter"
+      :title="$t('homePage.refreshRouter')"
+      style="margin-left: 10px"
+    >
+      <v-icon>
+        mdi-refresh
+      </v-icon>
+    </v-btn>
   </v-footer>
 </template>
 
 <script>
   export default {
-    name: 'AppFooter'
+    name: 'AppFooter',
+    methods: {
+      async refreshRouter() {
+        await this.$store.dispatch('changeRoles')
+      }
+    }
   }
 </script>
 

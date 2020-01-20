@@ -39,8 +39,7 @@
       async quit() {
         this.close()
         await this.publicMethods.removeUserSession()
-        location.reload()
-        // this.$router.push({ path: '/login' })
+        this.$router.push({ path: '/login' })
       }
     }
   }

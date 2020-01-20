@@ -14,5 +14,6 @@ export default {
   logoutSys: 'Logout system',
   logoutConfirm: 'Are you sure you want to log out ?',
   yes: 'Yes',
-  no: 'No'
+  no: 'No',
+  refreshRouter: 'Refresh router'
 }
