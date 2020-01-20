@@ -32,7 +32,7 @@ const userInfo = {
       data.roles = roles
       return Promise.resolve(data)
     },
-    async changeRoles({ commit, dispatch }) {
+    async changeRoles({ dispatch }) {
       const result = await dispatch('getRoles')
       const roles = result.roles
       resetRouter()

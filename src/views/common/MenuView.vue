@@ -11,7 +11,7 @@
       >
         <v-hover>
           <template v-slot="{ hover }">
-            <v-card outlined :elevation="hover ? 10 : 3" >
+            <v-card outlined :elevation="hover ? 10 : 3">
               <menu-item
                 :item="item"
                 no-markdown
@@ -48,7 +48,7 @@
         redirect = redirect.substring(0, redirect.length - 1)
       }
       const groupRouter = allRouter.find(route => redirect === `/${route.path}`)
-      this.items = this.getAllItems(groupRouter.children)
+      this.items = this.getAllItems(groupRouter.path, this.publicMethods.extend(true, [], groupRouter.children))
     },
     methods: {
       isShowGroupNav(item) {
@@ -65,12 +65,14 @@
       isShowItemNav(item) {
         return !item.meta.hidden && !item.children
       },
-      getAllItems(items) {
+      getAllItems(groupPath, items) {
         let temp = []
         items.map(item => {
+          const to = item.to ? item.to : groupPath
           if (this.isShowGroupNav(item)) {
-            temp = temp.concat(this.getAllItems(item.children))
+            temp = temp.concat(this.getAllItems(to, item.children))
           } else if (this.isShowItemNav(item)) {
+            item.to = `${to}/${item.path}`
             temp.push(item)
           }
         })

@@ -14,5 +14,6 @@ export default {
   logoutSys: '退出系统',
   logoutConfirm: '您确定退出系统 ？',
   yes: '是',
-  no: '否'
+  no: '否',
+  refreshRouter: '刷新路由'
 }

@@ -28,7 +28,7 @@ export const constantRoutes = [
     path: '/',
     redirect: '/login',
     component: HomePage,
-    children: menuRoutes
+    children: []
   },
   {
     path: '/login',
@@ -42,7 +42,8 @@ export const constantRoutes = [
   },
   {
     path: '*',
-    redirect: '/404',
+    component: () => import('@/views/NotFound'),
+    // redirect: '/404', // 定义动态路由时,不能这样写,否则刷新会跳转404
     hidden: true
   }
 ]
@@ -84,44 +85,44 @@ router.beforeEach(async(to, from, next) => {
       next()
     } else {
       // 获取用户权限
-      // let result
-      // try {
-      //   result = await store.dispatch('getRoles')
-      // } catch (e) {
-      //   result = e
-      // }
-      //
-      // // 如果请求接口返回无效的凭证,则需要回到登录页
-      // if (result.code === app.staticVal.Code.Invalid) {
-      //   // 这里是无效的凭证判断,需要返回登录页面
-      //   // TODO 这里估计要清除面包屑
-      //   await app.publicMethods.removeUserSession()
-      //   next({
-      //     path: '/login'
-      //   })
-      // } else {
-      //   // generate accessible routes map based on roles
-      //   const roles = result.roles
-      //
-      //   // resetRouter()
-      //   // 生成动态路由
-      //   const accessRoutes = await store.dispatch('generateRoutes', roles)
-      //
-      //   // dynamically add accessible routes
-      //   router.addRoutes(accessRoutes)
-      //
-      //   // hack method to ensure that addRoutes is complete
-      //   // set the replace: true, so the navigation will not leave a history record
-      //   next({ ...to, replace: true })
-      // }
-      next()
+      let result
+      try {
+        result = await store.dispatch('getRoles')
+      } catch (e) {
+        result = e
+      }
+
+      // 如果请求接口返回无效的凭证,则需要回到登录页
+      if (result.code === app.staticVal.Code.Invalid) {
+        // 这里是无效的凭证判断,需要返回登录页面
+        // 这里估计要清除面包屑
+        await app.publicMethods.removeUserSession()
+        next({
+          path: '/login',
+          replace: true
+        })
+      } else {
+        // generate accessible routes map based on roles
+        const roles = result.roles
+
+        // 生成动态路由
+        const accessRoutes = await store.dispatch('generateRoutes', roles)
+
+        // dynamically add accessible routes
+        router.addRoutes(accessRoutes)
+
+        // hack method to ensure that addRoutes is complete
+        // set the replace: true, so the navigation will not leave a history record
+        next({ ...to, replace: true })
+      }
     }
   }
 })
 
 router.afterEach(to => {
-  // TODO 这里404要处理一下setAddViews才得
+  // 这里404要处理一下setAddViews才得
   // 这里的处理404是由于动态路由的原因,可能导致之前进入的路由变成404,但是还存在setAddViews
+  // 估计可以不需要处理了
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     // 设置当前路由对象
