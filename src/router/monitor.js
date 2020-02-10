@@ -5,20 +5,21 @@
 
 const monitorRouter = {
   path: 'monitor',
-  name: 'Monitor',
+  // name: 'Monitor',
   to: 'monitor',
   meta: {
     title: 'menu.monitor',
     icon: 'iconfont icon-c-sys-monitor'
   },
   redirect: {
-    name: 'MonitorSubMenu'
+    // name: 'MonitorSubMenu'
+    path: '/monitor/'
   },
   component: () => import('@/views/monitor'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'MonitorSubMenu',
+      // name: 'MonitorSubMenu',
       meta: {
         title: 'menu.monitor',
         right: '6001',
@@ -28,7 +29,7 @@ const monitorRouter = {
     },
     {
       path: 'user',
-      name: 'UserMonitor',
+      // name: 'UserMonitor',
       meta: {
         title: 'menu.userMonitor',
         icon: 'iconfont icon-c-user-monitor',
@@ -38,7 +39,7 @@ const monitorRouter = {
     },
     {
       path: 'api',
-      name: 'ApiMonitor',
+      // name: 'ApiMonitor',
       meta: {
         title: 'menu.apiMonitor',
         icon: 'iconfont icon-c-api-monitor',
@@ -48,7 +49,7 @@ const monitorRouter = {
     },
     {
       path: 'database',
-      name: 'DatabaseMonitor',
+      // name: 'DatabaseMonitor',
       meta: {
         title: 'menu.databaseMonitor',
         icon: 'iconfont icon-c-database',

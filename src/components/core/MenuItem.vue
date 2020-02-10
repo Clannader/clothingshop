@@ -80,9 +80,7 @@
       isActiveClass(item) {
         const current = this.$store.state.tagsView.currentRouter
         let clazz = ''
-        if (current.name === item.name) {
-          clazz = 'v-list-item--active'
-        } else if (item.redirect && current.name === item.redirect.name) {
+        if (current.fullPath === '/' + item.to) {
           clazz = 'v-list-item--active'
         }
         return clazz
@@ -138,7 +136,7 @@
   }
 
   .v-icon.v-icon{
-    font-size: 22px;
+    font-size: 20px;
   }
 
   /deep/ .v-list-item__action:last-of-type:not(:only-child){

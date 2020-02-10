@@ -15,5 +15,6 @@ export default {
   logoutConfirm: 'Are you sure you want to log out ?',
   yes: 'Yes',
   no: 'No',
-  refreshRouter: 'Refresh router'
+  refreshRouter: 'Refresh router',
+  search: 'Search'
 }

@@ -5,9 +5,11 @@
 import login from './login/zh'
 import homePage from './homePage/zh'
 import menu from './menu/zh'
+import rights from './rights/zh'
 
 export default {
   login,
   homePage,
-  menu
+  menu,
+  rights
 }

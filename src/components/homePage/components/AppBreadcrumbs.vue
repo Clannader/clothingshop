@@ -67,7 +67,7 @@
         return this.$store.state.tagsView.addViews
       },
       isShow() {
-        return this.$store.state.tagsView.currentRouter.name !== 'Home'
+        return this.$store.state.tagsView.currentRouter.fullPath !== '/home'
       }
     },
     methods: {

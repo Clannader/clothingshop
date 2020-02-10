@@ -5,7 +5,7 @@
 
 const homeRouter = {
   path: 'home',
-  name: 'Home',
+  // name: 'Home',
   to: 'home',
   meta: {
     title: 'menu.home',
