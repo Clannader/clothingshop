@@ -5,20 +5,21 @@
 
 const logsRouter = {
   path: 'logs',
-  name: 'Logs',
+  // name: 'Logs',
   to: 'logs',
   meta: {
     title: 'menu.logs',
     icon: 'iconfont icon-c-logs'
   },
   redirect: {
-    name: 'LogsSubMenu'
+    // name: 'LogsSubMenu'
+    path: '/logs/'
   },
   component: () => import('@/views/logs'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'LogsSubMenu',
+      // name: 'LogsSubMenu',
       meta: {
         title: 'menu.logs',
         hidden: true,
@@ -28,7 +29,7 @@ const logsRouter = {
     },
     {
       path: 'user',
-      name: 'UserLogs',
+      // name: 'UserLogs',
       meta: {
         title: 'menu.userLogs',
         icon: 'iconfont icon-c-opera-logs',
@@ -38,7 +39,7 @@ const logsRouter = {
     },
     {
       path: 'server',
-      name: 'ServerLogs',
+      // name: 'ServerLogs',
       meta: {
         title: 'menu.serverLogs',
         icon: 'iconfont icon-c-server-logs',
@@ -48,7 +49,7 @@ const logsRouter = {
     },
     {
       path: 'mail',
-      name: 'MailLogs',
+      // name: 'MailLogs',
       meta: {
         title: 'menu.mailLogs',
         icon: 'iconfont icon-c-mail-logs',

@@ -5,7 +5,7 @@
 
 const miscellRouter = {
   path: 'miscellaneous',
-  name: 'Miscellaneous',
+  // name: 'Miscellaneous',
   to: 'miscellaneous',
   meta: {
     title: 'menu.miscellaneous',

@@ -5,20 +5,21 @@
 
 const statisticsRouter = {
   path: 'statistics',
-  name: 'Statistics',
+  // name: 'Statistics',
   to: 'statistics',
   meta: {
     title: 'menu.statistics',
     icon: 'iconfont icon-c-statistics'
   },
   redirect: {
-    name: 'StatisticsSubMenu'
+    // name: 'StatisticsSubMenu'
+    path: '/statistics/'
   },
   component: () => import('@/views/statistics'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'StatisticsSubMenu',
+      // name: 'StatisticsSubMenu',
       meta: {
         title: 'menu.statistics',
         right: '5001',
@@ -28,7 +29,7 @@ const statisticsRouter = {
     },
     {
       path: 'order',
-      name: 'StaShopOrder',
+      // name: 'StaShopOrder',
       meta: {
         title: 'menu.staShopOrder',
         icon: 'iconfont icon-c-shop-order',
@@ -38,7 +39,7 @@ const statisticsRouter = {
     },
     {
       path: 'income',
-      name: 'StaIncome',
+      // name: 'StaIncome',
       meta: {
         title: 'menu.staIncome',
         icon: 'iconfont icon-c-income',
@@ -48,7 +49,7 @@ const statisticsRouter = {
     },
     {
       path: 'userAccess',
-      name: 'StaUserAccess',
+      // name: 'StaUserAccess',
       meta: {
         title: 'menu.staUserAccess',
         icon: 'iconfont icon-c-user-access',

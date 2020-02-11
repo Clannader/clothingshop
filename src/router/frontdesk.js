@@ -5,20 +5,21 @@
 
 const frontdeskRouter = {
   path: 'frontdesk',
-  name: 'Frontdesk',
+  // name: 'Frontdesk',
   to: 'frontdesk',
   meta: {
     title: 'menu.frontdesk',
     icon: 'iconfont icon-frontdesk'
   },
   redirect: {
-    name: 'FrontDeskSubMenu'
+    // name: 'FrontDeskSubMenu'
+    path: '/frontdesk/'
   },
   component: () => import('@/views/frontdesk'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'FrontDeskSubMenu',
+      // name: 'FrontDeskSubMenu',
       meta: {
         title: 'menu.frontdesk',
         right: '2001',
@@ -28,7 +29,7 @@ const frontdeskRouter = {
     },
     {
       path: 'shopInfo',
-      name: 'ShopInfo',
+      // name: 'ShopInfo',
       meta: {
         title: 'menu.shopInfo',
         icon: 'iconfont icon-c-shopinfo',
@@ -38,7 +39,7 @@ const frontdeskRouter = {
     },
     {
       path: 'category',
-      name: 'ShopCategory',
+      // name: 'ShopCategory',
       meta: {
         title: 'menu.shopCategory',
         icon: 'iconfont icon-c-category',
@@ -48,7 +49,7 @@ const frontdeskRouter = {
     },
     {
       path: 'clothing',
-      name: 'Clothing',
+      // name: 'Clothing',
       meta: {
         title: 'menu.clothing',
         icon: 'iconfont icon-c-clothing',
@@ -58,7 +59,7 @@ const frontdeskRouter = {
     },
     {
       path: 'order',
-      name: 'ShopOrder',
+      // name: 'ShopOrder',
       meta: {
         title: 'menu.shopOrder',
         icon: 'iconfont icon-c-order-setup',

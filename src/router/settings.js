@@ -5,20 +5,21 @@
 
 const otherSettingsRouter = {
   path: 'settings',
-  name: 'Settings',
+  // name: 'Settings',
   to: 'settings',
   meta: {
     title: 'menu.settings',
     icon: 'iconfont icon-c-settings'
   },
   redirect: {
-    name: 'SettingsSubMenu'
+    // name: 'SettingsSubMenu'
+    path: '/settings/'
   },
   component: () => import('@/views/settings'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'SettingsSubMenu',
+      // name: 'SettingsSubMenu',
       meta: {
         title: 'menu.settings',
         right: '4001',
@@ -28,7 +29,7 @@ const otherSettingsRouter = {
     },
     {
       path: 'supplier',
-      name: 'SupplierList',
+      // name: 'SupplierList',
       meta: {
         title: 'menu.supplierList',
         icon: 'iconfont icon-c-supplier',
@@ -38,7 +39,7 @@ const otherSettingsRouter = {
     },
     {
       path: 'shop',
-      name: 'ShopList',
+      // name: 'ShopList',
       meta: {
         title: 'menu.shopList',
         icon: 'iconfont icon-c-shop-add',
@@ -48,7 +49,7 @@ const otherSettingsRouter = {
     },
     {
       path: 'user',
-      name: 'UserList',
+      // name: 'UserList',
       meta: {
         title: 'menu.userList',
         icon: 'iconfont icon-c-user-setup',
@@ -58,17 +59,17 @@ const otherSettingsRouter = {
     },
     {
       path: 'right',
-      name: 'RightList',
+      // name: 'RightList',
       meta: {
         title: 'menu.rightList',
         icon: 'iconfont icon-c-right',
         right: '4005'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/settings/rights')
     },
     {
       path: 'system',
-      name: 'SystemList',
+      // name: 'SystemList',
       meta: {
         title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
@@ -78,7 +79,7 @@ const otherSettingsRouter = {
     },
     {
       path: 'mail',
-      name: 'MailList',
+      // name: 'MailList',
       meta: {
         title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
@@ -88,7 +89,7 @@ const otherSettingsRouter = {
     },
     {
       path: 'repair',
-      name: 'Repair',
+      // name: 'Repair',
       meta: {
         title: 'menu.repair',
         icon: 'iconfont icon-c-repair',
