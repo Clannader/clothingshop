@@ -82,8 +82,8 @@
 </template>
 
 <script scope>
-  import { login } from './api.js'
-  import CryptoJS from 'crypto.js'
+  // import { login } from './api.js'
+  // import CryptoJS from 'crypto.js'
   import DeleteUserDialog from './components/DeleteUserDialog'
 
   export default {
@@ -166,11 +166,15 @@
         if (this.$store.state.tagsView.showSnackbar) {
           return
         }
-        const params = {
-          adminId: this.userName,
-          adminPws: CryptoJS.sha256(this.password)
-        }
-        const [err, data] = await this.publicMethods.getPromise(login(params))
+        // const params = {
+        //   adminId: this.userName,
+        //   adminPws: CryptoJS.sha256(this.password)
+        // }
+        // const [err, data] = await this.publicMethods.getPromise(login(params))
+        const [err, data] = [null, {
+          code: this.staticVal.Code.Success,
+          credential: 'eqweweeqweqwewq'
+        }]
         if (err) {
           // this.$toask.info('success', 'sss')
           // console.log(err)

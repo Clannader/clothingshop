@@ -3,7 +3,7 @@
  * 公共方法
  */
 'use strict'
-import api from './request'
+// import api from './request'
 import store from '@/store'
 
 const methods = {
@@ -11,7 +11,7 @@ const methods = {
     // 判断用户是否登录过,避免频繁调退出登录操作
     if (this.getUserSession()) {
       // 这个ajax请求,如果没有参数,也得必须填一个参数{},否则不会执行请求操作
-      await this.getPromise(api.post('/api/user/logout', {}))
+      // await this.getPromise(api.post('/api/user/logout', {}))
       // 这里据说由于动态路由的坑,需要重新刷新浏览器才行...
       // location.reload()
     }
