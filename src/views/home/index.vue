@@ -283,7 +283,7 @@
       },
       getTD(data) {
         let s = ''
-        for (let key in data) {
+        for (const key in data) {
           s += data[key] + '<br>'
         }
         return s
