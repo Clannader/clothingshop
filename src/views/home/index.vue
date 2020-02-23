@@ -49,6 +49,24 @@
         ref="hotTable"
         :settings="hotTableSettings">
       </hot-table>
+      <v-card-actions class="app-btn">
+        <v-spacer></v-spacer>
+        <v-btn @click="getData">测试获取选中数据</v-btn>
+      </v-card-actions>
+      <v-row>
+        <v-col>
+          <v-textarea
+            v-model="tableResult"
+            label="表格单元格数据"
+          ></v-textarea>
+        </v-col>
+        <v-col>
+          <v-textarea
+            v-model="sourceResult"
+            label="原始JSON数据"
+          ></v-textarea>
+        </v-col>
+      </v-row>
     </v-card>
     <v-card class="card-title">
       <v-card-title class="headline">Handson Table</v-card-title>
@@ -66,6 +84,7 @@
 
 <script>
   import { HotTable } from '@handsontable/vue'
+  import Handsontable from 'handsontable'
   import moment from 'moment'
 
   export default {
@@ -74,25 +93,6 @@
       HotTable
     },
     data() {
-      // 构造数据
-      const headers = []
-      const count = 20
-      for (let i = 0; i < count; i++) {
-        headers.push(moment().add(i, 'days').format('YYYY-MM-DD'))
-      }
-      const letter = ['A', 'B', 'C', 'D', 'E',
-        'F', 'G', 'H', 'I', 'J']
-      const body = []
-      let num = 1
-      for (let i = 0; i < count; i++) {
-        const data = []
-        data.push(letter[i] + letter[i] + letter[i])
-        for (let j = 0; j < count - 1; j++) {
-          data.push(num++)
-        }
-        body.push(data)
-      }
-
       return {
         vueHeaders: this.getVueHeaders(),
         vueDesserts: this.getVueDesserts(),
@@ -100,13 +100,13 @@
         pageCount: 10,
         itemsPerPage: 10,
         showNumber: ['10', '20', '40', '100'],
-        hotTableSettings: {
-          headers: ['1', '2', '3'],
-          rowHeaders: ['A', 'B', 'C'],
-          colHeaders: ['D', 'F', 'W'],
-          data: [[2, 3, 4], [4, 6, 7], [12, 32, 43]]
-        }
+        hotTableSettings: this.getHotTableSettings(),
+        tableResult: '',
+        sourceResult: ''
       }
+    },
+    created() {
+      Handsontable.renderers.registerRenderer('cellsRenderer', this.cellsRenderer)
     },
     methods: {
       getVueHeaders() {
@@ -160,7 +160,7 @@
       },
       getVueDesserts() {
         const vueDesserts = []
-        const num = 300
+        const num = 250
         for (let i = 0; i < num; i++) {
           vueDesserts.push(this.getVueTempData(i))
         }
@@ -180,6 +180,128 @@
           roomPrice: '780',
           rateCode: 'DFG'
         }
+      },
+      getHotDesserts() {
+        const hotDesserts = []
+        const num = 10
+        for (let i = 0; i < num; i++) {
+          const arr = []
+          for (let j = 0; j < num; j++) {
+            arr.push(this.getVueTempData(j))
+          }
+          hotDesserts.push(arr)
+        }
+        return hotDesserts
+      },
+      getHotTableSettings() {
+        return {
+          editor: false, // 禁用编辑表格
+          fillHandle: false, // 禁用拖拽复制+复制替换表格
+          copyable: false, // 不可复制
+          // enterMoves: false,
+          beforeKeyDown: this.beforeKeyDown, // 禁用按钮事件
+          data: this.getHotDesserts(),
+          // fixedRowsTop: 3, // 固定前3行
+          // fixedColumnsLeft: 3, // 固定左侧3列
+          outsideClickDeselects: false, // 设置false才能获取单元格
+          cells: this.getCells,
+          width: 1200,
+          height: 300,
+          // autoColumnSize: true,
+          // rowHeaders: true,
+          // colHeaders: true,
+          // renderAllRows: true,
+          colWidths: 150,
+          // dataSchema: {
+          //   register: null,
+          //   roomNumber: null,
+          //   rooms: null,
+          //   guestName: null,
+          //   arrivalDate: null,
+          //   departureDate: null,
+          //   profileNumber: null,
+          //   status: null,
+          //   roomPrice: null,
+          //   rateCode: null
+          // },
+          colHeaders: this.getColHeaders(),
+          // rowHeaderWidth: '150',
+          // rowHeights: '48',
+          // tableClassName: ['v-data-table__wrapper', 'v-data-table'],
+          rowHeaders: this.getRowHeaders()
+          // columns: [{
+          //   data: 'register'
+          // }]
+        }
+      },
+      beforeKeyDown(e) {
+        // 禁用delete和enter键的事件
+        if (e.keyCode === 8 || e.keyCode === 46) {
+          Handsontable.dom.stopImmediatePropagation(e)
+        }
+      },
+      getData() {
+        const hot = this.$refs.hotTable.hotInstance // 获取表格实例
+        const selectedData = hot.getSelected()
+        let tableResult = ''
+        let sourceResult = ''
+        if (selectedData) { // 判断用户是否选中,如果未选中,则返回undefined
+          tableResult = JSON.stringify(hot.getData.apply(this, selectedData[0]))
+          sourceResult = JSON.stringify(hot.getSourceData.apply(this, selectedData[0]))
+        }
+        // 格式化数据,通过getData获取区域的数据数组
+        this.tableResult = tableResult
+        this.sourceResult = sourceResult
+      },
+      getCells(/* row, col, prop */) {
+        var cellProperties = {}
+        // if (row === 0 && col === 0) {
+        //   cellProperties.readOnly = true
+        // }
+        // console.log(row + '|' + col + '|' + prop)
+        cellProperties.renderer = 'cellsRenderer'
+        return cellProperties
+      },
+      getColHeaders() {
+        const arr = []
+        this.getVueHeaders().forEach(v => {
+          arr.push(v.text)
+        })
+        return arr
+      },
+      cellsRenderer(instance, td, row, col, prop, value, cellProperties) {
+        // console.log(JSON.stringify(value))
+        // td.style = 'color: blue'
+        // console.log(td)
+        // td.style.width = '300px'
+        // console.log(value)
+        td.innerHTML = this.getTD(value)
+        // td.innerHTML = '<slot />'
+        // console.log(prop) // JSON是属性值
+        // console.log(cellProperties)
+        return td
+      },
+      getTD(data) {
+        let s = ''
+        for (let key in data) {
+          s += data[key] + '<br>'
+        }
+        return s
+      },
+      getRowHeaders() {
+        return [
+          'AAA',
+          'BBB',
+          'CCC',
+          'DDD',
+          'EEE',
+          'FFF',
+          'GGG',
+          'HHH',
+          'JJJ',
+          'KKK',
+          'LLL'
+        ]
       }
     }
   }
@@ -246,5 +368,39 @@
 
   /deep/ .v-data-table__wrapper{
     max-height: 300px;
+  }
+
+  /deep/ .handsontable {
+    tbody tr th{
+      background-color: #fff;
+      color: rgba(0,0,0,.6);
+      font-weight: bold;
+      /*display:flex;*/
+      /*justify-content: center;*/
+      &.ht__highlight{
+        background-color: $bg-blue;
+        color: #fff;
+      }
+      &.relative{
+        /*text-align: center;*/
+        /*span{*/
+        /*  text-align: center;*/
+        /*}*/
+      }
+    }
+
+    thead th{
+      color: rgba(0,0,0,.6);
+      font-weight: bold;
+      .relative{
+        background: #fff;
+      }
+      &.ht__highlight{
+        .relative{
+          color: #fff;
+          background: $bg-blue;
+        }
+      }
+    }
   }
 </style>
