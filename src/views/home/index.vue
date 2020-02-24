@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="card-title">
+    <v-card class="card-title" v-if="false">
       <v-card-title class="headline">Vuetify Table</v-card-title>
       <v-divider></v-divider>
       <v-data-table
@@ -85,6 +85,8 @@
 <script>
   import { HotTable } from '@handsontable/vue'
   import Handsontable from 'handsontable'
+  import TdCell from './TdCell'
+  import Vue from 'vue'
   import moment from 'moment'
 
   export default {
@@ -102,10 +104,17 @@
         showNumber: ['10', '20', '40', '100'],
         hotTableSettings: this.getHotTableSettings(),
         tableResult: '',
-        sourceResult: ''
+        sourceResult: '',
+        CellConstructor: undefined
       }
     },
     created() {
+      // console.log(TdCell)
+      const TdCellConstructor = Vue.extend(TdCell)
+      this.CellConstructor = TdCellConstructor
+      // const instance = new TdCellConstructor()
+      // instance.$mount(document.createElement('div'))
+      // console.log(instance.$el)
       Handsontable.renderers.registerRenderer('cellsRenderer', this.cellsRenderer)
     },
     methods: {
@@ -201,8 +210,8 @@
           // enterMoves: false,
           beforeKeyDown: this.beforeKeyDown, // 禁用按钮事件
           data: this.getHotDesserts(),
-          // fixedRowsTop: 3, // 固定前3行
-          // fixedColumnsLeft: 3, // 固定左侧3列
+          // fixedRowsTop: 1, // 固定前3行
+          // fixedColumnsLeft: 1, // 固定左侧3列
           outsideClickDeselects: false, // 设置false才能获取单元格
           cells: this.getCells,
           width: 1200,
@@ -228,10 +237,11 @@
           // rowHeaderWidth: '150',
           // rowHeights: '48',
           // tableClassName: ['v-data-table__wrapper', 'v-data-table'],
-          rowHeaders: this.getRowHeaders()
+          rowHeaders: this.getRowHeaders(),
           // columns: [{
           //   data: 'register'
           // }]
+          ss: ''
         }
       },
       beforeKeyDown(e) {
@@ -249,6 +259,7 @@
           tableResult = JSON.stringify(hot.getData.apply(this, selectedData[0]))
           sourceResult = JSON.stringify(hot.getSourceData.apply(this, selectedData[0]))
         }
+        console.log(hot.getColHeader())
         // 格式化数据,通过getData获取区域的数据数组
         this.tableResult = tableResult
         this.sourceResult = sourceResult
@@ -275,20 +286,25 @@
         // console.log(td)
         // td.style.width = '300px'
         // console.log(value)
-        td.innerHTML = this.getTD(value)
+        const cellInstance = new this.CellConstructor({
+          propsData: value
+        })
+        cellInstance.$mount(document.createElement('div'))
+        // console.log(ins.$el)
+        td.append(cellInstance.$el)
         // td.innerHTML = '<slot />'
         // console.log(prop) // JSON是属性值
         // console.log(cellProperties)
         return td
       },
-      getTD(data) {
-        let s = ''
-        for (const key in data) {
-          s += data[key] + '<br>'
-        }
-        return s
-      },
+      // getTD(data) {
+      //   return new this.CellConstructor({
+      //     propsData: data
+      //   })
+      // },
       getRowHeaders() {
+        // console.log(row)
+        // return 'AAA'
         return [
           'AAA',
           'BBB',
