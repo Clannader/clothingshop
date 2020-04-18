@@ -3,23 +3,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/views/login'
 import HomePage from 'components/homePage'
-import Frontdesk from './frontdesk'
 import Home from './home'
-import Logs from './logs'
-import Settings from './settings'
-import Statistics from './statistics'
-import Monitor from './monitor'
-import Miscellaneous from './miscellaneous'
-import FunctionTest from './funTest'
 
-import store from '@/store'
+// import store from '@/store'
 
 Vue.use(VueRouter)
 
 // 有权限的路由列表
 export const menuRoutes = [
-  Home, Frontdesk, Logs, Settings,
-  Statistics, Monitor, Miscellaneous, FunctionTest
+  Home
 ]
 
 // 无需权限的路由列表
@@ -28,7 +20,7 @@ export const constantRoutes = [
     path: '/',
     redirect: '/login',
     component: HomePage,
-    children: []
+    children: [...menuRoutes]
   },
   {
     path: '/login',
@@ -79,43 +71,43 @@ router.beforeEach(async(to, from, next) => {
   } else {
     // 进到这里说明已经登录成功了,首先先判断是否取了用户权限,如果内存中没有取,那么就去取
     // 这里要注意的是,每次刷新页面时都会去获取一遍权限,如果不刷新页面,权限则使用内存值
-    const userRoles = store.getters.roles
-    if (userRoles) {
-      // 内存中有权限,则放行
-      next()
-    } else {
-      // 获取用户权限
-      let result
-      try {
-        result = await store.dispatch('getRoles')
-      } catch (e) {
-        result = e
-      }
-
-      // 如果请求接口返回无效的凭证,则需要回到登录页
-      if (result.code === app.staticVal.Code.Invalid) {
-        // 这里是无效的凭证判断,需要返回登录页面
-        // 这里估计要清除面包屑
-        await app.publicMethods.removeUserSession()
-        next({
-          path: '/login',
-          replace: true
-        })
-      } else {
-        // generate accessible routes map based on roles
-        const roles = result.roles
-
-        // 生成动态路由
-        const accessRoutes = await store.dispatch('generateRoutes', roles)
-
-        // dynamically add accessible routes
-        router.addRoutes(accessRoutes)
-
-        // hack method to ensure that addRoutes is complete
-        // set the replace: true, so the navigation will not leave a history record
-        next({ ...to, replace: true })
-      }
-    }
+    // const userRoles = store.getters.roles
+    // if (userRoles) {
+    // 内存中有权限,则放行
+    next()
+    // } else {
+    //   // 获取用户权限
+    //   let result
+    //   try {
+    //     result = await store.dispatch('getRoles')
+    //   } catch (e) {
+    //     result = e
+    //   }
+    //
+    //   // 如果请求接口返回无效的凭证,则需要回到登录页
+    //   if (result.code === app.staticVal.Code.Invalid) {
+    //     // 这里是无效的凭证判断,需要返回登录页面
+    //     // 这里估计要清除面包屑
+    //     await app.publicMethods.removeUserSession()
+    //     next({
+    //       path: '/login',
+    //       replace: true
+    //     })
+    //   } else {
+    //     // generate accessible routes map based on roles
+    //     const roles = result.roles
+    //
+    //     // 生成动态路由
+    //     const accessRoutes = await store.dispatch('generateRoutes', roles)
+    //
+    //     // dynamically add accessible routes
+    //     router.addRoutes(accessRoutes)
+    //
+    //     // hack method to ensure that addRoutes is complete
+    //     // set the replace: true, so the navigation will not leave a history record
+    //     next({ ...to, replace: true })
+    //   }
+    // }
   }
 })
 
