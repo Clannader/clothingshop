@@ -22,31 +22,38 @@
     </v-card>
 
     <v-card class="card-body">
-      <a-table
+      <app-table
         :columns="tableColumns"
-        :pagination="false">
-
-      </a-table>
+        :dataSource="tableData"
+        :rowKey="record => record._id"
+        :loading="loading"
+      >
+      </app-table>
     </v-card>
   </div>
 </template>
 
 <script>
+  import { getRightsList } from './api.js'
+
   export default {
     name: 'SettingsRights',
+    created() {
+      this.doSearch()
+    },
     methods: {
       doSearch() {
-
+        this.loading = true
+        getRightsList({}).then(result => {
+          this.tableData = result.rights
+          this.loading = false
+        })
       }
     },
     data() {
       return {
-        loading: false, // 加载中标识
-        // 分页器所需参数
-        tableParams: this.staticVal.tableParams,
-        pagination: {},
-        tableConfig: {
-        }
+        tableData: [],
+        loading: false
       }
     },
     computed: {
@@ -57,16 +64,16 @@
             {
               title: `${this.$t('rights.groupName')}`,
               width: 200,
-              dataIndex: ''
+              dataIndex: 'groupName'
             },
             {
               title: `${this.$t('rights.groupDesc')}`,
               width: 250,
-              dataIndex: ''
+              dataIndex: 'desc'
             },
             {
               title: `${this.$t('rights.rightsCodes')}`,
-              dataIndex: ''
+              dataIndex: 'rightsCode'
             }
           ]
         }

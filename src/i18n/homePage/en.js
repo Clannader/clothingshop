@@ -16,5 +16,8 @@ export default {
   yes: 'Yes',
   no: 'No',
   refreshRouter: 'Refresh router',
-  search: 'Search'
+  search: 'Search',
+  emptyText: 'No Data',
+  tableTotal: 'Total',
+  tablePage: 'Per page'
 }
