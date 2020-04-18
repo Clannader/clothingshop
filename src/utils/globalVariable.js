@@ -19,7 +19,14 @@ const staticVal = {
   }, {
     code: 'en',
     desc: 'English'
-  }]
+  }],
+  // 表格参数
+  tableParams: {
+    pageIndex: 1,
+    showPages: 10,
+    total: 0, // 总条数
+    showNumber: ['10', '30', '50', '100']
+  }
 }
 
 export default staticVal

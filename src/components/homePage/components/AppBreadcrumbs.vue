@@ -85,7 +85,7 @@
 
 <style lang="scss" scoped>
   .bread-content {
-    padding: 24px 16px 0px 16px;
+    padding: 20px 16px 0px 16px;
   }
 
   .bread-text {
