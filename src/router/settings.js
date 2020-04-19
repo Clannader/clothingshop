@@ -22,7 +22,7 @@ const otherSettingsRouter = {
       // name: 'SettingsSubMenu',
       meta: {
         title: 'menu.settings',
-        right: '4001',
+        right: '3000',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -33,7 +33,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.supplierList',
         icon: 'iconfont icon-c-supplier',
-        right: '4002'
+        right: '3001'
       },
       component: () => import('@/views/blank')
     },
@@ -43,7 +43,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.shopList',
         icon: 'iconfont icon-c-shop-add',
-        right: '4003'
+        right: '3002'
       },
       component: () => import('@/views/blank')
     },
@@ -53,9 +53,9 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.userList',
         icon: 'iconfont icon-c-user-setup',
-        right: '4004'
+        right: '3003'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/settings/users')
     },
     {
       path: 'right',
@@ -63,7 +63,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.rightList',
         icon: 'iconfont icon-c-right',
-        right: '4005'
+        right: '3004'
       },
       component: () => import('@/views/settings/rights')
     },
@@ -73,7 +73,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
-        right: '4006'
+        right: '3005'
       },
       component: () => import('@/views/blank')
     },
@@ -83,7 +83,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
-        right: '4007'
+        right: '3006'
       },
       component: () => import('@/views/blank')
     },
@@ -93,7 +93,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.repair',
         icon: 'iconfont icon-c-repair',
-        right: '4008'
+        right: '3007'
       },
       component: () => import('@/views/blank')
     }

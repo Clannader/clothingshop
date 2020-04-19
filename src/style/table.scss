@@ -3,7 +3,11 @@
 }
 
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-  padding: 13px 16px!important;
+  padding: 10px 12px!important;
+}
+
+.ant-table-tbody > tr > td{
+  font-size: 13px;
 }
 
 // 清除表格行hover

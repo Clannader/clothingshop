@@ -1,12 +1,10 @@
 <template>
   <div>
     <a-table
-      :columns="columns"
       :pagination="false"
       :locale="locale"
-      :loading="loading"
-      :dataSource="dataSource"
-      :rowKey="rowKey"
+      v-bind="$attrs"
+      v-on="$listeners"
     >
     </a-table>
 
@@ -39,36 +37,21 @@
 
 <script>
   export default {
+    inheritAttrs: true,
     name: 'AppTable',
     data() {
       return {
-        pageIndex: 1,
-        pageCount: 10,
-        showPages: 10,
-        total: 0,
-        showNumber: ['10', '30', '50', '100']
+        pageIndex: 1, // 当前第几页
+        pageCount: 1, // 总共多少页
+        showPages: 10, // 每页多少
+        total: 0, // 总条数
+        showNumber: ['10', '30', '50', '100'] // 每页显示数量
       }
     },
     created() {
 
     },
     props: {
-      columns: {
-        type: Array,
-        default: () => ([])
-      },
-      loading: {
-        type: Boolean,
-        default: false
-      },
-      dataSource: {
-        type: Array,
-        default: () => ([])
-      },
-      rowKey: {
-        type: String || Function,
-        default: ''
-      }
     },
     computed: {
       locale: {
@@ -105,6 +88,7 @@
 
   .flexEnd {
     justify-content: flex-end;
+    /*padding-right: 0px;*/
   }
 
   .everyPageShow {
