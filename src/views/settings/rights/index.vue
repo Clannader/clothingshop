@@ -6,6 +6,7 @@
           <!-- 权限组名 -->
           <div class="group-item">
             <v-text-field
+              v-model="groupName"
               :label="$t('rights.searchName')"
               @keyup.enter="doSearch">
             </v-text-field>
@@ -27,6 +28,9 @@
         :dataSource="tableData"
         :rowKey="record => record._id"
         :loading="loading"
+        @change="doSearch"
+        :total="tableTotal"
+        ref="rightsTable"
       >
       </app-table>
     </v-card>
@@ -39,13 +43,23 @@
   export default {
     name: 'SettingsRights',
     created() {
+    },
+    mounted() {
       this.doSearch()
     },
     methods: {
       doSearch() {
         this.loading = true
-        getRightsList({}).then(result => {
+        const params = {
+          groupName: this.groupName
+        }
+        getRightsList(params).then(result => {
           this.tableData = result.rights
+          this.tableTotal = this.tableData.length
+        }).catch(() => {
+          this.tableData = []
+          this.tableTotal = 0
+        }).finally(() => {
           this.loading = false
         })
       }
@@ -53,7 +67,9 @@
     data() {
       return {
         tableData: [],
-        loading: false
+        loading: false,
+        groupName: undefined,
+        tableTotal: 0
       }
     },
     computed: {
