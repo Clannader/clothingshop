@@ -30,8 +30,17 @@
         :loading="loading"
         @change="doSearch"
         :total="tableTotal"
+        :scroll="{ x:1000,y: 400 }"
         ref="rightsTable"
       >
+        <template slot="groupDesc" slot-scope="record">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on : tip }">
+              <div v-on="tip">{{record}}</div>
+            </template>
+            <div>{{record}}</div>
+          </v-tooltip>
+        </template>
       </app-table>
     </v-card>
   </div>
@@ -85,10 +94,13 @@
             {
               title: `${this.$t('rights.groupDesc')}`,
               width: 250,
-              dataIndex: 'desc'
+              dataIndex: 'desc',
+              ellipsis: true,
+              scopedSlots: { customRender: 'groupDesc' }
             },
             {
               title: `${this.$t('rights.rightsCodes')}`,
+              ellipsis: true,
               dataIndex: 'rightsCode'
             }
           ]

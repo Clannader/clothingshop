@@ -101,7 +101,7 @@
 
   .flexEnd {
     justify-content: flex-end;
-    /*padding-right: 0px;*/
+    padding-right: 0px;
   }
 
   .everyPageShow {
@@ -126,4 +126,7 @@
     overflow: visible;
   }
 
+  .pagination ul>li:last-child .v-pagination__navigation{
+    margin-right: 0px;
+  }
 </style>
