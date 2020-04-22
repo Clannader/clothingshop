@@ -3,8 +3,10 @@
     <p>这是一个A组件</p>
     <p>这是一个A组件消息:{{msg}}</p>
     <a-table :columns="columns" :dataSource="data">
-      <a slot="name" slot-scope="text">{{ text }}</a>
+      <a slot="name" slot-scope="qqq">{{ qqq }}</a>
     </a-table>
+    <slot name="app"/>
+    <slot name="pane" :data="msg">{{msg}}</slot>
   </div>
 </template>
 

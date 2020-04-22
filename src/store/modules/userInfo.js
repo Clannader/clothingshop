@@ -50,6 +50,11 @@ const userInfo = {
        * 1.目前不知道的是如果有同名的方法会如何调用
        * 2.最后一个参数不知道有什么作用不
        * 3.还是说同名方法可以这样调用tagsView/test
+       *
+       * 记录多个不同路径进入同一个页面是的做法
+       * 1.<router-view :key="$route.fullPath"/>
+       * 2.使用computed计算值
+       * 3.使用watch 检测'$route'或者'$route.path'
        */
     }
   }

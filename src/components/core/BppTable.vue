@@ -6,15 +6,15 @@
       v-bind="$attrs"
       v-on="$listeners"
     >
-<!--  <template v-for="(val, slot) in $slots" :slot="slot">{{ this.$slots[slot] }}</template>-->
+<!--      <template v-for="(val, slot) in $slots" :slot="slot">{{ this.$slots[slot] }}</template>-->
       <template
         v-for="(col) in $attrs.columns"
       >
         <template
           v-if="col.scopedSlots"
           :slot="col.scopedSlots.customRender"
-          slot-scope="item">
-          <slot :name="col.scopedSlots.customRender" :tableRow="item"></slot>
+          slot-scope="record">
+          <slot :name="col.scopedSlots.customRender" :tableRow="record"></slot>
         </template>
       </template>
     </a-table>
@@ -49,7 +49,7 @@
 <script>
   export default {
     inheritAttrs: true,
-    name: 'AppTable',
+    name: 'BppTable',
     // bind多值写法
     // v-bind="{...$attrs, ...$props, ...{dataSource: body, columns: header}}"
     data() {
@@ -89,6 +89,19 @@
         this.$emit('change')
       }
     }
+    // render(h) {
+    //   const on = {
+    //     ...this.$listeners
+    //   }
+    //   const props = { ...this.$attrs, ...this.$props, total: this.total }
+    //   // slots循环
+    //   const slots = Object.keys(this.$slots).map(slot => {
+    //     return `<template :slot="${slot}"> {this.$slots[${slot}]} </template>`
+    //   })
+    //   const table = `<a-table :props="${props}" :scopedSlots="{this.$scopedSlots}" :on="${on}" > ${slots} </a-table>`
+    //
+    //   return h(`${table}`)
+    // }
   }
 </script>
 
@@ -140,7 +153,7 @@
     overflow: visible;
   }
 
-  .pagination ul>li:last-child .v-pagination__navigation{
+  .pagination ul > li:last-child .v-pagination__navigation {
     margin-right: 0px;
   }
 </style>

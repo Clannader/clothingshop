@@ -3,7 +3,14 @@
     <p>这是一个B组件</p>
     <app-a
       v-bind="$attrs"
-      v-on="$listeners"></app-a>
+      v-on="$listeners">
+      <template slot="app">
+        <slot name="app"></slot>
+      </template>
+    </app-a>
+    <div slot="pane" slot-scope="msg">
+      <slot name="pane" :data="msg"></slot>
+    </div>
   </div>
 </template>
 
