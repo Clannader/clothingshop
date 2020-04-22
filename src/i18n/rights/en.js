@@ -4,6 +4,9 @@
 'use strict'
 
 export default {
-  searchName: 'Rights group name'
+  searchName: 'Rights group name',
+  groupName: 'groupName',
+  groupDesc: 'groupDesc',
+  rightsCodes: 'rightsCodes'
 }
 

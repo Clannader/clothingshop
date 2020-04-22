@@ -43,83 +43,22 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// 这个很坑,全部按钮的英文都大写..
+// 这个很坑,原样式是,全部按钮的英文都大写..
 .v-btn {
   text-transform: capitalize;
 }
 
-.v-dialog > .v-card{
-  > .v-card__title {
-    &.dialog-title {
-      flex: none;
-      padding: 24px;
-      font-size: 22px;
-      color: $bg-blue;
-      letter-spacing: .69px;
-      line-height: 23px;
-      border-bottom: 1px solid #ededed;
-    }
-  }
-
-  >.v-card__text {
-    &.dialog-text {
-      color: #333;
-      padding: 20px 24px 0 24px;
-    }
-  }
-
-  .dialog-footer {
-    flex: none;
-    display: flex;
-    justify-content: flex-end;
-    padding: 24px;
-  }
-}
-
-.app-btn {
-  .v-btn {
-    min-width: 76px !important;
-    padding: 0 24px;
-    height: 36px !important;
-    box-shadow: none !important;
-    background-color: #f6f6f6 !important;
-    border-radius: 4px;
-    font-width: 400;
-    font-size: 14px;
-    color: #333;
-    letter-spacing: 0;
-    text-align: center;
-    line-height: 14px;
-
-    &:hover{
-      background-color: $bg-blue !important;
-      color: #fff;
-    }
-  }
-}
-
-.card-title {
-  margin: 16px;
-}
-
-.card-container {
-  padding: 8px 24px;
-}
-
-.card-search-btn .v-btn{
-  min-width: 0px;
-  margin: 0px;
-  padding: 8px 16px;
-  box-shadow: none;
-  color: #fff;
-  background-color: $bg-blue !important;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  line-height: 16px !important;
-  font-size: 16px;
-  margin-left: 8px;
-}
+// 导入dialog样式表
+@import "./dialog.scss";
+@import "./table.scss";
+@import "./card.scss";
 
 .form-group {
   display: flex;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

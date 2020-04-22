@@ -16,5 +16,8 @@ export default {
   yes: '是',
   no: '否',
   refreshRouter: '刷新路由',
-  search: '搜索'
+  search: '搜索',
+  emptyText: '无数据',
+  tableTotal: '总数',
+  tablePage: '每页总数'
 }

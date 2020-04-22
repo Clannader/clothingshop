@@ -4,5 +4,8 @@
 'use strict'
 
 export default {
-  searchName: '权限组名'
+  searchName: '权限组名',
+  groupName: '组名',
+  groupDesc: '描述',
+  rightsCodes: '权限代码'
 }
