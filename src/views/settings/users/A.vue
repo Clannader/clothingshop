@@ -6,7 +6,7 @@
       <a slot="name" slot-scope="qqq">{{ qqq }}</a>
     </a-table>
     <slot name="app"/>
-    <slot name="pane" :data="msg">{{msg}}</slot>
+    <slot name="pane"></slot>
   </div>
 </template>
 

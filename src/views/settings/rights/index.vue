@@ -23,16 +23,15 @@
     </v-card>
 
     <v-card class="card-body">
-      <a-table
+      <app-table
         :columns="tableColumns"
         :dataSource="tableData"
         :rowKey="record => record._id"
         :loading="loading"
-        :pagination="false"
-        :locale="locale"
+        :total="tableTotal"
         :scroll="{ x:1000,y: 400 }"
       >
-        <template slot="groupDesc" slot-scope="record">
+        <template slot="groupDesc" slot-scope="{record}">
           <v-tooltip bottom>
             <template v-slot:activator="{ on : tip }">
               <div v-on="tip" class="text-ellipsis">
@@ -42,33 +41,7 @@
             <div>{{record}}</div>
           </v-tooltip>
         </template>
-
-      </a-table>
-
-      <v-row class="mr-24">
-        <v-col class="flex-center">
-          <span class="amount">{{$t('homePage.tableTotal')}}: {{tableTotal}}</span>
-        </v-col>
-        <v-row class="mr-24">
-          <v-col class="flex-center flexEnd">
-            <span class="everyPageShow">{{$t('homePage.tablePage')}}</span>
-            <div class="showNumberBox">
-              <v-select
-                v-model="showPages"
-                :items="showNumber"
-                :label="showNumber[0]"
-                single-line
-              ></v-select>
-            </div>
-            <v-pagination
-              v-model="pageIndex"
-              :length="pageCount"
-              :total-visible="5"
-              style="padding-left: 20px"
-            ></v-pagination>
-          </v-col>
-        </v-row>
-      </v-row>
+      </app-table>
     </v-card>
   </div>
 </template>
@@ -79,10 +52,10 @@
   export default {
     name: 'SettingsRights',
     created() {
-      this.doSearch()
+
     },
     mounted() {
-
+      this.doSearch()
     },
     methods: {
       doSearch() {
@@ -106,10 +79,7 @@
         tableData: [],
         loading: false,
         groupName: undefined,
-        tableTotal: 0,
-        pageIndex: 1, // 当前第几页
-        showPages: 10, // 每页多少
-        showNumber: ['10', '30', '50', '100'] // 每页显示数量
+        tableTotal: 0
       }
     },
     computed: {
@@ -137,25 +107,6 @@
             }
           ]
         }
-      },
-      locale: {
-        get() {
-          return {
-            emptyText: `${this.$t('homePage.emptyText')}`
-          }
-        }
-      },
-      pageCount() {
-        return Math.ceil(this.tableTotal / this.showPages)
-      }
-    },
-    watch: {
-      showPages() {
-        this.doSearch()
-        this.pageIndex = 1
-      },
-      pageIndex() {
-        this.doSearch()
       }
     }
   }
