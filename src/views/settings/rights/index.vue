@@ -30,6 +30,8 @@
         :loading="loading"
         :total="tableTotal"
         :scroll="{ x:1000,y: 400 }"
+        @change="doSearch"
+        ref="rightsTable"
       >
         <template slot="groupDesc" slot-scope="{record}">
           <v-tooltip bottom>
@@ -52,16 +54,26 @@
   export default {
     name: 'SettingsRights',
     created() {
-
+      // 定义表格属性加上ref,为了获取封装后的表格的页码,和条数
+      this.doSearch()
     },
     mounted() {
-      this.doSearch()
+      // 初始化不放在这里,始终感觉不是很好的感觉
     },
     methods: {
       doSearch() {
         this.loading = true
+        const rightsTable = this.$refs.rightsTable
+        let pageSize = 10 // 如果rightsTable是undefined的时候,使用默认值
+        let pageIndex = 1
+        if (rightsTable) {
+          pageSize = rightsTable.showPages
+          pageIndex = rightsTable.pageIndex
+        }
         const params = {
-          groupName: this.groupName
+          groupName: this.groupName,
+          offset: pageIndex,
+          pageSize: pageSize
         }
         getRightsList(params).then(result => {
           this.tableData = result.rights
