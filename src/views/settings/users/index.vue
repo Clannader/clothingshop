@@ -17,7 +17,7 @@
       AppB
     },
     created() {
-
+      console.log('输出了')
     },
     data() {
       return {
