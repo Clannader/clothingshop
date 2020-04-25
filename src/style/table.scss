@@ -3,10 +3,10 @@
 }
 
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-  padding: 10px 12px!important;
+  padding: 10px 12px !important;
 }
 
-.ant-table-tbody > tr > td{
+.ant-table-tbody > tr > td {
   font-size: 13px;
 }
 
@@ -14,8 +14,9 @@
 .ant-table-thead > tr.ant-table-row-hover > td, .ant-table-tbody > tr.ant-table-row-hover > td, .ant-table-thead > tr:hover > td, .ant-table-tbody > tr:hover > td {
   background: none;
 }
+
 // 清楚复选行效果
-.ant-table-tbody > tr.ant-table-row-selected td{
+.ant-table-tbody > tr.ant-table-row-selected td {
   background: none;
 }
 
@@ -29,22 +30,15 @@
 //}
 
 // 解决Ant Design Table ellipsis和fixed 共同作用不生效
-.ant-table-fixed-left table, .ant-table-fixed-right table{
+.ant-table-fixed-left table, .ant-table-fixed-right table {
   width: min-content;
 }
 
 // 表格操作列样式
-.card-body {
-  .option-menu {
-    margin: auto;
-    /deep/ .v-btn {
-      margin: 0;
-      width: 27px;
-      height: 27px;
-      .v-icon {
-        font-size: 24px;
-      }
-    }
+.option-menu-btn {
+  &.v-btn--icon{
+    width: 24px;
+    height: 24px;
   }
 }
 

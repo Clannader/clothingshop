@@ -20,5 +20,7 @@ export default {
   emptyText: 'No Data',
   tableTotal: 'Total',
   tablePage: 'Per page',
-  operation: 'Option'
+  operation: 'Act.',
+  modify: 'Modify',
+  create: 'Create'
 }

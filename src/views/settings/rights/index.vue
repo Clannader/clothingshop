@@ -45,24 +45,34 @@
         </template>
 
         <template slot="action" slot-scope="{record}">
-          <div @click="optionShow(record)">
-            <v-menu bottom left class="option-menu">
-              <v-btn slot="activator" icon>
-                <v-icon style="color: #0055b8">more_vert</v-icon>
+          <v-menu
+            bottom
+            left
+            transition="slide-y-transition"
+          >
+            <template v-slot:activator="{ on: menu }">
+              <v-btn
+                v-on="menu"
+                class="option-menu-btn"
+                icon
+              >
+                <v-icon
+                  style="color: #0055b8"
+                >
+                  more_vert
+                </v-icon>
               </v-btn>
-<!--              <v-list style="width:140px;border-radius:4px">-->
-<!--                <v-list-tile-->
-<!--                  v-for="(item, i) in items"-->
-<!--                  :key="i"-->
-<!--                  @click="todo(item.title,record,item.key)"-->
-<!--                  v-if="item.status"-->
-<!--                >-->
-<!--                  <i :class="`actionBarIcon iconfont ${item.icon}`"></i>-->
-<!--                  <v-list-tile-title class="actionBarText">{{ item.title }}</v-list-tile-title>-->
-<!--                </v-list-tile>-->
-<!--              </v-list>-->
-            </v-menu>
-          </div>
+            </template>
+            <v-list>
+              <!-- 编辑按钮-->
+              <v-list-item @click="openModify(record)">
+                <i class="iconfont icon-bianji_icon menuOperationIcon"></i>
+                <v-list-item-title>
+                  {{$t('homePage.modify')}}
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </template>
       </app-table>
     </v-card>
@@ -106,8 +116,9 @@
           this.loading = false
         })
       },
-      optionShow(record) {
-        // 操作按钮显示与否
+      openModify(record) {
+        // 编辑权限组
+        this.$toast.success(JSON.stringify(record))
       }
     },
     data() {
@@ -125,7 +136,8 @@
           return [
             {
               title: `${this.$t('rights.groupName')}`,
-              width: 200,
+              width: 150,
+              fixed: 'left',
               dataIndex: 'groupName'
             },
             {
@@ -143,10 +155,10 @@
             {
               title: `${this.$t('homePage.operation')}`,
               dataIndex: '',
-              key: 'x',
+              key: 'action',
               fixed: 'right',
               scopedSlots: { customRender: 'action' },
-              width: 80,
+              width: 60,
               align: 'center'
             }
           ]
