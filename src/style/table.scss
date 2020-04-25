@@ -32,3 +32,19 @@
 .ant-table-fixed-left table, .ant-table-fixed-right table{
   width: min-content;
 }
+
+// 表格操作列样式
+.card-body {
+  .option-menu {
+    margin: auto;
+    /deep/ .v-btn {
+      margin: 0;
+      width: 27px;
+      height: 27px;
+      .v-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+

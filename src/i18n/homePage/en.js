@@ -19,5 +19,6 @@ export default {
   search: 'Search',
   emptyText: 'No Data',
   tableTotal: 'Total',
-  tablePage: 'Per page'
+  tablePage: 'Per page',
+  operation: 'Option'
 }

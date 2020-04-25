@@ -43,6 +43,27 @@
             <div>{{record}}</div>
           </v-tooltip>
         </template>
+
+        <template slot="action" slot-scope="{record}">
+          <div @click="optionShow(record)">
+            <v-menu bottom left class="option-menu">
+              <v-btn slot="activator" icon>
+                <v-icon style="color: #0055b8">more_vert</v-icon>
+              </v-btn>
+<!--              <v-list style="width:140px;border-radius:4px">-->
+<!--                <v-list-tile-->
+<!--                  v-for="(item, i) in items"-->
+<!--                  :key="i"-->
+<!--                  @click="todo(item.title,record,item.key)"-->
+<!--                  v-if="item.status"-->
+<!--                >-->
+<!--                  <i :class="`actionBarIcon iconfont ${item.icon}`"></i>-->
+<!--                  <v-list-tile-title class="actionBarText">{{ item.title }}</v-list-tile-title>-->
+<!--                </v-list-tile>-->
+<!--              </v-list>-->
+            </v-menu>
+          </div>
+        </template>
       </app-table>
     </v-card>
   </div>
@@ -84,6 +105,9 @@
         }).finally(() => {
           this.loading = false
         })
+      },
+      optionShow(record) {
+        // 操作按钮显示与否
       }
     },
     data() {
@@ -114,8 +138,16 @@
             {
               title: `${this.$t('rights.rightsCodes')}`,
               ellipsis: true,
-              dataIndex: 'rightsCode',
-              scopedSlots: { customRender: 'rightsCodes' }
+              dataIndex: 'rightsCode'
+            },
+            {
+              title: `${this.$t('homePage.operation')}`,
+              dataIndex: '',
+              key: 'x',
+              fixed: 'right',
+              scopedSlots: { customRender: 'action' },
+              width: 80,
+              align: 'center'
             }
           ]
         }
