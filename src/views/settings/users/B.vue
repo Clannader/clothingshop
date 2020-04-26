@@ -4,13 +4,15 @@
     <app-a
       v-bind="$attrs"
       v-on="$listeners">
-      <template slot="app">
-        <slot name="app"></slot>
+      <template
+        v-for="(vue, slot) in $slots"
+        :slot="slot">
+        <slot :name="slot"></slot>
       </template>
     </app-a>
-    <div slot="pane" slot-scope="msg">
-      <slot name="pane" :data="msg"></slot>
-    </div>
+<!--    <div slot="pane" slot-scope="msg">-->
+<!--      <slot name="pane" :data="msg"></slot>-->
+<!--    </div>-->
   </div>
 </template>
 

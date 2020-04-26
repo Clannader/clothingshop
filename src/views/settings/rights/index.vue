@@ -23,16 +23,17 @@
     </v-card>
 
     <v-card class="card-body">
-      <a-table
+      <app-table
         :columns="tableColumns"
         :dataSource="tableData"
         :rowKey="record => record._id"
         :loading="loading"
-        :pagination="false"
-        :locale="locale"
+        :total="tableTotal"
         :scroll="{ x:1000,y: 400 }"
+        @change="doSearch"
+        ref="rightsTable"
       >
-        <template slot="groupDesc" slot-scope="record">
+        <template slot="groupDesc" slot-scope="{record}">
           <v-tooltip bottom>
             <template v-slot:activator="{ on : tip }">
               <div v-on="tip" class="text-ellipsis">
@@ -43,32 +44,37 @@
           </v-tooltip>
         </template>
 
-      </a-table>
-
-      <v-row class="mr-24">
-        <v-col class="flex-center">
-          <span class="amount">{{$t('homePage.tableTotal')}}: {{tableTotal}}</span>
-        </v-col>
-        <v-row class="mr-24">
-          <v-col class="flex-center flexEnd">
-            <span class="everyPageShow">{{$t('homePage.tablePage')}}</span>
-            <div class="showNumberBox">
-              <v-select
-                v-model="showPages"
-                :items="showNumber"
-                :label="showNumber[0]"
-                single-line
-              ></v-select>
-            </div>
-            <v-pagination
-              v-model="pageIndex"
-              :length="pageCount"
-              :total-visible="5"
-              style="padding-left: 20px"
-            ></v-pagination>
-          </v-col>
-        </v-row>
-      </v-row>
+        <template slot="action" slot-scope="{record}">
+          <v-menu
+            bottom
+            left
+            transition="slide-y-transition"
+          >
+            <template v-slot:activator="{ on: menu }">
+              <v-btn
+                v-on="menu"
+                class="option-menu-btn"
+                icon
+              >
+                <v-icon
+                  style="color: #0055b8"
+                >
+                  more_vert
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <!-- 编辑按钮-->
+              <v-list-item @click="openModify(record)">
+                <i class="iconfont icon-bianji_icon menuOperationIcon"></i>
+                <v-list-item-title>
+                  {{$t('homePage.modify')}}
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </app-table>
     </v-card>
   </div>
 </template>
@@ -79,16 +85,26 @@
   export default {
     name: 'SettingsRights',
     created() {
+      // 定义表格属性加上ref,为了获取封装后的表格的页码,和条数
       this.doSearch()
     },
     mounted() {
-
+      // 初始化不放在这里,始终感觉不是很好的感觉
     },
     methods: {
       doSearch() {
         this.loading = true
+        const rightsTable = this.$refs.rightsTable
+        let pageSize = 10 // 如果rightsTable是undefined的时候,使用默认值
+        let pageIndex = 1
+        if (rightsTable) {
+          pageSize = rightsTable.showPages
+          pageIndex = rightsTable.pageIndex
+        }
         const params = {
-          groupName: this.groupName
+          groupName: this.groupName,
+          offset: pageIndex,
+          pageSize: pageSize
         }
         getRightsList(params).then(result => {
           this.tableData = result.rights
@@ -99,6 +115,10 @@
         }).finally(() => {
           this.loading = false
         })
+      },
+      openModify(record) {
+        // 编辑权限组
+        this.$toast.success(JSON.stringify(record))
       }
     },
     data() {
@@ -106,10 +126,7 @@
         tableData: [],
         loading: false,
         groupName: undefined,
-        tableTotal: 0,
-        pageIndex: 1, // 当前第几页
-        showPages: 10, // 每页多少
-        showNumber: ['10', '30', '50', '100'] // 每页显示数量
+        tableTotal: 0
       }
     },
     computed: {
@@ -119,7 +136,8 @@
           return [
             {
               title: `${this.$t('rights.groupName')}`,
-              width: 200,
+              width: 150,
+              fixed: 'left',
               dataIndex: 'groupName'
             },
             {
@@ -132,30 +150,19 @@
             {
               title: `${this.$t('rights.rightsCodes')}`,
               ellipsis: true,
-              dataIndex: 'rightsCode',
-              scopedSlots: { customRender: 'rightsCodes' }
+              dataIndex: 'rightsCode'
+            },
+            {
+              title: `${this.$t('homePage.operation')}`,
+              dataIndex: '',
+              key: 'action',
+              fixed: 'right',
+              scopedSlots: { customRender: 'action' },
+              width: 60,
+              align: 'center'
             }
           ]
         }
-      },
-      locale: {
-        get() {
-          return {
-            emptyText: `${this.$t('homePage.emptyText')}`
-          }
-        }
-      },
-      pageCount() {
-        return Math.ceil(this.tableTotal / this.showPages)
-      }
-    },
-    watch: {
-      showPages() {
-        this.doSearch()
-        this.pageIndex = 1
-      },
-      pageIndex() {
-        this.doSearch()
       }
     }
   }

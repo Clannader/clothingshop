@@ -1,6 +1,8 @@
 const path = require('path')
 
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
+// const TerserPlugin = require('terser-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -14,6 +16,13 @@ module.exports = {
   devServer: {
     // host: 'localhost',
     port: '9800'
+    // before(app, /*server*/) {
+    //   app.get(/.*.(js)$/, (req, res, next) => {
+    //     req.url = req.url + '.gz';
+    //     res.set('Content-Encoding', 'gzip');
+    //     next();
+    //   })
+    // }
     // proxy: 'http://localhost:3000/cms/h5'
   },
   // runtimeCompiler: true,
@@ -25,6 +34,34 @@ module.exports = {
   chainWebpack: config => {
     // 设置路径名的别名引用
     config.resolve.alias.set('components', resolve('src/components'))
+
+    // 项目优化第一步
+    //1.js,css代码的最小化压缩和分割
+    config.optimization.minimize(true)
+    // config.optimization.splitChunks({
+    //   chunks: 'all'
+    // })
+
+    //2.CND引入资源包,一般不会这样做,暂时写一个例子
+    //CND资源查询地址https://www.bootcdn.cn/
+    //需要在index页面加入链接
+    //<script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.min.js"></script>
+    //<link href="https://cdn.bootcss.com/mint-ui/2.2.13/style.min.css" rel="stylesheet">
+
+    //3.抽离css在js的动态加载
+
+    //4.图片压缩网站,可对图片进行压缩处理
+    // https://tinypng.com/
+
+    //5.使用gzip的压缩代码
+
+    // 用cdn方式引入
+    // config.externals({
+    //   'vue': 'Vue',
+    //   'vuex': 'Vuex',
+    //   'vue-router': 'VueRouter',
+    //   'axios': 'axios'
+    // })
 
     // 添加scss规则
     // const scssRule = config.module.rule('scss').test(/\\.scss$/)
@@ -40,9 +77,51 @@ module.exports = {
     // console.log(config.module.rules.get('vue'))
     // console.log(config.module.rules.get('vue').store)
   },
-  // configureWebpack: config => {
-  //
-  // },
+  configureWebpack: config => {
+    const isProd = process.env.NODE_ENV === 'production'
+    const plugins = []
+    if(isProd){
+      // 这个插件有点坑爹啊,2.x以上版本的,不支持ES6的语法了,目前不知道怎么解决,所以只能换回1.x的版本使用
+      const uglify = new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            drop_console: true,
+            drop_debugger: true
+            // pure_funcs: ['console.log']//移除console
+          }
+        },
+        sourceMap: false,
+        parallel: true
+      })
+      plugins.push(uglify)
+    }
+    // const compress = new CompressionWebpackPlugin(
+    //   {
+    //     filename: info => {
+    //       return `${info.path}.gz${info.query}`
+    //     },
+    //     algorithm: 'gzip',
+    //     threshold: 10240,
+    //     test: new RegExp(
+    //       '\\.(' +
+    //       ['js'].join('|') +
+    //       ')$'
+    //     ),
+    //     minRatio: 0.8,
+    //     deleteOriginalAssets: false
+    //   }
+    // )
+    //
+    // plugins.push(compress)
+
+    config.plugins = [
+      ...config.plugins,
+      ...plugins
+    ]
+
+    // console.log(config)
+  },
   pages: {
     index: {
       entry: [
@@ -63,7 +142,9 @@ module.exports = {
         // 这里最坑爹的是最后必须要有一个;号,否则编译报错
         data: `@import "@/style/color.scss";`
       }
-    }
+    },
+    //因为js会动态的加载出css，所以js文件包会比较大，那么需要提取css代码到文件. 这里我们只需要将css配置一下
+    extract: true
   }
   // pluginOptions: {
   //   'sass-resources-loader': {

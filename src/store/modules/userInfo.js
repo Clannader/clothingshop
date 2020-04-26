@@ -33,7 +33,10 @@ const userInfo = {
       return Promise.resolve(data)
     },
     async changeRoles({ dispatch }) {
-      const result = await dispatch('getRoles')
+      const [err, result] = await dispatch('getRoles').then(res => [null, res]).catch(err => [err])
+      if (err) {
+        return
+      }
       const roles = result.roles
       resetRouter()
       const accessRoutes = await dispatch('generateRoutes', roles)
@@ -56,6 +59,12 @@ const userInfo = {
        * 2.使用computed计算值
        * 3.使用watch 检测'$route'或者'$route.path'
        */
+    },
+    userLogout() {
+      router.push({ path: '/login' })
+    },
+    resetRouter() {
+      resetRouter()
     }
   }
 }

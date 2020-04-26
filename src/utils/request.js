@@ -2,6 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 import snackbar from '@/plugins/core/appSnackbar'
 import staticVal from './globalVariable'
+import methods from './methods' // 我觉得这个引入有点奇怪,因为request和methods已经是互相引用了
 
 // 为了避免弹了提示框又点击其他请求,从而需要把其他请求都中断了,等用户关闭提示框才能再一次请求
 // const CancelToken = axios.CancelToken
@@ -30,6 +31,7 @@ service.interceptors.request.use(
     // config.cancelToken = new CancelToken((c) => {
     //   cancel = c
     // })
+    // 现在就是不知道如何让请求抛异常,如果抛异常是不是就说明请求就会中断?
     config.headers['credential'] = sessionStorage.getItem('credential') || ''
     config.headers['language'] = store.getters.language
     return config
@@ -46,7 +48,16 @@ service.interceptors.response.use(
     if (code === staticVal.Code.Success) {
       return response.data
     } else {
-      snackbar.error(response.data.msg)
+      if (code === staticVal.Code.Invalid) {
+        // session失效了,退回登录页面
+        // 先删除session
+        sessionStorage.removeItem('credential')
+        // 这样调用removeSession时不会再去调用退出接口了
+        methods.removeUserSession()
+        store.dispatch('userLogout')// 这里跳回登录页面
+      } else {
+        snackbar.error(response.data.msg)
+      }
       return Promise.reject(response.data)
     }
   },

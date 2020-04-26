@@ -19,5 +19,8 @@ export default {
   search: '搜索',
   emptyText: '无数据',
   tableTotal: '总数',
-  tablePage: '每页总数'
+  tablePage: '每页总数',
+  operation: '操作',
+  modify: '编辑',
+  create: '新建'
 }
