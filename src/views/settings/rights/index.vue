@@ -8,7 +8,7 @@
             <v-text-field
               v-model="groupName"
               :label="$t('rights.searchName')"
-              @keyup.enter="doSearch">
+              @keyup.enter="initDoSearh">
             </v-text-field>
           </div>
           <v-spacer></v-spacer>
@@ -119,6 +119,10 @@
       openModify(record) {
         // 编辑权限组
         this.$toast.success(JSON.stringify(record))
+      },
+      initDoSearh() {
+        this.pageIndex = 1
+        this.doSearch()
       }
     },
     data() {

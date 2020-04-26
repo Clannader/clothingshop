@@ -22,5 +22,8 @@ export default {
   tablePage: 'Per page',
   operation: 'Act.',
   modify: 'Modify',
-  create: 'Create'
+  create: 'Create',
+  notWhoops: 'Whoops',
+  notPage: 'The page you were looking for does not exist',
+  notHere: 'Get me out of here!'
 }
