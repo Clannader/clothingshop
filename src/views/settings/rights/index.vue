@@ -30,6 +30,8 @@
         :loading="loading"
         :total="tableTotal"
         :scroll="{ x:1000,y: 400 }"
+        :rowClassName="rowClass"
+        :customRow= "rowClick"
         @change="doSearch"
         ref="rightsTable"
       >
@@ -55,6 +57,7 @@
                 v-on="menu"
                 class="option-menu-btn"
                 icon
+                @click="selectedRow(record)"
               >
                 <v-icon
                   style="color: #0055b8"
@@ -66,7 +69,7 @@
             <v-list>
               <!-- 编辑按钮-->
               <v-list-item @click="openModify(record)">
-                <i class="iconfont icon-bianji_icon menuOperationIcon"></i>
+                <i class="iconfont"></i>
                 <v-list-item-title>
                   {{$t('homePage.modify')}}
                 </v-list-item-title>
@@ -123,6 +126,30 @@
       initDoSearh() {
         this.pageIndex = 1
         this.doSearch()
+      },
+      // 选中行Class
+      rowClass(record/*, index*/) {
+        if (record.groupName === this.isSelect) {
+          return 'rowSelected'
+        }
+      },
+      rowClick(record/*, rowKey*/) {
+        return {
+          on: {
+            click: () => {
+              // 行单击事件
+              this.selectedRow(record)
+            },
+            dblclick: () => {
+              // 行双击事件
+              this.openModify(record)
+            }
+          }
+        }
+      },
+      selectedRow(record) {
+        this.isSelect = record.groupName
+        this.tableColumns[0].isSelect = !this.tableColumns[0].isSelect
       }
     },
     data() {
@@ -130,7 +157,8 @@
         tableData: [],
         loading: false,
         groupName: undefined,
-        tableTotal: 0
+        tableTotal: 0,
+        isSelect: ''
       }
     },
     computed: {
@@ -142,7 +170,8 @@
               title: `${this.$t('rights.groupName')}`,
               width: 150,
               fixed: 'left',
-              dataIndex: 'groupName'
+              dataIndex: 'groupName',
+              isSelect: false
             },
             {
               title: `${this.$t('rights.groupDesc')}`,
