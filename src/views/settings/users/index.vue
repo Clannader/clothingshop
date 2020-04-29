@@ -3,11 +3,11 @@
     <v-card class="card-title">
       <v-container fluid class="card-container">
         <div class="form-group">
-          <app-data-picker
+          <app-date-picker
             :label="'开始日期'"
             :newDatePicker.sync="startDate"
             :min="currentDate"
-          ></app-data-picker>
+          ></app-date-picker>
         </div>
         <div class="form-group">
           <v-text-field
@@ -22,11 +22,11 @@
           ></v-text-field>
         </div>
         <div class="form-group">
-          <app-data-picker
+          <app-date-picker
             :label="'结束日期'"
             :newDatePicker.sync="endDate"
             :min="startDate"
-          ></app-data-picker>
+          ></app-date-picker>
         </div>
       </v-container>
     </v-card>
