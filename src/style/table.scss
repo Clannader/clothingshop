@@ -11,8 +11,29 @@
 }
 
 // 清除表格行hover
-.ant-table-thead > tr.ant-table-row-hover > td, .ant-table-tbody > tr.ant-table-row-hover > td, .ant-table-thead > tr:hover > td, .ant-table-tbody > tr:hover > td {
-  background: none;
+//.ant-table-thead > tr.ant-table-row-hover > td,
+//.ant-table-tbody > tr.ant-table-row-hover > td,
+//.ant-table-thead > tr:hover > td,
+//.ant-table-tbody > tr:hover > td {
+//  background: none;
+//}
+
+// 清除表格行hover
+//.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+//  background: none;
+//}
+
+.ant-table-tbody > tr,
+.ant-table-thead > tr{
+  &.ant-table-row-hover,
+  &:hover{
+    &:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td{
+      background: none;
+    }
+  }
 }
 
 // 清楚复选行效果
@@ -21,13 +42,13 @@
 }
 
 // 隔行变色
-//.ant-table-row:nth-child(n) {
-//  background-color: #fff;
-//}
-//
-//.ant-table-row:nth-child(2n) {
-//  background-color: #f2f2f2;
-//}
+.ant-table-row:nth-child(n) {
+  background-color: #fff;
+}
+
+.ant-table-row:nth-child(2n) {
+  background-color: #f2f2f2;
+}
 
 // 解决Ant Design Table ellipsis和fixed 共同作用不生效
 .ant-table-fixed-left table, .ant-table-fixed-right table {
@@ -36,9 +57,14 @@
 
 // 表格操作列样式
 .option-menu-btn {
-  &.v-btn--icon{
+  &.v-btn--icon {
     width: 24px;
     height: 24px;
   }
 }
 
+.ant-table-tbody {
+  .rowSelected {
+    background: #b3d4fc;
+  }
+}

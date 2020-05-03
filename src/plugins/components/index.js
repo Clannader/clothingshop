@@ -11,4 +11,4 @@ Vue.component('menu-sub-group', () => import('@/components/core/MenuSubGroup'))
 
 // 我觉得这个表格是根本无法封装的
 Vue.component('app-table', () => import('@/components/core/AppTable'))
-// Vue.component('bpp-table', () => import('@/components/core/BppTable'))
+Vue.component('app-date-picker', () => import('@/components/core/AppDatePicker'))

@@ -22,5 +22,8 @@ export default {
   tablePage: '每页总数',
   operation: '操作',
   modify: '编辑',
-  create: '新建'
+  create: '新建',
+  notWhoops: '哎呀',
+  notPage: '您要查找的页面不存在',
+  notHere: '带你离开这里!'
 }

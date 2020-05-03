@@ -15,15 +15,6 @@
         slot-scope="row">
         <slot :name="slot" :record="row"></slot>
       </template>
-<!--      <template-->
-<!--        v-for="(col) in $attrs.columns"-->
-<!--      >-->
-<!--        <template-->
-<!--          v-if="col.scopedSlots"-->
-<!--          :slot="col.scopedSlots.customRender">-->
-<!--          <slot :name="col.scopedSlots.customRender" :tableRow="'item'"></slot>-->
-<!--        </template>-->
-<!--      </template>-->
     </a-table>
 
     <v-row class="mr-24">

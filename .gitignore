@@ -22,4 +22,4 @@ yarn-error.log*
 /bin/
 /.settings/
 
-/package-lock.json
+package-lock.json

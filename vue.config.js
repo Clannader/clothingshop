@@ -37,7 +37,7 @@ module.exports = {
 
     // 项目优化第一步
     //1.js,css代码的最小化压缩和分割
-    config.optimization.minimize(true)
+    // config.optimization.minimize(true)
     // config.optimization.splitChunks({
     //   chunks: 'all'
     // })

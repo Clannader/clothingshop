@@ -1,30 +1,59 @@
 <template>
   <div>
-    <app-b
-    :msg="'B组件给A的消息'">
-      <template slot="app"><h1>B的插槽</h1></template>
-      <template slot="pane">
-        <h1>B的插槽2</h1>
-      </template>
-    </app-b>
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <app-date-picker
+            :label="'开始日期'"
+            :newDatePicker.sync="startDate"
+            :min="currentDate"
+          ></app-date-picker>
+        </div>
+        <div class="form-group">
+          <v-text-field
+            type="number"
+            :label="'天数'"
+            v-model="days"
+            prepend-inner-icon="remove"
+            maxlength="3"
+            @click:prepend-inner="days=remove(days)"
+            append-icon="add"
+            @click:append="days=add(days)"
+          ></v-text-field>
+        </div>
+        <div class="form-group">
+          <app-date-picker
+            :label="'结束日期'"
+            :newDatePicker.sync="endDate"
+            :min="startDate"
+          ></app-date-picker>
+        </div>
+      </v-container>
+    </v-card>
   </div>
 </template>
 
 <script>
-  import AppB from './B'
   export default {
-    components: {
-      AppB
-    },
+    name: 'SettingsUsers',
     created() {
-      console.log('输出了')
     },
     data() {
       return {
-        msg: 'AASSS'
+        startDate: null,
+        endDate: null,
+        currentDate: null,
+        days: 0
       }
     },
-    name: 'SettingsUsers'
+    methods: {
+      remove(days) {
+
+      },
+      add(days) {
+
+      }
+    }
   }
 </script>
 
