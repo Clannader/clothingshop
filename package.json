@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "open": "vue-cli-service serve --open"
+    "open": "vue-cli-service serve --open",
+    "build:test": "vue-cli-service serve --mode test",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "@mdi/font": "^5.1.45",
@@ -29,8 +31,11 @@
     "@vue/cli-plugin-babel": "^4.3.1",
     "@vue/cli-plugin-eslint": "^4.3.1",
     "@vue/cli-service": "^4.3.1",
+    "@vue/cli-plugin-unit-mocha": "~4.3.0",
+    "@vue/test-utils": "1.0.0-beta.31",
     "babel-eslint": "^10.1.0",
     "compression-webpack-plugin": "^3.1.0",
+    "chai": "^4.1.2",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.0",
