@@ -1,13 +1,21 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import Blank from '@/views/blank'
+import TestUnit from '@/views/test/components/TestUnit'
 
-describe('Blank.vue', () => {
-  it('renders props.msg when passed', () => {
+describe('TestUnit.vue', () => {
+  it('通过显示msg', () => {
     const msg = 'new message'
-    const wrapper = shallowMount(Blank, {
+    const wrapper = shallowMount(TestUnit, {
       propsData: { msg }
     })
     expect(wrapper.text()).to.include(msg)
+  })
+
+  it('通过显示number', () => {
+    const number = 44
+    const wrapper = shallowMount(TestUnit, {
+      propsData: { number }
+    })
+    expect(wrapper.text()).to.include(number)
   })
 })

@@ -1,18 +1,11 @@
 <template>
   <div>
-    <p>{{msg}}</p>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Blank',
-    props: {
-      msg: {
-        type: String,
-        default: ''
-      }
-    }
+    name: 'Blank'
   }
 </script>
 
