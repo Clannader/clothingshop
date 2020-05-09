@@ -3,30 +3,32 @@
     <v-card class="card-title">
       <v-container fluid class="card-container">
         <div class="form-group">
-          <app-date-picker
-            :label="'开始日期'"
-            :newDatePicker.sync="startDate"
-            :min="currentDate"
-          ></app-date-picker>
-        </div>
-        <div class="form-group">
-          <v-text-field
-            type="number"
-            :label="'天数'"
-            v-model="days"
-            prepend-inner-icon="remove"
-            maxlength="3"
-            @click:prepend-inner="days=remove(days)"
-            append-icon="add"
-            @click:append="days=add(days)"
-          ></v-text-field>
-        </div>
-        <div class="form-group">
-          <app-date-picker
-            :label="'结束日期'"
-            :newDatePicker.sync="endDate"
-            :min="startDate"
-          ></app-date-picker>
+          <div class="group-item">
+            <app-date-picker
+              :label="'开始日期'"
+              :newDatePicker.sync="startDate"
+              :min="currentDate"
+            ></app-date-picker>
+          </div>
+          <div class="group-item">
+            <v-text-field
+              type="number"
+              :label="'天数'"
+              v-model="days"
+              prepend-inner-icon="remove"
+              maxlength="3"
+              @click:prepend-inner="days=remove(days)"
+              append-icon="add"
+              @click:append="days=add(days)"
+            ></v-text-field>
+          </div>
+          <div class="group-item">
+            <app-date-picker
+              :label="'结束日期'"
+              :newDatePicker.sync="endDate"
+              :min="startDate"
+            ></app-date-picker>
+          </div>
         </div>
       </v-container>
     </v-card>
@@ -57,6 +59,12 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .group-item {
+    padding-right: 24px;
+    width: 20%;
+    &:last-child{
+      padding-right: 0px;
+    }
+  }
 </style>

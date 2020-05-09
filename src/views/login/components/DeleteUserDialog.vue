@@ -1,6 +1,11 @@
 <template>
   <div class="text-xs-center">
-    <v-dialog v-model="dialog" width="320" persistent ref="deleteUser">
+    <v-dialog
+      v-model="dialog"
+      width="320"
+      persistent
+      ref="deleteUser"
+      @keydown.enter="close(true)">
       <v-card>
         <v-card-title class="dialog-title">
           {{$t('login.deleteUserTitle')}}
