@@ -46,8 +46,27 @@
             ></v-file-input>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">
-            <v-btn rounded dark @click="upLoad()">
-              上传
+            <v-btn rounded dark @click="springBootUpLoad()">
+              SpringBootUpLoad
+            </v-btn>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="width: 50%; padding-right: 16px;">
+            <v-file-input
+              label="上传文件"
+              accept=".doc,.docx,.mp4"
+              show-size
+              single-line
+              small-chips
+              prepend-icon=""
+              v-model="nodeFile"
+            ></v-file-input>
+          </div>
+          <div style="padding-top: 16px;" class="card-search-btn">
+            <v-btn rounded dark @click="nodeJsUpLoad()">
+              NodeJsUpLoad
             </v-btn>
           </div>
         </div>
@@ -69,7 +88,8 @@
         endDate: null,
         currentDate: null,
         days: 0,
-        file: undefined
+        file: undefined,
+        nodeFile: undefined
       }
     },
     methods: {
@@ -79,7 +99,10 @@
       add(days) {
 
       },
-      upLoad() {
+      springBootUpLoad() {
+        /**
+         * spring boot 上传文件写法
+         */
         if (!this.file) {
           this.$toast.error('请选择文件')
           return
@@ -96,6 +119,37 @@
         formData.append('name', '我要传文件')
         formData.append('age', 27)
         api.post('/upload/file/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(res => {
+          this.$toast.success(res.msg)
+        }).catch(err => {
+          console.error(err)
+        })
+      },
+      nodeJsUpLoad() {
+        /**
+         * 测试NodeJS 上传文件写法
+         */
+        if (!this.nodeFile) {
+          this.$toast.error('请选择文件')
+          return
+        }
+
+        // const fileName = this.nodeFile.name
+        // const fileSize = this.nodeFile.size
+
+        // 创建FormData对象
+        const formData = new FormData()
+        // 如果是多个,需要遍历append
+        // formData.append('file', this.nodeFile[0])
+        // formData.append('file', this.nodeFile[1])
+        // 如果是单个,则直接写
+        formData.append('file', this.nodeFile)
+        formData.append('name', '我要传文件')
+        formData.append('age', 27)
+        api.post('/api/file/test/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
