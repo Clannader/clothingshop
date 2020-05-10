@@ -32,10 +32,33 @@
         </div>
       </v-container>
     </v-card>
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <div style="width: 50%; padding-right: 16px;">
+            <v-file-input
+              label="上传文件"
+              accept=".doc,.docx,.mp4"
+              show-size
+              single-line
+              prepend-icon=""
+              v-model="file"
+            ></v-file-input>
+          </div>
+          <div style="padding-top: 16px;" class="card-search-btn">
+            <v-btn rounded dark @click="upLoad()">
+              上传
+            </v-btn>
+          </div>
+        </div>
+      </v-container>
+    </v-card>
   </div>
 </template>
 
 <script>
+  import api from '@/utils/request'
+
   export default {
     name: 'TestDate',
     created() {
@@ -45,7 +68,8 @@
         startDate: null,
         endDate: null,
         currentDate: null,
-        days: 0
+        days: 0,
+        file: undefined
       }
     },
     methods: {
@@ -54,6 +78,32 @@
       },
       add(days) {
 
+      },
+      upLoad() {
+        if (!this.file) {
+          this.$toast.error('请选择文件')
+          return
+        }
+
+        const fileName = this.file.name
+        console.log(fileName)
+        const fileSize = this.file.size
+        console.log(fileSize)
+
+        // 创建FormData对象
+        const formData = new FormData()
+        formData.append('file', this.file)
+        formData.append('name', '我要传文件')
+        formData.append('age', 27)
+        api.post('/upload/file/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(res => {
+          this.$toast.success(res.msg)
+        }).catch(err => {
+          console.error(err)
+        })
       }
     }
   }
@@ -62,7 +112,7 @@
 <style lang="scss" scoped>
   .group-item {
     padding-right: 24px;
-    width: 20%;
+    width: 30%;
     &:last-child{
       padding-right: 0px;
     }
