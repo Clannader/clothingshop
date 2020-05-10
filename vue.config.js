@@ -15,7 +15,31 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     // host: 'localhost',
-    port: '9800'
+    port: '9800',
+    // 尝试使用反向代理解决跨域问题
+    proxy: {
+      // 1.按照我理解的代理设置,应该是这样的,首先baseUrl的设置必须是和启动的服务器同一个域名
+      // 也就是dev的是什么地址,baseURL就是什么地址,否则代理无效,还是按照baseUrl的地址去
+      // 访问
+      // 2.使用代理的情况就是API地址不支持跨域的时候使用,dev的时候,前端还是会启一个服务器
+      // 然后页面通过访问同一个域名下的地址,然后通过服务器帮你访问另一个地址,才实现代理
+      '^/api/*': {
+        target: 'https://cc:3001', // 要代理的域名
+        changeOrigin: true,//允许跨域
+        pathRewrite: {
+          '^/api': '/cms/h5/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
+          //然后把开发地址替换成接口要的地址
+        }
+      },
+      '^/upload/*': {
+        target: 'http://localhost:8090', // 要代理的域名
+        changeOrigin: true,//允许跨域
+        pathRewrite: {
+          '^/upload': '/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
+          //然后把开发地址替换成接口要的地址
+        }
+      }
+    }
     // before(app, /*server*/) {
     //   app.get(/.*.(js)$/, (req, res, next) => {
     //     req.url = req.url + '.gz';
@@ -23,7 +47,7 @@ module.exports = {
     //     next();
     //   })
     // }
-    // proxy: 'http://localhost:3000/cms/h5'
+    // proxy: 'http://cc:3000/cms/h5'
   },
   // runtimeCompiler: true,
   // vue 2.x版本的原先BASE_URL，vue 4.x改名为publicPath

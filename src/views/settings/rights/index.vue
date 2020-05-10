@@ -133,7 +133,7 @@
           return 'rowSelected'
         }
       },
-      rowClick(record/*, rowKey*/) {
+      rowClick(record/*, index 表格的下标,可以点击时获取点击的是第几行*/) {
         return {
           on: {
             click: () => {

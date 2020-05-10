@@ -1,6 +1,11 @@
 <template>
   <div class="text-xs-center">
-    <v-dialog v-model="dialog" width="320" persistent>
+    <v-dialog
+      v-model="dialog"
+      width="320"
+      persistent
+      ref="deleteUser"
+      @keydown.enter="close(true)">
       <v-card>
         <v-card-title class="dialog-title">
           {{$t('login.deleteUserTitle')}}
@@ -31,6 +36,16 @@
       return {
         dialog: true
       }
+    },
+    mounted() {
+      // 如果要在dialog上面加回车事件,只能用下面代码去加了
+      // this.$refs.deleteUser.onKeydown = (e) => {
+      //   const code = e.key
+      //   if (code === 'Enter') {
+      //     this.close.apply(this)
+      //     e.preventDefault()
+      //   }
+      // }
     },
     methods: {
       close(isAction) {
