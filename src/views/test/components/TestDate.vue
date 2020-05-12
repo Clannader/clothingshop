@@ -40,14 +40,12 @@
               label="上传文件"
               accept=".doc,.docx,.mp4"
               show-size
-              single-line
-              prepend-icon=""
               v-model="file"
             ></v-file-input>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">
-            <v-btn rounded dark @click="springBootUpLoad()">
-              SpringBootUpLoad
+            <v-btn rounded dark small @click="springBootUpLoad()">
+              SpringBootUpload
             </v-btn>
           </div>
         </div>
@@ -58,15 +56,34 @@
               label="上传文件"
               accept=".doc,.docx,.mp4"
               show-size
-              single-line
               small-chips
-              prepend-icon=""
               v-model="nodeFile"
-            ></v-file-input>
+              :loading="nodeShowProgress"
+            >
+              <v-progress-linear
+                slot="progress"
+                absolute
+                height="4px"
+                max="100"
+                color="light-blue"
+                striped
+                v-model="nodeProgress"
+              >
+              </v-progress-linear>
+              <template v-slot:selection="{ text }">
+                <v-chip
+                  small
+                  label
+                  color="primary"
+                >
+                  {{ text }}<span v-if="nodeShowProgress">(&nbsp;{{Math.floor(nodeProgress)}}&nbsp;%)</span>
+                </v-chip>
+              </template>
+            </v-file-input>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">
-            <v-btn rounded dark @click="nodeJsUpLoad()">
-              NodeJsUpLoad
+            <v-btn rounded dark small @click="nodeJsUpLoad()">
+              NodeJsUpload
             </v-btn>
           </div>
         </div>
@@ -89,7 +106,9 @@
         currentDate: null,
         days: 0,
         file: undefined,
-        nodeFile: undefined
+        nodeFile: undefined,
+        nodeProgress: 0,
+        nodeShowProgress: false
       }
     },
     methods: {
@@ -139,7 +158,7 @@
 
         // const fileName = this.nodeFile.name
         // const fileSize = this.nodeFile.size
-
+        this.nodeShowProgress = true
         // 创建FormData对象
         const formData = new FormData()
         // 如果是多个,需要遍历append
@@ -152,11 +171,19 @@
         api.post('/api/file/test/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: e => {
+            if (e.lengthComputable) {
+              this.nodeProgress = (e.loaded / e.total) * 100
+            }
           }
         }).then(res => {
           this.$toast.success(res.msg)
         }).catch(err => {
           console.error(err)
+        }).finally(() => {
+          this.nodeShowProgress = false
+          this.nodeProgress = 0
         })
       }
     }
