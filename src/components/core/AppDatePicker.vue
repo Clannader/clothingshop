@@ -3,6 +3,7 @@
     <v-menu
       v-model="menu"
       transition="scale-transition"
+      :nudge-top="80"
       offset-y
       max-width="290px"
       min-width="290px"

@@ -7,6 +7,7 @@
             <app-date-picker
               label="开始日期"
               :min="currentDate"
+              :return-value.sync="startDate"
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -24,6 +25,7 @@
             <app-date-picker
               label="结束日期"
               :min="startDate"
+              :return-value.sync="endDate"
               require
             ></app-date-picker>
           </div>
@@ -195,6 +197,9 @@
     width: 30%;
     &:last-child{
       padding-right: 0px;
+    }
+    /deep/ .v-input input{
+      text-align: center !important;
     }
   }
 
