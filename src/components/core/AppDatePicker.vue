@@ -18,6 +18,7 @@
           :disabled="disabled"
           :class="{'input-require':require}"
           @blur="dateFormat()"
+          @click:append="menu = true"
         >
         </v-text-field>
       </template>
@@ -65,11 +66,10 @@
       }
     },
     created() {
-      console.log(moment(new Date()).fromNow())
+
     },
     methods: {
       dateFormat() {
-        console.log(moment(new Date()).fromNow())
         console.log(moment.locales())
       }
     }

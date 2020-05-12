@@ -5,6 +5,7 @@
 'use strict'
 import api from './request'
 import store from '@/store'
+import moment from 'moment'
 
 const methods = {
   async removeUserSession() {
@@ -163,6 +164,10 @@ const methods = {
     // Objects with prototype are plain iff they were constructed by a global Object function
     const Ctor = hasOwn.call(proto, 'constructor') && proto.constructor
     return typeof Ctor === 'function' && fnToString.call(Ctor) === fnToString.call(Object)
+  },
+
+  dateFormat(fmt = 'YYYY-MM-DD') {
+    return moment(new Date()).format(fmt.replace(/y/g, 'Y').replace(/d/g, 'D'))
   }
 }
 

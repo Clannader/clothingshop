@@ -11,14 +11,13 @@
           </div>
           <div class="group-item">
             <v-text-field
-              type="number"
-              label="天数"
               v-model="days"
+              label="天数"
               prepend-inner-icon="remove"
-              maxlength="3"
-              @click:prepend-inner="days=remove(days)"
               append-icon="add"
-              @click:append="days=add(days)"
+              maxlength="3"
+              @click:prepend-inner="removeDays"
+              @click:append="addDays"
             ></v-text-field>
           </div>
           <div class="group-item">
@@ -97,6 +96,7 @@
   export default {
     name: 'TestDate',
     created() {
+      this.currentDate = this.publicMethods.dateFormat()
     },
     data() {
       return {
@@ -111,11 +111,11 @@
       }
     },
     methods: {
-      remove(days) {
-
+      removeDays() {
+        if (this.days > 1) { --this.days } else { this.days = 0 }
       },
-      add(days) {
-
+      addDays() {
+        this.days = ++this.days
       },
       springBootUpLoad() {
         /**
@@ -197,4 +197,5 @@
       padding-right: 0px;
     }
   }
+
 </style>
