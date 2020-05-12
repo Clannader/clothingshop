@@ -1,9 +1,11 @@
 /**
  * Create by CC on 2018/12/12
  */
+
 'use strict'
 import { menuRoutes, constantRoutes } from '@/router'
 import Methods from '@/utils/methods'
+import moment from 'moment'
 
 const tagsView = {
   state: {
@@ -18,6 +20,16 @@ const tagsView = {
     // 设置语言
     SetLanguage: (state, language = 'zh') => {
       state.language = language
+      let momentLang = ''
+      switch (language) {
+        case 'zh':
+          momentLang = 'zh-cn'
+          break
+        case 'en':
+          momentLang = 'en'
+          break
+      }
+      moment.locale(momentLang)
       localStorage.setItem('language', language)
     },
     // 设置是否显示snackbar

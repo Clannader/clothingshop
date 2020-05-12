@@ -5,15 +5,14 @@
         <div class="form-group">
           <div class="group-item">
             <app-date-picker
-              :label="'开始日期'"
-              :newDatePicker.sync="startDate"
+              label="开始日期"
               :min="currentDate"
             ></app-date-picker>
           </div>
           <div class="group-item">
             <v-text-field
               type="number"
-              :label="'天数'"
+              label="天数"
               v-model="days"
               prepend-inner-icon="remove"
               maxlength="3"
@@ -24,9 +23,9 @@
           </div>
           <div class="group-item">
             <app-date-picker
-              :label="'结束日期'"
-              :newDatePicker.sync="endDate"
+              label="结束日期"
               :min="startDate"
+              require
             ></app-date-picker>
           </div>
         </div>
@@ -101,9 +100,9 @@
     },
     data() {
       return {
-        startDate: null,
-        endDate: null,
-        currentDate: null,
+        startDate: undefined,
+        endDate: undefined,
+        currentDate: undefined,
         days: 0,
         file: undefined,
         nodeFile: undefined,

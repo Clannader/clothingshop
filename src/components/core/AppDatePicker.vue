@@ -1,20 +1,24 @@
 <template>
   <div>
     <v-menu
-      ref="menu"
       v-model="menu"
-      :close-on-content-click="false"
       transition="scale-transition"
       offset-y
       max-width="290px"
-      min-width="290px">
+      min-width="290px"
+      :disabled="disabled"
+      :close-on-content-click="false"
+    >
       <template v-slot:activator="{ on }">
         <v-text-field
-          :class="{'input-require':isRequire}"
           v-model="datePicker"
           v-on="{ ...on, ...$listeners }"
           v-bind="$attrs"
-          append-icon="iconfont icon-c-opera-logs">
+          append-icon="mdi-calendar-blank"
+          :disabled="disabled"
+          :class="{'input-require':require}"
+          @blur="dateFormat()"
+        >
         </v-text-field>
       </template>
 
@@ -31,12 +35,18 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     inheritAttrs: true,
     name: 'AppDataPicker',
     props: {
       // 是否必填项
-      isRequire: {
+      require: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
         type: Boolean,
         default: false
       }
@@ -44,18 +54,24 @@
     data() {
       return {
         menu: false,
-        datePicker: '',
-        locale: 'zh'
+        datePicker: ''
       }
     },
     watch: {
     },
     computed: {
+      locale() {
+        return this.$store.state.tagsView.language
+      }
     },
     created() {
-      this.locale = this.$store.state.tagsView.language
+      console.log(moment(new Date()).fromNow())
     },
     methods: {
+      dateFormat() {
+        console.log(moment(new Date()).fromNow())
+        console.log(moment.locales())
+      }
     }
   }
 
