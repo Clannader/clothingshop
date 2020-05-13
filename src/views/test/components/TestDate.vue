@@ -194,7 +194,7 @@
 <style lang="scss" scoped>
   .group-item {
     padding-right: 24px;
-    width: 30%;
+    width: 20%;
     &:last-child{
       padding-right: 0px;
     }
