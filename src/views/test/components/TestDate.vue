@@ -7,7 +7,7 @@
             <app-date-picker
               label="开始日期"
               :min="currentDate"
-              :return-value.sync="startDate"
+              :update-value.sync="startDate"
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -25,7 +25,7 @@
             <app-date-picker
               label="结束日期"
               :min="startDate"
-              :return-value.sync="endDate"
+              :update-value.sync="endDate"
               require
             ></app-date-picker>
           </div>
@@ -94,11 +94,14 @@
 
 <script>
   import api from '@/utils/request'
+  import moment from 'moment'
 
   export default {
     name: 'TestDate',
     created() {
       this.currentDate = this.publicMethods.dateFormat()
+      this.startDate = this.currentDate
+      this.endDate = moment(this.startDate).add(this.days, 'days').format('YYYY-MM-DD')
     },
     data() {
       return {
@@ -114,7 +117,11 @@
     },
     methods: {
       removeDays() {
-        if (this.days > 1) { --this.days } else { this.days = 0 }
+        if (this.days > 1) {
+          --this.days
+        } else {
+          this.days = 0
+        }
       },
       addDays() {
         this.days = ++this.days
@@ -187,6 +194,23 @@
           this.nodeProgress = 0
         })
       }
+    },
+    watch: {
+      startDate: function(val) {
+        if (!val) {
+          return
+        }
+        this.endDate = moment(this.startDate).add(this.days, 'days').format('YYYY-MM-DD')
+      },
+      endDate: function(val) {
+        if (!val) {
+          return
+        }
+        this.days = moment(this.endDate).diff(moment(this.startDate), 'days')
+      },
+      days: function(val) {
+        this.endDate = moment(this.startDate).add(val, 'days').format('YYYY-MM-DD')
+      }
     }
   }
 </script>
@@ -195,10 +219,12 @@
   .group-item {
     padding-right: 24px;
     width: 20%;
-    &:last-child{
+
+    &:last-child {
       padding-right: 0px;
     }
-    /deep/ .v-input input{
+
+    /deep/ .v-input input {
       text-align: center !important;
     }
   }

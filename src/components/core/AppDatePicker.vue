@@ -2,12 +2,13 @@
   <div>
     <v-menu
       v-model="menu"
+      v-bind="$attrs"
+      v-on="$listeners"
       transition="scale-transition"
-      :nudge-top="80"
+      :nudge-top="20"
       offset-y
       max-width="290px"
       min-width="290px"
-      :disabled="disabled"
       :close-on-content-click="false"
     >
       <template v-slot:activator="{ on }">
@@ -16,10 +17,9 @@
           v-on="{ ...on, ...$listeners }"
           v-bind="$attrs"
           append-icon="mdi-calendar-blank"
-          :disabled="disabled"
           :class="{'input-require':require}"
-          @blur="dateFormat()"
           @click:append="menu = true"
+          @change="getReturnValue()"
         >
         </v-text-field>
       </template>
@@ -29,6 +29,7 @@
         v-on="$listeners"
         v-model="datePicker"
         :locale="locale"
+        @change="getReturnValue()"
         scrollable
       >
       </v-date-picker>
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  // import moment from 'moment'
 
   export default {
     inheritAttrs: true,
@@ -48,18 +49,25 @@
         type: Boolean,
         default: false
       },
-      disabled: {
-        type: Boolean,
-        default: false
+      updateValue: {
+        type: null,
+        default: undefined
       }
     },
     data() {
       return {
         menu: false,
-        datePicker: ''
+        datePicker: '',
+        format: ''
       }
     },
     watch: {
+      updateValue: {
+        handler(newVal) {
+          this.datePicker = newVal
+        },
+        deep: true
+      }
     },
     computed: {
       locale() {
@@ -70,8 +78,8 @@
 
     },
     methods: {
-      dateFormat() {
-        console.log(moment.locales())
+      getReturnValue() {
+        this.$emit('update:updateValue', this.datePicker)
       }
     }
   }
