@@ -8,11 +8,17 @@ import router, { resetRouter } from '@/router'
 
 const userInfo = {
   state: {
-    roles: undefined // 用户权限
+    roles: undefined, // 用户权限
+    systemConfig: {
+      dateFormat: 'dd/MM/yyyy'
+    }
   },
   mutations: {
     SetRoles: (state, roles) => {
       state.roles = roles
+    },
+    SetSystemConfig: (state, config) => {
+      state.systemConfig = config
     }
   },
   actions: {
@@ -65,6 +71,9 @@ const userInfo = {
     },
     resetRouter() {
       resetRouter()
+    },
+    setSystemConfig({ commit }, config) {
+      commit('SetSystemConfig', config)
     }
   }
 }

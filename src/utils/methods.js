@@ -54,23 +54,6 @@ const methods = {
     return fn.then(data => [null, data]).catch(err => [err])
   },
 
-  /**
-   * 把code,desc的数组自定义转换key,value的数组
-   */
-  formatArr(arr, k = 'value', v = 'label') {
-    const temp = []
-    if (!Array.isArray(arr)) {
-      return []
-    }
-    arr.forEach(value => {
-      const obj = {}
-      obj[k] = value.code
-      obj[v] = value.desc
-      temp.push(obj)
-    })
-    return temp
-  },
-
   convertStringToBoolean(str = '') {
     return (typeof str === 'string' && str === 'true') || (typeof str === 'boolean' && str)
   },

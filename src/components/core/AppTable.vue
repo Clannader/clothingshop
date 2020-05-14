@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-table
-      :pagination="false"
-      :locale="locale"
       v-bind="$attrs"
       v-on="$listeners"
+      :pagination="false"
+      :locale="locale"
     >
 <!--  这里绑定的插槽有$slots 和 $scopedSlots-->
 <!--  vue里面有$options,route,可通过打印查看-->

@@ -62,3 +62,20 @@ html {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.input-require .v-label {
+  padding-left: 12px;
+}
+
+.input-require .v-label::before {
+  content: '';
+  margin-right: 8px;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #DC0600;
+  position: absolute;
+  top: calc(50% - 3px);
+  left: 0;
+}

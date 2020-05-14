@@ -1,20 +1,27 @@
 <template>
   <div>
     <v-menu
-      ref="menu"
       v-model="menu"
-      :close-on-content-click="false"
+      v-bind="$attrs"
+      v-on="$listeners"
+      ref="menu"
       transition="scale-transition"
+      :nudge-top="20"
       offset-y
       max-width="290px"
-      min-width="290px">
+      min-width="290px"
+      :close-on-content-click="false"
+    >
       <template v-slot:activator="{ on }">
         <v-text-field
-          :class="{'input-require':isRequire}"
-          v-model="datePicker"
+          v-model="dateText"
           v-on="{ ...on, ...$listeners }"
           v-bind="$attrs"
-          append-icon="iconfont icon-c-opera-logs">
+          append-icon="mdi-calendar-blank"
+          :class="{'input-require':require}"
+          :readonly="readonly"
+          @click:append="menu = true"
+        >
         </v-text-field>
       </template>
 
@@ -23,6 +30,7 @@
         v-on="$listeners"
         v-model="datePicker"
         :locale="locale"
+        @change="getReturnValue()"
         scrollable
       >
       </v-date-picker>
@@ -31,31 +39,56 @@
 </template>
 
 <script>
+
   export default {
     inheritAttrs: true,
     name: 'AppDataPicker',
     props: {
       // 是否必填项
-      isRequire: {
+      require: {
         type: Boolean,
         default: false
+      },
+      readonly: {
+        type: Boolean,
+        default: false
+      },
+      updateValue: {
+        type: null,
+        default: undefined
       }
     },
     data() {
       return {
         menu: false,
         datePicker: '',
-        locale: 'zh'
+        format: '',
+        dateText: ''
       }
     },
     watch: {
+      updateValue: {
+        handler(newVal) {
+          this.dateText = newVal.format(this.format)
+          this.datePicker = newVal
+          this.getReturnValue()
+        },
+        deep: true
+      }
     },
     computed: {
+      locale() {
+        return this.$store.state.tagsView.language
+      }
     },
     created() {
-      this.locale = this.$store.state.tagsView.language
+      this.format = this.$store.state.userInfo.systemConfig.dateFormat
     },
     methods: {
+      getReturnValue() {
+        this.$emit('update:updateValue', this.datePicker)
+        // this.$refs.menu.save(this.datePicker)
+      }
     }
   }
 
