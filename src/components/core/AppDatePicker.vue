@@ -4,6 +4,7 @@
       v-model="menu"
       v-bind="$attrs"
       v-on="$listeners"
+      ref="menu"
       transition="scale-transition"
       :nudge-top="20"
       offset-y
@@ -13,13 +14,12 @@
     >
       <template v-slot:activator="{ on }">
         <v-text-field
-          v-model="datePicker"
+          v-model="dateText"
           v-on="{ ...on, ...$listeners }"
           v-bind="$attrs"
           append-icon="mdi-calendar-blank"
           :class="{'input-require':require}"
           @click:append="menu = true"
-          @change="getReturnValue()"
         >
         </v-text-field>
       </template>
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-  // import moment from 'moment'
 
   export default {
     inheritAttrs: true,
@@ -58,13 +57,15 @@
       return {
         menu: false,
         datePicker: '',
-        format: ''
+        format: '',
+        dateText: ''
       }
     },
     watch: {
       updateValue: {
         handler(newVal) {
           this.datePicker = newVal
+          this.getReturnValue()
         },
         deep: true
       }
@@ -75,11 +76,13 @@
       }
     },
     created() {
-
+      this.format = this.$store.state.userInfo.systemConfig.dateFormat
     },
     methods: {
       getReturnValue() {
         this.$emit('update:updateValue', this.datePicker)
+        this.dateText = this.datePicker.format(this.format)
+        // this.$refs.menu.save(this.datePicker)
       }
     }
   }

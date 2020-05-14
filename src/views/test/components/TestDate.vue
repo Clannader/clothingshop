@@ -29,6 +29,11 @@
               require
             ></app-date-picker>
           </div>
+          <div style="padding-top: 16px;" class="card-search-btn">
+            <v-btn rounded dark @click="getDateValue()">
+              确定
+            </v-btn>
+          </div>
         </div>
       </v-container>
     </v-card>
@@ -94,14 +99,13 @@
 
 <script>
   import api from '@/utils/request'
-  import moment from 'moment'
 
   export default {
     name: 'TestDate',
     created() {
-      this.currentDate = this.publicMethods.dateFormat()
+      this.currentDate = new Date().format()
       this.startDate = this.currentDate
-      this.endDate = moment(this.startDate).add(this.days, 'days').format('YYYY-MM-DD')
+      this.endDate = this.startDate.createMoment().add(this.days, 'days').format('YYYY-MM-DD')
     },
     data() {
       return {
@@ -193,6 +197,11 @@
           this.nodeShowProgress = false
           this.nodeProgress = 0
         })
+      },
+      getDateValue() {
+        console.log('currentDate:' + this.currentDate)
+        console.log('startDate:' + this.startDate)
+        console.log('endDate:' + this.endDate)
       }
     },
     watch: {
@@ -200,16 +209,16 @@
         if (!val) {
           return
         }
-        this.endDate = moment(this.startDate).add(this.days, 'days').format('YYYY-MM-DD')
+        this.endDate = this.startDate.createMoment().add(this.days, 'days').format('YYYY-MM-DD')
       },
       endDate: function(val) {
         if (!val) {
           return
         }
-        this.days = moment(this.endDate).diff(moment(this.startDate), 'days')
+        this.days = this.endDate.createMoment().diff(this.startDate.createMoment(), 'days')
       },
       days: function(val) {
-        this.endDate = moment(this.startDate).add(val, 'days').format('YYYY-MM-DD')
+        this.endDate = this.startDate.createMoment().add(val, 'days').format('YYYY-MM-DD')
       }
     }
   }

@@ -17,6 +17,7 @@ import vuetify from './plugins/vuetify'
 import i18n from './i18n'
 import 'moment/locale/zh-cn'
 // 公共方法
+import './plugins/core/overrideObject'
 import './utils'
 import App from './App'
 // store结构
