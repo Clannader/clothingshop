@@ -7,6 +7,7 @@
             <app-date-picker
               label="开始日期"
               :min="currentDate"
+              :init-value="startDate"
               :update-value.sync="startDate"
               readonly
             ></app-date-picker>
@@ -27,6 +28,7 @@
             <app-date-picker
               label="结束日期"
               :min="startDate"
+              :init-value="endDate"
               :update-value.sync="endDate"
               require
               readonly
@@ -115,7 +117,7 @@
         startDate: undefined,
         endDate: undefined,
         currentDate: undefined,
-        days: 0,
+        days: 1,
         file: undefined,
         nodeFile: undefined,
         nodeProgress: 0,

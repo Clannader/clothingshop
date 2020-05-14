@@ -4,7 +4,6 @@
       v-model="menu"
       v-bind="$attrs"
       v-on="$listeners"
-      ref="menu"
       transition="scale-transition"
       :nudge-top="20"
       offset-y
@@ -49,21 +48,29 @@
         type: Boolean,
         default: false
       },
+      // 因为只能对输入框有效,不能对日期选择只读,否则选不了日期
       readonly: {
         type: Boolean,
         default: false
       },
+      // 控件更新子组件字段值
       updateValue: {
         type: null,
         default: undefined
+      },
+      // 想了几天初始化赋值的办法,依然找不到什么有效的办法,只能让子组件传入初始值来初始化了
+      // 不明白为什么别人的就能初始化成功
+      initValue: {
+        type: String,
+        default: ''
       }
     },
     data() {
       return {
         menu: false,
-        datePicker: '',
-        format: '',
-        dateText: ''
+        datePicker: '', // 日期选择控件
+        format: '', // 日期格式化格式
+        dateText: '' // 输入框日期显示
       }
     },
     watch: {
@@ -83,6 +90,8 @@
     },
     created() {
       this.format = this.$store.state.userInfo.systemConfig.dateFormat
+      this.datePicker = this.initValue
+      this.dateText = this.initValue.format(this.format)
     },
     methods: {
       getReturnValue() {
