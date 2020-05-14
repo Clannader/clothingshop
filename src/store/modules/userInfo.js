@@ -10,7 +10,7 @@ const userInfo = {
   state: {
     roles: undefined, // 用户权限
     systemConfig: {
-      dateFormat: 'yyyy/MM/dd'
+      dateFormat: 'dd/MM/yyyy'
     }
   },
   mutations: {

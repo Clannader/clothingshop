@@ -8,6 +8,7 @@
               label="开始日期"
               :min="currentDate"
               :update-value.sync="startDate"
+              readonly
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -19,6 +20,7 @@
               maxlength="3"
               @click:prepend-inner="removeDays"
               @click:append="addDays"
+              class="input-require"
             ></v-text-field>
           </div>
           <div class="group-item">
@@ -27,6 +29,7 @@
               :min="startDate"
               :update-value.sync="endDate"
               require
+              readonly
             ></app-date-picker>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">

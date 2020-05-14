@@ -19,6 +19,7 @@
           v-bind="$attrs"
           append-icon="mdi-calendar-blank"
           :class="{'input-require':require}"
+          :readonly="readonly"
           @click:append="menu = true"
         >
         </v-text-field>
@@ -48,6 +49,10 @@
         type: Boolean,
         default: false
       },
+      readonly: {
+        type: Boolean,
+        default: false
+      },
       updateValue: {
         type: null,
         default: undefined
@@ -64,6 +69,7 @@
     watch: {
       updateValue: {
         handler(newVal) {
+          this.dateText = newVal.format(this.format)
           this.datePicker = newVal
           this.getReturnValue()
         },
@@ -81,7 +87,6 @@
     methods: {
       getReturnValue() {
         this.$emit('update:updateValue', this.datePicker)
-        this.dateText = this.datePicker.format(this.format)
         // this.$refs.menu.save(this.datePicker)
       }
     }
