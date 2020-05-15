@@ -16,6 +16,6 @@ String.prototype.format = function(fmt = 'yyyy-MM-dd') {
   return moment(this).format(fmt.replace(/y/g, 'Y').replace(/d/g, 'D'))
 }
 
-String.prototype.createMoment = function() {
-  return moment(this)
+String.prototype.createMoment = function(fmt) {
+  return moment(this, fmt)
 }

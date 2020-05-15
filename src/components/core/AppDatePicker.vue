@@ -20,6 +20,7 @@
           :clearable="clearable"
           @click:append="menu = true"
           @click:clear="clearDate"
+          @blur="validateDate()"
         >
         </v-text-field>
       </template>
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+  // import moment from 'moment'
 
   export default {
     inheritAttrs: true,
@@ -110,6 +112,21 @@
       clearDate() {
         this.dateText = ''
         this.datePicker = ''
+        this.getReturnValue()
+      },
+      validateDate() {
+        if (this.publicMethods.isEmpty(this.dateText)) {
+          return
+        }
+        const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
+        const datePicker = this.dateText.createMoment(format).format('YYYY-MM-DD')
+        if (datePicker === 'Invalid date') {
+          this.$toast.error(this.$t('homePage.InvalidDate'))
+          this.datePicker = ''
+          this.dateText = ''
+        } else {
+          this.datePicker = datePicker
+        }
         this.getReturnValue()
       }
     }

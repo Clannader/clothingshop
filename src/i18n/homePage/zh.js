@@ -25,5 +25,6 @@ export default {
   create: '新建',
   notWhoops: '哎呀',
   notPage: '您要查找的页面不存在',
-  notHere: '带你离开这里!'
+  notHere: '带你离开这里!',
+  InvalidDate: '无效的日期'
 }

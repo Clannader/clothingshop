@@ -9,7 +9,6 @@
               :min="currentDate"
               :update-value.sync="startDate"
               :close-on-content-click="false"
-              readonly
               require
             ></app-date-picker>
           </div>
@@ -32,7 +31,6 @@
               :update-value.sync="endDate"
               :close-on-content-click="false"
               require
-              readonly
             ></app-date-picker>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">

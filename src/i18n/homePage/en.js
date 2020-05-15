@@ -25,5 +25,6 @@ export default {
   create: 'Create',
   notWhoops: 'Whoops',
   notPage: 'The page you were looking for does not exist',
-  notHere: 'Get me out of here!'
+  notHere: 'Get me out of here!',
+  InvalidDate: 'Invalid date'
 }
