@@ -7,9 +7,10 @@
             <app-date-picker
               label="开始日期"
               :min="currentDate"
-              :init-value="startDate"
               :update-value.sync="startDate"
+              :close-on-content-click="false"
               readonly
+              require
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -28,8 +29,8 @@
             <app-date-picker
               label="结束日期"
               :min="startDate"
-              :init-value="endDate"
               :update-value.sync="endDate"
+              :close-on-content-click="false"
               require
               readonly
             ></app-date-picker>
