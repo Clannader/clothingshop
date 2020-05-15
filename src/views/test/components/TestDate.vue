@@ -8,7 +8,8 @@
               label="开始日期"
               :min="currentDate"
               :update-value.sync="startDate"
-              readonly
+              :close-on-content-click="false"
+              require
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -28,8 +29,8 @@
               label="结束日期"
               :min="startDate"
               :update-value.sync="endDate"
+              :close-on-content-click="false"
               require
-              readonly
             ></app-date-picker>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">
@@ -115,7 +116,7 @@
         startDate: undefined,
         endDate: undefined,
         currentDate: undefined,
-        days: 0,
+        days: 1,
         file: undefined,
         nodeFile: undefined,
         nodeProgress: 0,

@@ -146,6 +146,10 @@ const methods = {
     // Objects with prototype are plain iff they were constructed by a global Object function
     const Ctor = hasOwn.call(proto, 'constructor') && proto.constructor
     return typeof Ctor === 'function' && fnToString.call(Ctor) === fnToString.call(Object)
+  },
+
+  isEmpty(obj) {
+    return obj == null || obj === '' || obj === 'undefined'
   }
 }
 

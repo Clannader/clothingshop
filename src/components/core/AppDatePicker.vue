@@ -3,31 +3,30 @@
     <v-menu
       v-model="menu"
       v-bind="$attrs"
-      v-on="$listeners"
-      ref="menu"
       transition="scale-transition"
       :nudge-top="20"
       offset-y
       max-width="290px"
       min-width="290px"
-      :close-on-content-click="false"
     >
       <template v-slot:activator="{ on }">
         <v-text-field
           v-model="dateText"
-          v-on="{ ...on, ...$listeners }"
+          v-on="on"
           v-bind="$attrs"
           append-icon="mdi-calendar-blank"
           :class="{'input-require':require}"
           :readonly="readonly"
+          :clearable="clearable"
           @click:append="menu = true"
+          @click:clear="clearDate"
+          @blur="validateDate()"
         >
         </v-text-field>
       </template>
 
       <v-date-picker
         v-bind="$attrs"
-        v-on="$listeners"
         v-model="datePicker"
         :locale="locale"
         @change="getReturnValue()"
@@ -39,39 +38,56 @@
 </template>
 
 <script>
+  // import moment from 'moment'
 
   export default {
     inheritAttrs: true,
-    name: 'AppDataPicker',
+    name: 'AppDatePicker',
     props: {
       // 是否必填项
       require: {
         type: Boolean,
         default: false
       },
+      // 因为只能对输入框有效,不能对日期选择只读,否则选不了日期
       readonly: {
         type: Boolean,
         default: false
       },
+      // 控件更新子组件字段值
       updateValue: {
         type: null,
         default: undefined
+      },
+      clearable: {
+        type: Boolean,
+        default: false
       }
+      // 想了几天初始化赋值的办法,依然找不到什么有效的办法,只能让子组件传入初始值来初始化了
+      // 不明白为什么别人的就能初始化成功
+      // initValue: {
+      //   type: String,
+      //   default: ''
+      // }
     },
     data() {
       return {
         menu: false,
-        datePicker: '',
-        format: '',
-        dateText: ''
+        datePicker: '', // 日期选择控件
+        format: '', // 日期格式化格式
+        dateText: '' // 输入框日期显示
       }
     },
     watch: {
       updateValue: {
         handler(newVal) {
-          this.dateText = newVal.format(this.format)
-          this.datePicker = newVal
-          this.getReturnValue()
+          if (!this.publicMethods.isEmpty(newVal)) {
+            this.dateText = newVal.format(this.format)
+            this.datePicker = newVal
+          } else {
+            this.dateText = ''
+            this.datePicker = ''
+          }
         },
         deep: true
       }
@@ -83,11 +99,35 @@
     },
     created() {
       this.format = this.$store.state.userInfo.systemConfig.dateFormat
+      if (!this.publicMethods.isEmpty(this.updateValue)) {
+        this.dateText = this.updateValue.format(this.format)
+        this.datePicker = this.updateValue
+      }
     },
     methods: {
       getReturnValue() {
         this.$emit('update:updateValue', this.datePicker)
         // this.$refs.menu.save(this.datePicker)
+      },
+      clearDate() {
+        this.dateText = ''
+        this.datePicker = ''
+        this.getReturnValue()
+      },
+      validateDate() {
+        if (this.publicMethods.isEmpty(this.dateText)) {
+          return
+        }
+        const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
+        const datePicker = this.dateText.createMoment(format).format('YYYY-MM-DD')
+        if (datePicker === 'Invalid date') {
+          this.$toast.error(this.$t('homePage.InvalidDate'))
+          this.datePicker = ''
+          this.dateText = ''
+        } else {
+          this.datePicker = datePicker
+        }
+        this.getReturnValue()
       }
     }
   }
