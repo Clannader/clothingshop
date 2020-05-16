@@ -1,0 +1,80 @@
+<template>
+  <v-dialog
+    v-model="visible"
+    persistent
+    :width="width"
+    scrollable
+  >
+    <v-card>
+      <v-card-title class="dialog-title">
+        {{title}}
+      </v-card-title>
+      <v-card-text style="padding: 0px 24px 0px 24px">
+        <app-pdf :pdf-content="pdfContent"></app-pdf>
+      </v-card-text>
+      <v-card-actions class="dialog-footer app-btn">
+        <v-spacer></v-spacer>
+        <v-btn v-if="!onlyClose" depressed @click="submit()">{{$t('homePage.confirm')}}</v-btn>
+        <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+  import AppPdf from './AppPdf'
+  export default {
+    name: 'AppPdfDialog',
+    components: {
+      AppPdf
+    },
+    props: {
+      // 标题
+      title: {
+        type: String,
+        default: ''
+      },
+      // dialog宽度
+      width: {
+        type: Number,
+        default: 640
+      },
+      // 是否点蒙层可关闭
+      // persistent: {
+      //   type: Boolean,
+      //   default: true
+      // },
+      visible: {
+        type: Boolean,
+        default: false
+      },
+      // 是否需要确定按钮
+      onlyClose: {
+        type: Boolean,
+        default: false
+      },
+      pdfContent: {
+        type: String,
+        default: ''
+      }
+    },
+    data() {
+      return {
+      }
+    },
+    created() {
+    },
+    methods: {
+      submit() {
+        this.$emit('submit')
+      },
+      close() {
+        this.$emit('close')
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>

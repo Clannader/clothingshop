@@ -37,6 +37,9 @@
             <v-btn rounded dark @click="getDateValue()">
               确定
             </v-btn>
+            <v-btn rounded dark @click="getPDFValue()">
+              获取PDF
+            </v-btn>
           </div>
         </div>
       </v-container>
@@ -98,14 +101,53 @@
         </div>
       </v-container>
     </v-card>
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <v-textarea
+            v-model="pdfText"
+            label="PDF内容"
+            hide-details
+            outlined
+            rows="3"
+            row-height="15"
+          ></v-textarea>
+        </div>
+      </v-container>
+    </v-card>
+
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <video
+            controls
+            src="http://localhost:3000/video/video-1.mp4"
+            style="width: 100%;height: 300px"
+          ></video>
+        </div>
+      </v-container>
+    </v-card>
+
+    <app-pdf-dialog
+      :visible="show"
+      :pdf-content="pdfContent"
+      :title="'预览PDF'"
+      :width="1000"
+      @submit="pdfSubmit"
+      @close="pdfClose"
+    ></app-pdf-dialog>
   </div>
 </template>
 
 <script>
   import api from '@/utils/request'
+  import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
 
   export default {
     name: 'TestDate',
+    components: {
+      AppPdfDialog
+    },
     created() {
       this.currentDate = new Date().format()
       this.startDate = this.currentDate
@@ -120,7 +162,10 @@
         file: undefined,
         nodeFile: undefined,
         nodeProgress: 0,
-        nodeShowProgress: false
+        nodeShowProgress: false,
+        pdfText: '',
+        pdfContent: '',
+        show: false
       }
     },
     methods: {
@@ -206,6 +251,19 @@
         console.log('currentDate:' + this.currentDate)
         console.log('startDate:' + this.startDate)
         console.log('endDate:' + this.endDate)
+      },
+      getPDFValue() {
+        api.post('/api/file/test/pdf', {}).then(res => {
+          // this.pdfText = res.pdf
+          this.pdfContent = res.pdf
+          this.show = true
+        }).catch(() => {})
+      },
+      pdfSubmit() {
+        this.$toast.success('成功')
+      },
+      pdfClose() {
+        this.show = false
       }
     },
     watch: {

@@ -26,5 +26,7 @@ export default {
   notWhoops: '哎呀',
   notPage: '您要查找的页面不存在',
   notHere: '带你离开这里!',
-  InvalidDate: '无效的日期'
+  InvalidDate: '无效的日期',
+  confirm: '确定',
+  colse: '关闭'
 }
