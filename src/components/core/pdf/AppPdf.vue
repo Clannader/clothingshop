@@ -59,8 +59,10 @@
       //   },
       //   deep: true
       // },
-      async pageIndex() {
-        await this.pageCanvas()
+      pageIndex() {
+        const pdfList = document.querySelector('.pdf-list')
+        this.pageCanvas()
+        pdfList.scrollTop = 0
       }
     },
     mounted() {
