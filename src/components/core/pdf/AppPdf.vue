@@ -60,9 +60,12 @@
       //   deep: true
       // },
       pageIndex() {
-        const pdfList = document.querySelector('.pdf-list')
         this.pageCanvas()
-        pdfList.scrollTop = 0
+        this.$vuetify.goTo('.pdf-list', {
+          duration: 500,
+          easing: 'linear',
+          container: '.pdf-list'
+        })
       }
     },
     mounted() {
