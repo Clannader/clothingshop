@@ -3,7 +3,6 @@
     v-model="visible"
     persistent
     :width="width"
-    scrollable
   >
     <v-card>
       <v-card-title class="dialog-title">
