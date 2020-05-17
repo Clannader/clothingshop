@@ -7,7 +7,7 @@
   >
     <v-card>
       <v-card-title class="dialog-title">
-        {{title}}
+        <span class="dialog-title-text">{{title}}</span>
       </v-card-title>
       <v-card-text style="padding: 0px 24px 0px 24px">
         <app-pdf :pdf-content="pdfContent"></app-pdf>

@@ -8,7 +8,7 @@
       @keydown.enter="close(true)">
       <v-card>
         <v-card-title class="dialog-title">
-          {{$t('login.deleteUserTitle')}}
+          <span class="dialog-title-text">{{$t('login.deleteUserTitle')}}</span>
         </v-card-title>
         <v-card-text class="dialog-text">
           {{$t('login.deleteUserConfirm', { user: this.userName})}}
