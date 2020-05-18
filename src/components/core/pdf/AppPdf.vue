@@ -84,6 +84,7 @@
         }) // 返回一个pdf对象
         this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
         await this.pageCanvas()
+        // this.initPrint()
       },
       async pageCanvas() {
         const pdfList = document.querySelector('.pdf-list')
@@ -103,12 +104,34 @@
         canvas.className = 'canvas' // 给canvas节点定义一个class名,这里我取名为canvas
         if (pdfList.hasChildNodes()) {
           // 判断pdfList下是否存在canvas标签,如果存在,先删除后添加
-          pdfList.removeChild(document.querySelector('canvas'))
+          pdfList.removeChild(pdfList.querySelector('canvas'))
         }
         pdfList.appendChild(canvas) // 插入到pdfList节点的最后
       },
       onResize() {
         this.pdfHeight = window.innerHeight - 230
+      },
+      async initPrint() {
+        const pdfPrint = document.querySelector('.pdf-print')
+        const total = this.pdfObject.numPages
+        for (let i = 1; i <= total; i++) {
+          // 循环页数
+          const canvas = document.createElement('canvas')
+          const page = await this.pdfObject.getPage(i) // 调用getPage方法传入当前循环的页数,返回一个page对象
+          const scale = 1.5 // 缩放倍数，1表示原始大小
+          const viewport = page.getViewport(scale)
+          const context = canvas.getContext('2d') // 创建绘制canvas的对象
+          canvas.height = viewport.height // 定义canvas高和宽
+          canvas.width = viewport.width
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          }
+          await page.render(renderContext)
+
+          canvas.className = 'canvasPrint' // 给canvas节点定义一个class名,这里我取名为canvas
+          pdfPrint.appendChild(canvas) // 插入到pdfList节点的最后
+        }
       }
     }
   }

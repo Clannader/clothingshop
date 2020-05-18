@@ -67,6 +67,7 @@
     },
     methods: {
       submit() {
+        // this.$htmlToPaper('pdfPrint')
         this.$emit('submit')
       },
       close() {

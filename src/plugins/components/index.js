@@ -9,7 +9,7 @@ import vueHtmlToPaper from 'vue-html-to-paper'
 
 Vue.use(vueQriously)
 Vue.use(vueHtmlToPaper, {
-  // name: '_blank',
+  name: '',
   specs: [
     'fullscreen=yes',
     'titlebar=yes',
