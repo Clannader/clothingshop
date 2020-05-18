@@ -38,6 +38,9 @@ Vue.component(Input.name, Input)
 // 注册全局自定义组件
 import './plugins/components'
 
+import vueQriously from 'vue-qriously'
+Vue.use(vueQriously)
+
 Vue.config.productionTip = false
 
 new Vue({

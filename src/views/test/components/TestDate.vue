@@ -40,6 +40,9 @@
             <v-btn rounded dark @click="getPDFValue()">
               获取PDF
             </v-btn>
+            <v-btn rounded dark @click="qrShow = true">
+              获取二维码
+            </v-btn>
           </div>
         </div>
       </v-container>
@@ -136,17 +139,24 @@
       @submit="pdfSubmit"
       @close="pdfClose"
     ></app-pdf-dialog>
+
+    <test-qr-code
+      :visible="qrShow"
+      @close="qrShow = false"
+    ></test-qr-code>
   </div>
 </template>
 
 <script>
   import api from '@/utils/request'
   import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
+  import TestQrCode from './TestQrCode'
 
   export default {
     name: 'TestDate',
     components: {
-      AppPdfDialog
+      AppPdfDialog,
+      TestQrCode
     },
     created() {
       this.currentDate = new Date().format()
@@ -165,7 +175,8 @@
         nodeShowProgress: false,
         pdfText: '',
         pdfContent: '',
-        show: false
+        show: false,
+        qrShow: false
       }
     },
     methods: {

@@ -28,5 +28,6 @@ export default {
   notHere: 'Get me out of here!',
   InvalidDate: 'Invalid date',
   confirm: 'Confirm',
-  colse: 'Close'
+  colse: 'Close',
+  print: 'Print'
 }

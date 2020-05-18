@@ -28,5 +28,6 @@ export default {
   notHere: '带你离开这里!',
   InvalidDate: '无效的日期',
   confirm: '确定',
-  colse: '关闭'
+  colse: '关闭',
+  print: '打印'
 }

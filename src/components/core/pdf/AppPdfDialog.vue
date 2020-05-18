@@ -13,7 +13,7 @@
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">
         <v-spacer></v-spacer>
-        <v-btn v-if="!onlyClose" depressed @click="submit()">{{$t('homePage.confirm')}}</v-btn>
+        <v-btn v-if="!onlyClose" depressed @click="submit()">{{$t('homePage.print')}}</v-btn>
         <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
       </v-card-actions>
     </v-card>
