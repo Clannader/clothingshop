@@ -150,6 +150,16 @@ const methods = {
 
   isEmpty(obj) {
     return obj == null || obj === '' || obj === 'undefined'
+  },
+
+  base64ToBlob(base64, type) {
+    const bstr = atob(base64)
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n)
+    }
+    return new Blob([u8arr], { type: type })
   }
 }
 

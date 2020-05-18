@@ -13,7 +13,8 @@
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">
         <v-spacer></v-spacer>
-        <v-btn v-if="!onlyClose" depressed @click="submit()">{{$t('homePage.print')}}</v-btn>
+        <v-btn depressed @click="download()">{{$t('homePage.download')}}</v-btn>
+        <v-btn depressed @click="submit()">{{$t('homePage.print')}}</v-btn>
         <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
       </v-card-actions>
     </v-card>
@@ -22,6 +23,7 @@
 
 <script>
   import AppPdf from './AppPdf'
+  import { saveAs } from 'file-saver'
   export default {
     name: 'AppPdfDialog',
     components: {
@@ -48,10 +50,10 @@
         default: false
       },
       // 是否需要确定按钮
-      onlyClose: {
-        type: Boolean,
-        default: false
-      },
+      // onlyClose: {
+      //   type: Boolean,
+      //   default: false
+      // },
       pdfContent: {
         type: String,
         default: ''
@@ -69,6 +71,9 @@
       },
       close() {
         this.$emit('close')
+      },
+      download() {
+        saveAs(this.publicMethods.base64ToBlob(this.pdfContent, 'application/pdf'), '8SE.pdf')
       }
     }
   }

@@ -29,5 +29,6 @@ export default {
   InvalidDate: '无效的日期',
   confirm: '确定',
   colse: '关闭',
-  print: '打印'
+  print: '打印',
+  download: '下载'
 }

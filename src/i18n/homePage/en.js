@@ -29,5 +29,6 @@ export default {
   InvalidDate: 'Invalid date',
   confirm: 'Confirm',
   colse: 'Close',
-  print: 'Print'
+  print: 'Print',
+  download: 'Download'
 }
