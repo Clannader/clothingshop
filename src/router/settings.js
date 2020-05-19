@@ -45,7 +45,7 @@ const otherSettingsRouter = {
         icon: 'iconfont icon-c-shop-add',
         right: '3002'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/test/components/TestSelectAll')
     },
     {
       path: 'user',

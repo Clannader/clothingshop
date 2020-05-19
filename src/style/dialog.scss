@@ -1,20 +1,44 @@
+
+.v-dialog {
+  overflow: visible;
+}
+
 .v-dialog > .v-card {
   > .v-card__title {
     &.dialog-title {
-      flex: none;
-      padding: 24px;
-      font-size: 22px;
-      color: $bg-blue;
-      letter-spacing: .69px;
-      line-height: 23px;
-      border-bottom: 1px solid #ededed;
+      //flex: none;
+      //padding: 24px;
+      //font-size: 22px;
+      //color: $bg-blue;
+      //letter-spacing: .69px;
+      //line-height: 23px;
+      //border-bottom: 1px solid #ededed;
+
+      margin: 0px;
+      padding: 0px 24px;
+      height: 21px;
+
+      .dialog-title-text {
+        margin-top: -21px;
+        padding: 10px 48px;
+        background-color: $bg-blue;
+        border-radius: 4px;
+        font-family: PingFangSC-Medium;
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: .62px;
+        line-height: 21px;
+        z-index: 9;
+        box-shadow: -2px -2px 10px 0 rgba(8,31,58,.2), 2px 2px 10px 0 rgba(14,55,102,.25);
+      }
     }
   }
 
   > .v-card__text {
     &.dialog-text {
       color: #333;
-      padding: 20px 24px 0 24px;
+      display: flex;
+      padding: 24px 24px 0px;
     }
   }
 

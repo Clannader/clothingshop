@@ -26,5 +26,9 @@ export default {
   notWhoops: 'Whoops',
   notPage: 'The page you were looking for does not exist',
   notHere: 'Get me out of here!',
-  InvalidDate: 'Invalid date'
+  InvalidDate: 'Invalid date',
+  confirm: 'Confirm',
+  colse: 'Close',
+  print: 'Print',
+  download: 'Download'
 }

@@ -37,6 +37,19 @@
             <v-btn rounded dark @click="getDateValue()">
               确定
             </v-btn>
+            <v-btn rounded dark @click="getPDFValue()">
+              获取PDF
+            </v-btn>
+            <v-btn rounded dark @click="initQRView">
+              获取二维码
+            </v-btn>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="card-search-btn">
+            <v-btn rounded dark @click="printPDF()">
+              打印PDF
+            </v-btn>
           </div>
         </div>
       </v-container>
@@ -98,14 +111,64 @@
         </div>
       </v-container>
     </v-card>
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <v-textarea
+            v-model="pdfText"
+            label="PDF内容"
+            hide-details
+            outlined
+            rows="3"
+            row-height="15"
+          ></v-textarea>
+        </div>
+      </v-container>
+    </v-card>
+
+    <v-card class="card-title">
+      <v-container fluid class="card-container">
+        <div class="form-group">
+          <video
+            controls
+            src="http://localhost:3000/video/video-1.mp4"
+            style="width: 100%;height: 300px"
+          ></video>
+        </div>
+      </v-container>
+    </v-card>
+
+    <app-pdf-dialog
+      :visible="show"
+      :pdf-content="pdfContent"
+      :title="'预览PDF'"
+      :width="1000"
+      @close="pdfClose"
+    ></app-pdf-dialog>
+
+    <test-qr-code
+      :visible="qrShow"
+      :init-code="initCode"
+      @close="qrShow = false"
+    ></test-qr-code>
+
+    <app-print ref="print"></app-print>
   </div>
 </template>
 
 <script>
   import api from '@/utils/request'
+  import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
+  import TestQrCode from './TestQrCode'
+  import AppPrint from '@/components/core/AppPrint'
 
   export default {
     name: 'TestDate',
+    components: {
+      AppPdfDialog,
+      TestQrCode,
+      AppPrint
+    },
     created() {
       this.currentDate = new Date().format()
       this.startDate = this.currentDate
@@ -120,7 +183,12 @@
         file: undefined,
         nodeFile: undefined,
         nodeProgress: 0,
-        nodeShowProgress: false
+        nodeShowProgress: false,
+        pdfText: '',
+        pdfContent: '',
+        show: false,
+        qrShow: false,
+        initCode: ''
       }
     },
     methods: {
@@ -206,6 +274,29 @@
         console.log('currentDate:' + this.currentDate)
         console.log('startDate:' + this.startDate)
         console.log('endDate:' + this.endDate)
+      },
+      getPDFValue() {
+        api.post('/api/file/test/pdf', {
+          num: this.days
+        }).then(res => {
+          this.pdfContent = res.pdf
+          this.show = true
+        }).catch(() => {})
+      },
+      pdfClose() {
+        this.show = false
+        this.pdfContent = undefined
+      },
+      printPDF() {
+        api.post('/api/file/test/pdf', {
+          num: this.days
+        }).then(res => {
+          this.$refs.print.print(res.pdf)
+        }).catch(() => {})
+      },
+      initQRView() {
+        this.qrShow = true
+        this.initCode = this.days + ''
       }
     },
     watch: {

@@ -25,3 +25,10 @@
 17.调整表格的宽度,不能超长√(继承了组件属性就解决了)
 
 18.目前最难的问题是组件的继承,插槽属性如何全继承过去,还是说需要重写√
+
+19.Nodejs 二维码插件库qr-image
+          验证码svg-captcha
+          PDF生成pdfkit
+          格式化JSON format-json(使用这个方法plain)
+          文件下载file-saver
+          矢量绘制node-canvas

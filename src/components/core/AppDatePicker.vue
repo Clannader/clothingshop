@@ -120,6 +120,7 @@
         }
         const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
         const datePicker = this.dateText.createMoment(format).format('YYYY-MM-DD')
+        // 暂时这样校验日期吧,JS校验日期确实有点难
         if (datePicker === 'Invalid date') {
           this.$toast.error(this.$t('homePage.InvalidDate'))
           this.datePicker = ''
