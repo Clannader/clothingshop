@@ -5,7 +5,9 @@
       v-resize="onResize"
       :style="{ 'height': pdfHeight + 'px'}"
     >
-      <div class="pdf-list"></div>
+      <div class="pdf-list">
+        <canvas ref="pdfCanvas"></canvas>
+      </div>
     </div>
 
     <v-row class="mr-24">
@@ -45,20 +47,7 @@
         pdfHeight: 300
       }
     },
-    // computed: {
-    //   pageCount() {
-    //     return Math.ceil(this.total / this.showPages)
-    //   }
-    // },
     watch: {
-      // pdfContent: {
-      //   handler(val) {
-      //     if (val) {
-      //       this.showPdf(val)
-      //     }
-      //   },
-      //   deep: true
-      // },
       pageIndex() {
         this.pageCanvas()
         this.$vuetify.goTo('.pdf-list', {
@@ -84,11 +73,11 @@
         }) // 返回一个pdf对象
         this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
         await this.pageCanvas()
-        // this.initPrint()
       },
       async pageCanvas() {
-        const pdfList = document.querySelector('.pdf-list')
-        const canvas = document.createElement('canvas')
+        // const pdfList = document.querySelector('.pdf-list')
+        // const canvas = document.createElement('canvas')
+        const canvas = this.$refs.pdfCanvas
         const page = await this.pdfObject.getPage(this.pageIndex) // 调用getPage方法传入当前循环的页数,返回一个page对象
         const scale = 1.5 // 缩放倍数，1表示原始大小
         const viewport = page.getViewport(scale)
@@ -101,12 +90,12 @@
         }
         await page.render(renderContext)
 
-        canvas.className = 'canvas' // 给canvas节点定义一个class名,这里我取名为canvas
-        if (pdfList.hasChildNodes()) {
-          // 判断pdfList下是否存在canvas标签,如果存在,先删除后添加
-          pdfList.removeChild(pdfList.querySelector('canvas'))
-        }
-        pdfList.appendChild(canvas) // 插入到pdfList节点的最后
+        // canvas.className = 'canvas' // 给canvas节点定义一个class名,这里我取名为canvas
+        // if (pdfList.hasChildNodes()) {
+        //   // 判断pdfList下是否存在canvas标签,如果存在,先删除后添加
+        //   pdfList.removeChild(pdfList.querySelector('canvas'))
+        // }
+        // pdfList.appendChild(canvas) // 插入到pdfList节点的最后
       },
       onResize() {
         this.pdfHeight = window.innerHeight - 230
