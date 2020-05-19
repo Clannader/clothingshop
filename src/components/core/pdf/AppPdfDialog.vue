@@ -14,7 +14,6 @@
       <v-card-actions class="dialog-footer app-btn">
         <v-spacer></v-spacer>
         <v-btn depressed @click="download()">{{$t('homePage.download')}}</v-btn>
-        <v-btn depressed @click="submit()">{{$t('homePage.print')}}</v-btn>
         <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
       </v-card-actions>
     </v-card>
@@ -24,6 +23,7 @@
 <script>
   import AppPdf from './AppPdf'
   import { saveAs } from 'file-saver'
+
   export default {
     name: 'AppPdfDialog',
     components: {
@@ -60,9 +60,6 @@
       }
     },
     methods: {
-      submit() {
-        this.$emit('submit')
-      },
       close() {
         this.$emit('close')
       },

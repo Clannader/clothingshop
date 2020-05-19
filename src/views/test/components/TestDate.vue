@@ -45,6 +45,13 @@
             </v-btn>
           </div>
         </div>
+        <div class="form-group">
+          <div class="card-search-btn">
+            <v-btn rounded dark @click="printPDF()">
+              打印PDF
+            </v-btn>
+          </div>
+        </div>
       </v-container>
     </v-card>
     <v-card class="card-title">
@@ -144,6 +151,8 @@
       :visible="qrShow"
       @close="qrShow = false"
     ></test-qr-code>
+
+    <app-print v-if="isPrint" :pdf-content="pdfContent"></app-print>
   </div>
 </template>
 
@@ -151,12 +160,14 @@
   import api from '@/utils/request'
   import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
   import TestQrCode from './TestQrCode'
+  import AppPrint from '@/components/core/AppPrint'
 
   export default {
     name: 'TestDate',
     components: {
       AppPdfDialog,
-      TestQrCode
+      TestQrCode,
+      AppPrint
     },
     created() {
       this.currentDate = new Date().format()
@@ -176,7 +187,8 @@
         pdfText: '',
         pdfContent: '',
         show: false,
-        qrShow: false
+        qrShow: false,
+        isPrint: false
       }
     },
     methods: {
@@ -275,6 +287,12 @@
       },
       pdfClose() {
         this.show = false
+      },
+      printPDF() {
+        api.post('/api/file/test/pdf', {}).then(res => {
+          this.pdfContent = res.pdf
+          this.isPrint = true
+        }).catch(() => {})
       }
     },
     watch: {
