@@ -143,7 +143,6 @@
       :pdf-content="pdfContent"
       :title="'预览PDF'"
       :width="1000"
-      @submit="pdfSubmit"
       @close="pdfClose"
     ></app-pdf-dialog>
 
@@ -281,9 +280,6 @@
           this.pdfContent = res.pdf
           this.show = true
         }).catch(() => {})
-      },
-      pdfSubmit() {
-        this.$toast.success('成功')
       },
       pdfClose() {
         this.show = false
