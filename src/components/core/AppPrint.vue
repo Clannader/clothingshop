@@ -6,22 +6,6 @@
 <script>
   export default {
     name: 'AppPrint',
-    props: {
-      pdfContent: {
-        type: String,
-        default: ''
-      }
-    },
-    watch: {
-      pdfContent: {
-        handler(val) {
-          this.print(val)
-        }
-      }
-    },
-    mounted() {
-      // this.print(this.pdfContent)
-    },
     methods: {
       print(base64) {
         const printIframe = document.querySelector('#printIframe')

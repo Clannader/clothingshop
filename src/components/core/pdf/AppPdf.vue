@@ -49,7 +49,9 @@
     },
     watch: {
       pageIndex() {
-        this.pageCanvas()
+        // 当每次分页的时候,加载对应页码的pdf
+        this.pageCanvas(this.pageIndex)
+        // 由于有bug,所以就只能通过这个方法回到顶部
         this.$vuetify.goTo('.pdf-list', {
           duration: 500,
           easing: 'linear',
@@ -59,40 +61,45 @@
       pdfContent: {
         handler(val) {
           if (val) {
-            this.pageIndex = 1
+            // 当检测内容有变化的时候,需要跳回第一页的操作
+            // 重新加载pdf
             this.showPdf(val)
+            // 返回顶部
+            this.$vuetify.goTo('.pdf-list', {
+              duration: 500,
+              easing: 'linear',
+              container: '.pdf-list'
+            })
+            // this.pageIndex = 1
           }
         }
       }
     },
     mounted() {
+      // 初始化时加载pdf
       this.showPdf(this.pdfContent)
     },
     methods: {
       async showPdf(base64) {
         // const pdfList = document.querySelector('.pdfList') // 通过querySelector选择DOM节点,使用document.getElementById()也一样
         // const CMAP_URL = 'https://unpkg.com/pdfjs-dist@2.3.200/cmaps/'
-        this.pdfObject = undefined
         const decodedBase64 = atob(base64) // 使用浏览器自带的方法解码
         PDFJS.GlobalWorkerOptions.workerSrc = PDFJS
-        console.log('111')
         // 返回一个pdf对象
-        await PDFJS.getDocument({
+        // TODO 这里有个bug,当切换内容的时候,getPage报错,并且第一页会颠倒显示
+        this.pdfObject = await PDFJS.getDocument({
           data: decodedBase64,
           // cMapUrl: CMAP_URL,
           cMapPacked: true
-        }).then(res => {
-          this.pdfObject = res
-          this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
-          this.pageCanvas()
         })
+        this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
+        this.pageCanvas(1)
       },
-      async pageCanvas() {
-        console.log(this.pdfObject)
+      async pageCanvas(pageIndex) {
         // const pdfList = document.querySelector('.pdf-list')
         // const canvas = document.createElement('canvas')
         const canvas = this.$refs.pdfCanvas
-        const page = await this.pdfObject.getPage(this.pageIndex) // 调用getPage方法传入当前循环的页数,返回一个page对象
+        const page = await this.pdfObject.getPage(pageIndex) // 调用getPage方法传入当前循环的页数,返回一个page对象
         const scale = 1.5 // 缩放倍数，1表示原始大小
         const viewport = page.getViewport(scale)
         const context = canvas.getContext('2d') // 创建绘制canvas的对象

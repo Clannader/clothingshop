@@ -152,7 +152,7 @@
       @close="qrShow = false"
     ></test-qr-code>
 
-    <app-print v-if="isPrint" :pdf-content="pdfContent"></app-print>
+    <app-print ref="print"></app-print>
   </div>
 </template>
 
@@ -188,7 +188,6 @@
         pdfContent: '',
         show: false,
         qrShow: false,
-        isPrint: false,
         initCode: ''
       }
     },
@@ -292,8 +291,7 @@
         api.post('/api/file/test/pdf', {
           num: this.days
         }).then(res => {
-          this.pdfContent = res.pdf
-          this.isPrint = true
+          this.$refs.print.print(res.pdf)
         }).catch(() => {})
       },
       initQRView() {
