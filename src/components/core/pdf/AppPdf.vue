@@ -55,6 +55,14 @@
           easing: 'linear',
           container: '.pdf-list'
         })
+      },
+      pdfContent: {
+        handler(val) {
+          if (val) {
+            this.pageIndex = 1
+            this.showPdf(val)
+          }
+        }
       }
     },
     mounted() {
@@ -64,17 +72,23 @@
       async showPdf(base64) {
         // const pdfList = document.querySelector('.pdfList') // 通过querySelector选择DOM节点,使用document.getElementById()也一样
         // const CMAP_URL = 'https://unpkg.com/pdfjs-dist@2.3.200/cmaps/'
+        this.pdfObject = undefined
         const decodedBase64 = atob(base64) // 使用浏览器自带的方法解码
         PDFJS.GlobalWorkerOptions.workerSrc = PDFJS
-        this.pdfObject = await PDFJS.getDocument({
+        console.log('111')
+        // 返回一个pdf对象
+        await PDFJS.getDocument({
           data: decodedBase64,
           // cMapUrl: CMAP_URL,
           cMapPacked: true
-        }) // 返回一个pdf对象
-        this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
-        await this.pageCanvas()
+        }).then(res => {
+          this.pdfObject = res
+          this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
+          this.pageCanvas()
+        })
       },
       async pageCanvas() {
+        console.log(this.pdfObject)
         // const pdfList = document.querySelector('.pdf-list')
         // const canvas = document.createElement('canvas')
         const canvas = this.$refs.pdfCanvas
@@ -130,7 +144,7 @@
     padding-right: 0px;
   }
 
-  .pagination ul>li:last-child .v-pagination__navigation{
+  .pagination ul > li:last-child .v-pagination__navigation {
     margin-right: 0px;
   }
 

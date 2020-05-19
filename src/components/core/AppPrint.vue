@@ -1,5 +1,5 @@
 <template>
-  <iframe id="printIframe">
+  <iframe id="printIframe" style="display:none">
   </iframe>
 </template>
 
@@ -15,11 +15,12 @@
     watch: {
       pdfContent: {
         handler(val) {
-          if (val) {
-            this.print(val)
-          }
+          this.print(val)
         }
       }
+    },
+    mounted() {
+      // this.print(this.pdfContent)
     },
     methods: {
       print(base64) {

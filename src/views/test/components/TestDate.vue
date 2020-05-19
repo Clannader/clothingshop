@@ -40,7 +40,7 @@
             <v-btn rounded dark @click="getPDFValue()">
               获取PDF
             </v-btn>
-            <v-btn rounded dark @click="qrShow = true">
+            <v-btn rounded dark @click="initQRView">
               获取二维码
             </v-btn>
           </div>
@@ -148,6 +148,7 @@
 
     <test-qr-code
       :visible="qrShow"
+      :init-code="initCode"
       @close="qrShow = false"
     ></test-qr-code>
 
@@ -187,7 +188,8 @@
         pdfContent: '',
         show: false,
         qrShow: false,
-        isPrint: false
+        isPrint: false,
+        initCode: ''
       }
     },
     methods: {
@@ -275,20 +277,28 @@
         console.log('endDate:' + this.endDate)
       },
       getPDFValue() {
-        api.post('/api/file/test/pdf', {}).then(res => {
-          // this.pdfText = res.pdf
+        api.post('/api/file/test/pdf', {
+          num: this.days
+        }).then(res => {
           this.pdfContent = res.pdf
           this.show = true
         }).catch(() => {})
       },
       pdfClose() {
         this.show = false
+        this.pdfContent = undefined
       },
       printPDF() {
-        api.post('/api/file/test/pdf', {}).then(res => {
+        api.post('/api/file/test/pdf', {
+          num: this.days
+        }).then(res => {
           this.pdfContent = res.pdf
           this.isPrint = true
         }).catch(() => {})
+      },
+      initQRView() {
+        this.qrShow = true
+        this.initCode = this.days + ''
       }
     },
     watch: {

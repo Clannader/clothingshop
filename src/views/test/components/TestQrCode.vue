@@ -10,7 +10,7 @@
       </v-card-title>
       <v-card-text style="padding: 24px 24px 0px 24px">
         <div class="form-group">
-          <qriously :value="initQCode" :size="200"/>
+          <qriously :value="initCode" :size="200"/>
         </div>
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">
@@ -29,11 +29,17 @@
       visible: {
         type: Boolean,
         default: false
+      },
+      initCode: {
+        type: String,
+        default: ''
       }
     },
-    data() {
-      return {
-        initQCode: '1234567890'
+    watch: {
+      initCode(newVal) {
+        if (newVal) {
+          console.log(newVal)
+        }
       }
     },
     methods: {
