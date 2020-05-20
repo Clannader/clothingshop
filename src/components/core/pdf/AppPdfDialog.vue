@@ -13,21 +13,25 @@
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">
         <v-spacer></v-spacer>
+        <v-btn depressed @click="print()">{{$t('homePage.print')}}</v-btn>
         <v-btn depressed @click="download()">{{$t('homePage.download')}}</v-btn>
         <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
       </v-card-actions>
     </v-card>
+    <app-print ref="print"></app-print>
   </v-dialog>
 </template>
 
 <script>
   import AppPdf from './AppPdf'
+  import AppPrint from '../AppPrint'
   import { saveAs } from 'file-saver'
 
   export default {
     name: 'AppPdfDialog',
     components: {
-      AppPdf
+      AppPdf,
+      AppPrint
     },
     props: {
       // 标题
@@ -65,6 +69,9 @@
       },
       download() {
         saveAs(this.publicMethods.base64ToBlob(this.pdfContent, 'application/pdf'), '8SE.pdf')
+      },
+      print() {
+        this.$refs.print.print(this.pdfContent)
       }
     }
   }
