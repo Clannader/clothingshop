@@ -43,10 +43,6 @@
             <v-btn rounded dark @click="initQRView">
               获取二维码
             </v-btn>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="card-search-btn">
             <v-btn rounded dark @click="printPDF()">
               打印PDF
             </v-btn>
