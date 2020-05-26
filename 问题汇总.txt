@@ -32,3 +32,5 @@
           格式化JSON format-json(使用这个方法plain)
           文件下载file-saver
           矢量绘制node-canvas
+
+20.优化删除使用ref属性的页面

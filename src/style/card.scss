@@ -7,18 +7,20 @@
   padding: 8px 24px;
 }
 
-.card-search-btn .v-btn {
-  min-width: 0px;
-  margin: 0px;
-  padding: 8px 16px;
-  box-shadow: none;
-  color: #fff;
-  background-color: $bg-blue !important;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  line-height: 16px !important;
-  font-size: 16px;
-  margin-left: 8px;
+.card-search-btn {
+  .v-btn {
+    min-width: 0px;
+    margin: 0px;
+    padding: 8px 16px;
+    box-shadow: none;
+    color: #fff;
+    background-color: $bg-blue !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 16px !important;
+    font-size: 16px;
+    margin-left: 8px;
+  }
 }
 
 .card-body {

@@ -65,17 +65,30 @@ html {
 
 .input-require .v-label {
   padding-left: 12px;
+
+  &::before{
+    content: '';
+    margin-right: 8px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #DC0600;
+    position: absolute;
+    top: calc(50% - 3px);
+    left: 0;
+  }
 }
 
-.input-require .v-label::before {
-  content: '';
-  margin-right: 8px;
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #DC0600;
-  position: absolute;
-  top: calc(50% - 3px);
-  left: 0;
+// 修改多选下拉框的选值不溢出的问题
+.visible-selected /deep/ {
+  .v-select__selection--comma{
+    overflow: visible;
+  }
+
+  .v-select__selections{
+    overflow: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
 }

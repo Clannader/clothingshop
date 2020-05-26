@@ -8,6 +8,7 @@
               v-model="selectedFruits"
               :items="fruits"
               label="Favorite Fruits"
+              class="visible-selected"
               multiple
             >
               <template v-slot:prepend-item>
@@ -121,7 +122,7 @@
         return this.selectedFruits.length > 0 && !this.likesAllFruit
       },
       icon() {
-        if (this.likesAllFruit) return 'mdi-close-box'
+        if (this.likesAllFruit) return 'mdi-checkbox-marked'
         if (this.likesSomeFruit) return 'mdi-minus-box'
         return 'mdi-checkbox-blank-outline'
       }
@@ -141,6 +142,5 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>
