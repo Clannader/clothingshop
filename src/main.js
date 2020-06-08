@@ -22,6 +22,7 @@ import App from './App'
 import store from './store'
 // 路由
 import router from './router'
+import './mock'
 
 import { Table, Upload, Icon, Input } from 'ant-design-vue'
 
