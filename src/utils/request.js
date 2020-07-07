@@ -32,7 +32,9 @@ service.interceptors.request.use(
     //   cancel = c
     // })
     // 现在就是不知道如何让请求抛异常,如果抛异常是不是就说明请求就会中断?
-    config.headers['credential'] = sessionStorage.getItem('credential') || ''
+    if (!config.headers['credential']) {
+      config.headers['credential'] = sessionStorage.getItem('credential') || ''
+    }
     config.headers['language'] = store.getters.language
     return config
   },
@@ -45,7 +47,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const code = response.data.code
-    if (code === staticVal.Code.Success) {
+    if (code === staticVal.Code.Success || code === 1000) {
       return response.data
     } else {
       if (code === staticVal.Code.Invalid) {
