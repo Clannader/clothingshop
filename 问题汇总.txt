@@ -32,3 +32,14 @@
           格式化JSON format-json(使用这个方法plain)
           文件下载file-saver
           矢量绘制node-canvas
+
+20.优化删除使用ref属性的页面
+
+2020-07-07
+21.pdf的cmaps如何打包,如何发布到本地引用
+22.打包如何设置复制静态资源,参考vue2.x版本的配置
+
+移除下列无用的module
+"roboto-npm-webfont": "^1.0.1",
+"vue-html-to-paper": "^1.3.1",
+"compression-webpack-plugin": "^3.1.0",

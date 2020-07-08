@@ -157,6 +157,7 @@
   import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
   import TestQrCode from './TestQrCode'
   import AppPrint from '@/components/core/AppPrint'
+  import CryptoJS from 'crypto.js'
 
   export default {
     name: 'TestDate',
@@ -271,13 +272,105 @@
         console.log('startDate:' + this.startDate)
         console.log('endDate:' + this.endDate)
       },
-      getPDFValue() {
-        api.post('/api/file/test/pdf', {
-          num: this.days
-        }).then(res => {
-          this.pdfContent = res.pdf
+      async getPDFValue() {
+        // api.post('/api/file/test/pdf', {
+        //   num: this.days
+        // }).then(res => {
+        //   this.pdfContent = res.pdf
+        //   this.show = true
+        // }).catch(() => {})
+        const resp = await this.getReport()
+        if (resp) {
+          this.pdfContent = resp.pdf
           this.show = true
-        }).catch(() => {})
+        }
+      },
+      async loginPMS() {
+        const resp = await api.post(
+          '/cmbg-api/user/login',
+          {
+            password: CryptoJS.sha256('WYNwyn123456').toUpperCase(),
+            return_permisson: false,
+            station: 'DEV-OLIVER',
+            username: 'oliver'
+          }, {
+            headers: {
+              hotelcode: 'staging22'
+            }
+          })
+          .then(res => {
+            // if (res.code === 1000) {
+            //   console.log(res.credential)
+            //   localStorage.setItem('cmbgAPI', res.credential)
+            //   return res
+            // } else {
+            //   return null
+            // }
+            return res
+          }).catch(err => {
+            // console.error(err)
+            // return null
+            return err
+          })
+
+        if (resp.code === 1000) {
+          console.log(resp.credential)
+          localStorage.setItem('cmbgAPI', resp.credential)
+          return resp
+        } else {
+          return null
+        }
+      },
+      async getReport() {
+        const resp = await api.post(
+          '/cmbg-api/na/statistic/report/print_with_condition',
+          {
+            id: 97067,
+            parameter_list: []
+          }, {
+            headers: {
+              credential: localStorage.getItem('cmbgAPI') || '',
+              hotelcode: 'staging22'
+            }
+          })
+          .then(res => {
+            // if (res.code === 1100) {
+            //   console.log('进行登录')
+            //   this.loginPMS().then(() => {
+            //     console.log('登录成功')
+            //     this.getReport()
+            //   })
+            // } else if (res.code === 1000) {
+            //   return res
+            // } else {
+            //   return null
+            // }
+            return res
+          }).catch(err => {
+            // if (res.code === 1100) {
+            //   console.log('进行登录')
+            //   this.loginPMS().then(() => {
+            //     console.log('登录成功')
+            //     this.getReport()
+            //   })
+            // }
+            return err
+        })
+
+        if (resp.code === 1100) {
+          console.log('进行登录')
+          const loginResp = await this.loginPMS().then(res => res).catch(() => null)
+          if (loginResp) {
+            console.log('登录成功')
+            return this.getReport()
+          } else {
+            return null
+          }
+        } else if (resp.code === 1000) {
+          return resp
+        } else {
+          return null
+        }
       },
       pdfClose() {
         this.show = false

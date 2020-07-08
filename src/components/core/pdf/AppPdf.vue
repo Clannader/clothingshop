@@ -83,15 +83,22 @@
     methods: {
       async showPdf(base64, isChange) {
         // const pdfList = document.querySelector('.pdfList') // 通过querySelector选择DOM节点,使用document.getElementById()也一样
-        // const CMAP_URL = 'https://unpkg.com/pdfjs-dist@2.3.200/cmaps/'
+        const CMAP_URL = process.env.VUE_APP_CMAPS_PATH + '/static/cmaps/'
         const decodedBase64 = atob(base64) // 使用浏览器自带的方法解码
         PDFJS.GlobalWorkerOptions.workerSrc = PDFJS
         // 返回一个pdf对象
         this.pdfObject = await PDFJS.getDocument({
           data: decodedBase64,
-          // cMapUrl: CMAP_URL,
+          cMapUrl: CMAP_URL,
           cMapPacked: true
+        }).promise.then(res => res).catch(err => {
+          this.$toast.error(err)
+          console.log(err)
+          return null
         })
+        if (this.pdfObject === null) {
+          return
+        }
         this.total = this.pdfObject.numPages // 声明一个pages变量等于当前pdf文件的页数
         // 这里避免pdf内容改变时,切换至第一页的时候,修改页数不能走这里触发页数渲染
         if (!isChange) {
@@ -112,7 +119,7 @@
           canvasContext: context,
           viewport: viewport
         }
-        await page.render(renderContext)
+        await page.render(renderContext).promise
 
         // canvas.className = 'canvas' // 给canvas节点定义一个class名,这里我取名为canvas
         // if (pdfList.hasChildNodes()) {

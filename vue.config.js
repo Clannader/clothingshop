@@ -1,6 +1,7 @@
 const path = require('path')
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const TerserPlugin = require('terser-webpack-plugin')
 
@@ -37,6 +38,13 @@ module.exports = {
         pathRewrite: {
           '^/upload': '/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
           //然后把开发地址替换成接口要的地址
+        }
+      },
+      '^/cmbg-api/*': {
+        target: 'https://cambridge-dev.shijicloud.com/CambridgeAPI',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/cmbg-api': '/api'
         }
       }
     }
@@ -138,6 +146,13 @@ module.exports = {
     // )
     //
     // plugins.push(compress)
+
+    const copyWebpackPlugin = new CopyWebpackPlugin([{
+      from: resolve('static'),
+      to: 'static',
+      ignore: ['.*']
+    }])
+    plugins.push(copyWebpackPlugin)
 
     config.plugins = [
       ...config.plugins,
