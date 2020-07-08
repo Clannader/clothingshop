@@ -1,6 +1,7 @@
 const path = require('path')
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const TerserPlugin = require('terser-webpack-plugin')
 
@@ -145,6 +146,13 @@ module.exports = {
     // )
     //
     // plugins.push(compress)
+
+    const copyWebpackPlugin = new CopyWebpackPlugin([{
+      from: resolve('static'),
+      to: 'static',
+      ignore: ['.*']
+    }])
+    plugins.push(copyWebpackPlugin)
 
     config.plugins = [
       ...config.plugins,

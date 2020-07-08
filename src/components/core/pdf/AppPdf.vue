@@ -83,7 +83,7 @@
     methods: {
       async showPdf(base64, isChange) {
         // const pdfList = document.querySelector('.pdfList') // 通过querySelector选择DOM节点,使用document.getElementById()也一样
-        const CMAP_URL = 'https://unpkg.com/pdfjs-dist@2.3.200/cmaps/'
+        const CMAP_URL = process.env.VUE_APP_CMAPS_PATH + '/static/cmaps/'
         const decodedBase64 = atob(base64) // 使用浏览器自带的方法解码
         PDFJS.GlobalWorkerOptions.workerSrc = PDFJS
         // 返回一个pdf对象
