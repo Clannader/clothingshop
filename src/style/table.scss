@@ -62,10 +62,28 @@
 }
 
 // 表格操作列样式
-.option-menu-btn {
-  &.v-btn--icon {
-    width: 24px;
-    height: 24px;
+.option-menu-list {
+  border-radius: 0px;
+  padding: 0px;
+
+  .v-list-item{
+    padding: 0px 24px 0px 16px;
+    &:hover{
+      background-color: #d7e5f6;
+    }
+  }
+
+  .v-list-item__title{
+    margin-left: 8px;
+    font-size: 14px;
+    color: $bg-blue;
+    letter-spacing: 0
+  }
+
+  i {
+    font-size: 18px;
+    margin-right: 8px;
+    color: $bg-blue;
   }
 }
 

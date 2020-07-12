@@ -66,7 +66,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <v-list>
+            <v-list class="option-menu-list">
               <!-- 编辑按钮-->
               <v-list-item @click="openModify(record)">
                 <i class="material-icons create"></i>
