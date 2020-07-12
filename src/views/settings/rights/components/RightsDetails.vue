@@ -16,7 +16,7 @@
     data() {
       return {
         title: '',
-        isNew: false,
+        isNew: false
       }
     },
     props: {
