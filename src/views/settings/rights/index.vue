@@ -92,11 +92,19 @@
       <v-btn rounded @click="openCreate()">{{$t('homePage.create')}}</v-btn>
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
+
+    <component
+      :is="children"
+      :recordId="recordId"
+      @closeDialog="closeDialog"
+    ></component>
   </div>
 </template>
 
 <script>
   import { getRightsList } from './api.js'
+  import RightsDetails from './components/RightsDetails'
+  import RightsDeleteDialog from './components/RightsDeleteDialog'
 
   export default {
     name: 'SettingsRights',
@@ -138,7 +146,8 @@
       },
       openModify(record) {
         // 编辑权限组
-        this.$toast.success(JSON.stringify(record))
+        this.children = RightsDetails
+        this.recordId = record._id
       },
       initDoSearh() {
         this.pageIndex = 1
@@ -169,13 +178,18 @@
         // this.tableColumns[0].isSelect = !this.tableColumns[0].isSelect
       },
       openDelete(record) {
-        console.log(record)
+        this.children = RightsDeleteDialog
+        this.recordId = record._id
       },
       goBack() {
         this.$router.back(-1)
       },
       openCreate() {
-
+        this.children = RightsDetails
+        this.recordId = ''
+      },
+      closeDialog() {
+        this.children = ''
       }
     },
     data() {
@@ -184,6 +198,8 @@
         loading: false,
         groupName: undefined,
         tableTotal: 0,
+        children: '',
+        recordId: undefined,
         isSelect: {} // 点击选中时,获取当前记录的json
       }
     },
