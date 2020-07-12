@@ -45,7 +45,7 @@ const otherSettingsRouter = {
         icon: 'iconfont icon-c-shop-add',
         right: '3002'
       },
-      component: () => import('@/views/test/components/TestSelectAll')
+      component: () => import('@/views/blank')
     },
     {
       path: 'user',
@@ -55,7 +55,7 @@ const otherSettingsRouter = {
         icon: 'iconfont icon-c-user-setup',
         right: '3003'
       },
-      component: () => import('@/views/test/components/TestDate')
+      component: () => import('@/views/blank')
     },
     {
       path: 'right',

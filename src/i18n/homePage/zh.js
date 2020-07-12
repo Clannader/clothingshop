@@ -30,5 +30,6 @@ export default {
   confirm: '确定',
   colse: '关闭',
   print: '打印',
-  download: '下载'
+  download: '下载',
+  delete: '删除'
 }

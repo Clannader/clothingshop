@@ -69,9 +69,17 @@
             <v-list>
               <!-- 编辑按钮-->
               <v-list-item @click="openModify(record)">
-                <i class="iconfont"></i>
+                <i class="material-icons create"></i>
                 <v-list-item-title>
                   {{$t('homePage.modify')}}
+                </v-list-item-title>
+              </v-list-item>
+
+              <!-- 删除按钮-->
+              <v-list-item @click="openDelete(record)">
+                <i class="material-icons highlight_off"></i>
+                <v-list-item-title>
+                  {{$t('homePage.delete')}}
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -79,6 +87,11 @@
         </template>
       </app-table>
     </v-card>
+
+    <div class="text-xs-right bottomBtn roundBtnContainer">
+      <v-btn round @click="gotoAddBooking()">{{$t('updateRes.New')}}</v-btn>
+      <v-btn round @click="goBack()">{{$t('updateRes.ReturnUp')}}</v-btn>
+    </div>
   </div>
 </template>
 
@@ -117,6 +130,10 @@
           this.tableTotal = 0
         }).finally(() => {
           this.loading = false
+          // 循环遍历看看搜索回来的数据是否还包含之前选中的数据,人如果不包含,则清空
+          if (!this.tableData.find(v => this.isSelect.groupName === v.groupName)) {
+            this.isSelect = {}
+          }
         })
       },
       openModify(record) {
@@ -129,7 +146,7 @@
       },
       // 选中行Class
       rowClass(record/*, index*/) {
-        if (record.groupName === this.isSelect) {
+        if (record.groupName === this.isSelect.groupName) {
           return 'rowSelected'
         }
       },
@@ -148,8 +165,11 @@
         }
       },
       selectedRow(record) {
-        this.isSelect = record.groupName
-        this.tableColumns[0].isSelect = !this.tableColumns[0].isSelect
+        this.isSelect = record
+        // this.tableColumns[0].isSelect = !this.tableColumns[0].isSelect
+      },
+      openDelete(record) {
+        console.log(record)
       }
     },
     data() {
@@ -158,7 +178,7 @@
         loading: false,
         groupName: undefined,
         tableTotal: 0,
-        isSelect: ''
+        isSelect: {} // 点击选中时,获取当前记录的json
       }
     },
     computed: {
