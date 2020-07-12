@@ -55,8 +55,8 @@
             <template v-slot:activator="{ on: menu }">
               <v-btn
                 v-on="menu"
-                class="option-menu-btn"
                 icon
+                small
                 @click="selectedRow(record)"
               >
                 <v-icon
@@ -88,9 +88,9 @@
       </app-table>
     </v-card>
 
-    <div class="text-xs-right bottomBtn roundBtnContainer">
-      <v-btn round @click="gotoAddBooking()">{{$t('updateRes.New')}}</v-btn>
-      <v-btn round @click="goBack()">{{$t('updateRes.ReturnUp')}}</v-btn>
+    <div class="card-bottom card-round-btn">
+      <v-btn rounded @click="openCreate()">{{$t('homePage.create')}}</v-btn>
+      <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
   </div>
 </template>
@@ -170,6 +170,12 @@
       },
       openDelete(record) {
         console.log(record)
+      },
+      goBack() {
+        this.$router.back(-1)
+      },
+      openCreate() {
+
       }
     },
     data() {

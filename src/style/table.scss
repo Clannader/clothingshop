@@ -2,8 +2,14 @@
   background-color: #fff;
 }
 
-.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-  padding: 10px 12px !important;
+.ant-table-thead > tr > th{
+  padding: 13px 12px !important;
+  color: #757575;
+}
+.ant-table-tbody > tr > td {
+  padding: 5px 12px !important;
+  height: 48px;
+  color: #333;
 }
 
 .ant-table-tbody > tr > td {

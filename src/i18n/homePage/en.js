@@ -31,5 +31,6 @@ export default {
   colse: 'Close',
   print: 'Print',
   download: 'Download',
-  delete: 'Delete'
+  delete: 'Delete',
+  goback: 'GoBack'
 }

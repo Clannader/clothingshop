@@ -31,5 +31,6 @@ export default {
   colse: '关闭',
   print: '打印',
   download: '下载',
-  delete: '删除'
+  delete: '删除',
+  goback: '返回'
 }

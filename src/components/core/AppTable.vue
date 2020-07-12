@@ -19,7 +19,9 @@
 
     <v-row class="mr-24">
       <v-col class="flex-center">
-        <span class="amount">{{$t('homePage.tableTotal')}}: {{total}}</span>
+        <span class="amount">{{$t('homePage.tableTotal')}}:
+          <span class="table-total">{{total}}</span>
+        </span>
       </v-col>
       <v-row class="mr-24">
         <v-col class="flex-center flexEnd">
@@ -108,7 +110,20 @@
   .amount {
     font-size: 12px;
     line-height: 12px;
-    color: #555;
+    color: #757575;
+
+    .table-total{
+      display: inline-block;
+      text-align: center;
+      margin-left: 4px;
+      padding: 0 8px;
+      border-radius: 2px;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: .34px;
+      line-height: 12px;
+      color: #333;
+    }
   }
 
   .flexEnd {
