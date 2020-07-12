@@ -30,5 +30,7 @@ export default {
   confirm: 'Confirm',
   colse: 'Close',
   print: 'Print',
-  download: 'Download'
+  download: 'Download',
+  delete: 'Delete',
+  goback: 'GoBack'
 }

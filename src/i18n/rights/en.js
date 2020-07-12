@@ -7,6 +7,7 @@ export default {
   searchName: 'Rights group name',
   groupName: 'groupName',
   groupDesc: 'groupDesc',
-  rightsCodes: 'rightsCodes'
+  rightsCodes: 'rightsCodes',
+  createGroup: 'Create rights group'
 }
 

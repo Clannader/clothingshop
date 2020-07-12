@@ -7,5 +7,6 @@ export default {
   searchName: '权限组名',
   groupName: '组名',
   groupDesc: '描述',
-  rightsCodes: '权限代码'
+  rightsCodes: '权限代码',
+  createGroup: '新建权限组'
 }

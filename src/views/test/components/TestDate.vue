@@ -279,11 +279,15 @@
         //   this.pdfContent = res.pdf
         //   this.show = true
         // }).catch(() => {})
-        const resp = await this.getReport()
-        if (resp) {
-          this.pdfContent = resp.pdf
-          this.show = true
-        }
+        // const resp = await this.getReport()
+        // if (resp) {
+        //   this.pdfContent = resp.pdf
+        //   this.show = true
+        // }
+        api.post('/api/file/pdf/test', {}).then(res => {
+            this.pdfContent = res.pdf
+            this.show = true
+        }).catch(() => {})
       },
       async loginPMS() {
         const resp = await api.post(
@@ -377,9 +381,7 @@
         this.pdfContent = undefined
       },
       printPDF() {
-        api.post('/api/file/test/pdf', {
-          num: this.days
-        }).then(res => {
+        api.post('/api/file/pdf/test', {}).then(res => {
           this.$refs.print.print(res.pdf)
         }).catch(() => {})
       },

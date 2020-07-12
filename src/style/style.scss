@@ -92,3 +92,9 @@ html {
     justify-content: flex-end;
   }
 }
+
+.v-list-item{
+  &:hover{
+    background-color: #d7e5f6;
+  }
+}
