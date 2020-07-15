@@ -40,6 +40,13 @@ module.exports = {
           //然后把开发地址替换成接口要的地址
         }
       },
+      '^/download/*': {
+        target: 'https://localhost:3001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/download': '/'
+        }
+      },
       '^/cmbg-api/*': {
         target: 'https://cambridge-dev.shijicloud.com/CambridgeAPI',
         changeOrigin: true,
