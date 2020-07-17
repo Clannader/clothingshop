@@ -192,11 +192,4 @@ module.exports = {
     //因为js会动态的加载出css，所以js文件包会比较大，那么需要提取css代码到文件. 这里我们只需要将css配置一下
     extract: true
   }
-  // pluginOptions: {
-  //   'sass-resources-loader': {
-  //     preProcessor: 'scss',
-  //     // 需要通过less-loader自动引入的资源，集合类型
-  //     patterns: [resolve('src/style/color.scss')]
-  //   }
-  // }
 }
