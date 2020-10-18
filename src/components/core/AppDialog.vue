@@ -8,7 +8,7 @@
       <v-card-title class="dialog-title">
         <span class="dialog-title-text">{{title}}</span>
       </v-card-title>
-      <v-card-text style="padding: 0px 24px 0px 24px">
+      <v-card-text style="padding: 24px 24px 0px 24px">
         <slot name="dialogContent"></slot>
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">

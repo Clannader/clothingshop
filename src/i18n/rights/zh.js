@@ -8,5 +8,6 @@ export default {
   groupName: '组名',
   groupDesc: '描述',
   rightsCodes: '权限代码',
-  createGroup: '新建权限组'
+  createGroup: '新建权限组',
+  modifyGroup: '编辑权限组 {name}'
 }

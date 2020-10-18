@@ -7,3 +7,7 @@ import api from '@/utils/request'
 export function getRightsList(params) {
   return api.post('/api/rights/getRightsList', params)
 }
+
+export function findRightsById(params) {
+  return api.post('/api/rights/findRightsById', params)
+}

@@ -95,14 +95,14 @@
 
     <component
       :is="children"
-      :recordId="recordId"
+      :recordScheam="recordScheam"
       @closeDialog="closeDialog"
     ></component>
   </div>
 </template>
 
 <script>
-  import { getRightsList } from './api.js'
+  import { getRightsList, findRightsById } from './api.js'
   import RightsDetails from './components/RightsDetails'
   import RightsDeleteDialog from './components/RightsDeleteDialog'
 
@@ -146,8 +146,10 @@
       },
       openModify(record) {
         // 编辑权限组
-        this.children = RightsDetails
-        this.recordId = record._id
+        findRightsById({ id: record._id }).then(result => {
+          this.children = RightsDetails
+          this.recordScheam = result.rights
+        })
       },
       initDoSearh() {
         this.pageIndex = 1
@@ -179,14 +181,14 @@
       },
       openDelete(record) {
         this.children = RightsDeleteDialog
-        this.recordId = record._id
+        // this.recordId = record._id
       },
       goBack() {
         this.$router.back(-1)
       },
       openCreate() {
         this.children = RightsDetails
-        this.recordId = ''
+        this.recordScheam = {}
       },
       closeDialog() {
         this.children = ''
@@ -199,7 +201,7 @@
         groupName: undefined,
         tableTotal: 0,
         children: '',
-        recordId: undefined,
+        recordScheam: undefined,
         isSelect: {} // 点击选中时,获取当前记录的json
       }
     },
