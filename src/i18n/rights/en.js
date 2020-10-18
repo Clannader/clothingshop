@@ -8,6 +8,7 @@ export default {
   groupName: 'groupName',
   groupDesc: 'groupDesc',
   rightsCodes: 'rightsCodes',
-  createGroup: 'Create rights group'
+  createGroup: 'Create rights group',
+  modifyGroup: 'Modify rights group {name}'
 }
 

@@ -1,8 +1,22 @@
 <template>
   <app-dialog
-    :visible="true"
+    :visible="visible"
     :title="title"
   >
+    <template slot="dialogContent">
+      <v-text-field
+        v-model="rightsSchema.groupName"
+        :label="$t('rights.groupName')">
+      </v-text-field>
+      <v-text-field
+        v-model="rightsSchema.desc"
+        :label="$t('rights.groupDesc')">
+      </v-text-field>
+      <v-text-field
+        v-model="rightsSchema.rightsCode"
+        :label="$t('rights.rightsCodes')">
+      </v-text-field>
+    </template>
     <template slot="dialogBtn">
       <v-btn depressed @click="action()">{{$t('homePage.confirm')}}</v-btn>
       <v-btn depressed @click="close()">{{$t('homePage.colse')}}</v-btn>
@@ -11,26 +25,34 @@
 </template>
 
 <script>
+
   export default {
     name: 'RightsDetails',
     data() {
       return {
         title: '',
-        isNew: false
+        isNew: false,
+        rightsSchema: {
+          groupName: undefined,
+          desc: undefined,
+          rightsCode: undefined
+        },
+        visible: true
       }
     },
     props: {
-      recordId: {
-        type: String,
-        default: ''
+      recordScheam: {
+        type: Object,
+        default: () => ({})
       }
     },
     created() {
-      this.isNew = this.publicMethods.isEmpty(this.recordId)
+      this.isNew = Object.keys(this.recordScheam).length === 0
       if (this.isNew) {
         this.title = this.$t('rights.createGroup')
       } else {
-        this.title = '编辑'
+        this.rightsSchema = this.recordScheam
+        this.title = this.$t('rights.modifyGroup', { name: this.rightsSchema.groupName })
       }
     },
     methods: {
