@@ -11,3 +11,7 @@ export function getRightsList(params) {
 export function findRightsById(params) {
   return api.post('/api/rights/findRightsById', params)
 }
+
+export function deleteRights(params) {
+  return api.post('/api/rights/deleteRights', params)
+}

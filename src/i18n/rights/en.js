@@ -9,6 +9,8 @@ export default {
   groupDesc: 'groupDesc',
   rightsCodes: 'rightsCodes',
   createGroup: 'Create rights group',
-  modifyGroup: 'Modify rights group {name}'
+  modifyGroup: 'Modify rights group {name}',
+  confirmDelete: 'Confirm to delete the {name} rights group?',
+  deleteGroup: 'Delete rights group'
 }
 

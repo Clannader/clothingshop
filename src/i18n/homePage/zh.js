@@ -32,5 +32,6 @@ export default {
   print: '打印',
   download: '下载',
   delete: '删除',
-  goback: '返回'
+  goback: '返回',
+  deleteSuccess: '删除成功'
 }

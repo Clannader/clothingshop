@@ -9,5 +9,7 @@ export default {
   groupDesc: '描述',
   rightsCodes: '权限代码',
   createGroup: '新建权限组',
-  modifyGroup: '编辑权限组 {name}'
+  modifyGroup: '编辑权限组 {name}',
+  confirmDelete: '确定删除 {name} 权限组?',
+  deleteGroup: '删除权限组'
 }

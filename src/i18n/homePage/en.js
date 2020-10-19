@@ -32,5 +32,6 @@ export default {
   print: 'Print',
   download: 'Download',
   delete: 'Delete',
-  goback: 'GoBack'
+  goback: 'GoBack',
+  deleteSuccess: 'Delete success'
 }

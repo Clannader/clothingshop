@@ -181,7 +181,10 @@
       },
       openDelete(record) {
         this.children = RightsDeleteDialog
-        // this.recordId = record._id
+        this.recordScheam = {
+          _id: record._id,
+          groupName: record.groupName
+        }
       },
       goBack() {
         this.$router.back(-1)
@@ -192,6 +195,7 @@
       },
       closeDialog() {
         this.children = ''
+        this.doSearch()
       }
     },
     data() {
