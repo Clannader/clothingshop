@@ -9,6 +9,13 @@ export default {
   groupDesc: 'groupDesc',
   rightsCodes: 'rightsCodes',
   createGroup: 'Create rights group',
-  modifyGroup: 'Modify rights group {name}'
+  modifyGroup: 'Modify rights group {name}',
+  confirmDelete: 'Confirm to delete the {name} rights group?',
+  deleteGroup: 'Delete rights group',
+  inputGroupName: 'Please enter group name',
+  errorGroupName: 'Incorrect group name format',
+  inputRightsCode: 'Please enter rights code',
+  errorRightsCode: 'Incorrect rights code format',
+  selectGroup: 'Select rights code'
 }
 

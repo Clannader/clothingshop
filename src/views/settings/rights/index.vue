@@ -149,7 +149,7 @@
         findRightsById({ id: record._id }).then(result => {
           this.children = RightsDetails
           this.recordScheam = result.rights
-        })
+        }).catch()
       },
       initDoSearh() {
         this.pageIndex = 1
@@ -181,7 +181,10 @@
       },
       openDelete(record) {
         this.children = RightsDeleteDialog
-        // this.recordId = record._id
+        this.recordScheam = {
+          _id: record._id,
+          groupName: record.groupName
+        }
       },
       goBack() {
         this.$router.back(-1)
@@ -192,6 +195,7 @@
       },
       closeDialog() {
         this.children = ''
+        this.doSearch()
       }
     },
     data() {
