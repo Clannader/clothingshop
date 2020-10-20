@@ -149,7 +149,7 @@
         findRightsById({ id: record._id }).then(result => {
           this.children = RightsDetails
           this.recordScheam = result.rights
-        })
+        }).catch()
       },
       initDoSearh() {
         this.pageIndex = 1

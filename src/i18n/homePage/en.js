@@ -33,5 +33,7 @@ export default {
   download: 'Download',
   delete: 'Delete',
   goback: 'GoBack',
-  deleteSuccess: 'Delete success'
+  deleteSuccess: 'Delete success',
+  createSuccess: 'Create success',
+  modifySuccess: 'Modify success'
 }
