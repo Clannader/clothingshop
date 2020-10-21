@@ -11,7 +11,8 @@ module.exports = {
     // '@vue/prettier'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
@@ -76,7 +77,7 @@ module.exports = {
     'no-empty-pattern': 2,
     'no-eval': 2,
     'no-ex-assign': 2,
-    'no-extend-native': 2,
+    'no-extend-native': 0,
     'no-extra-bind': 2,
     'no-extra-boolean-cast': 2,
     'no-extra-parens': [2, 'functions'],
@@ -186,5 +187,16 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint'
-  }
+  },
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        mocha: true
+      }
+    }
+  ]
 }

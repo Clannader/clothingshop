@@ -5,12 +5,13 @@
 
 const miscellRouter = {
   path: 'miscellaneous',
-  name: 'Miscellaneous',
+  // name: 'Miscellaneous',
+  to: 'miscellaneous',
   meta: {
     title: 'menu.miscellaneous',
     icon: 'iconfont icon-c-miscellaneous',
     chip: 'new',
-    right: 'ALL'
+    right: '7000'
   },
   component: () => import('@/views/blank')
 }

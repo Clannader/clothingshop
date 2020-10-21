@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" width="320" persistent>
       <v-card>
         <v-card-title class="dialog-title">
-          {{$t('homePage.logoutSys')}}
+          <span class="dialog-title-text">{{$t('homePage.logoutSys')}}</span>
         </v-card-title>
         <v-card-text class="dialog-text">
             {{$t('homePage.logoutConfirm')}}
@@ -36,10 +36,10 @@
         document.onkeydown = undefined
         this.$emit('closeDialog')
       },
-      quit() {
-        this.$store.dispatch('clearViews')
-        this.$router.push({ path: '/' })
+      async quit() {
         this.close()
+        await this.publicMethods.removeUserSession()
+        this.$router.push({ path: '/login' })
       }
     }
   }

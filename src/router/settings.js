@@ -5,93 +5,95 @@
 
 const otherSettingsRouter = {
   path: 'settings',
-  name: 'Settings',
+  // name: 'Settings',
+  to: 'settings',
   meta: {
     title: 'menu.settings',
-    icon: 'iconfont icon-c-settings',
-    right: 'ALL'
+    icon: 'iconfont icon-c-settings'
   },
   redirect: {
-    name: 'SettingsSubMenu'
+    // name: 'SettingsSubMenu'
+    path: '/settings/'
   },
   component: () => import('@/views/settings'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'SettingsSubMenu',
+      // name: 'SettingsSubMenu',
       meta: {
         title: 'menu.settings',
+        right: '3000',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
     },
     {
       path: 'supplier',
-      name: 'SupplierList',
+      // name: 'SupplierList',
       meta: {
         title: 'menu.supplierList',
         icon: 'iconfont icon-c-supplier',
-        right: ''
+        right: '3001'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'shop',
-      name: 'ShopList',
+      // name: 'ShopList',
       meta: {
         title: 'menu.shopList',
         icon: 'iconfont icon-c-shop-add',
-        right: ''
+        right: '3002'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'user',
-      name: 'UserList',
+      // name: 'UserList',
       meta: {
         title: 'menu.userList',
         icon: 'iconfont icon-c-user-setup',
-        right: ''
+        right: '3003'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/test/components/TestPreviewDoc')
     },
     {
       path: 'right',
-      name: 'RightList',
+      // name: 'RightList',
       meta: {
         title: 'menu.rightList',
         icon: 'iconfont icon-c-right',
-        right: ''
+        right: '3004'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/settings/rights')
     },
     {
       path: 'system',
-      name: 'SystemList',
+      // name: 'SystemList',
       meta: {
         title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
-        right: ''
+        right: '3005'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'mail',
-      name: 'MailList',
+      // name: 'MailList',
       meta: {
         title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
-        right: ''
+        right: '3006'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'repair',
-      name: 'Repair',
+      // name: 'Repair',
       meta: {
         title: 'menu.repair',
         icon: 'iconfont icon-c-repair',
-        right: ''
+        right: '3007'
       },
       component: () => import('@/views/blank')
     }

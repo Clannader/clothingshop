@@ -5,11 +5,11 @@
 
 const homeRouter = {
   path: 'home',
-  name: 'Home',
+  // name: 'Home',
+  to: 'home',
   meta: {
     title: 'menu.home',
-    icon: 'iconfont icon-c-home',
-    right: 'ALL'
+    icon: 'iconfont icon-c-home'
   },
   component: () => import('@/views/home')
 }

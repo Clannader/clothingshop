@@ -3,7 +3,9 @@
  */
 'use strict'
 import tagsView from './tagsView'
+import userInfo from './userInfo'
 
 export default {
-  tagsView
+  tagsView,
+  userInfo
 }

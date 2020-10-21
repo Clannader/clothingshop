@@ -1,0 +1,73 @@
+.v-dialog {
+  overflow: visible;
+}
+
+.v-dialog > .v-card {
+  > .v-card__title {
+    &.dialog-title {
+      //flex: none;
+      //padding: 24px;
+      //font-size: 22px;
+      //color: $bg-blue;
+      //letter-spacing: .69px;
+      //line-height: 23px;
+      //border-bottom: 1px solid #ededed;
+
+      margin: 0px;
+      padding: 0px 24px;
+      height: 21px;
+
+      .dialog-title-text {
+        margin-top: -21px;
+        padding: 10px 48px;
+        background-color: $bg-blue;
+        border-radius: 4px;
+        font-family: PingFangSC-Medium;
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: .62px;
+        line-height: 21px;
+        z-index: 9;
+        box-shadow: -2px -2px 10px 0 rgba(8,31,58,.2), 2px 2px 10px 0 rgba(14,55,102,.25);
+      }
+    }
+  }
+
+  > .v-card__text {
+    &.dialog-text {
+      color: #333;
+      display: flex;
+      padding: 24px 24px 0px;
+    }
+  }
+
+  .dialog-footer {
+    flex: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+}
+
+//用于dialog弹框的footer的按钮组
+.app-btn {
+  .v-btn {
+    min-width: 76px !important;
+    padding: 0 24px;
+    height: 36px !important;
+    box-shadow: none !important;
+    background-color: #f6f6f6 !important;
+    border-radius: 4px;
+    font-width: 400;
+    font-size: 14px;
+    color: #333;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 14px;
+
+    &:hover {
+      background-color: $bg-blue !important;
+      color: #fff;
+    }
+  }
+}

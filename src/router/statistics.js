@@ -5,53 +5,55 @@
 
 const statisticsRouter = {
   path: 'statistics',
-  name: 'Statistics',
+  // name: 'Statistics',
+  to: 'statistics',
   meta: {
     title: 'menu.statistics',
-    icon: 'iconfont icon-c-statistics',
-    right: 'ALL'
+    icon: 'iconfont icon-c-statistics'
   },
   redirect: {
-    name: 'StatisticsSubMenu'
+    // name: 'StatisticsSubMenu'
+    path: '/statistics/'
   },
   component: () => import('@/views/statistics'),
   children: [
     {
       path: '/', // 添加空格，用以防止路由不匹配导致路由导航重复的问题
-      name: 'StatisticsSubMenu',
+      // name: 'StatisticsSubMenu',
       meta: {
         title: 'menu.statistics',
+        right: '5001',
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
     },
     {
       path: 'order',
-      name: 'StaShopOrder',
+      // name: 'StaShopOrder',
       meta: {
         title: 'menu.staShopOrder',
         icon: 'iconfont icon-c-shop-order',
-        right: ''
+        right: '5002'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'income',
-      name: 'StaIncome',
+      // name: 'StaIncome',
       meta: {
         title: 'menu.staIncome',
         icon: 'iconfont icon-c-income',
-        right: ''
+        right: '5003'
       },
       component: () => import('@/views/blank')
     },
     {
       path: 'userAccess',
-      name: 'StaUserAccess',
+      // name: 'StaUserAccess',
       meta: {
         title: 'menu.staUserAccess',
         icon: 'iconfont icon-c-user-access',
-        right: ''
+        right: '5004'
       },
       component: () => import('@/views/blank')
     }

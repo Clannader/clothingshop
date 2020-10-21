@@ -22,6 +22,7 @@ const getters = {
   mini: state => {
     // 这里要对mini的值进行转换,因为存进去的有可能是string,但是用的时候必须是boolean,要不然报错
     return Methods.convertStringToBoolean(state.tagsView.mini)
-  }
+  },
+  roles: state => state.userInfo.roles
 }
 export default getters

@@ -1,13 +1,16 @@
 /**
  * Create by CC on 2018/12/12
  */
+
 'use strict'
-import { menuRouter } from '@/router'
+import { menuRoutes, constantRoutes } from '@/router'
+import Methods from '@/utils/methods'
+import moment from 'moment'
 
 const tagsView = {
   state: {
     language: localStorage.getItem('language') || 'zh', // 全局语言类型
-    menuRouter: menuRouter, // 全局左侧导航栏
+    menuRouter: [], // 全局左侧导航栏
     showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
     mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
     currentRouter: {}, // 当前路由对象
@@ -17,6 +20,16 @@ const tagsView = {
     // 设置语言
     SetLanguage: (state, language = 'zh') => {
       state.language = language
+      let momentLang = ''
+      switch (language) {
+        case 'zh':
+          momentLang = 'zh-cn'
+          break
+        case 'en':
+          momentLang = 'en'
+          break
+      }
+      moment.locale(momentLang)
       localStorage.setItem('language', language)
     },
     // 设置是否显示snackbar
@@ -32,12 +45,16 @@ const tagsView = {
     SetCurrentRouter: (state, router = {}) => {
       state.currentRouter = router
     },
-    // 设置当前面包屑数据
+    // 设置当前面包屑视图
     SetAddViews: (state, views = []) => {
       state.addViews = views
     },
+    // 清除面包屑视图
     ClearViews: (state) => {
       state.addViews = []
+    },
+    SetMenuRouter: (state, menuRouter) => {
+      state.menuRouter = menuRouter
     }
   },
   actions: {
@@ -59,13 +76,19 @@ const tagsView = {
       // 所以保存路由不能在setAddViews中保存,需要在then方法后面执行
       const views = state.addViews // 获取当前views的值,第一次进来时,该值是[]
       // 寻找当前路由是否已存在
-      const index = views.findIndex(v => v.name === router.name)
+      const index = views.findIndex(v => v.path === router.fullPath)
       // 加入当前路由值
       const item = {
         text: router.meta.title,
-        name: router.name,
+        path: router.fullPath,
         i18nParams: router.meta.i18nParams,
         disabled: true
+      }
+
+      // 由于动态路由可能导致路由不存在,也加进了views里面
+      // 如果没有text,则不加进去
+      if (!item.text) {
+        return
       }
 
       // 第一次进来index为-1
@@ -74,7 +97,7 @@ const tagsView = {
         // 需求制定
         // 1.进入首页不显示面包屑
         // 2.首页永远是第一个
-        if (item.name === 'Home') {
+        if (item.path === '/home') {
           // 如果进入首页,清空views
           // TODO 记得解锁
           if (views.length > 1) {
@@ -120,8 +143,49 @@ const tagsView = {
     clearViews({ commit }) {
       // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
       commit('ClearViews')
+    },
+    // 生成权限路由
+    generateRoutes({ commit }, roles) {
+      // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
+      // 克隆一个对象
+      const cloneRoutes = Methods.extend(true, [], constantRoutes)
+      const loginIndex = cloneRoutes.findIndex(v => v.path === '/')
+      const loginRoutes = cloneRoutes[loginIndex]
+
+      // 根据权限计算好menuRouter
+      const router = filterAsyncRoutes(menuRoutes, roles)
+      loginRoutes.children = router
+
+      commit('SetMenuRouter', loginRoutes.children)
+      return Promise.resolve(cloneRoutes)
     }
   }
+}
+
+const filterAsyncRoutes = function(routes, roles) {
+  const tempRoutes = []
+  // 路由名重复加载问题
+  routes.forEach(route => {
+    const temp = { ...route }
+    if (temp.children && temp.children.length > 0) {
+      // 有子路由的情况
+      const groupRoutes = filterAsyncRoutes(temp.children, roles)
+      if (groupRoutes.length > 0) {
+        temp.children = groupRoutes
+        tempRoutes.push(temp)
+      }
+    } else {
+      // 没有子路由时
+      if (!temp.meta.right) {
+        // 没有right节点的时候默认开放路由
+        tempRoutes.push(temp)
+      } else if (roles.indexOf(temp.meta.right) !== -1) {
+        tempRoutes.push(temp)
+      }
+    }
+  })
+
+  return tempRoutes
 }
 
 export default tagsView

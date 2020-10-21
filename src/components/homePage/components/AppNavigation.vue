@@ -61,7 +61,7 @@
     },
     methods: {
       gotoHome() {
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ path: '/home' })
       },
       isShowGroupNav(item) {
         // 是否显示大组的左侧栏

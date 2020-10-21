@@ -155,9 +155,14 @@
         this.$store.dispatch('setLanguage', lang)
       },
       submit() {
-        if (this.$refs.form.validate()) {
-          this.userLogin()
-        }
+        // 这里加一个定时器,是为了combo box组件的问题,当输入完内容时,没有失去焦点的时候,还是会
+        // 获取不到值的,所以这里加个定时器,让组件更新在event的事件队列之后,这样获取值
+        // 就不会有问题了
+        setTimeout(() => {
+          if (this.$refs.form.validate()) {
+            this.userLogin()
+          }
+        })
       },
       changeShowPassword() {
         this.showPassword = !this.showPassword
@@ -191,7 +196,7 @@
           sessionStorage.setItem('userName', this.userName)
           this.publicMethods.setUserSession(data['credential'])
           document.onkeydown = undefined
-          this.$router.push({ name: 'Home' })
+          this.$router.push({ path: '/home' })
         }
       },
       deleteUserName(isAction) {

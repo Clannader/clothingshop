@@ -43,57 +43,58 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// 这个很坑,全部按钮的英文都大写..
+// 这个很坑,原样式是,全部按钮的英文都大写..
 .v-btn {
   text-transform: capitalize;
 }
 
-.v-dialog > .v-card{
-  > .v-card__title {
-    &.dialog-title {
-      flex: none;
-      padding: 24px;
-      font-size: 22px;
-      color: $bg-blue;
-      letter-spacing: .69px;
-      line-height: 23px;
-      border-bottom: 1px solid #ededed;
-    }
-  }
+// 导入dialog样式表
+@import "./dialog.scss";
+@import "./table.scss";
+@import "./card.scss";
 
-  >.v-card__text {
-    &.dialog-text {
-      color: #333;
-      padding: 20px 24px 0 24px;
-    }
-  }
+.form-group {
+  display: flex;
+}
 
-  .dialog-footer {
-    flex: none;
-    display: flex;
-    justify-content: flex-end;
-    padding: 24px;
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.input-require .v-label {
+  padding-left: 12px;
+
+  &::before{
+    content: '';
+    margin-right: 8px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #DC0600;
+    position: absolute;
+    top: calc(50% - 3px);
+    left: 0;
   }
 }
 
-.app-btn {
-  .v-btn {
-    min-width: 76px !important;
-    padding: 0 24px;
-    height: 36px !important;
-    box-shadow: none !important;
-    background-color: #f6f6f6 !important;
-    border-radius: 4px;
-    font-width: 400;
-    font-size: 14px;
-    color: #333;
-    letter-spacing: 0;
-    text-align: center;
-    line-height: 14px;
+// 修改多选下拉框的选值不溢出的问题
+.visible-selected /deep/ {
+  .v-select__selection--comma{
+    overflow: visible;
+  }
 
-    &:hover{
-      background-color: $bg-blue !important;
-      color: #fff;
-    }
+  .v-select__selections{
+    overflow: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+}
+
+.v-list-item{
+  &:hover{
+    background-color: #d7e5f6;
   }
 }

@@ -1,0 +1,94 @@
+.ant-table-thead > tr > th {
+  background-color: #fff;
+}
+
+.ant-table-thead > tr > th{
+  padding: 13px 12px !important;
+  color: #757575;
+}
+.ant-table-tbody > tr > td {
+  padding: 5px 12px !important;
+  height: 48px;
+  color: #333;
+}
+
+.ant-table-tbody > tr > td {
+  font-size: 13px;
+}
+
+// 清除表格行hover
+//.ant-table-thead > tr.ant-table-row-hover > td,
+//.ant-table-tbody > tr.ant-table-row-hover > td,
+//.ant-table-thead > tr:hover > td,
+//.ant-table-tbody > tr:hover > td {
+//  background: none;
+//}
+
+// 清除表格行hover
+//.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+//.ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+//  background: none;
+//}
+
+.ant-table-tbody > tr,
+.ant-table-thead > tr{
+  &.ant-table-row-hover,
+  &:hover{
+    &:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td{
+      background: none;
+    }
+  }
+}
+
+// 清楚复选行效果
+.ant-table-tbody > tr.ant-table-row-selected td {
+  background: none;
+}
+
+// 隔行变色
+.ant-table-row:nth-child(n) {
+  background-color: #fff;
+}
+
+.ant-table-row:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+
+// 解决Ant Design Table ellipsis和fixed 共同作用不生效
+.ant-table-fixed-left table, .ant-table-fixed-right table {
+  width: min-content;
+}
+
+// 表格操作列样式
+.option-menu-list {
+  border-radius: 0px;
+  padding: 0px;
+
+  .v-list-item{
+    padding: 0px 24px 0px 16px;
+    &:hover{
+      background-color: #d7e5f6;
+    }
+  }
+
+  .v-list-item__title{
+    margin-left: 8px;
+    font-size: 14px;
+    color: $bg-blue;
+    letter-spacing: 0
+  }
+
+  i {
+    font-size: 18px;
+    margin-right: 8px;
+    color: $bg-blue;
+  }
+}
+
+.ant-table-tbody {
+  .rowSelected {
+    background: #b3d4fc;
+  }
+}
