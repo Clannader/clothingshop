@@ -18,12 +18,12 @@
     </a-table>
 
     <v-row class="mr-24">
-      <v-col class="flex-center">
+      <v-col class="flex-center" :class="pagination ? '' : 'page-amount'">
         <span class="amount">{{$t('homePage.tableTotal')}}:
           <span class="table-total">{{total}}</span>
         </span>
       </v-col>
-      <v-row class="mr-24">
+      <v-row class="mr-24" v-if="pagination">
         <v-col class="flex-center flexEnd">
           <span class="everyPageShow">{{$t('homePage.tablePage')}}</span>
           <div class="showNumberBox">
@@ -66,6 +66,10 @@
         // type: [Object, Boolean, Function] 好像是定义2种类型的方式???
         type: Number,
         default: 0
+      },
+      pagination: {
+        type: Boolean,
+        default: true
       }
     },
     computed: {
@@ -96,6 +100,14 @@
   .mr-24 {
     margin-left: 0px;
     margin-right: 0px;
+    .col {
+      padding: 0px 0px 0px 12px;
+    }
+
+    .page-amount{
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
   }
 
   .v-pagination {

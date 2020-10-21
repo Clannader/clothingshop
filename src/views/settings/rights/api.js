@@ -19,3 +19,8 @@ export function deleteRights(params) {
 export function saveRights(isNew = true, params) {
   return api.post(isNew ? '/api/rights/createRights' : '/api/rights/modifyRights', params)
 }
+
+export function getRightsCode(params) {
+  return api.post('/api/rights/getRightsCode', params)
+}
+
