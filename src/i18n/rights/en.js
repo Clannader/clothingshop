@@ -16,6 +16,7 @@ export default {
   errorGroupName: 'Incorrect group name format',
   inputRightsCode: 'Please enter rights code',
   errorRightsCode: 'Incorrect rights code format',
-  selectGroup: 'Select rights code'
+  selectGroup: 'Select rights code',
+  selectedRightsCodes: 'Rights code selected'
 }
 
