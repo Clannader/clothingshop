@@ -196,6 +196,9 @@
           sessionStorage.setItem('userName', this.userName)
           this.publicMethods.setUserSession(data['credential'])
           document.onkeydown = undefined
+          if (data.expireMsg) {
+            this.$toast.success(data.expireMsg, 6000)
+          }
           this.$router.push({ path: '/home' })
         }
       },
