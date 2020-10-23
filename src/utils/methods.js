@@ -2,9 +2,12 @@
  * Create by CC on 2018/12/6
  * 公共方法
  */
+
 'use strict'
 import api from './request'
 import store from '@/store'
+import CryptoJS from 'crypto-js'
+import staticVal from './globalVariable'
 
 const methods = {
   async removeUserSession() {
@@ -23,6 +26,8 @@ const methods = {
     sessionStorage.removeItem('credential')
     sessionStorage.removeItem('userName')
     sessionStorage.removeItem('addViews')
+    sessionStorage.removeItem('shopId')
+    sessionStorage.removeItem('selfShop')
   },
 
   getUserSession() {
@@ -30,9 +35,13 @@ const methods = {
     return sessionStorage.getItem('credential') || ''
   },
 
-  setUserSession(session = '') {
+  setUserSession(session = {}) {
     // 设置用户凭证
-    sessionStorage.setItem('credential', session)
+    for (const key in session) {
+      if (!this.isEmpty(session[key])) {
+        sessionStorage.setItem(key, session[key])
+      }
+    }
   },
 
   hotkeys(fn, keyCode, ...args) {
@@ -160,6 +169,16 @@ const methods = {
       u8arr[n] = bstr.charCodeAt(n)
     }
     return new Blob([u8arr], { type: type })
+  },
+
+  tripleDESdecrypt(str = '') {
+    const key = CryptoJS.enc.Utf8.parse(staticVal.tripleDES.key)
+    const decryptAction = CryptoJS.TripleDES.decrypt(str, key, {
+      iv: CryptoJS.enc.Utf8.parse(staticVal.tripleDES.iv),
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    })
+    return decryptAction.toString(CryptoJS.enc.Utf8)
   }
 }
 
