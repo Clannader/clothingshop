@@ -132,7 +132,7 @@
         }
         getRightsList(params).then(result => {
           this.tableData = result.rights
-          this.tableTotal = this.tableData.length
+          this.tableTotal = result.total
         }).catch(() => {
           this.tableData = []
           this.tableTotal = 0
@@ -152,7 +152,10 @@
         }).catch()
       },
       initDoSearh() {
-        this.pageIndex = 1
+        const rightsTable = this.$refs.rightsTable
+        if (rightsTable) {
+          rightsTable.pageIndex = 1
+        }
         this.doSearch()
       },
       // 选中行Class
