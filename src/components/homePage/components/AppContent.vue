@@ -4,16 +4,43 @@
       <app-breadcrumbs></app-breadcrumbs>
       <router-view></router-view>
     </v-container>
+    <change-password
+      :visible="showPwd"
+      @closeDialog="quit()"
+      @actionAfter="closePwdDialog()"
+    ></change-password>
   </v-content>
 </template>
 
 <script>
   import AppBreadcrumbs from './AppBreadcrumbs'
+  import ChangePassword from '@/views/common/ChangePassword'
 
   export default {
     name: 'AppContent',
     components: {
-      AppBreadcrumbs
+      AppBreadcrumbs,
+      ChangePassword
+    },
+    data() {
+      return {
+        showPwd: false
+      }
+    },
+    created() {
+      this.showPwd = this.$store.getters.sessionSchema.isFirstLogin
+    },
+    methods: {
+      async quit() {
+        await this.publicMethods.removeUserSession()
+        this.$router.push({ path: '/login' })
+      },
+      closePwdDialog() {
+        this.showPwd = false
+        this.$store.dispatch('setSessionSchema', {
+          isFirstLogin: false
+        })
+      }
     }
   }
 </script>

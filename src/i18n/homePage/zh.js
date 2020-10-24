@@ -35,5 +35,13 @@ export default {
   goback: '返回',
   deleteSuccess: '删除成功',
   createSuccess: '创建成功',
-  modifySuccess: '修改成功'
+  modifySuccess: '修改成功',
+  changPwdTitle: '修改密码',
+  oldPwd: '旧密码',
+  newPwd: '新密码',
+  newPwd2: '再次密码',
+  inputOldPwd: '请输入旧密码',
+  inputNewPwd: '请输入新密码',
+  inputNew2Pwd: '请再次输入新密码',
+  diffPwd: '两次密码不一样'
 }
