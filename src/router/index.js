@@ -66,18 +66,35 @@ router.beforeEach(async(to, from, next) => {
     // 退出登录操作
     await app.publicMethods.removeUserSession()
   }
-  const isLogin = app.publicMethods.getUserSession()
+  let isLogin = app.publicMethods.getUserSession()
   if (!isLogin) {
     // 如果没有登录,则跳回登录页
-    if (to.path !== '/login') {
+    const path = to.path // 获取当前路径
+    const query = to.query // 获取当前路径的?后面的参数JSON
+    // if (to.path !== '/login') {
+    //   await app.publicMethods.removeUserSession()
+    //   next({
+    //     path: '/login'
+    //   })
+    // } else {
+    //   next()
+    // }
+    if (path === '/login') {
+      return next()
+    } else if (path === '/home' && query.key) {
+      const session = JSON.parse(app.publicMethods.tripleDESdecrypt(query.key))
+      app.publicMethods.setUserSession(session)
+      isLogin = true
+    } else {
       await app.publicMethods.removeUserSession()
-      next({
+      return next({
         path: '/login'
       })
-    } else {
-      next()
     }
-  } else {
+  }
+  // else {
+  // 这里需要修改一下,如果home页面从别的地方进来需要刷新路由
+  if (isLogin) {
     // 进到这里说明已经登录成功了,首先先判断是否取了用户权限,如果内存中没有取,那么就去取
     // 这里要注意的是,每次刷新页面时都会去获取一遍权限,如果不刷新页面,权限则使用内存值
     const userRoles = store.getters.roles

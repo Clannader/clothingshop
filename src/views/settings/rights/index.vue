@@ -22,15 +22,19 @@
       </v-container>
     </v-card>
 
-    <v-card class="card-body">
+    <v-card
+      class="card-body"
+      v-resize="onResize"
+    >
       <app-table
         :columns="tableColumns"
         :dataSource="tableData"
         :rowKey="record => record._id"
         :loading="loading"
         :total="tableTotal"
-        :scroll="{ x:1000,y: 400 }"
+        :scroll="{ x:1000,y: tableY }"
         :rowClassName="rowClass"
+        :pagination="false"
         :customRow= "rowClick"
         @change="doSearch"
         ref="rightsTable"
@@ -132,7 +136,7 @@
         }
         getRightsList(params).then(result => {
           this.tableData = result.rights
-          this.tableTotal = this.tableData.length
+          this.tableTotal = result.total
         }).catch(() => {
           this.tableData = []
           this.tableTotal = 0
@@ -149,10 +153,13 @@
         findRightsById({ id: record._id }).then(result => {
           this.children = RightsDetails
           this.recordScheam = result.rights
-        }).catch()
+        }).catch(() => {})
       },
       initDoSearh() {
-        this.pageIndex = 1
+        const rightsTable = this.$refs.rightsTable
+        if (rightsTable) {
+          rightsTable.pageIndex = 1
+        }
         this.doSearch()
       },
       // 选中行Class
@@ -196,6 +203,9 @@
       closeDialog() {
         this.children = ''
         this.doSearch()
+      },
+      onResize() {
+        this.tableY = window.innerHeight - 427 + 34 // 34 是分页的差额
       }
     },
     data() {
@@ -206,6 +216,7 @@
         tableTotal: 0,
         children: '',
         recordScheam: undefined,
+        tableY: 230,
         isSelect: {} // 点击选中时,获取当前记录的json
       }
     },

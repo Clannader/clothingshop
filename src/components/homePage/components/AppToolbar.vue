@@ -23,7 +23,7 @@
         :src="require('@/assets/user/default.jpg')"
         class="user-img"
       ></v-img>
-      {{userName}}
+      {{adminName}}
     </v-btn>
 
     <app-lang></app-lang>
@@ -53,12 +53,13 @@
     },
     data() {
       return {
-        userName: '',
+        adminName: '',
         children: ''
       }
     },
     created() {
-      this.userName = sessionStorage.getItem('userName')
+      // this.userName = sessionStorage.getItem('userName')
+      this.adminName = this.$store.getters.sessionSchema.adminName
     },
     methods: {
       changeSidebar() {

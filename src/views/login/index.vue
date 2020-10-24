@@ -83,7 +83,7 @@
 
 <script scope>
   import { login } from './api.js'
-  import CryptoJS from 'crypto.js'
+  import CryptoJS from 'crypto-js'
   import DeleteUserDialog from './components/DeleteUserDialog'
 
   export default {
@@ -173,7 +173,7 @@
         }
         const params = {
           adminId: this.userName,
-          adminPws: CryptoJS.sha256(this.password)
+          adminPws: CryptoJS.SHA256(this.password).toString()
         }
         const [err, data] = await this.publicMethods.getPromise(login(params))
         if (err) {
@@ -193,9 +193,11 @@
             this.userNameList.splice(this.userNameList.indexOf(this.userName), 1)
           }
           localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
-          sessionStorage.setItem('userName', this.userName)
-          this.publicMethods.setUserSession(data['credential'])
+          this.publicMethods.setUserSession({ ...data['session'], credential: data['credential'] })
           document.onkeydown = undefined
+          if (data.expireMsg) {
+            this.$toast.success(data.expireMsg, 6000)
+          }
           this.$router.push({ path: '/home' })
         }
       },

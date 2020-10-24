@@ -11,6 +11,17 @@ const userInfo = {
     roles: undefined, // 用户权限
     systemConfig: {
       dateFormat: 'dd/MM/yyyy'
+    },
+    sessionSchema: {
+      // 用户结构
+      adminId: '',
+      adminName: '',
+      adminType: '',
+      lastTime: '',
+      shopId: '',
+      selfShop: '',
+      supplierCode: '',
+      shopName: ''
     }
   },
   mutations: {
@@ -19,6 +30,9 @@ const userInfo = {
     },
     SetSystemConfig: (state, config) => {
       state.systemConfig = config
+    },
+    SetSessionSchema: (state, session) => {
+      state.sessionSchema = session
     }
   },
   actions: {
@@ -27,7 +41,7 @@ const userInfo = {
       commit('SetRoles', undefined)
     },
     // 获取用户权限
-    async getRoles({ commit }) {
+    async getRoles({ commit, dispatch }) {
       const [err, data] = await request.post('/api/user/roles', {})
         .then(data => [null, data]).catch(err => [err])
       if (err) {
@@ -35,6 +49,7 @@ const userInfo = {
       }
       const roles = data.roles.split(',')
       commit('SetRoles', roles)
+      dispatch('setSessionSchema', data['session'])
       data.roles = roles
       return Promise.resolve(data)
     },
@@ -74,6 +89,10 @@ const userInfo = {
     },
     setSystemConfig({ commit }, config) {
       commit('SetSystemConfig', config)
+    },
+    setSessionSchema({ commit }, session) {
+      router.app.publicMethods.setUserSession(session)
+      commit('SetSessionSchema', session)
     }
   }
 }

@@ -42,8 +42,9 @@
               path: '/home',
               disabled: false
             })
-            if (this.isShow) {
-              const current = this.$store.state.tagsView.currentRouter
+            const current = this.$store.state.tagsView.currentRouter
+            // 解决免登陆的时候,有多余的标签
+            if (this.isShow && current.path !== '/home') {
               views.push({
                 text: current.meta.title,
                 path: current.fullPath,

@@ -46,7 +46,7 @@
           id: this.rightsSchema._id
         }).then(() => {
           this.$toast.success(this.$t('homePage.deleteSuccess'))
-        }).finally(() => {
+        }).catch(() => {}).finally(() => {
           this.close()
         })
       }

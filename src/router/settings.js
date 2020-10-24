@@ -55,7 +55,7 @@ const otherSettingsRouter = {
         icon: 'iconfont icon-c-user-setup',
         right: '3003'
       },
-      component: () => import('@/views/test/components/TestPreviewDoc')
+      component: () => import('@/views/settings/users')
     },
     {
       path: 'right',

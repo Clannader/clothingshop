@@ -125,11 +125,11 @@
     <v-card class="card-title">
       <v-container fluid class="card-container">
         <div class="form-group">
-          <video
+          <!--<video
             controls
             src="http://localhost:3000/video/video-1.mp4"
             style="width: 100%;height: 300px"
-          ></video>
+          ></video>-->
         </div>
       </v-container>
     </v-card>
@@ -157,7 +157,7 @@
   import AppPdfDialog from '@/components/core/pdf/AppPdfDialog'
   import TestQrCode from './TestQrCode'
   import AppPrint from '@/components/core/AppPrint'
-  import CryptoJS from 'crypto.js'
+  import CryptoJS from 'crypto-js'
 
   export default {
     name: 'TestDate',
@@ -293,7 +293,7 @@
         const resp = await api.post(
           '/cmbg-api/user/login',
           {
-            password: CryptoJS.sha256('WYNwyn123456').toUpperCase(),
+            password: CryptoJS.SHA256('WYNwyn123456').toString().toUpperCase(),
             return_permisson: false,
             station: 'DEV-OLIVER',
             username: 'oliver'

@@ -19,7 +19,11 @@ const staticVal = {
   }, {
     code: 'en',
     desc: 'English'
-  }]
+  }],
+  tripleDES: {
+    key: 'ClothingShop',
+    iv: '8890880'
+  }
 }
 
 export default staticVal
