@@ -6,10 +6,12 @@ import login from './login/en'
 import homePage from './homePage/en'
 import menu from './menu/en'
 import rights from './rights/en'
+import users from './users/en'
 
 export default {
   login,
   homePage,
   menu,
-  rights
+  rights,
+  users
 }
