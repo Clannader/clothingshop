@@ -23,6 +23,7 @@ const methods = {
     store.dispatch('clearViews') // 清除面包屑视图
     store.dispatch('setCurrentRouter', {}) // 清除当前路由
     store.dispatch('resetRouter')// 重置路由,避免不刷新页面导致缓存
+    // TODO 优化删除sessionStorage
     sessionStorage.removeItem('credential')
     sessionStorage.removeItem('userName')
     sessionStorage.removeItem('addViews')
@@ -68,7 +69,7 @@ const methods = {
   },
 
   // 哎,自己写一个深拷贝吧,不然太不习惯了
-  extend: function() {
+  /** extend: function() {
     let options; let name; let src; let copy; let copyIsArray; let clone
       let target = arguments[0] || {}
       let i = 1
@@ -131,9 +132,9 @@ const methods = {
 
     // Return the modified object
     return target
-  },
+  },*/
 
-  isPlainObject(obj) {
+  /** isPlainObject(obj) {
     const class2type = {}
     const toString = class2type.toString
     const hasOwn = class2type.hasOwnProperty
@@ -155,7 +156,7 @@ const methods = {
     // Objects with prototype are plain iff they were constructed by a global Object function
     const Ctor = hasOwn.call(proto, 'constructor') && proto.constructor
     return typeof Ctor === 'function' && fnToString.call(Ctor) === fnToString.call(Object)
-  },
+  },*/
 
   isEmpty(obj) {
     return obj == null || obj === '' || obj === 'undefined'
