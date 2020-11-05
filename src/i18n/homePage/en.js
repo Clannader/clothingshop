@@ -35,5 +35,13 @@ export default {
   goback: 'GoBack',
   deleteSuccess: 'Delete success',
   createSuccess: 'Create success',
-  modifySuccess: 'Modify success'
+  modifySuccess: 'Modify success',
+  changPwdTitle: 'Change password',
+  oldPwd: 'Old password',
+  newPwd: 'New password',
+  newPwd2: 'Again password',
+  inputOldPwd: 'Please enter your old password',
+  inputNewPwd: 'Please enter your new password',
+  inputNew2Pwd: 'Please again enter your new password',
+  diffPwd: 'The two passwords are different'
 }

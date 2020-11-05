@@ -21,7 +21,8 @@ const userInfo = {
       shopId: '',
       selfShop: '',
       supplierCode: '',
-      shopName: ''
+      shopName: '',
+      isFirstLogin: true
     }
   },
   mutations: {
