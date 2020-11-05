@@ -149,6 +149,7 @@ const tagsView = {
       // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
       // 克隆一个对象
       const cloneRoutes = Methods.extend(true, [], constantRoutes)
+      // const cloneRoutes = [...constantRoutes]
       const loginIndex = cloneRoutes.findIndex(v => v.path === '/')
       const loginRoutes = cloneRoutes[loginIndex]
 
