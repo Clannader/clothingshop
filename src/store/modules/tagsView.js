@@ -4,7 +4,7 @@
 
 'use strict'
 import { menuRoutes, constantRoutes } from '@/router'
-import Methods from '@/utils/methods'
+// import Methods from '@/utils/methods'
 import moment from 'moment'
 
 const tagsView = {
