@@ -1,8 +1,9 @@
 /**
  * Create by CC on 2019/12/16
  */
-'use strict'
 
+'use strict'
+import RightsCode from '../utils/rightsCode'
 const logsRouter = {
   path: 'logs',
   // name: 'Logs',
@@ -43,9 +44,9 @@ const logsRouter = {
       meta: {
         title: 'menu.serverLogs',
         icon: 'iconfont icon-c-server-logs',
-        right: '3003'
+        right: RightsCode.ServerLogs.code
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/logs/server')
     },
     {
       path: 'mail',

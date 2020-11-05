@@ -1,6 +1,7 @@
 /**
  * 一些静态的常量定义
  */
+import RightsCode from './rightsCode'
 
 const staticVal = {
   // 接口响应状态码
@@ -21,9 +22,10 @@ const staticVal = {
     desc: 'English'
   }],
   tripleDES: {
-    key: 'ClothingShop',
+    key: 'ClothingShopClothingShopClothingShopClothingShopClothingShopAAAA',
     iv: '8890880'
-  }
+  },
+  RightsCode: RightsCode
 }
 
 export default staticVal
