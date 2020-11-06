@@ -216,7 +216,8 @@
             {
               title: `${this.$t('users.rights')}`,
               ellipsis: true,
-              dataIndex: 'rights'
+              dataIndex: 'rights',
+              width: 200
             },
             {
               title: `${this.$t('users.adminType')}`,
@@ -226,7 +227,8 @@
             },
             {
               title: `${this.$t('users.email')}`,
-              dataIndex: 'email'
+              dataIndex: 'email',
+              width: 250
             },
             {
               title: `${this.$t('users.supplierCode')}`,
