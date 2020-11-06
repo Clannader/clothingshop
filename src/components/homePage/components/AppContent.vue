@@ -1,5 +1,5 @@
 <template>
-  <v-main class="layout-content-box">
+  <v-content class="layout-content-box">
     <v-container fluid class="main-content">
       <app-breadcrumbs></app-breadcrumbs>
       <router-view></router-view>
@@ -9,7 +9,7 @@
       @closeDialog="quit()"
       @actionAfter="closePwdDialog()"
     ></change-password>
-  </v-main>
+  </v-content>
 </template>
 
 <script>

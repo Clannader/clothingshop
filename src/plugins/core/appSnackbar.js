@@ -40,11 +40,11 @@ class AppSnackbar {
   }
 
   static success(message, duration) {
-    this.toast(message, 'success', duration)
+    this.toast(message, 'green', duration)
   }
 
   static info(message, duration) {
-    this.toast(message, 'info', duration)
+    this.toast(message, 'blue', duration)
   }
 
   static error(message, duration) {
@@ -53,7 +53,7 @@ class AppSnackbar {
     //   return
     // }
     // store.dispatch('setShowSnackbar', true)
-    this.toast(message, 'error', duration)
+    this.toast(message, 'red', duration)
   }
 }
 
