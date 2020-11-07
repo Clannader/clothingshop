@@ -7,3 +7,7 @@ import api from '@/utils/request'
 export function getSearchLogsList(params) {
   return api.get('/api/logs/server/search', params)
 }
+
+export function downloadLogs(params) {
+  return api.post('/api/logs/server/download', params)
+}

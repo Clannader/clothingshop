@@ -19,44 +19,46 @@
       </v-container>
     </v-card>
 
-    <div
-      class="logs-box"
-      v-resize="onResize"
-      :style="{ 'max-height' : tableY + 'px' }"
-    >
-      <template v-for="(log, i) in logsArr">
-        <div
-          :key="i"
-          :style="(i-1)%3 === 0 ? {'padding': '0 12px'} : ''"
-          class="box"
-        >
-          <v-card class="box-card">
-            <div class="box-item">
-              <v-tooltip bottom nudge-left="12">
-                <template v-slot:activator="{ on : tip }">
-                  <div v-on="tip" class="box-name"><b>{{log.name}}</b></div>
-                </template>
-                <div>{{log.name}}</div>
-              </v-tooltip>
-              <div class="box-icon">
-                <v-icon>
-                  remove_red_eye
-                </v-icon>
-                <div class="icon-text" @click="viewAction">
-                  {{$t('logs.view')}}
-                </div>
-                <v-icon>
-                  cloud_download
-                </v-icon>
-                <div class="icon-text" @click="downLoadAction">
-                  {{$t('logs.download')}}
+    <a-spin :spinning="loading">
+      <div
+        class="logs-box"
+        v-resize="onResize"
+        :style="{ 'max-height' : tableY + 'px' }"
+      >
+        <template v-for="(log, i) in logsArr">
+          <div
+            :key="i"
+            :style="(i-1)%3 === 0 ? {'padding': '0 12px'} : ''"
+            class="box"
+          >
+            <v-card class="box-card">
+              <div class="box-item">
+                <v-tooltip bottom nudge-left="12">
+                  <template v-slot:activator="{ on : tip }">
+                    <div v-on="tip" class="box-name"><b>{{log.name}}</b></div>
+                  </template>
+                  <div>{{log.name}}</div>
+                </v-tooltip>
+                <div class="box-icon">
+                  <v-icon>
+                    remove_red_eye
+                  </v-icon>
+                  <div class="icon-text" @click="viewAction">
+                    {{$t('logs.view')}}
+                  </div>
+                  <v-icon>
+                    cloud_download
+                  </v-icon>
+                  <div class="icon-text" @click="downLoadAction(log.name)">
+                    {{$t('logs.download')}}
+                  </div>
                 </div>
               </div>
-            </div>
-          </v-card>
-        </div>
-      </template>
-    </div>
+            </v-card>
+          </div>
+        </template>
+      </div>
+    </a-spin>
 
     <div class="card-bottom card-round-btn">
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
@@ -65,14 +67,16 @@
 </template>
 
 <script>
-  import { getSearchLogsList } from './api'
+  import { getSearchLogsList, downloadLogs } from './api'
+  import { saveAs } from 'file-saver'
 
   export default {
     name: 'ServerLogs',
     data() {
       return {
         tableY: 230,
-        logsArr: []
+        logsArr: [],
+        loading: false
       }
     },
     created() {
@@ -80,9 +84,12 @@
     },
     methods: {
       doSearch() {
+        this.loading = true
         getSearchLogsList().then(res => {
           this.logsArr = res.logs
         }).catch(() => {
+        }).finally(() => {
+          this.loading = false
         })
       },
       goBack() {
@@ -94,8 +101,12 @@
       viewAction() {
         console.log('view')
       },
-      downLoadAction() {
-        console.log('download')
+      downLoadAction(logName) {
+        downloadLogs({
+          logName: logName
+        }).then(res => {
+          saveAs(this.publicMethods.base64ToBlob(res.content, 'application/octet-stream'), logName)
+        }).catch(() => {})
       }
     }
   }
@@ -125,8 +136,6 @@
       width: (1/3)*100%;
 
       .box-card {
-        /*background: #fff;*/
-        /*border-radius: 4px;*/
 
         .box-item {
           align-items: center;
@@ -145,7 +154,7 @@
             line-height: 16px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: normal;
+            white-space: nowrap;
             color: $bg-blue;
           }
 
