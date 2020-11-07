@@ -5,6 +5,7 @@
         <div class="form-group">
           <div class="group-item">
             <v-text-field
+              v-model="searchCond"
               :label="$t('users.searchCond')"
             >
             </v-text-field>
@@ -25,7 +26,7 @@
         v-resize="onResize"
         :style="{ 'max-height' : tableY + 'px' }"
       >
-        <template v-for="(log, i) in logsArr">
+        <template v-for="(log, i) in filterData">
           <div
             :key="i"
             :style="(i-1)%3 === 0 ? {'padding': '0 12px'} : ''"
@@ -61,6 +62,12 @@
     </a-spin>
 
     <div class="card-bottom card-round-btn">
+      <div class="flex-center">
+        <span class="amount">{{$t('homePage.tableTotal')}}:
+          <span class="table-total">{{filterData.length}}</span>
+        </span>
+      </div>
+      <v-spacer></v-spacer>
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
   </div>
@@ -76,7 +83,8 @@
       return {
         tableY: 230,
         logsArr: [],
-        loading: false
+        loading: false,
+        searchCond: undefined
       }
     },
     created() {
@@ -106,7 +114,21 @@
           logName: logName
         }).then(res => {
           saveAs(this.publicMethods.base64ToBlob(res.content, 'application/octet-stream'), logName)
-        }).catch(() => {})
+        }).catch(() => {
+        })
+      },
+      filterByFunction(logItem) {
+        if (this.publicMethods.isEmpty(this.searchCond)) return true
+        // return logItem.name.indexOf(this.searchCond) !== -1 ||
+        //   logItem.date.indexOf(this.searchCond) !== -1
+        return logItem.date.indexOf(this.searchCond) !== -1
+      }
+    },
+    computed: {
+      filterData() {
+        return this.logsArr.filter(v => {
+          return this.filterByFunction(v)
+        })
       }
     }
   }
@@ -115,7 +137,7 @@
 <style lang="scss" scoped>
   .group-item {
     padding-right: 24px;
-    width: 25.0%;
+    width: 35.0%;
   }
 
   .card-search-btn {
@@ -179,4 +201,35 @@
       }
     }
   }
+
+  .flex-center {
+    width: 20%;
+    /*display: flex;*/
+    .amount {
+      font-size: 12px;
+      line-height: 44px; // 这里由于不知道如何居中,只能限制行高了
+      color: #757575;
+      /*align-items: center;*/
+
+      .table-total {
+        display: inline-block;
+        text-align: center;
+        margin-left: 4px;
+        padding: 0 8px;
+        border-radius: 2px;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: .34px;
+        line-height: 12px;
+        color: #333;
+      }
+    }
+  }
+
+  .card-bottom{
+    padding-left: 24px;
+    display: flex;
+    text-align: unset !important;
+  }
+
 </style>
