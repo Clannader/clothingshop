@@ -23,12 +23,15 @@ const methods = {
     store.dispatch('clearViews') // 清除面包屑视图
     store.dispatch('setCurrentRouter', {}) // 清除当前路由
     store.dispatch('resetRouter')// 重置路由,避免不刷新页面导致缓存
-    // TODO 优化删除sessionStorage
-    sessionStorage.removeItem('credential')
-    sessionStorage.removeItem('userName')
-    sessionStorage.removeItem('addViews')
-    sessionStorage.removeItem('shopId')
-    sessionStorage.removeItem('selfShop')
+    // sessionStorage.removeItem('credential')
+    // sessionStorage.removeItem('userName')
+    // sessionStorage.removeItem('addViews')
+    // sessionStorage.removeItem('shopId')
+    // sessionStorage.removeItem('selfShop')
+    const sessionKeys = Object.keys(sessionStorage)
+    for (let i = 0; i < sessionKeys.length; i++) {
+      sessionStorage.removeItem(sessionKeys[i])
+    }
   },
 
   getUserSession() {

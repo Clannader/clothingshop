@@ -7,11 +7,13 @@ import homePage from './homePage/en'
 import menu from './menu/en'
 import rights from './rights/en'
 import users from './users/en'
+import logs from './logs/en'
 
 export default {
   login,
   homePage,
   menu,
   rights,
-  users
+  users,
+  logs
 }

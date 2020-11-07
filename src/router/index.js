@@ -64,6 +64,9 @@ router.beforeEach(async(to, from, next) => {
   const app = router.app
   if (to.path === '/login') {
     // 退出登录操作
+    // 如果要升级vue-router 3.3.x版本以上,需要注释掉这句代码,不然导致他会进入了
+    // Login路径,然后就删除session了,我也不知道为什么会重复进入login,并且
+    // to和from的path都是一致的,都是login
     await app.publicMethods.removeUserSession()
   }
   let isLogin = app.publicMethods.getUserSession()
