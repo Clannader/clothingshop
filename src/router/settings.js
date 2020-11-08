@@ -2,7 +2,7 @@
  * Create by CC on 2019/12/16
  */
 'use strict'
-
+import RightsCode from '../utils/rightsCode'
 const otherSettingsRouter = {
   path: 'settings',
   // name: 'Settings',
@@ -53,7 +53,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.userList',
         icon: 'iconfont icon-c-user-setup',
-        right: '3003'
+        right: RightsCode.UserSetup.code
       },
       component: () => import('@/views/settings/users')
     },
@@ -63,7 +63,7 @@ const otherSettingsRouter = {
       meta: {
         title: 'menu.rightList',
         icon: 'iconfont icon-c-right',
-        right: '3004'
+        right: RightsCode.RightsSetup.code
       },
       component: () => import('@/views/settings/rights')
     },

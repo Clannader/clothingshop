@@ -25,15 +25,14 @@ import store from './store'
 // 路由
 import router from './router'
 
-import { Table, Upload, Icon, Input } from 'ant-design-vue'
+import { Table, Upload, Spin } from 'ant-design-vue'
 
 Vue.component(Table.name, Table)
 Vue.component(Table.Column.name, Table.Column)
 Vue.component(Table.ColumnGroup.name, Table.ColumnGroup)
 Vue.component(Upload.name, Upload)
 Vue.component(Upload.Dragger.name, Upload.Dragger)
-Vue.component(Icon.name, Icon)
-Vue.component(Input.name, Input)
+Vue.component(Spin.name, Spin)
 
 // 注册全局自定义组件
 import './plugins/components'
