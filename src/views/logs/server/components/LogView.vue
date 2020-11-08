@@ -3,7 +3,6 @@
     :visible="true"
     :title="$t('logs.logTitle')"
     v-resize="onResize"
-    :min-width="900"
     :width="900"
   >
     <template slot="dialogContent">
@@ -52,7 +51,7 @@
         logContent: '',
         tableY: 230,
         startByte: 0, // 开始加载的字节位数
-        endByte: 1024 // 最大加载1MB
+        endByte: 3 * 1024 // 最大加载1MB
       }
     },
     created() {
@@ -66,7 +65,20 @@
           startByte: this.startByte,
           endByte: this.endByte
         }).then(res => {
-          this.logContent = Buffer.from(res.content, 'base64').toString()
+          // 方法1:失败
+          // const orgBuf = Buffer.from(this.logContent)
+          // const newBuf = Buffer.from(res.content, 'base64')
+          // this.logContent = Buffer.concat([orgBuf, newBuf]).toString()
+
+          // 方法2:
+          // 这里真的很奇怪,使用读取流,如果开始位不是0的时候,后面的读取的数据会多一个前一次读取数据
+          // 的最后一个字符,我也不知道为什么,所以这里要判断不是第一次加载,后面的加载都要
+          // 删除第一个字符串,否则会重复
+          let content = Buffer.from(res.content, 'base64').toString()
+          if (this.startByte !== 0) {
+            content = content.substr(1)
+          }
+          this.logContent += content
           this.hasMore = res.hasMore
           if (this.hasMore) {
             this.startByte = this.endByte
