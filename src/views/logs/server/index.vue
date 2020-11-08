@@ -44,7 +44,7 @@
                   <v-icon>
                     remove_red_eye
                   </v-icon>
-                  <div class="icon-text" @click="viewAction">
+                  <div class="icon-text" @click="viewAction(log.name)">
                     {{$t('logs.view')}}
                   </div>
                   <v-icon>
@@ -70,12 +70,19 @@
       <v-spacer></v-spacer>
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
+
+    <component
+      :is="children"
+      :logName="logName"
+      @closeDialog="closeDialog"
+    ></component>
   </div>
 </template>
 
 <script>
   import { getSearchLogsList, downloadLogs } from './api'
   import { saveAs } from 'file-saver'
+  import LogView from './components/LogView'
 
   export default {
     name: 'ServerLogs',
@@ -84,7 +91,9 @@
         tableY: 230,
         logsArr: [],
         loading: false,
-        searchCond: undefined
+        searchCond: undefined,
+        logName: '',
+        children: ''
       }
     },
     created() {
@@ -106,8 +115,9 @@
       onResize() {
         this.tableY = window.innerHeight - 310
       },
-      viewAction() {
-        console.log('view')
+      viewAction(logName) {
+        this.logName = logName
+        this.children = LogView
       },
       downLoadAction(logName) {
         downloadLogs({
@@ -122,6 +132,9 @@
         // return logItem.name.indexOf(this.searchCond) !== -1 ||
         //   logItem.date.indexOf(this.searchCond) !== -1
         return logItem.date.indexOf(this.searchCond) !== -1
+      },
+      closeDialog() {
+        this.children = ''
       }
     },
     computed: {

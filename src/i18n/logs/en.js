@@ -5,5 +5,7 @@
 
 export default {
   view: 'View',
-  download: 'Download'
+  download: 'Download',
+  logMore: 'View more',
+  logTitle: 'Server log'
 }
