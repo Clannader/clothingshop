@@ -17,7 +17,7 @@ import AppSnackbarComponent from 'components/core/AppSnackbar'
 // vuetify 2.3.x版本以上使用
 // const isV2Up = parseInt(v1) >= 2 && parseInt(v2) > 2
 
-class AppAlert {
+class AppSnackbar {
   static toast(message = '', color = 'green', duration = 3000) {
     // color:[success, error, info, cyan darken-2]
     // const Constructor = isV2Down
@@ -74,4 +74,4 @@ class AppAlert {
   }
 }
 
-export default AppAlert
+export default AppSnackbar
