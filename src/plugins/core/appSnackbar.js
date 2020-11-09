@@ -18,7 +18,7 @@ import AppSnackbarComponent from 'components/core/AppSnackbar'
 // const isV2Up = parseInt(v1) >= 2 && parseInt(v2) > 2
 
 class AppSnackbar {
-  static toast(message = '', color = 'green', duration = 3000) {
+  static toast(message = '', color = 'green', duration = 5000) {
     // color:[success, error, info, cyan darken-2]
     // const Constructor = isV2Down
     //   ? Vue.extend(AppSnackbarComponent)
