@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-import snackbar from '@/plugins/core/appSnackbar'
+import appAlert from '@/plugins/core/appAlert'
 import staticVal from './globalVariable'
 import methods from './methods' // 我觉得这个引入有点奇怪,因为request和methods已经是互相引用了
 
@@ -58,13 +58,13 @@ service.interceptors.response.use(
         methods.removeUserSession()
         store.dispatch('userLogout')// 这里跳回登录页面
       } else {
-        snackbar.error(response.data.msg)
+        appAlert.error(response.data.msg)
       }
       return Promise.reject(response.data)
     }
   },
   error => {
-    snackbar.error(error)
+    appAlert.error(error)
     return Promise.reject(error)
   }
 )

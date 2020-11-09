@@ -1,8 +1,12 @@
+/**
+ * Create by CC on 2020/11/9
+ */
+'use strict'
+
 import AppSnackbarComponent from 'components/core/AppSnackbar'
 import Vue from 'vue'
 
-// import store from '@/store'
-
+// vuetify 2.2.x以下版本可以用
 class AppSnackbar {
   static toast(message = '', color = 'success', duration = 3000) {
     // color:[success, error, info, cyan darken-2]

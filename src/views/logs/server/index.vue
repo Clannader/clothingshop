@@ -120,11 +120,14 @@
         this.children = LogView
       },
       downLoadAction(logName) {
+        this.loading = true
         downloadLogs({
           logName: logName
         }).then(res => {
           saveAs(this.publicMethods.base64ToBlob(res.content, 'application/octet-stream'), logName)
         }).catch(() => {
+        }).finally(() => {
+          this.loading = false
         })
       },
       filterByFunction(logItem) {
