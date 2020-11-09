@@ -37,6 +37,16 @@
       }
     },
     created() {
+      // 2.3.x版本以上这里报undefined
+      this.$vuetify.application = {
+        bar: 0,
+        bottom: 0,
+        footer: 0,
+        insetFooter: 0,
+        left: 0,
+        right: 0,
+        top: 0
+      }
       // 如果判断已经弹了框,则后面的弹的框都不显示
       if (store.getters.showSnackbar) {
         return

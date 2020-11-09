@@ -1,13 +1,30 @@
-import AppSnackbarComponent from 'components/core/AppSnackbar'
+// import Vuetify from 'vuetify'
 import Vue from 'vue'
+// import AppAlertComponent from 'components/core/AppAlert'
+import AppSnackbarComponent from 'components/core/AppSnackbar'
 
-// import store from '@/store'
+// 获取vuetify的版本
+// const version = Vuetify.version
+
+// 分隔版本号,取版本信息
+// const [v1, v2] = version.split('.')
+
+// 定义v2版本以下的变量名
+// vuetify 2.2.x以下版本使用
+// const isV2Down = parseInt(v1) <= 2 && parseInt(v2) <= 2
+
+// 定义v2版本以上的变量名
+// vuetify 2.3.x版本以上使用
+// const isV2Up = parseInt(v1) >= 2 && parseInt(v2) > 2
 
 class AppSnackbar {
-  static toast(message = '', color = 'success', duration = 3000) {
+  static toast(message = '', color = 'green', duration = 3000) {
     // color:[success, error, info, cyan darken-2]
-    const AppSnackbarConstructor = Vue.extend(AppSnackbarComponent)
-    const instance = new AppSnackbarConstructor(
+    // const Constructor = isV2Down
+    //   ? Vue.extend(AppSnackbarComponent)
+    //   : Vue.extend(AppAlertComponent)
+    const Constructor = Vue.extend(AppSnackbarComponent)
+    const instance = new Constructor(
       {
         propsData: {
           timeout: duration
