@@ -7,7 +7,7 @@
   >
     <template slot="dialogContent">
       <a-spin :spinning="loading">
-        <div
+        <!-- <div
           class="dialog-text"
           :style="{ 'max-height' : tableY + 'px' }"
         >
@@ -19,7 +19,18 @@
             hide-details
             readonly
           ></v-textarea>
-        </div>
+        </div> -->
+        <v-virtual-scroll
+          :height="tableY"
+          :items="logContent"
+          item-height="20"
+        >
+          <template v-slot:default="{ item }">
+            <div>
+              <span>{{ item }}</span>
+            </div>
+          </template>
+        </v-virtual-scroll>
       </a-spin>
     </template>
     <template slot="dialogBtn">
@@ -48,10 +59,11 @@
       return {
         loading: false,
         hasMore: false,
-        logContent: '',
+        logContent: [],
+        logTemp: '',
         tableY: 230,
         startByte: 0, // 开始加载的字节位数
-        endByte: 10 * 1024 // 最大加载1MB
+        endByte: 1 * 1024 // 最大加载1MB
       }
     },
     created() {
@@ -78,7 +90,9 @@
           // if (this.startByte !== 0) {
           //   content = content.substr(1)
           // }
-          this.logContent += Buffer.from(res.content, 'base64').toString()
+          // 测试用例11-09 10-17
+          this.logTemp += Buffer.from(res.content, 'base64').toString()
+          this.logContent = this.logTemp.split('\r\n')
           this.hasMore = res.hasMore
           if (this.hasMore) {
             this.startByte = res.startByte
