@@ -1,0 +1,66 @@
+<template>
+  <v-alert
+    v-model="show"
+    border="top"
+    dark
+    :color="color"
+  >
+    {{message}}
+  </v-alert>
+</template>
+
+<script>
+  import store from '@/store'
+  export default {
+    name: 'AppAlert',
+    props: {
+      color: {
+        type: String,
+        default: 'info'
+      },
+      timeout: {
+        type: Number,
+        default: 0
+      },
+      message: {
+        type: String,
+        default: ''
+      }
+    },
+    data() {
+      return {
+        // 是否显示弹框
+        show: false,
+        // 这个是定时器
+        activeTimeout: -1
+      }
+    },
+    created() {
+      // 如果判断已经弹了框,则后面的弹的框都不显示
+      if (store.getters.showSnackbar) {
+        return
+      }
+      this.show = true
+    },
+    mounted() {
+      this.setTimeout()
+      store.dispatch('setShowSnackbar', true)
+    },
+    methods: {
+      close() {
+        this.show = false
+        store.dispatch('setShowSnackbar', false)
+        window.clearTimeout(this.activeTimeout)
+      },
+      setTimeout() {
+        this.activeTimeout = window.setTimeout(() => {
+          this.close()
+        }, this.timeout)
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
