@@ -53,6 +53,8 @@
                   <div class="icon-text" @click="downLoadAction(log.name)">
                     {{$t('logs.download')}}
                   </div>
+                  <v-spacer></v-spacer>
+                  <span class="box-size">{{log.size}}</span>
                 </div>
               </div>
             </v-card>
@@ -178,7 +180,8 @@
         .box-item {
           align-items: center;
           height: 87px;
-          padding-left: 24px;
+          padding-left: 16px;
+          padding-right: 12px;
           cursor: pointer;
 
           .box-name {
@@ -211,6 +214,11 @@
               font-weight: 400;
               font-size: 12px;
               color: #666;
+            }
+
+            .box-size {
+              color: #333;
+              font-size: 12px;
             }
           }
         }
