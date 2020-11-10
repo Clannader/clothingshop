@@ -23,11 +23,13 @@
         <v-virtual-scroll
           :height="tableY"
           :items="logContent"
-          item-height="20"
+          item-height="25"
         >
           <template v-slot:default="{ item }">
             <div>
-              <span>{{ item }}</span>
+              <p class="text-no-wrap" style="color: #333">
+                {{item}}
+              </p>
             </div>
           </template>
         </v-virtual-scroll>
@@ -60,7 +62,7 @@
         loading: false,
         hasMore: false,
         logContent: [],
-        logTemp: '',
+        // logTemp: '', // 这个是分隔数组的最后一行内容
         tableY: 230,
         startByte: 0, // 开始加载的字节位数
         endByte: 1 * 1024 // 最大加载1MB
@@ -91,8 +93,23 @@
           //   content = content.substr(1)
           // }
           // 测试用例11-09 10-17
-          this.logTemp += Buffer.from(res.content, 'base64').toString()
-          this.logContent = this.logTemp.split('\r\n')
+          // const content = Buffer.from(res.content, 'base64').toString()
+          const arrContent = Buffer.from(res.content, 'base64').toString().split('\r\n')
+          // 取得到数组中的数组的最后一个元素
+          const lastArr = arrContent[arrContent.length - 1]
+          // 判断最后一个元素是否为空,空代表是\r\n结尾的字符串
+          // this.logContent.splice(this.logContent.length - 1, 1)
+          if (lastArr === '') {
+            // 干掉最后一个元素
+            arrContent.splice(arrContent.length - 1, 1)
+          } else {
+            // 改变第一个元素的值
+            arrContent[0] = this.logContent.splice(this.logContent.length - 1, 1) + arrContent[0]
+            // content = this.logTemp + content
+            // arrContent = content.split('\r\n')
+          }
+          // this.logTemp = lastArr
+          this.logContent = this.logContent.concat(arrContent)
           this.hasMore = res.hasMore
           if (this.hasMore) {
             this.startByte = res.startByte
