@@ -24,7 +24,7 @@ const logsRouter = {
       meta: {
         title: 'menu.logs',
         hidden: true,
-        right: '3001'
+        right: RightsCode.LogsManager.code
       },
       component: () => import('@/views/common/MenuView')
     },
@@ -34,9 +34,9 @@ const logsRouter = {
       meta: {
         title: 'menu.userLogs',
         icon: 'iconfont icon-c-opera-logs',
-        right: '3002'
+        right: RightsCode.UserLogs.code
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/logs/user')
     },
     {
       path: 'server',
@@ -54,7 +54,7 @@ const logsRouter = {
       meta: {
         title: 'menu.mailLogs',
         icon: 'iconfont icon-c-mail-logs',
-        right: '3004'
+        right: RightsCode.MailLogs.code
       },
       component: () => import('@/views/blank')
     }

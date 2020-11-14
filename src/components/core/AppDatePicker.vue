@@ -15,7 +15,7 @@
           v-on="on"
           v-bind="$attrs"
           append-icon="mdi-calendar-blank"
-          :class="{'input-require':require}"
+          :class="{'input-require':inputRequire}"
           :readonly="readonly"
           :clearable="clearable"
           @click:append="menu = true"
@@ -48,7 +48,7 @@
       // require关键字会出现警告
       // Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
       // 解决办法,改名字即可
-      require: {
+      inputRequire: {
         type: Boolean,
         default: false
       },
@@ -119,6 +119,9 @@
       },
       validateDate() {
         if (this.publicMethods.isEmpty(this.dateText)) {
+          this.datePicker = undefined
+          this.dateText = ''
+          this.getReturnValue()
           return
         }
         const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
