@@ -5,9 +5,9 @@
         <div class="form-group">
           <div class="group-item">
             <v-text-field
-              v-model="cond"
+              v-model="queryParams.cond"
               :label="$t('users.searchCond')"
-              @keyup.enter="initDoSearh">
+              @keyup.enter="doSearch">
             </v-text-field>
           </div>
           <v-spacer></v-spacer>
@@ -34,7 +34,8 @@
         :rowClassName="rowClass"
         :customRow="rowClick"
         @change="doSearch"
-        ref="usersTable"
+        :offset.sync="offset"
+        :pageSize.sync="pageSize"
       >
         <template slot="adminType" slot-scope="{record}">
           <div class="text-ellipsis">
@@ -97,13 +98,19 @@
   export default {
     name: 'SettingsUsers',
     data() {
+      const query = {
+        cond: undefined
+      }
       return {
         tableData: [],
+        tableY: 230,
+        offset: 1,
+        pageSize: 10,
         loading: false,
-        cond: undefined,
+        queryParams: query,
+        queryParamsCopy: query,
         tableTotal: 0,
         children: '',
-        tableY: 230,
         isSelect: {}
       }
     },
@@ -113,19 +120,14 @@
     methods: {
       doSearch() {
         this.loading = true
-        const usersTable = this.$refs.usersTable
-        let pageSize = 10
-        let pageIndex = 1
-        if (usersTable) {
-          pageSize = usersTable.showPages
-          pageIndex = usersTable.pageIndex
+        if (!this.publicMethods.compareObjects(this.queryParamsCopy, this.queryParams)) {
+          this.offset = 1
         }
-        const params = {
-          cond: this.cond,
-          offset: pageIndex,
-          pageSize: pageSize
-        }
-        getUsersList(params).then(result => {
+        getUsersList({
+          ...this.queryParams,
+          offset: this.offset,
+          pageSize: this.pageSize
+        }).then(result => {
           this.tableData = result.users
           this.tableTotal = result.total
         }).catch(() => {
@@ -136,6 +138,7 @@
           if (!this.tableData.find(v => this.isSelect._id === v._id)) {
             this.isSelect = {}
           }
+          this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
       goBack() {
@@ -172,13 +175,13 @@
       openDelete(record) {
 
       },
-      initDoSearh() {
-        const usersTable = this.$refs.usersTable
-        if (usersTable) {
-          usersTable.pageIndex = 1
-        }
-        this.doSearch()
-      },
+      // initDoSearh() {
+      //   const usersTable = this.$refs.usersTable
+      //   if (usersTable) {
+      //     usersTable.pageIndex = 1
+      //   }
+      //   this.doSearch()
+      // },
       openModify(record) {
 
       },
