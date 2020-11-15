@@ -73,11 +73,16 @@ const methods = {
 
   // 哎,自己写一个深拷贝吧,不然太不习惯了
   extend: function() {
-    let options; let name; let src; let copy; let copyIsArray; let clone
-      let target = arguments[0] || {}
-      let i = 1
-      const length = arguments.length
-      let deep = false
+    let options
+    let name
+    let src
+    let copy
+    let copyIsArray
+    let clone
+    let target = arguments[0] || {}
+    let i = 1
+    const length = arguments.length
+    let deep = false
 
     // Handle a deep copy situation
     if (typeof target === 'boolean') {
@@ -183,6 +188,38 @@ const methods = {
       padding: CryptoJS.pad.Pkcs7
     })
     return decryptAction.toString(CryptoJS.enc.Utf8)
+  },
+
+  compareObjects(objA, objB) {
+    const objectAProperties = Object.getOwnPropertyNames(objA)
+    const objectBProperties = Object.getOwnPropertyNames(objB)
+    let propName = ''
+
+    if (objectAProperties.length !== objectBProperties.length) {
+      return false
+    }
+
+    for (let i = 0; i < objectAProperties.length; i++) {
+      propName = objectAProperties[i]
+      // 这里暂时排除__ob__
+      if (propName === '__ob__') {
+        continue
+      }
+      if (objectBProperties.indexOf(propName) > -1) {
+        const isObj = this.isPlainObject(objA[propName]) && this.isPlainObject(objB[propName])
+        const isArr = Array.isArray(objA[propName]) && Array.isArray(objB[propName])
+        if (isArr || isObj) {
+          if (!this.compareObjects(objA[propName], objB[propName])) {
+            return false
+          }
+        } else if (objA[propName] !== objB[propName]) {
+          return false
+        }
+      } else {
+        return false
+      }
+    }
+    return true
   }
 }
 

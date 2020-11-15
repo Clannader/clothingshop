@@ -5,16 +5,16 @@
         <div class="form-group">
           <div class="group-item">
             <v-text-field
-              v-model="cond"
+              v-model="queryParams.cond"
               :label="$t('users.searchCond')"
-              @keyup.enter="initDoSearh">
+              @keyup.enter="doSearch">
             </v-text-field>
           </div>
           <div class="group-item">
             <app-date-picker
               :label="$t('logs.startDate')"
-              :max="endDate"
-              :update-value.sync="startDate"
+              :max="queryParams.endDate"
+              :update-value.sync="queryParams.startDate"
               :close-on-content-click="false"
               readonly
               clearable
@@ -23,8 +23,8 @@
           <div class="group-item">
             <app-date-picker
               :label="$t('logs.endDate')"
-              :min="startDate"
-              :update-value.sync="endDate"
+              :min="queryParams.startDate"
+              :update-value.sync="queryParams.endDate"
               :close-on-content-click="false"
               readonly
               clearable
@@ -54,7 +54,8 @@
         :rowClassName="rowClass"
         :customRow="rowClick"
         @change="doSearch"
-        ref="userLogsTable"
+        :offset.sync="offset"
+        :pageSize.sync="pageSize"
       >
         <template slot="logDate" slot-scope="{record}">
           <div class="text-ellipsis">
@@ -108,15 +109,21 @@
   export default {
     name: 'UserLogs',
     data() {
-      return {
-        tableData: [],
-        loading: false,
+      const query = {
         cond: undefined,
         startDate: undefined,
-        endDate: undefined,
+        endDate: undefined
+      }
+      return {
+        tableData: [],
+        tableY: 230,
+        offset: 1,
+        pageSize: 10,
+        loading: false,
+        queryParams: query,
+        queryParamsCopy: query,
         tableTotal: 0,
         children: '',
-        tableY: 230,
         isSelect: {}
       }
     },
@@ -126,21 +133,14 @@
     methods: {
       doSearch() {
         this.loading = true
-        const userLogsTable = this.$refs.userLogsTable
-        let pageSize = 10
-        let pageIndex = 1
-        if (userLogsTable) {
-          pageSize = userLogsTable.showPages
-          pageIndex = userLogsTable.pageIndex
+        if (!this.publicMethods.compareObjects(this.queryParamsCopy, this.queryParams)) {
+          this.offset = 1
         }
-        const params = {
-          cond: this.cond,
-          offset: pageIndex,
-          pageSize: pageSize,
-          startDate: this.startDate,
-          endDate: this.endDate
-        }
-        queryUserLog(params).then(result => {
+        queryUserLog({
+          ...this.queryParams,
+          offset: this.offset,
+          pageSize: this.pageSize
+        }).then(result => {
           this.tableData = result.logs
           this.tableTotal = result.total
         }).catch(() => {
@@ -151,16 +151,18 @@
           if (!this.tableData.find(v => this.isSelect._id === v._id)) {
             this.isSelect = {}
           }
+          this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
       initDoSearh() {
-        const userLogsTable = this.$refs.userLogsTable
-        if (userLogsTable) {
+        // const userLogsTable = this.$refs.userLogsTable
+        // if (userLogsTable) {
           // TODO 这里的返回第一页还需要思考,因为数据不是很多,很多情况没办法测
           // 这里的要检测条件和上次有改变时返回第一页,否则出现有总数,但是没有数据返回的情况
-          userLogsTable.pageIndex = 1
-        }
-        this.doSearch()
+          // userLogsTable.pageIndex = 1
+        // }
+        // this.offset = 1
+        // this.doSearch()
       },
       goBack() {
         this.$router.back(-1)

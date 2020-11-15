@@ -114,14 +114,12 @@
       },
       clearDate() {
         this.dateText = ''
-        this.datePicker = ''
+        this.datePicker = undefined
         this.getReturnValue()
       },
       validateDate() {
         if (this.publicMethods.isEmpty(this.dateText)) {
-          this.datePicker = undefined
-          this.dateText = ''
-          this.getReturnValue()
+          this.clearDate()
           return
         }
         const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
@@ -129,7 +127,7 @@
         // 暂时这样校验日期吧,JS校验日期确实有点难
         if (datePicker === 'Invalid date') {
           this.$toast.error(this.$t('homePage.InvalidDate'))
-          this.datePicker = ''
+          this.datePicker = undefined
           this.dateText = ''
         } else {
           this.datePicker = datePicker

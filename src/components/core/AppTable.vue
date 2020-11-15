@@ -28,14 +28,14 @@
           <span class="everyPageShow">{{$t('homePage.tablePage')}}</span>
           <div class="showNumberBox">
             <v-select
-              v-model="showPages"
+              v-model="tablePageSize"
               :items="showNumber"
               :label="showNumber[0]"
               single-line
             ></v-select>
           </div>
           <v-pagination
-            v-model="pageIndex"
+            v-model="tableOffset"
             :length="pageCount"
             :total-visible="5"
             style="padding-left: 20px"
@@ -54,12 +54,13 @@
     // v-bind="{...$attrs, ...$props, ...{dataSource: body, columns: header}}"
     data() {
       return {
-        pageIndex: 1, // 当前第几页
-        showPages: 10, // 每页多少
+        tableOffset: 1, // 当前第几页
+        tablePageSize: 10, // 每页多少
         showNumber: ['10', '30', '50', '100'] // 每页显示数量
       }
     },
-    created() {
+    create() {
+      this.getReturnValue()
     },
     props: {
       total: {
@@ -70,6 +71,14 @@
       pagination: {
         type: Boolean,
         default: true
+      },
+      offset: {
+        type: Number,
+        default: 1
+      },
+      pageSize: {
+        type: [Number, String],
+        default: 10
       }
     },
     computed: {
@@ -81,16 +90,38 @@
         }
       },
       pageCount() {
-        return Math.ceil(this.total / this.showPages)
+        return Math.ceil(this.total / this.tablePageSize)
       }
     },
     watch: {
-      showPages() {
-        this.$emit('change')
-        this.pageIndex = 1
+      tablePageSize() {
+        // 切换每页数量时,需要从第一页开始请求
+        if (this.tableOffset !== 1) {
+          // 如果不等于第一页,则自动改变成第一页
+          // 这样会触发tableOffset的watch,由于tableOffset的watch也会进行刷新
+          // 所以这里就单纯赋值即可
+          this.tableOffset = 1
+        } else {
+          // 这里进来的条件是在第一页来回切换tablePageSize的时候会触发
+          this.getReturnValue()
+          this.$emit('change')
+        }
       },
-      pageIndex() {
+      tableOffset() {
+        // 每页跳转的时候都需要刷新和改变子类的字段值
+        this.getReturnValue()
         this.$emit('change')
+      },
+      offset(newVal) {
+        // if (this.tableOffset !== 1) {
+          this.tableOffset = newVal
+        // }
+      }
+    },
+    methods: {
+      getReturnValue() {
+        this.$emit('update:offset', this.tableOffset)
+        this.$emit('update:pageSize', this.tablePageSize)
       }
     }
   }
