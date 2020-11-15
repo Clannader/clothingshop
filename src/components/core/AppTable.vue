@@ -6,9 +6,9 @@
       :pagination="false"
       :locale="locale"
     >
-<!--  这里绑定的插槽有$slots 和 $scopedSlots-->
-<!--  vue里面有$options,route,可通过打印查看-->
-<!--  这里的row是对于插槽的值,但是回传需要一个key值,目前无法知道如何不需要key也能返回-->
+      <!--  这里绑定的插槽有$slots 和 $scopedSlots-->
+      <!--  vue里面有$options,route,可通过打印查看-->
+      <!--  这里的row是对于插槽的值,但是回传需要一个key值,目前无法知道如何不需要key也能返回-->
       <template
         v-for="(vue, slot) in $scopedSlots"
         :slot="slot"
@@ -60,7 +60,6 @@
       }
     },
     create() {
-      this.getReturnValue()
     },
     props: {
       total: {
@@ -113,9 +112,7 @@
         this.$emit('change')
       },
       offset(newVal) {
-        // if (this.tableOffset !== 1) {
-          this.tableOffset = newVal
-        // }
+        this.tableOffset = newVal
       }
     },
     methods: {
@@ -131,11 +128,12 @@
   .mr-24 {
     margin-left: 0px;
     margin-right: 0px;
+
     .col {
       padding: 0px 0px 0px 12px;
     }
 
-    .page-amount{
+    .page-amount {
       padding-top: 12px;
       padding-bottom: 12px;
     }
@@ -155,7 +153,7 @@
     line-height: 12px;
     color: #757575;
 
-    .table-total{
+    .table-total {
       display: inline-block;
       text-align: center;
       margin-left: 4px;
@@ -196,7 +194,7 @@
     overflow: visible;
   }
 
-  .pagination ul>li:last-child .v-pagination__navigation{
+  .pagination ul > li:last-child .v-pagination__navigation {
     margin-right: 0px;
   }
 </style>
