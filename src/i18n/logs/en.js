@@ -7,5 +7,11 @@ export default {
   view: 'View',
   download: 'Download',
   logMore: 'View more',
-  logTitle: 'Server log'
+  logTitle: 'Server log',
+  requestIP: 'Request IP',
+  logType: 'Log type',
+  date: 'Date',
+  contents: 'Content',
+  startDate: 'Start date',
+  endDate: 'End date'
 }

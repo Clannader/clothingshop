@@ -10,6 +10,26 @@
               @keyup.enter="doSearch">
             </v-text-field>
           </div>
+          <div class="group-item">
+            <app-date-picker
+              :label="$t('logs.startDate')"
+              :max="queryParams.endDate"
+              :update-value.sync="queryParams.startDate"
+              :close-on-content-click="false"
+              readonly
+              clearable
+            ></app-date-picker>
+          </div>
+          <div class="group-item">
+            <app-date-picker
+              :label="$t('logs.endDate')"
+              :min="queryParams.startDate"
+              :update-value.sync="queryParams.endDate"
+              :close-on-content-click="false"
+              readonly
+              clearable
+            ></app-date-picker>
+          </div>
           <v-spacer></v-spacer>
           <div class="card-search-btn">
             <v-btn rounded dark @click="doSearch()">
@@ -37,9 +57,9 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="adminType" slot-scope="{record}">
+        <template slot="logDate" slot-scope="{record}">
           <div class="text-ellipsis">
-            {{getAdminTypeLabel(record)}}
+            {{record.format('YYYY-MM-DD HH:mm:ss')}}
           </div>
         </template>
 
@@ -64,19 +84,11 @@
               </v-btn>
             </template>
             <v-list class="option-menu-list">
-              <!-- 编辑按钮-->
-              <v-list-item @click="openModify(record)">
-                <i class="material-icons create"></i>
+              <!-- 查看按钮-->
+              <v-list-item @click="viewLogs(record)">
+                <i class="material-icons remove_red_eye"></i>
                 <v-list-item-title>
-                  {{$t('homePage.modify')}}
-                </v-list-item-title>
-              </v-list-item>
-
-              <!-- 删除按钮-->
-              <v-list-item @click="openDelete(record)">
-                <i class="material-icons highlight_off"></i>
-                <v-list-item-title>
-                  {{$t('homePage.delete')}}
+                  {{$t('logs.view')}}
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -86,20 +98,21 @@
     </v-card>
 
     <div class="card-bottom card-round-btn">
-      <v-btn rounded @click="openCreate()">{{$t('homePage.create')}}</v-btn>
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
   </div>
 </template>
 
 <script>
-  import { getUsersList } from './api'
+  import { queryUserLog } from './api'
 
   export default {
-    name: 'SettingsUsers',
+    name: 'UserLogs',
     data() {
       const query = {
-        cond: undefined
+        cond: undefined,
+        startDate: undefined,
+        endDate: undefined
       }
       return {
         tableData: [],
@@ -123,12 +136,12 @@
         if (!this.publicMethods.compareObjects(this.queryParamsCopy, this.queryParams)) {
           this.offset = 1
         }
-        getUsersList({
+        queryUserLog({
           ...this.queryParams,
           offset: this.offset,
           pageSize: this.pageSize
         }).then(result => {
-          this.tableData = result.users
+          this.tableData = result.logs
           this.tableTotal = result.total
         }).catch(() => {
           this.tableData = []
@@ -141,11 +154,18 @@
           this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
+      initDoSearh() {
+        // const userLogsTable = this.$refs.userLogsTable
+        // if (userLogsTable) {
+          // 这里的返回第一页还需要思考,因为数据不是很多,很多情况没办法测
+          // 这里的要检测条件和上次有改变时返回第一页,否则出现有总数,但是没有数据返回的情况
+          // userLogsTable.pageIndex = 1
+        // }
+        // this.offset = 1
+        // this.doSearch()
+      },
       goBack() {
         this.$router.back(-1)
-      },
-      openCreate() {
-
       },
       onResize() {
         this.tableY = window.innerHeight - 427
@@ -164,7 +184,7 @@
             },
             dblclick: () => {
               // 行双击事件
-              this.openModify(record)
+              this.viewLogs(record)
             }
           }
         }
@@ -172,28 +192,8 @@
       selectedRow(record) {
         this.isSelect = record
       },
-      openDelete(record) {
+      viewLogs(record) {
 
-      },
-      // initDoSearh() {
-      //   const usersTable = this.$refs.usersTable
-      //   if (usersTable) {
-      //     usersTable.pageIndex = 1
-      //   }
-      //   this.doSearch()
-      // },
-      openModify(record) {
-
-      },
-      getAdminTypeLabel(type) {
-        switch (type) {
-          case '3RD':
-            return this.$t('users.RD_Type')
-          case 'SYSTEM':
-            return this.$t('users.SYSTEM_Type')
-          case 'NORMAL':
-            return this.$t('users.NORMAL_Type')
-        }
       }
     },
     computed: {
@@ -203,40 +203,35 @@
           return [
             {
               title: `${this.$t('users.shopId')}`,
-              width: 150,
+              width: 100,
               dataIndex: 'shopId'
-            },
-            {
-              title: `${this.$t('users.adminId')}`,
-              width: 150,
-              dataIndex: 'adminId'
             },
             {
               title: `${this.$t('users.adminName')}`,
               width: 150,
-              dataIndex: 'adminName'
+              dataIndex: 'userName'
             },
             {
-              title: `${this.$t('users.rights')}`,
+              title: `${this.$t('logs.contents')}`,
               ellipsis: true,
-              dataIndex: 'rights',
-              width: 200
+              // width: 300,
+              dataIndex: 'content'
             },
             {
-              title: `${this.$t('users.adminType')}`,
-              width: 100,
-              dataIndex: 'adminType',
-              scopedSlots: { customRender: 'adminType' }
+              title: `${this.$t('logs.date')}`,
+              dataIndex: 'date',
+              width: 180,
+              scopedSlots: { customRender: 'logDate' }
             },
             {
-              title: `${this.$t('users.email')}`,
-              dataIndex: 'email',
-              width: 250
+              title: `${this.$t('logs.logType')}`,
+              dataIndex: 'type',
+              width: 120
             },
             {
-              title: `${this.$t('users.supplierCode')}`,
-              ellipsis: true,
-              dataIndex: 'supplierCode'
+              title: `${this.$t('logs.requestIP')}`,
+              dataIndex: 'requestIP',
+              width: 120
             },
             {
               title: `${this.$t('homePage.operation')}`,
@@ -257,7 +252,7 @@
 <style lang="scss" scoped>
   .group-item {
     padding-right: 24px;
-    width: 70.0%;
+    width: 25.0%;
   }
 
   .card-search-btn {

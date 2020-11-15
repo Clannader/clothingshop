@@ -9,7 +9,6 @@
               :min="currentDate"
               :update-value.sync="startDate"
               :close-on-content-click="false"
-              require
             ></app-date-picker>
           </div>
           <div class="group-item">
@@ -30,7 +29,8 @@
               :min="startDate"
               :update-value.sync="endDate"
               :close-on-content-click="false"
-              require
+              clearable
+              readonly
             ></app-date-picker>
           </div>
           <div style="padding-top: 16px;" class="card-search-btn">

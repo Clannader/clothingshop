@@ -6,9 +6,9 @@
       :pagination="false"
       :locale="locale"
     >
-<!--  这里绑定的插槽有$slots 和 $scopedSlots-->
-<!--  vue里面有$options,route,可通过打印查看-->
-<!--  这里的row是对于插槽的值,但是回传需要一个key值,目前无法知道如何不需要key也能返回-->
+      <!--  这里绑定的插槽有$slots 和 $scopedSlots-->
+      <!--  vue里面有$options,route,可通过打印查看-->
+      <!--  这里的row是对于插槽的值,但是回传需要一个key值,目前无法知道如何不需要key也能返回-->
       <template
         v-for="(vue, slot) in $scopedSlots"
         :slot="slot"
@@ -28,14 +28,14 @@
           <span class="everyPageShow">{{$t('homePage.tablePage')}}</span>
           <div class="showNumberBox">
             <v-select
-              v-model="showPages"
+              v-model="tablePageSize"
               :items="showNumber"
               :label="showNumber[0]"
               single-line
             ></v-select>
           </div>
           <v-pagination
-            v-model="pageIndex"
+            v-model="tableOffset"
             :length="pageCount"
             :total-visible="5"
             style="padding-left: 20px"
@@ -54,12 +54,12 @@
     // v-bind="{...$attrs, ...$props, ...{dataSource: body, columns: header}}"
     data() {
       return {
-        pageIndex: 1, // 当前第几页
-        showPages: 10, // 每页多少
+        tableOffset: 1, // 当前第几页
+        tablePageSize: 10, // 每页多少
         showNumber: ['10', '30', '50', '100'] // 每页显示数量
       }
     },
-    created() {
+    create() {
     },
     props: {
       total: {
@@ -70,6 +70,14 @@
       pagination: {
         type: Boolean,
         default: true
+      },
+      offset: {
+        type: Number,
+        default: 1
+      },
+      pageSize: {
+        type: [Number, String],
+        default: 10
       }
     },
     computed: {
@@ -81,16 +89,36 @@
         }
       },
       pageCount() {
-        return Math.ceil(this.total / this.showPages)
+        return Math.ceil(this.total / this.tablePageSize)
       }
     },
     watch: {
-      showPages() {
-        this.$emit('change')
-        this.pageIndex = 1
+      tablePageSize() {
+        // 切换每页数量时,需要从第一页开始请求
+        if (this.tableOffset !== 1) {
+          // 如果不等于第一页,则自动改变成第一页
+          // 这样会触发tableOffset的watch,由于tableOffset的watch也会进行刷新
+          // 所以这里就单纯赋值即可
+          this.tableOffset = 1
+        } else {
+          // 这里进来的条件是在第一页来回切换tablePageSize的时候会触发
+          this.getReturnValue()
+          this.$emit('change')
+        }
       },
-      pageIndex() {
+      tableOffset() {
+        // 每页跳转的时候都需要刷新和改变子类的字段值
+        this.getReturnValue()
         this.$emit('change')
+      },
+      offset(newVal) {
+        this.tableOffset = newVal
+      }
+    },
+    methods: {
+      getReturnValue() {
+        this.$emit('update:offset', this.tableOffset)
+        this.$emit('update:pageSize', this.tablePageSize)
       }
     }
   }
@@ -100,11 +128,12 @@
   .mr-24 {
     margin-left: 0px;
     margin-right: 0px;
+
     .col {
       padding: 0px 0px 0px 12px;
     }
 
-    .page-amount{
+    .page-amount {
       padding-top: 12px;
       padding-bottom: 12px;
     }
@@ -124,7 +153,7 @@
     line-height: 12px;
     color: #757575;
 
-    .table-total{
+    .table-total {
       display: inline-block;
       text-align: center;
       margin-left: 4px;
@@ -165,7 +194,7 @@
     overflow: visible;
   }
 
-  .pagination ul>li:last-child .v-pagination__navigation{
+  .pagination ul > li:last-child .v-pagination__navigation {
     margin-right: 0px;
   }
 </style>

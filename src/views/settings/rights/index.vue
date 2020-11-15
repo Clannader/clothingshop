@@ -6,9 +6,9 @@
           <!-- 权限组名 -->
           <div class="group-item">
             <v-text-field
-              v-model="groupName"
+              v-model="queryParams.groupName"
               :label="$t('rights.searchName')"
-              @keyup.enter="initDoSearh">
+              @keyup.enter="doSearch">
             </v-text-field>
           </div>
           <v-spacer></v-spacer>
@@ -37,7 +37,6 @@
         :pagination="false"
         :customRow= "rowClick"
         @change="doSearch"
-        ref="rightsTable"
       >
         <template slot="groupDesc" slot-scope="{record}">
           <v-tooltip bottom>
@@ -122,19 +121,19 @@
     methods: {
       doSearch() {
         this.loading = true
-        const rightsTable = this.$refs.rightsTable
-        let pageSize = 10 // 如果rightsTable是undefined的时候,使用默认值
-        let pageIndex = 1
-        if (rightsTable) {
-          pageSize = rightsTable.showPages
-          pageIndex = rightsTable.pageIndex
-        }
-        const params = {
-          groupName: this.groupName,
-          offset: pageIndex,
-          pageSize: pageSize
-        }
-        getRightsList(params).then(result => {
+        // const rightsTable = this.$refs.rightsTable
+        // let pageSize = 10 // 如果rightsTable是undefined的时候,使用默认值
+        // let pageIndex = 1
+        // if (rightsTable) {
+        //   pageSize = rightsTable.showPages
+        //   pageIndex = rightsTable.pageIndex
+        // }
+        // const params = {
+        //   groupName: this.groupName,
+        //   offset: pageIndex,
+        //   pageSize: pageSize
+        // }
+        getRightsList(this.queryParams).then(result => {
           this.tableData = result.rights
           this.tableTotal = result.total
         }).catch(() => {
@@ -155,13 +154,13 @@
           this.recordScheam = result.rights
         }).catch(() => {})
       },
-      initDoSearh() {
-        const rightsTable = this.$refs.rightsTable
-        if (rightsTable) {
-          rightsTable.pageIndex = 1
-        }
-        this.doSearch()
-      },
+      // initDoSearh() {
+      //   const rightsTable = this.$refs.rightsTable
+      //   if (rightsTable) {
+      //     rightsTable.pageIndex = 1
+      //   }
+      //   this.doSearch()
+      // },
       // 选中行Class
       rowClass(record/*, index*/) {
         if (record.groupName === this.isSelect.groupName) {
@@ -184,7 +183,6 @@
       },
       selectedRow(record) {
         this.isSelect = record
-        // this.tableColumns[0].isSelect = !this.tableColumns[0].isSelect
       },
       openDelete(record) {
         this.children = RightsDeleteDialog
@@ -211,12 +209,14 @@
     data() {
       return {
         tableData: [],
+        tableY: 230,
         loading: false,
-        groupName: undefined,
+        queryParams: {
+          groupName: undefined
+        },
         tableTotal: 0,
         children: '',
         recordScheam: undefined,
-        tableY: 230,
         isSelect: {} // 点击选中时,获取当前记录的json
       }
     },
