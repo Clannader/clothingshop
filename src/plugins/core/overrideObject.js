@@ -12,6 +12,10 @@ Date.prototype.format = function(fmt = 'yyyy-MM-dd') {
   return moment(this).format(fmt.replace(/y/g, 'Y').replace(/d/g, 'D'))
 }
 
+Date.prototype.todayMoment = function() {
+  return moment(this)
+}
+
 String.prototype.format = function(fmt = 'yyyy-MM-dd') {
   return moment(this).format(fmt.replace(/y/g, 'Y').replace(/d/g, 'D'))
 }
