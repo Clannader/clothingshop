@@ -13,5 +13,8 @@ export default {
   date: 'Date',
   contents: 'Content',
   startDate: 'Start date',
-  endDate: 'End date'
+  endDate: 'End date',
+  deleteLog: 'Delete',
+  deleteLogTitle: 'Delete server log',
+  deleteLogConfirm: 'Confirm to delete the {name} log?'
 }

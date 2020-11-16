@@ -13,5 +13,8 @@ export default {
   date: '日期',
   contents: '内容',
   startDate: '开始日期',
-  endDate: '结束日期'
+  endDate: '结束日期',
+  deleteLog: '删除',
+  deleteLogTitle: '删除服务器日志',
+  deleteLogConfirm: '确定删除 {name} 日志?'
 }

@@ -41,17 +41,30 @@
                   <div>{{log.name}}</div>
                 </v-tooltip>
                 <div class="box-icon">
-                  <v-icon>
-                    remove_red_eye
-                  </v-icon>
+                  <i class="v-icon material-icons remove_red_eye"
+                     @click="viewAction(log.name)"
+                  >
+                  </i>
                   <div class="icon-text" @click="viewAction(log.name)">
                     {{$t('logs.view')}}
                   </div>
-                  <v-icon>
-                    cloud_download
-                  </v-icon>
+                  <i class="v-icon material-icons cloud_download"
+                     @click="downLoadAction(log.name)"
+                  >
+                  </i>
                   <div class="icon-text" @click="downLoadAction(log.name)">
                     {{$t('logs.download')}}
+                  </div>
+                  <i class="v-icon material-icons highlight_off"
+                     @click="deleteAction(log.name)"
+                     v-if="isShowDelete(log.date)"
+                  >
+                  </i>
+                  <div class="icon-text"
+                       @click="deleteAction(log.name)"
+                       v-if="isShowDelete(log.date)"
+                  >
+                    {{$t('logs.deleteLog')}}
                   </div>
                   <v-spacer></v-spacer>
                   <span class="box-size">{{log.size}}</span>
@@ -85,6 +98,7 @@
   import { getSearchLogsList, downloadLogs } from './api'
   import { saveAs } from 'file-saver'
   import LogView from './components/LogView'
+  import LogDeleteDialog from './components/LogDeleteDialog'
 
   export default {
     name: 'ServerLogs',
@@ -140,6 +154,18 @@
       },
       closeDialog() {
         this.children = ''
+        this.doSearch()
+      },
+      deleteAction(logName) {
+        this.logName = logName
+        this.children = LogDeleteDialog
+      },
+      isShowDelete(date) {
+        // 判断用户是否有权限
+        const rightCode = this.staticVal.RightsCode.DeleteServerLog.code
+        const isRight = this.$store.getters.roles.indexOf(rightCode) !== -1
+        const isAfter = new Date().todayMoment().diff(date.createMoment(), 'days')
+        return isRight && isAfter > 30
       }
     },
     computed: {
@@ -250,7 +276,7 @@
     }
   }
 
-  .card-bottom{
+  .card-bottom {
     padding-left: 24px;
     display: flex;
     text-align: unset !important;
