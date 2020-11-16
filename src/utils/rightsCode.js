@@ -139,6 +139,10 @@ const RightsCode = {
   ChangeUserStatus: {
     code: '9004',
     desc: '能否修改用户状态'
+  },
+  DeleteServerLog: {
+    code: '9005',
+    desc: '能否删除服务器日志'
   }
 }
 

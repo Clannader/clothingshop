@@ -11,3 +11,7 @@ export function getSearchLogsList(params) {
 export function downloadLogs(params) {
   return api.post('/api/logs/server/download', params)
 }
+
+export function deleteLogs(params) {
+  return api.post('/api/logs/server/delete', params)
+}
