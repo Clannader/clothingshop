@@ -30,6 +30,33 @@
               clearable
             ></app-date-picker>
           </div>
+          <div class="group-item">
+            <v-select
+              v-model="queryParams.type"
+              :items="logTypeItem"
+              item-value="code"
+              item-text="desc"
+              :label="$t('logs.logType')"
+              @change="doSearch"
+            >
+            </v-select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="group-item">
+            <v-text-field
+              v-model="queryParams.shopId"
+              :label="$t('logs.queryShop')"
+              @keyup.enter="doSearch">
+            </v-text-field>
+          </div>
+          <div class="group-item">
+            <v-text-field
+              v-model="queryParams.adminId"
+              :label="$t('logs.queryUserID')"
+              @keyup.enter="doSearch">
+            </v-text-field>
+          </div>
           <v-spacer></v-spacer>
           <div class="card-search-btn">
             <v-btn rounded dark @click="doSearch()">
@@ -112,7 +139,8 @@
       const query = {
         cond: undefined,
         startDate: undefined,
-        endDate: undefined
+        endDate: undefined,
+        type: 'ALL'
       }
       return {
         tableData: [],
@@ -168,7 +196,7 @@
         this.$router.back(-1)
       },
       onResize() {
-        this.tableY = window.innerHeight - 427
+        this.tableY = window.innerHeight - 427 - 70
       },
       rowClass(record) {
         if (record._id === this.isSelect._id) {
@@ -243,6 +271,20 @@
               align: 'center'
             }
           ]
+        }
+      },
+      logTypeItem: {
+        get() {
+          return [{
+            code: 'ALL',
+            desc: `${this.$t('logs.allType')}`
+          }, {
+            code: 'ServerLog',
+            desc: `${this.$t('logs.serverType')}`
+          }, {
+            code: 'Right',
+            desc: `${this.$t('logs.rightType')}`
+          }]
         }
       }
     }
