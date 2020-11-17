@@ -2,7 +2,7 @@
  * Create by CC on 2018/12/7
  */
 'use strict'
-
+import RightsCode from '../utils/rightsCode'
 const frontdeskRouter = {
   path: 'frontdesk',
   // name: 'Frontdesk',
@@ -22,7 +22,7 @@ const frontdeskRouter = {
       // name: 'FrontDeskSubMenu',
       meta: {
         title: 'menu.frontdesk',
-        right: '2001',
+        right: RightsCode.FrontdeskManager.code,
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -33,7 +33,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopInfo',
         icon: 'iconfont icon-c-shopinfo',
-        right: '2002'
+        right: RightsCode.ShopInfo.code
       },
       component: () => import('@/views/frontdesk/shopInfo')
     },
@@ -43,7 +43,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopCategory',
         icon: 'iconfont icon-c-category',
-        right: '2003'
+        right: RightsCode.CategoryManager.code
       },
       component: () => import('@/views/blank')
     },
@@ -53,7 +53,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.clothing',
         icon: 'iconfont icon-c-clothing',
-        right: '2004'
+        right: RightsCode.ClothesManager.code
       },
       component: () => import('@/views/blank')
     },
@@ -63,7 +63,7 @@ const frontdeskRouter = {
       meta: {
         title: 'menu.shopOrder',
         icon: 'iconfont icon-c-order-setup',
-        right: '2005'
+        right: RightsCode.OrderManager.code
       },
       component: () => import('@/views/blank')
     }

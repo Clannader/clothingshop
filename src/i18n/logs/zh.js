@@ -16,5 +16,10 @@ export default {
   endDate: '结束日期',
   deleteLog: '删除',
   deleteLogTitle: '删除服务器日志',
-  deleteLogConfirm: '确定删除 {name} 日志?'
+  deleteLogConfirm: '确定删除 {name} 日志?',
+  allType: '全部',
+  serverType: '服务器日志',
+  rightType: '权限',
+  queryShop: '店铺ID',
+  queryUserID: '用户ID'
 }

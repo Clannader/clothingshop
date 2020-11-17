@@ -16,5 +16,10 @@ export default {
   endDate: 'End date',
   deleteLog: 'Delete',
   deleteLogTitle: 'Delete server log',
-  deleteLogConfirm: 'Confirm to delete the {name} log?'
+  deleteLogConfirm: 'Confirm to delete the {name} log?',
+  allType: 'All',
+  serverType: 'Server log',
+  rightType: 'Right',
+  queryShop: 'Shop ID',
+  queryUserID: 'User ID'
 }

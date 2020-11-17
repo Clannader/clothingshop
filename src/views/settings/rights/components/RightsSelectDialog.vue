@@ -89,7 +89,9 @@
         this.tableY = window.innerHeight - 330
       },
       onSelectChange(selectedRowKeys/*, selectedRows*/) {
-        this.rightsCode = selectedRowKeys
+        this.rightsCode = selectedRowKeys.sort((r1, r2) => {
+          return r1 - r2
+        })
       }
     },
     computed: {
