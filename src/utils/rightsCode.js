@@ -66,7 +66,7 @@ const RightsCode = {
   },
   MailSetup: {
     code: '3006',
-    desc: '系统数据设置'
+    desc: '邮件设置'
   },
   RepairData: {
     code: '3007',
