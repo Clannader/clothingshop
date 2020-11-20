@@ -94,9 +94,13 @@ const userInfo = {
     setSystemConfig({ commit }, config) {
       commit('SetSystemConfig', config)
     },
-    setSessionSchema({ commit }, session = {}) {
+    setSessionSchema({ commit, state }, session = {}) {
       router.app.publicMethods.setUserSession(session)
-      commit('SetSessionSchema', session)
+      const orgSession = state.sessionSchema || {}
+      for (const key in session) {
+        orgSession[key] = session[key]
+      }
+      commit('SetSessionSchema', orgSession)
     },
     clearSession({ commit }) {
       commit('SetSessionSchema', undefined)
