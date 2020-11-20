@@ -88,6 +88,10 @@
           // 因为这里进来的都是通过重定向进来的,所以这样重定向的值肯定是有的,那么他的值就是那个大组的
           let redirect = current.redirectedFrom || current.fullPath
           // 刷新页面时,redirect的值在最后会加多一个/
+          // 这里有个bug,停留在一级页签退出时,redirect是undefined的
+          if (!redirect) {
+            return []
+          }
           if (redirect.endsWith('/')) {
             redirect = redirect.substring(0, redirect.length - 1)
           }

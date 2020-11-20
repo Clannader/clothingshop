@@ -37,9 +37,10 @@
       },
       closePwdDialog() {
         this.showPwd = false
-        this.$store.dispatch('setSessionSchema', {
-          isFirstLogin: false
-        })
+        // 其实这里也不需要重新设置session,也是可以的
+        const session = this.$store.getters.sessionSchema
+        session.isFirstLogin = false
+        this.$store.dispatch('setSessionSchema', session)
       }
     }
   }
