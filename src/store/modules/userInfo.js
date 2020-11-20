@@ -33,12 +33,14 @@ const userInfo = {
       state.systemConfig = config
     },
     SetSessionSchema: (state, session) => {
-      state.sessionSchema = session
+      for (const key in session) {
+        state.sessionSchema[key] = session[key]
+      }
     }
   },
   actions: {
     // 设置用户权限
-    setRoles({ commit }) {
+    clearRoles({ commit }) {
       commit('SetRoles', undefined)
     },
     // 获取用户权限
@@ -91,9 +93,12 @@ const userInfo = {
     setSystemConfig({ commit }, config) {
       commit('SetSystemConfig', config)
     },
-    setSessionSchema({ commit }, session) {
+    setSessionSchema({ commit }, session = {}) {
       router.app.publicMethods.setUserSession(session)
       commit('SetSessionSchema', session)
+    },
+    clearSession({ commit }) {
+      commit('SetSessionSchema', {})
     }
   }
 }

@@ -49,10 +49,6 @@ const tagsView = {
     SetAddViews: (state, views = []) => {
       state.addViews = views
     },
-    // 清除面包屑视图
-    ClearViews: (state) => {
-      state.addViews = []
-    },
     SetMenuRouter: (state, menuRouter) => {
       state.menuRouter = menuRouter
     }
@@ -69,6 +65,9 @@ const tagsView = {
     },
     setCurrentRouter({ commit }, router) {
       commit('SetCurrentRouter', router)
+    },
+    clearCurrentRouter({ commit }) {
+      commit('SetCurrentRouter', {})
     },
     setAddViews({ commit, state }, router) {
       // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来
@@ -142,7 +141,7 @@ const tagsView = {
     },
     clearViews({ commit }) {
       // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
-      commit('ClearViews')
+      commit('SetAddViews', [])
     },
     // 生成权限路由
     generateRoutes({ commit }, roles) {
@@ -159,6 +158,9 @@ const tagsView = {
 
       commit('SetMenuRouter', loginRoutes.children)
       return Promise.resolve(cloneRoutes)
+    },
+    clearMenuRouter({ commit }) {
+      commit('SetMenuRouter', [])
     }
   }
 }
