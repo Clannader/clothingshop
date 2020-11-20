@@ -38,8 +38,8 @@ const userInfo = {
   },
   actions: {
     // 设置用户权限
-    setRoles({ commit }) {
-      commit('SetRoles', undefined)
+    clearRoles({ commit }) {
+      commit('SetRoles', '')
     },
     // 获取用户权限
     async getRoles({ commit, dispatch }) {
@@ -50,6 +50,9 @@ const userInfo = {
       }
       const roles = data.roles.split(',')
       commit('SetRoles', roles)
+      // 这里遇到一个很奇怪的bug,如果在setSessionSchema之前去修改session
+      // 则这个方法是不执行的,并且代码还不会往下执行
+      // 应该说dispatch的参数进去后如果有修改,感觉就不会执行,不知道是不是这个现象
       dispatch('setSessionSchema', data['session'])
       data.roles = roles
       return Promise.resolve(data)
@@ -91,9 +94,16 @@ const userInfo = {
     setSystemConfig({ commit }, config) {
       commit('SetSystemConfig', config)
     },
-    setSessionSchema({ commit }, session) {
+    setSessionSchema({ commit, state }, session = {}) {
       router.app.publicMethods.setUserSession(session)
-      commit('SetSessionSchema', session)
+      const orgSession = state.sessionSchema || {}
+      for (const key in session) {
+        orgSession[key] = session[key]
+      }
+      commit('SetSessionSchema', orgSession)
+    },
+    clearSession({ commit }) {
+      commit('SetSessionSchema', undefined)
     }
   }
 }

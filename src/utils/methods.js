@@ -18,16 +18,13 @@ const methods = {
       // 这里据说由于动态路由的坑,需要重新刷新浏览器才行...
       // location.reload()
     }
-    store.commit('SetMenuRouter', []) // 清除menuRouter
-    store.dispatch('setRoles') // 清除权限
+    // 检查所有store的内存变量,退出时需要全部删除
+    store.dispatch('clearMenuRouter') // 清除menuRouter
+    store.dispatch('clearRoles') // 清除权限
     store.dispatch('clearViews') // 清除面包屑视图
-    store.dispatch('setCurrentRouter', {}) // 清除当前路由
+    store.dispatch('clearCurrentRouter') // 清除当前路由
     store.dispatch('resetRouter')// 重置路由,避免不刷新页面导致缓存
-    // sessionStorage.removeItem('credential')
-    // sessionStorage.removeItem('userName')
-    // sessionStorage.removeItem('addViews')
-    // sessionStorage.removeItem('shopId')
-    // sessionStorage.removeItem('selfShop')
+    store.dispatch('clearSession')
     const sessionKeys = Object.keys(sessionStorage)
     for (let i = 0; i < sessionKeys.length; i++) {
       sessionStorage.removeItem(sessionKeys[i])

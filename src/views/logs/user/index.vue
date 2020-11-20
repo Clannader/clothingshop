@@ -39,6 +39,17 @@
               :label="$t('logs.logType')"
               @change="doSearch"
             >
+              <template v-slot:item="{ item, attrs, on }">
+                <v-list-item
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-list-item-title
+                    v-text="item.desc + ' (' + item.code + ')'"
+                  >
+                  </v-list-item-title>
+                </v-list-item>
+              </template>
             </v-select>
           </div>
         </div>

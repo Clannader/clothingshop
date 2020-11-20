@@ -4,6 +4,9 @@
     left
     offset-y
     transition="slide-y-transition"
+    open-delay="60"
+    close-delay="100"
+    open-on-hover
   >
     <template v-slot:activator="{ on: menu }">
       <v-btn
