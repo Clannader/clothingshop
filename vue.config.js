@@ -25,7 +25,7 @@ module.exports = {
       // 2.使用代理的情况就是API地址不支持跨域的时候使用,dev的时候,前端还是会启一个服务器
       // 然后页面通过访问同一个域名下的地址,然后通过服务器帮你访问另一个地址,才实现代理
       '^/api/*': {
-        target: 'https://cc:3001', // 要代理的域名
+        target: 'http://cc:3000', // 要代理的域名
         changeOrigin: true,//允许跨域
         pathRewrite: {
           '^/api': '/cms/h5/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
@@ -41,7 +41,7 @@ module.exports = {
         }
       },
       '^/download/*': {
-        target: 'https://localhost:3001',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         pathRewrite: {
           '^/download': '/'

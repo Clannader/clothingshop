@@ -18,6 +18,7 @@ const methods = {
       // 这里据说由于动态路由的坑,需要重新刷新浏览器才行...
       // location.reload()
     }
+    // TODO 检查所有store的内存变量,退出时需要全部删除
     store.commit('SetMenuRouter', []) // 清除menuRouter
     store.dispatch('setRoles') // 清除权限
     store.dispatch('clearViews') // 清除面包屑视图
