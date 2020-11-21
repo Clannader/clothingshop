@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { get } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'MenuView',
@@ -82,7 +82,7 @@
       }
     },
     computed: {
-      ...get('tagsView', ['menuRouter', 'currentRouter']),
+      ...sync('tagsView', ['menuRouter', 'currentRouter']),
       items: {
         get() {
           // 获取当前路由的上级路由名,及上级路由的全部children

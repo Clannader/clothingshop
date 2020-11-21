@@ -6,6 +6,7 @@
 import { make } from 'vuex-pathify'
 import request from '@/utils/request'
 import router, { resetRouter } from '@/router'
+import { ROOT_DISPATCH } from '@/store'
 
 const state = {
   namespaced: true,
@@ -67,7 +68,7 @@ const actions = {
     }
     const roles = result.roles
     resetRouter()
-    const accessRoutes = await dispatch('generateRoutes', roles)
+    const accessRoutes = await dispatch('tagsView/generateRoutes', roles, ROOT_DISPATCH)
     router.addRoutes(accessRoutes)
     /**
      * 记录一下如何获取store的module下的state的值

@@ -72,7 +72,7 @@
         const currentLocale = this.$i18n.locale
         if (locale !== currentLocale) {
           this.$i18n.locale = locale
-          this.$store.dispatch('userInfo/setLanguage', locale)
+          this.$store.dispatch('tagsView/setLanguage', locale)
         }
       }
     }

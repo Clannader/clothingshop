@@ -44,7 +44,7 @@
 <script>
   import AppLang from '../toolbar/AppLang'
   import LogoutDialog from '../toolbar/LogoutDialog'
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'AppToolbar',
@@ -59,7 +59,8 @@
       }
     },
     computed: {
-      ...get('userInfo', ['sessionSchema@adminName'])
+      ...get('userInfo', ['sessionSchema@adminName']),
+      ...sync('tagsView', ['mini', 'drawer'])
     },
     created() {
       // this.userName = sessionStorage.getItem('userName')
@@ -68,7 +69,15 @@
     methods: {
       changeSidebar() {
         // 初始化侧边栏状态,是收缩还是展开
-        this.$store.dispatch('tagsView/setMini', !this.$store.getters.mini)
+        if (this.$vuetify.breakpoint.mobile) {
+          // 如果是手机模式,则改变drawer
+          this.mini = false
+          this.drawer = !this.drawer
+        } else {
+          this.mini = !this.mini
+          // 不是则改变mini
+          // this.$store.dispatch('tagsView/setMini', !this.$store.getters.mini)
+        }
       },
       logout() {
         this.children = LogoutDialog
