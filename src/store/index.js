@@ -3,7 +3,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as modules from './modules'
+import modules from './modules'
 import getters from './getters'
 import pathify from '@/plugins/vuex-pathify'
 

@@ -22,8 +22,7 @@ const state = {
 // 把state定义的自动生成对应的mutations
 // 调用使用名字即可,例如commit('language')
 const mutations = make.mutations(state)
-console.log(mutations)
-console.log(make.actions(state))
+
 const actions = {
   ...make.actions(state),
   setLanguage: ({ commit }, language = 'zh') => {
@@ -150,7 +149,6 @@ const actions = {
     commit('menuRouter', [])
   }
 }
-console.log(actions)
 
 const filterAsyncRoutes = function(routes, roles) {
   const tempRoutes = []
