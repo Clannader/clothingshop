@@ -6,10 +6,10 @@
     app
     class="main-footer"
   >
-    <strong>Copyright &copy; 2017-{{ new Date().getFullYear() }} Oliver.wu</strong>
+    <strong>Copyright &copy; {{systemConfig.copyright}}-{{ new Date().getFullYear() }} {{systemConfig.author}}</strong>
     {{$t('homePage.rights')}}
     <v-spacer></v-spacer>
-    <strong>{{$t('homePage.version')}}</strong>1.0.0.0
+    <strong>{{$t('homePage.version')}}</strong>{{systemConfig.version}}
     <v-btn
       icon
       x-small
@@ -25,8 +25,15 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'AppFooter',
+    computed: {
+      ...mapGetters([
+        'systemConfig'
+      ])
+    },
     methods: {
       async refreshRouter() {
         await this.$store.dispatch('changeRoles')

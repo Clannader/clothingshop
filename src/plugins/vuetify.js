@@ -5,6 +5,9 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 
 const opts = {
+  breakpoint: {
+    mobileBreakpoint: 960
+  },
   icons: {
     iconfont: ['mdiSvg'] // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
   },

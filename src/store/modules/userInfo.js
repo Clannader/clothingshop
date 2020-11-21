@@ -10,19 +10,22 @@ const userInfo = {
   state: {
     roles: undefined, // 用户权限
     systemConfig: {
-      dateFormat: 'dd/MM/yyyy'
+      // dateFormat: '',
+      // version: '',
+      // author: '',
+      // copyright: ''
     },
     sessionSchema: {
       // 用户结构
-      adminId: '',
-      adminName: '',
-      adminType: '',
-      lastTime: '',
-      shopId: '',
-      selfShop: '',
-      supplierCode: '',
-      shopName: '',
-      isFirstLogin: true
+      // adminId: '',
+      // adminName: '',
+      // adminType: '',
+      // lastTime: '',
+      // shopId: '',
+      // selfShop: '',
+      // supplierCode: '',
+      // shopName: '',
+      // isFirstLogin: true
     }
   },
   mutations: {
@@ -55,6 +58,13 @@ const userInfo = {
       // 应该说dispatch的参数进去后如果有修改,感觉就不会执行,不知道是不是这个现象
       dispatch('setSessionSchema', data['session'])
       data.roles = roles
+      // 新增获取系统配置信息
+      const [configErr, configData] = await request.post('/api/system/config/search', {})
+        .then(data => [null, data]).catch(err => [err])
+      if (configErr) {
+        return Promise.reject(configErr)
+      }
+      dispatch('setSystemConfig', configData.config)
       return Promise.resolve(data)
     },
     async changeRoles({ dispatch }) {
