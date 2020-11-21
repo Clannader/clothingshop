@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import { dispatch } from 'vuex-pathify'
+  import { get, dispatch } from 'vuex-pathify'
 
   export default {
     name: 'AppBreadcrumbs',
@@ -25,6 +25,7 @@
       }
     },
     computed: {
+      ...get('tagsView', ['currentRouter']),
       breadcrumbs() {
         // 是否第一次加载组件
         if (this.isFirst) {
@@ -44,13 +45,13 @@
               path: '/home',
               disabled: false
             })
-            const current = this.$store.state.tagsView.currentRouter
+            // const current = this.$store.state.tagsView.currentRouter
             // 解决免登陆的时候,有多余的标签
-            if (this.isShow && current.path !== '/home') {
+            if (this.isShow && this.currentRouter.path !== '/home') {
               views.push({
-                text: current.meta.title,
-                path: current.fullPath,
-                i18nParams: current.meta.i18nParams,
+                text: this.currentRouter.meta.title,
+                path: this.currentRouter.fullPath,
+                i18nParams: this.currentRouter.meta.i18nParams,
                 disabled: true
               })
             }
@@ -59,7 +60,7 @@
           // 当登录后进入Home,再点击其他页面的时候触发
           // if (!(views.length === 1 && views[0].name === 'Home')) {
           //   this.$store.commit('SetAddViews', views)
-          dispatch('tagsView/setAddViews')
+          dispatch('tagsView/setAddViews', views)
           // }
           // 这里的意思是computed方法里面不建议对变量赋值
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -68,10 +69,10 @@
           // 可以使用这种方式赋值
           this.setFirst()
         }
-        return this.$store.state.tagsView.addViews
+        return get('tagsView', ['addViews'])
       },
       isShow() {
-        return this.$store.state.tagsView.currentRouter.fullPath !== '/home'
+        return this.currentRouter.fullPath !== '/home'
       }
     },
     methods: {

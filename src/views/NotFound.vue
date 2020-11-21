@@ -23,15 +23,12 @@
 </template>
 
 <script>
-  import { dispatch } from 'vuex-pathify'
-
   export default {
     name: 'NotFound',
     methods: {
       gotoHome() {
         // 清空视图可能要重写一个方法,解决解锁资源
-        // this.$store.commit('SetAddViews', [])
-        dispatch('tagsView/setAddViews')
+        this.$store.dispatch('tagsView/clearViews')
         sessionStorage.setItem('addViews', [])
         this.$router.push({
           path: '/home'

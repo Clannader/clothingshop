@@ -108,7 +108,7 @@ router.beforeEach(async(to, from, next) => {
       // 获取用户权限
       let result
       try {
-        result = await store.dispatch('getRoles')
+        result = await store.dispatch('userInfo/getRoles')
       } catch (e) {
         result = e
       }
@@ -127,7 +127,7 @@ router.beforeEach(async(to, from, next) => {
         const roles = result.roles
 
         // 生成动态路由
-        const accessRoutes = await store.dispatch('generateRoutes', roles)
+        const accessRoutes = await store.dispatch('tagsView/generateRoutes', roles)
 
         // dynamically add accessible routes
         router.addRoutes(accessRoutes)

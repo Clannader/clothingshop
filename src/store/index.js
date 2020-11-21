@@ -3,9 +3,12 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+// 真的是神坑啊, vuex-pathify如果需要修改options的参数,需要先引入vuex-pathify
+// 简直太坑了...
+import pathify from '@/plugins/vuex-pathify'
 import modules from './modules'
 import getters from './getters'
-import pathify from '@/plugins/vuex-pathify'
 
 Vue.use(Vuex)
 

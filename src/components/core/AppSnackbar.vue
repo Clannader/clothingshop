@@ -69,12 +69,12 @@
     },
     mounted() {
       this.setTimeout()
-      store.dispatch('setShowSnackbar', true)
+      store.dispatch('tagsView/setShowSnackbar', true)
     },
     methods: {
       close() {
         this.show = false
-        store.dispatch('setShowSnackbar', false)
+        store.dispatch('tagsView/setShowSnackbar', false)
         window.clearTimeout(this.activeTimeout)
       },
       setTimeout() {

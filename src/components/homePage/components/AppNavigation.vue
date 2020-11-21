@@ -46,7 +46,8 @@
   export default {
     name: 'AppNavigation',
     computed: {
-      ...get('tagsView', ['menuRouter', 'mini'])
+      ...get('tagsView', ['menuRouter']),
+      ...get(['mini'])
     },
     methods: {
       gotoHome() {
