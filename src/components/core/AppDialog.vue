@@ -12,6 +12,7 @@
         <slot name="dialogContent"></slot>
       </v-card-text>
       <v-card-actions class="dialog-footer app-btn">
+        <slot name="footerLeft"></slot>
         <v-spacer></v-spacer>
         <slot name="dialogBtn"></slot>
       </v-card-actions>

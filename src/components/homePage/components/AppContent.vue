@@ -2,7 +2,9 @@
   <v-main class="layout-content-box">
     <v-container fluid class="main-content">
       <app-breadcrumbs></app-breadcrumbs>
-      <router-view></router-view>
+      <v-fade-transition mode="out-in">
+        <router-view></router-view>
+      </v-fade-transition>
     </v-container>
     <change-password
       :visible="showPwd"

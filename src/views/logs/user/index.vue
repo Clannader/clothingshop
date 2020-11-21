@@ -138,11 +138,18 @@
     <div class="card-bottom card-round-btn">
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
+
+    <component
+      :is="children"
+      :userLogObject="isSelect"
+      @closeDialog="closeDialog"
+    ></component>
   </div>
 </template>
 
 <script>
   import { queryUserLog } from './api'
+  import UserLogView from './components/UserLogView'
 
   export default {
     name: 'UserLogs',
@@ -231,8 +238,12 @@
       selectedRow(record) {
         this.isSelect = record
       },
-      viewLogs(record) {
-
+      viewLogs() {
+        this.children = UserLogView
+      },
+      closeDialog() {
+        this.children = ''
+        this.doSearch()
       }
     },
     computed: {
@@ -295,6 +306,9 @@
           }, {
             code: 'Right',
             desc: `${this.$t('logs.rightType')}`
+          }, {
+            code: 'User',
+            desc: `${this.$t('logs.userType')}`
           }]
         }
       }

@@ -100,17 +100,26 @@ const tagsView = {
           // 如果进入首页,清空views
           // TODO 记得解锁
           if (views.length > 1) {
+            // 这里是进入首页之后,清空首页后面的全部路由
             views.splice(1, views.length - 1)
           }
           return
         }
         // 拷贝一个对象出来,否则对象地址一样,修改值会影响views里面的元素
-        const lastEle = Object.assign({}, views[views.length - 1], {
-          disabled: false
-        })
+        // const lastEle = Object.assign({}, views[views.length - 1], {
+        //   disabled: false
+        // })
         // 2个元素交换位置,先把其中一个插入到原本位置,再把另一个插入到另一个位置
-        views.splice(index, 1, lastEle)
-        views.splice(views.length - 1, 1, item)
+        // 这里是路由交换逻辑
+        // views.splice(index, 1, lastEle)
+        // views.splice(views.length - 1, 1, item)
+
+        // 改为一直往后加的逻辑
+        // 先把当前存在的这个删除掉
+        views.splice(index, 1)
+        // 更新最后一个元素的状态值
+        views[views.length - 1].disabled = false
+        views.push(item)
         return
       }
 

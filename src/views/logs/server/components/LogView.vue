@@ -23,7 +23,7 @@
         <v-virtual-scroll
           :height="tableY"
           :items="logContent"
-          item-height="25"
+          :item-height="itemHeight"
           v-scroll.self="onScroll"
         >
           <template v-slot:default="{ item }">
@@ -35,6 +35,16 @@
           </template>
         </v-virtual-scroll>
       </a-spin>
+    </template>
+    <template slot="footerLeft">
+      <v-slider
+        v-model="itemHeight"
+        :label="$t('logs.logItemHeight')"
+        thumb-label
+        max="35"
+        min="18"
+        hide-details
+      ></v-slider>
     </template>
     <template slot="dialogBtn">
       <v-btn
@@ -65,6 +75,7 @@
         logContent: [],
         // logTemp: '', // 这个是分隔数组的最后一行内容
         tableY: 230,
+        itemHeight: 25,
         startByte: 0, // 开始加载的字节位数
         endByte: 10 * 1024 // 最大加载1MB
       }

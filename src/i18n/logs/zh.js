@@ -21,5 +21,8 @@ export default {
   serverType: '服务器日志',
   rightType: '权限',
   queryShop: '店铺ID',
-  queryUserID: '用户ID'
+  queryUserID: '用户ID',
+  userType: '用户',
+  logItemHeight: '行高',
+  userLogTitle: '用户日志'
 }

@@ -24,6 +24,7 @@ const getters = {
     return Methods.convertStringToBoolean(state.tagsView.mini)
   },
   roles: state => state.userInfo.roles,
-  sessionSchema: state => state.userInfo.sessionSchema
+  sessionSchema: state => state.userInfo.sessionSchema,
+  systemConfig: state => state.userInfo.systemConfig
 }
 export default getters
