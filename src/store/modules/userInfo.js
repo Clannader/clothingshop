@@ -34,11 +34,11 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  clearRoles({ commit }) {
+  clearRoles: ({ commit }) => {
     commit('roles', '')
   },
   // 获取用户权限
-  async getRoles({ commit, dispatch }) {
+  getRoles: async({ commit, dispatch }) => {
     const [err, data] = await request.post('/api/user/roles', {})
       .then(data => [null, data]).catch(err => [err])
     // 新增获取系统配置信息
@@ -60,7 +60,7 @@ const actions = {
     dispatch('setSessionSchema', data['session'])
     return Promise.resolve(data)
   },
-  async changeRoles({ dispatch }) {
+  changeRoles: async({ dispatch }) => {
     const [err, result] = await dispatch('getRoles').then(res => [null, res]).catch(err => [err])
     if (err) {
       return
@@ -88,13 +88,13 @@ const actions = {
      * 3.使用watch 检测'$route'或者'$route.path'
      */
   },
-  userLogout() {
+  userLogout: () => {
     router.push({ path: '/login' })
   },
-  resetRouter() {
+  resetRouter: () => {
     resetRouter()
   },
-  setSessionSchema({ commit, state }, session = {}) {
+  setSessionSchema: ({ commit, state }, session = {}) => {
     router.app.publicMethods.setUserSession(session)
     // const orgSession = state.sessionSchema || {}
     // for (const key in session) {
@@ -102,7 +102,7 @@ const actions = {
     // }
     commit('sessionSchema', { ...state.sessionSchema, ...session })
   },
-  clearSession({ commit }) {
+  clearSession: ({ commit }) => {
     commit('sessionSchema', {})
   }
 }

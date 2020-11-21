@@ -22,10 +22,11 @@ const state = {
 // 把state定义的自动生成对应的mutations
 // 调用使用名字即可,例如commit('language')
 const mutations = make.mutations(state)
-
+console.log(mutations)
+console.log(make.actions(state))
 const actions = {
   ...make.actions(state),
-  setLanguage({ commit }, language = 'zh') {
+  setLanguage: ({ commit }, language = 'zh') => {
     let momentLang = ''
     switch (language) {
       case 'zh':
@@ -39,14 +40,14 @@ const actions = {
     localStorage.setItem('language', language)
     commit('language', language)
   },
-  setMini({ commit }, mini = false) {
+  setMini: ({ commit }, mini = false) => {
     localStorage.setItem('sidebarStatus', mini)
     commit('mini', mini)
   },
-  clearCurrentRouter({ commit }) {
+  clearCurrentRouter: ({ commit }) => {
     commit('currentRouter', {})
   },
-  setAddViews({ commit, state }, router) {
+  setAddViews: ({ commit, state }, router) => {
     // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来
     // 首先先申明加载顺序,进入路由,调用setAddViews方法,再进入组件,然后才调用setAddViews的then方法
     // 所以保存路由不能在setAddViews中保存,需要在then方法后面执行
@@ -125,12 +126,12 @@ const actions = {
     views.push(item)
     commit('addViews', views)
   },
-  clearViews({ commit }) {
+  clearViews: ({ commit }) => {
     // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
     commit('addViews', [])
   },
   // 生成权限路由
-  generateRoutes({ commit }, roles) {
+  generateRoutes: ({ commit }, roles) => {
     // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
     // 克隆一个对象
     const cloneRoutes = Methods.extend(true, [], constantRoutes)
@@ -145,10 +146,11 @@ const actions = {
     commit('menuRouter', loginRoutes.children)
     return Promise.resolve(cloneRoutes)
   },
-  clearMenuRouter({ commit }) {
+  clearMenuRouter: ({ commit }) => {
     commit('menuRouter', [])
   }
 }
+console.log(actions)
 
 const filterAsyncRoutes = function(routes, roles) {
   const tempRoutes = []

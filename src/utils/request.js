@@ -56,7 +56,7 @@ service.interceptors.response.use(
         sessionStorage.removeItem('credential')
         // 这样调用removeSession时不会再去调用退出接口了
         methods.removeUserSession()
-        store.dispatch('userLogout')// 这里跳回登录页面
+        store.dispatch('userInfo/userLogout')// 这里跳回登录页面
       } else {
         appSnackbar.error(response.data.msg)
       }
