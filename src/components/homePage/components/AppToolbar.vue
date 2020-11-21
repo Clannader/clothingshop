@@ -8,7 +8,7 @@
     color="primary"
   >
     <v-app-bar-nav-icon
-      @click.stop="mini = !mini"
+      @click.stop="changeSidebar"
     >
     </v-app-bar-nav-icon>
 
@@ -44,7 +44,7 @@
 <script>
   import AppLang from '../toolbar/AppLang'
   import LogoutDialog from '../toolbar/LogoutDialog'
-  import { get, sync } from 'vuex-pathify'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'AppToolbar',
@@ -59,18 +59,17 @@
       }
     },
     computed: {
-      ...get('userInfo', ['sessionSchema@adminName']),
-      ...sync('tagsView', 'mini')
+      ...get('userInfo', ['sessionSchema@adminName'])
     },
     created() {
       // this.userName = sessionStorage.getItem('userName')
       // this.adminName = this.$store.getters.sessionSchema.adminName
     },
     methods: {
-      // changeSidebar() {
-      //   // 初始化侧边栏状态,是收缩还是展开
-      //   this.$store.dispatch('setMini', !this.$store.getters.mini)
-      // },
+      changeSidebar() {
+        // 初始化侧边栏状态,是收缩还是展开
+        this.$store.dispatch('tagsView/setMini', !this.$store.getters.mini)
+      },
       logout() {
         this.children = LogoutDialog
       },

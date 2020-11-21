@@ -39,6 +39,7 @@
 
 <script>
   // import moment from 'moment'
+  import { get } from 'vuex-pathify'
 
   export default {
     inheritAttrs: true,
@@ -77,7 +78,7 @@
       return {
         menu: false,
         datePicker: '', // 日期选择控件
-        format: '', // 日期格式化格式
+        // format: '', // 日期格式化格式
         dateText: '' // 输入框日期显示
       }
     },
@@ -96,12 +97,11 @@
       }
     },
     computed: {
-      locale() {
-        return this.$store.state.tagsView.language
-      }
+      locale: get('tagsView/language'),
+      format: get('userInfo/systemConfig@dateFormat')
     },
     created() {
-      this.format = this.$store.state.userInfo.systemConfig.dateFormat
+      // this.format = this.$store.state.userInfo.systemConfig.dateFormat
       if (!this.publicMethods.isEmpty(this.updateValue)) {
         this.dateText = this.updateValue.format(this.format)
         this.datePicker = this.updateValue

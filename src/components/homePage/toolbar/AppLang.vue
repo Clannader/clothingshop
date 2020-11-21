@@ -55,11 +55,10 @@
     name: 'AppLang',
     data() {
       return {
-        languageList: []
+        languageList: this.staticVal.LanguageList
       }
     },
     created() {
-      this.languageList = this.staticVal.LanguageList
     },
     computed: {
       currentLanguage() {
@@ -73,7 +72,7 @@
         const currentLocale = this.$i18n.locale
         if (locale !== currentLocale) {
           this.$i18n.locale = locale
-          this.$store.dispatch('setLanguage', locale)
+          this.$store.dispatch('userInfo/setLanguage', locale)
         }
       }
     }

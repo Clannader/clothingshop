@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import { get, dispatch } from 'vuex-pathify'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'AppBreadcrumbs',
@@ -25,7 +25,7 @@
       }
     },
     computed: {
-      ...get('tagsView', ['currentRouter']),
+      ...get('tagsView', ['currentRouter', 'addViews']),
       breadcrumbs() {
         // 是否第一次加载组件
         if (this.isFirst) {
@@ -60,7 +60,8 @@
           // 当登录后进入Home,再点击其他页面的时候触发
           // if (!(views.length === 1 && views[0].name === 'Home')) {
           //   this.$store.commit('SetAddViews', views)
-          dispatch('tagsView/setAddViews', views)
+          // 我也忘记为什么调用commit了,这里居然不能调用dispatch
+          this.$store.commit('tagsView/addViews', views)
           // }
           // 这里的意思是computed方法里面不建议对变量赋值
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -69,7 +70,7 @@
           // 可以使用这种方式赋值
           this.setFirst()
         }
-        return get('tagsView', ['addViews'])
+        return this.addViews
       },
       isShow() {
         return this.currentRouter.fullPath !== '/home'
