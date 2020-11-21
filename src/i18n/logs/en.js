@@ -21,5 +21,8 @@ export default {
   serverType: 'Server log',
   rightType: 'Right',
   queryShop: 'Shop ID',
-  queryUserID: 'User ID'
+  queryUserID: 'User ID',
+  userType: 'User',
+  logItemHeight: 'ItemHeight',
+  userLogTitle: 'User Log'
 }
