@@ -147,9 +147,9 @@ router.afterEach(to => {
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     // 设置当前路由对象
-    app.$store.dispatch('setCurrentRouter', to)
+    app.$store.dispatch('tagsView/clearCurrentRouter', to)
     // 设置面包屑视图
-    app.$store.dispatch('setAddViews', to).then(() => {
+    app.$store.dispatch('tagsView/setAddViews', to).then(() => {
       // 最后保存路由
       sessionStorage.setItem('addViews', JSON.stringify(app.$store.state.tagsView.addViews))
     })

@@ -19,12 +19,12 @@ const methods = {
       // location.reload()
     }
     // 检查所有store的内存变量,退出时需要全部删除
-    store.dispatch('clearMenuRouter') // 清除menuRouter
-    store.dispatch('clearRoles') // 清除权限
-    store.dispatch('clearViews') // 清除面包屑视图
-    store.dispatch('clearCurrentRouter') // 清除当前路由
-    store.dispatch('resetRouter')// 重置路由,避免不刷新页面导致缓存
-    store.dispatch('clearSession')
+    store.dispatch('tagsView/clearMenuRouter') // 清除menuRouter
+    store.dispatch('userInfo/clearRoles') // 清除权限
+    store.dispatch('tagsView/clearViews') // 清除面包屑视图
+    store.dispatch('tagsView/clearCurrentRouter') // 清除当前路由
+    store.dispatch('userInfo/resetRouter')// 重置路由,避免不刷新页面导致缓存
+    store.dispatch('userInfo/clearSession')
     const sessionKeys = Object.keys(sessionStorage)
     for (let i = 0; i < sessionKeys.length; i++) {
       sessionStorage.removeItem(sessionKeys[i])

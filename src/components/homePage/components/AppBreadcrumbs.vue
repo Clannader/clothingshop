@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import { dispatch } from 'vuex-pathify'
+
   export default {
     name: 'AppBreadcrumbs',
     data() {
@@ -56,7 +58,8 @@
           // 如果仅有一个元素,并且第一个是Home页面,则不改变store里面的views
           // 当登录后进入Home,再点击其他页面的时候触发
           // if (!(views.length === 1 && views[0].name === 'Home')) {
-            this.$store.commit('SetAddViews', views)
+          //   this.$store.commit('SetAddViews', views)
+          dispatch('tagsView/setAddViews')
           // }
           // 这里的意思是computed方法里面不建议对变量赋值
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
