@@ -43,6 +43,8 @@
 </template>
 
 <script>
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'MenuItem',
     props: {
@@ -78,7 +80,7 @@
         })
       },
       isActiveClass(item) {
-        const current = this.$store.state.tagsView.currentRouter
+        const current = this.currentRouter
         let clazz = ''
         if (current.fullPath === '/' + item.to) {
           clazz = 'v-list-item--active'
@@ -108,7 +110,8 @@
           return false
         }
         return true
-      }
+      },
+      ...get('tagsView', ['currentRouter'])
       // current() {
       //   return this.$store.state.tagsView.currentRouter
       // }

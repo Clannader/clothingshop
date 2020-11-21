@@ -108,7 +108,7 @@ router.beforeEach(async(to, from, next) => {
       // 获取用户权限
       let result
       try {
-        result = await store.dispatch('getRoles')
+        result = await store.dispatch('userInfo/getRoles')
       } catch (e) {
         result = e
       }
@@ -127,7 +127,7 @@ router.beforeEach(async(to, from, next) => {
         const roles = result.roles
 
         // 生成动态路由
-        const accessRoutes = await store.dispatch('generateRoutes', roles)
+        const accessRoutes = await store.dispatch('tagsView/generateRoutes', roles)
 
         // dynamically add accessible routes
         router.addRoutes(accessRoutes)
@@ -147,9 +147,9 @@ router.afterEach(to => {
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
     const app = router.app
     // 设置当前路由对象
-    app.$store.dispatch('setCurrentRouter', to)
+    app.$store.dispatch('tagsView/setCurrentRouter', to)
     // 设置面包屑视图
-    app.$store.dispatch('setAddViews', to).then(() => {
+    app.$store.dispatch('tagsView/setAddViews', to).then(() => {
       // 最后保存路由
       sessionStorage.setItem('addViews', JSON.stringify(app.$store.state.tagsView.addViews))
     })

@@ -25,19 +25,15 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { call, get } from 'vuex-pathify'
 
   export default {
     name: 'AppFooter',
     computed: {
-      ...mapGetters([
-        'systemConfig'
-      ])
+      ...get('userInfo', ['systemConfig'])
     },
     methods: {
-      async refreshRouter() {
-        await this.$store.dispatch('changeRoles')
-      }
+      refreshRouter: call('userInfo/changeRoles')
     }
   }
 </script>

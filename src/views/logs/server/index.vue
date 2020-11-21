@@ -99,6 +99,7 @@
   import { saveAs } from 'file-saver'
   import LogView from './components/LogView'
   import LogDeleteDialog from './components/LogDeleteDialog'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'ServerLogs',
@@ -163,7 +164,7 @@
       isShowDelete(date) {
         // 判断用户是否有权限
         const rightCode = this.staticVal.RightsCode.DeleteServerLog.code
-        const isRight = this.$store.getters.roles.indexOf(rightCode) !== -1
+        const isRight = this.roles.indexOf(rightCode) !== -1
         const isAfter = new Date().todayMoment().diff(date.createMoment(), 'days')
         return isRight && isAfter > 30
       }
@@ -173,7 +174,8 @@
         return this.logsArr.filter(v => {
           return this.filterByFunction(v)
         })
-      }
+      },
+      ...get('userInfo', ['roles'])
     }
   }
 </script>

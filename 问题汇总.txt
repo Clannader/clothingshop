@@ -73,3 +73,4 @@
 36.如何把自己项目变成ts
 37.考虑使用vuex-pathify这个来获取store
 38.重新规划store,使用vuex-pathify
+39.vuex如何快速拿到getters的值,vuex-pathify如何拿到getters或者module的getters的值

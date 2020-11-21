@@ -85,6 +85,7 @@
   import { login } from './api.js'
   import CryptoJS from 'crypto-js'
   import DeleteUserDialog from './components/DeleteUserDialog'
+  import { get } from 'vuex-pathify'
 
   export default {
     components: {
@@ -129,16 +130,18 @@
       this.publicMethods.hotkeys(this.submit, 'Enter')
     },
     computed: {
+      storeLang: get('tagsView/language'),
       language: {
         get() {
-          return this.$store.state.tagsView.language
+          return this.storeLang
         },
         set(lang) {
           this.languagesChange(lang)
           this.changeLang()
           // this.$refs.form.reset()
         }
-      }
+      },
+      ...get('tagsView', ['showSnackbar'])
     },
     methods: {
       // 改变语言时重载登录Input部分
@@ -152,7 +155,7 @@
       // switch language
       languagesChange(lang) {
         this.$i18n.locale = lang
-        this.$store.dispatch('setLanguage', lang)
+        this.$store.dispatch('tagsView/setLanguage', lang)
       },
       submit() {
         // 这里加一个定时器,是为了combo box组件的问题,当输入完内容时,没有失去焦点的时候,还是会
@@ -168,7 +171,7 @@
         this.showPassword = !this.showPassword
       },
       async userLogin() {
-        if (this.$store.state.tagsView.showSnackbar) {
+        if (this.showSnackbar) {
           return
         }
         const params = {

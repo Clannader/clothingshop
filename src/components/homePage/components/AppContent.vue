@@ -17,9 +17,13 @@
 <script>
   import AppBreadcrumbs from './AppBreadcrumbs'
   import ChangePassword from '@/views/common/ChangePassword'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'AppContent',
+    computed: {
+      ...get('userInfo', ['sessionSchema'])
+    },
     components: {
       AppBreadcrumbs,
       ChangePassword
@@ -30,7 +34,7 @@
       }
     },
     created() {
-      this.showPwd = this.$store.getters.sessionSchema.isFirstLogin
+      this.showPwd = this.sessionSchema.isFirstLogin
     },
     methods: {
       async quit() {
@@ -39,7 +43,7 @@
       },
       closePwdDialog() {
         this.showPwd = false
-        this.$store.dispatch('setSessionSchema', {
+        this.$store.dispatch('userInfo/setSessionSchema', {
           isFirstLogin: false
         })
       }
