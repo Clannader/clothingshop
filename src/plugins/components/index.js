@@ -3,11 +3,10 @@
  */
 'use strict'
 
-import Vue from 'vue'
 import vueQriously from 'vue-qriously'
 // import vueHtmlToPaper from 'vue-html-to-paper'
 
-Vue.use(vueQriously)
+// Vue.use(vueQriously)
 // Vue.use(vueHtmlToPaper, {
 //   name: '',
 //   specs: [
@@ -22,11 +21,13 @@ Vue.use(vueQriously)
 // })
 
 // 自定义组件
-Vue.component('menu-group', () => import('@/components/core/MenuGroup'))
-Vue.component('menu-item', () => import('@/components/core/MenuItem'))
-Vue.component('menu-sub-group', () => import('@/components/core/MenuSubGroup'))
+export function registerComponents(app) {
+  app.component('menu-group', () => import('@/components/core/MenuGroup'))
+  app.component('menu-item', () => import('@/components/core/MenuItem'))
+  app.component('menu-sub-group', () => import('@/components/core/MenuSubGroup'))
+  app.component('app-table', () => import('@/components/core/AppTable'))
+  app.component('app-date-picker', () => import('@/components/core/AppDatePicker'))
+  app.component('app-dialog', () => import('@/components/core/AppDialog'))
+  app.use(vueQriously)
+}
 
-// 我觉得这个表格是根本无法封装的
-Vue.component('app-table', () => import('@/components/core/AppTable'))
-Vue.component('app-date-picker', () => import('@/components/core/AppDatePicker'))
-Vue.component('app-dialog', () => import('@/components/core/AppDialog'))

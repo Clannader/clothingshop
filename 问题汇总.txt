@@ -75,3 +75,5 @@
 38.重新规划store,使用vuex-pathify√
 39.vuex如何快速拿到getters的值,vuex-pathify如何拿到getters或者module的getters的值√
 40.drawer这个值在小屏幕登录的时候有问题
+41.写一个判断权限的指令
+42.更换注册插件的写法,只有main,i18n,router,store才会import vue√

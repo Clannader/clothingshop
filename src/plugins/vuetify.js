@@ -1,8 +1,10 @@
-import '@mdi/font/css/materialdesignicons.css'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+/**
+ * Create by CC on 2020/11/22
+ */
+'use strict'
 
-Vue.use(Vuetify)
+import '@mdi/font/css/materialdesignicons.css'
+import Vuetify from 'vuetify'
 
 const opts = {
   breakpoint: {
@@ -18,6 +20,10 @@ const opts = {
       }
     }
   }
+}
+
+export function useVuetify(app) {
+  app.use(Vuetify)
 }
 
 export default new Vuetify(opts)
