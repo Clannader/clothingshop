@@ -23,9 +23,11 @@
 </template>
 
 <script>
-  import { sync } from 'vuex-pathify'
+  import ChangeMeta from '@/mixins/change-meta'
+
   export default {
     name: 'NotFound',
+    mixins: [ChangeMeta],
     methods: {
       gotoHome() {
         // 清空视图可能要重写一个方法,解决解锁资源
@@ -34,14 +36,6 @@
         this.$router.push({
           path: '/home'
         })
-      }
-    },
-    computed: {
-      ...sync('tagsView', ['currentRouter'])
-    },
-    metaInfo() {
-      return {
-        title: this.$t(`${this.currentRouter.meta.title}`)
       }
     }
   }
