@@ -38,11 +38,17 @@ export const constantRoutes = [
   },
   {
     path: '/404',
+    meta: {
+      title: 'menu.NoFoundPage'
+    },
     // name: 'NotFound',
     component: () => import('@/views/NotFound')
   },
   {
     path: '*',
+    meta: {
+      title: 'menu.NoFoundPage'
+    },
     component: () => import('@/views/NotFound'),
     // redirect: '/404', // 定义动态路由时,不能这样写,否则刷新会跳转404
     hidden: true
@@ -144,10 +150,10 @@ router.afterEach(to => {
   // 这里404要处理一下setAddViews才得
   // 这里的处理404是由于动态路由的原因,可能导致之前进入的路由变成404,但是还存在setAddViews
   // 估计可以不需要处理了
+  const app = router.app
+  // 设置当前路由对象
+  app.$store.dispatch('tagsView/setCurrentRouter', to)
   if (to.fullPath && to.fullPath !== '/login' && to.fullPath !== '/404') {
-    const app = router.app
-    // 设置当前路由对象
-    app.$store.dispatch('tagsView/setCurrentRouter', to)
     // 设置面包屑视图
     app.$store.dispatch('tagsView/setAddViews', to).then(() => {
       // 最后保存路由

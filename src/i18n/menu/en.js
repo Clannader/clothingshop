@@ -31,6 +31,7 @@ export default {
   userMonitor: 'User',
   apiMonitor: 'Api',
   databaseMonitor: 'Database',
-  test: 'Test {num}'
+  test: 'Test {num}',
+  NoFoundPage: '404 Page'
 }
 

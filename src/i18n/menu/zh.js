@@ -31,5 +31,6 @@ export default {
   userMonitor: '用户访问',
   apiMonitor: '接口调用',
   databaseMonitor: '数据库性能',
-  test: '功能测试 {num}'
+  test: '功能测试 {num}',
+  NoFoundPage: '404 页面'
 }

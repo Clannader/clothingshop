@@ -14,6 +14,7 @@
   import AppContent from './components/AppContent'
   import AppNavigation from './components/AppNavigation'
   import AppToolbar from './components/AppToolbar'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'HomePage',
@@ -23,6 +24,14 @@
       AppContent,
       AppNavigation,
       AppToolbar
+    },
+    computed: {
+      ...sync('tagsView', ['currentRouter'])
+    },
+    metaInfo() {
+      return {
+        title: this.$t(`${this.currentRouter.meta.title}`)
+      }
     }
   }
 </script>
