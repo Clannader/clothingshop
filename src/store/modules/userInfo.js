@@ -9,7 +9,6 @@ import router, { resetRouter } from '@/router'
 import { ROOT_DISPATCH } from '@/store'
 
 const state = {
-  namespaced: true,
   roles: null, // 用户权限
   systemConfig: {
     // dateFormat: '',

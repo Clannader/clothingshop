@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import { sync } from 'vuex-pathify'
   export default {
     name: 'NotFound',
     methods: {
@@ -33,6 +34,14 @@
         this.$router.push({
           path: '/home'
         })
+      }
+    },
+    computed: {
+      ...sync('tagsView', ['currentRouter'])
+    },
+    metaInfo() {
+      return {
+        title: this.$t(`${this.currentRouter.meta.title}`)
       }
     }
   }

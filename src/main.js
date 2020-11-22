@@ -13,12 +13,13 @@ import './style/style.scss'
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
+import { registerPlugins } from './plugins'
 // 翻译资源文件
 import i18n from './i18n'
 import 'moment/locale/zh-cn'
 // 公共方法
-import './plugins/core/overrideObject'
-import './utils'
+// import './plugins/core/overrideObject'
+// import './utils'
 import App from './App'
 // store结构
 import store from './store'
@@ -35,7 +36,8 @@ Vue.component(Upload.Dragger.name, Upload.Dragger)
 Vue.component(Spin.name, Spin)
 
 // 注册全局自定义组件
-import './plugins/components'
+// import './plugins/components'
+registerPlugins(Vue)
 
 Vue.config.productionTip = false
 

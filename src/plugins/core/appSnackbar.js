@@ -23,6 +23,8 @@ class AppSnackbar {
     // const Constructor = isV2Down
     //   ? Vue.extend(AppSnackbarComponent)
     //   : Vue.extend(AppAlertComponent)
+    // 以后再考虑如何改变这个组件的this引用,这样可以翻译
+    // 或者传入翻译函数
     const Constructor = Vue.extend(AppSnackbarComponent)
     const instance = new Constructor(
       {
