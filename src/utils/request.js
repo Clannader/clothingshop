@@ -21,7 +21,7 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   config => {
-    // TODO 后面删除
+    // 后面删除
     // console.log(JSON.stringify(process.env))
     // if (store.getters.showSnackbar) {
     //   if (typeof cancel === 'function') {
