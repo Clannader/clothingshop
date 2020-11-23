@@ -11,7 +11,7 @@ const homeRouter = {
     title: 'menu.home',
     icon: 'iconfont icon-c-home'
   },
-  component: () => import('@/views/test/components/TestStore')
+  component: () => import('@/views/home')
 }
 
 export default homeRouter
