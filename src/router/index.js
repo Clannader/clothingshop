@@ -33,13 +33,16 @@ export const constantRoutes = [
   },
   {
     path: '/login',
+    meta: {
+      title: 'menu.loginPage'
+    },
     // name: 'Login', // 定义动态路由时,初始路由不能有name,否则报警告
     component: Login
   },
   {
     path: '/404',
     meta: {
-      title: 'menu.NoFoundPage'
+      title: 'menu.noFoundPage'
     },
     // name: 'NotFound',
     component: () => import('@/views/NotFound')
