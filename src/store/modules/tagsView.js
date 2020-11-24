@@ -16,7 +16,7 @@ const state = {
   mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
   currentRouter: {}, // 当前路由对象
   addViews: [], // 当前面包屑
-  drawer: false // 左侧栏是否隐藏,当窗口小于一定px时就会隐藏
+  drawer: null // 左侧栏是否隐藏,当窗口小于一定px时就会隐藏
 }
 
 // 把state定义的自动生成对应的mutations
