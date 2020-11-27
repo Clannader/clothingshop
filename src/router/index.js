@@ -55,7 +55,7 @@ export const constantRoutes = [
   {
     path: '*',
     meta: {
-      title: 'menu.NoFoundPage'
+      title: 'menu.noFoundPage'
     },
     component: () => import('@/views/NotFound'),
     // redirect: '/404', // 定义动态路由时,不能这样写,否则刷新会跳转404
