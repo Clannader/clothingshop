@@ -14,4 +14,17 @@ const homeRouter = {
   component: () => import('@/views/home')
 }
 
-export default homeRouter
+const phoneHomeRouter = {
+  path: 'home',
+  to: 'home',
+  meta: {
+    title: 'menu.home',
+    icon: 'iconfont icon-c-home'
+  },
+  component: () => import('@/phone/home')
+}
+
+export {
+  homeRouter,
+  phoneHomeRouter
+}

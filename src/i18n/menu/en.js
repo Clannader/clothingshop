@@ -12,12 +12,12 @@ export default {
   statistics: 'Data statistics',
   settings: 'Settings',
   logs: 'Logs',
-  userLogs: 'User',
+  userLogs: 'User logs',
   shopCategory: 'Category',
   clothing: 'Clothing',
   shopOrder: 'Order',
-  serverLogs: 'Server',
-  mailLogs: 'Mail',
+  serverLogs: 'Server logs',
+  mailLogs: 'Mail logs',
   supplierList: 'Supplier',
   shopList: 'Shop',
   userList: 'User',
@@ -27,11 +27,12 @@ export default {
   repair: 'Repair',
   staShopOrder: 'Order',
   staIncome: 'Income',
-  staUserAccess: 'Access',
-  userMonitor: 'User',
-  apiMonitor: 'Api',
-  databaseMonitor: 'Database',
+  staUserAccess: 'User access',
+  userMonitor: 'User monitor',
+  apiMonitor: 'Api monitor',
+  databaseMonitor: 'Database monitor',
   test: 'Test {num}',
-  NoFoundPage: '404 Page'
+  noFoundPage: '404 Page',
+  loginPage: 'Clothingshop'
 }
 

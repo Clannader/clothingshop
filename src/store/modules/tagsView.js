@@ -4,7 +4,7 @@
 
 'use strict'
 import { make } from 'vuex-pathify'
-import { menuRoutes, constantRoutes } from '@/router'
+import { menuRoutes, constantRoutes, phoneRoutes } from '../../router'
 import Methods from '@/utils/methods'
 import moment from 'moment'
 
@@ -130,7 +130,7 @@ const actions = {
     commit('addViews', [])
   },
   // 生成权限路由
-  generateRoutes: ({ commit }, roles) => {
+  generateRoutes: ({ commit, rootState }, roles) => {
     // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
     // 克隆一个对象
     const cloneRoutes = Methods.extend(true, [], constantRoutes)
@@ -139,7 +139,13 @@ const actions = {
     const loginRoutes = cloneRoutes[loginIndex]
 
     // 根据权限计算好menuRouter
-    const router = filterAsyncRoutes(menuRoutes, roles)
+    const mobile = rootState.userInfo.sessionSchema.mobile
+    let router
+    if (mobile) {
+      router = filterAsyncRoutes(phoneRoutes, roles)
+    } else {
+      router = filterAsyncRoutes(menuRoutes, roles)
+    }
     loginRoutes.children = router
 
     commit('menuRouter', loginRoutes.children)
