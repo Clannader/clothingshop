@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/login'
 import HomePage from 'components/homePage'
 import Frontdesk from './frontdesk'
-import Home from './home'
+import { homeRouter, phoneHomeRouter } from './home'
 import Logs from './logs'
 import Settings from './settings'
 import Statistics from './statistics'
@@ -18,9 +18,13 @@ Vue.use(VueRouter)
 
 // 有权限的路由列表
 export const menuRoutes = [
-  Home, Frontdesk, Logs, Settings,
+  homeRouter, Frontdesk, Logs, Settings,
   Statistics, Monitor, Miscellaneous
   // , FunctionTest
+]
+
+export const phoneRoutes = [
+  phoneHomeRouter
 ]
 
 // 无需权限的路由列表
@@ -28,6 +32,7 @@ export const constantRoutes = [
   {
     path: '/',
     redirect: '/login',
+    // TODO phone的主页要换
     component: HomePage,
     children: []
   },

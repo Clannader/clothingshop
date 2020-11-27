@@ -5,7 +5,7 @@
 'use strict'
 import { make } from 'vuex-pathify'
 import request from '@/utils/request'
-import router, { resetRouter } from '@/router'
+import router, { resetRouter } from '../../router'
 import { ROOT_DISPATCH } from '@/store'
 
 const state = {

@@ -1,11 +1,13 @@
 /**
  * Create by CC on 2020/11/22
  */
+
 'use strict'
 import { useUtils } from '../utils'
 import { useMeta } from './vue-meta'
 import { useVuetify } from './vuetify'
 import { registerComponents } from './components'
+import { useVant } from './vant'
 import './core/overrideObject'
 
 export function registerPlugins(app) {
@@ -13,4 +15,5 @@ export function registerPlugins(app) {
   useUtils(app)
   useMeta(app)
   useVuetify(app)
+  useVant(app)
 }

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mdi/font": "~5.8.55",
+    "@vant/touch-emulator": "^1.2.0",
     "ant-design-vue": "~1.7.2",
     "axios": "~0.21.0",
     "core-js": "~3.6.5",
@@ -21,6 +22,7 @@
     "material-design-icons-iconfont": "~6.1.0",
     "moment": "~2.29.1",
     "pdfjs-dist": "~2.5.207",
+    "vant": "^2.11.1",
     "vue": "~2.6.12",
     "vue-i18n": "~8.22.1",
     "vue-qriously": "~1.1.1",
