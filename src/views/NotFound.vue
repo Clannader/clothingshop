@@ -31,10 +31,11 @@
     methods: {
       gotoHome() {
         // 清空视图可能要重写一个方法,解决解锁资源
-        this.$store.dispatch('tagsView/clearViews')
-        sessionStorage.setItem('addViews', [])
-        this.$router.push({
-          path: '/home'
+        this.$store.dispatch('tagsView/clearViews').then(() => {
+          sessionStorage.setItem('addViews', JSON.stringify([]))
+          this.$router.push({
+            path: '/home'
+          })
         })
       }
     }
