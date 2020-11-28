@@ -8,15 +8,20 @@ import { menuRoutes, constantRoutes, phoneRoutes } from '../../router'
 import Methods from '@/utils/methods'
 import moment from 'moment'
 
+// 这里用不了Methods的方法,因为state的初始化不行,其他方法可以
+function convertStringToBoolean(str = '') {
+  return (typeof str === 'string' && str === 'true') || (typeof str === 'boolean' && str)
+}
+
 // 定义store的基础变量名
 const state = {
   language: localStorage.getItem('language') || 'zh', // 全局语言类型
   menuRouter: [], // 全局左侧导航栏
   showSnackbar: false, // 全局是否弹消息条,如果弹了,则不能再弹
-  mini: localStorage.getItem('sidebarStatus') || false, // 是否收缩左侧栏
+  mini: convertStringToBoolean(localStorage.getItem('sidebarStatus')) || false, // 是否收缩左侧栏
   currentRouter: {}, // 当前路由对象
   addViews: [], // 当前面包屑
-  drawer: null // 左侧栏是否隐藏,当窗口小于一定px时就会隐藏
+  drawer: null // 左侧栏是否隐藏,当窗口小于一定px时就会隐藏 true显示,false隐藏
 }
 
 // 把state定义的自动生成对应的mutations

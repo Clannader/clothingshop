@@ -47,19 +47,19 @@
   export default {
     name: 'AppNavigation',
     computed: {
-      ...sync('tagsView', ['menuRouter', 'drawer']),
-      mini: {
-        get() {
-          return this.$store.getters.mini
-        },
-        set(val) {
-          // 经过测试可以在sync里面加入mini,但是这样导致显示的效果
-          // 和预期的不一样,所以还是按照老方式的写法吧
-          // 如果写在sync里面的话,点击路由就会自动改变mini的值了
-
-          // 我就纳闷了,如果不这样写,左侧栏缩小后点击就会报错...
-        }
-      }
+      ...sync('tagsView', ['menuRouter', 'drawer', 'mini'])
+      // mini: {
+      //   get() {
+      //     return this.$store.getters.mini
+      //   },
+      //   set(val) {
+      //     // 经过测试可以在sync里面加入mini,但是这样导致显示的效果
+      //     // 和预期的不一样,所以还是按照老方式的写法吧
+      //     // 如果写在sync里面的话,点击路由就会自动改变mini的值了
+      //
+      //     // 我就纳闷了,如果不这样写,左侧栏缩小后点击就会报错...
+      //   }
+      // }
     },
     methods: {
       gotoHome() {
