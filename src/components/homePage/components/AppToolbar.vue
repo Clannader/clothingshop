@@ -63,6 +63,7 @@
       ...sync('tagsView', ['mini', 'drawer'])
     },
     created() {
+      // this.drawer = !this.$vuetify.breakpoint.mobile
       // this.userName = sessionStorage.getItem('userName')
       // this.adminName = this.$store.getters.sessionSchema.adminName
     },
