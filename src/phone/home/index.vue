@@ -18,15 +18,15 @@
 </template>
 
 <script>
-  import { Dialog, CellGroup, Button, Cell, SwipeCell } from 'vant'
+  import { Dialog } from 'vant'
   export default {
     name: 'PhoneHome',
-    components: {
-      VanCellGroup: CellGroup,
-      VanButton: Button,
-      VanCell: Cell,
-      VanSwipeCell: SwipeCell
-    },
+    // components: {
+    //   VanCellGroup: CellGroup,
+    //   VanButton: Button,
+    //   VanCell: Cell,
+    //   VanSwipeCell: SwipeCell
+    // },
     methods: {
       // position 为关闭时点击的位置
       // instance 为对应的 SwipeCell 实例

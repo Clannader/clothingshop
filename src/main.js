@@ -6,7 +6,7 @@
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import 'ant-design-vue/dist/antd.min.css'
+// import 'ant-design-vue/dist/antd.min.css'
 // import 'roboto-npm-webfont' // 使用font-family: 'Roboto', sans-serif 字体
 import './style/icon/iconfont.css'
 import './style/style.scss'
@@ -25,16 +25,6 @@ import App from './App'
 import store from './store'
 // 路由
 import router from './router'
-
-import { Table, Upload, Spin } from 'ant-design-vue'
-
-Vue.component(Table.name, Table)
-Vue.component(Table.Column.name, Table.Column)
-Vue.component(Table.ColumnGroup.name, Table.ColumnGroup)
-Vue.component(Upload.name, Upload)
-Vue.component(Upload.Dragger.name, Upload.Dragger)
-Vue.component(Spin.name, Spin)
-
 // 注册全局自定义组件
 // import './plugins/components'
 registerPlugins(Vue)
