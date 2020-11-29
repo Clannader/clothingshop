@@ -19,11 +19,6 @@
 <script>
   export default {
     name: 'PhoneAppFooter',
-    // components: {
-    //   VanTabbar: Tabbar,
-    //   VanTabbarItem: TabbarItem,
-    //   VanIcon: Icon
-    // },
     data() {
       return {
         tabActive: 'home',
