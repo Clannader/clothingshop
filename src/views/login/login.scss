@@ -13,12 +13,12 @@
 
   .loginContentBox {
     position: absolute;
-    left: calc(50% - 241px);
-    top: calc((100% - 400px) * 0.45);
+    left: calc(50% - 220px); // width的一半
+    top: calc(50% - 203px);// 高度的一半
     opacity: 0.9;
     background: rgba(255, 255, 255, 0.8);
-    padding: 20px 40px 20px 40px;
-    width: 442px;
+    padding: 20px 40px;
+    width: 440px;
 
     .headerBox {
       height: 30px;
@@ -92,7 +92,7 @@
 
     .loginBtnBox {
       .v-btn {
-        width: 360px;
+        width: 360px; // $contentBoxWidth - 2 * $contentBoxPadding;
         margin: 0;
         height: 44px;
         font-size: 16px;
@@ -136,6 +136,38 @@
     position: absolute;
     left: calc(50% - 241px);
     bottom: calc((100% - 507px) * 0.094);
+  }
+}
+
+@media (max-width: 450px){
+  .loginBox {
+    .loginContentBox {
+      left: calc(50% - 165px);
+      top: calc(50% - 203px);
+      padding: 20px;
+      width: 330px;
+      .loginBtnBox {
+        .v-btn {
+          width: 290px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 350px){
+  .loginBox {
+    .loginContentBox {
+      left: calc(50% - 140px);
+      top: calc(50% - 203px);
+      padding: 20px;
+      width: 280px;
+      .loginBtnBox {
+        .v-btn {
+          width: 240px;
+        }
+      }
+    }
   }
 }
 
