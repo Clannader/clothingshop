@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'AppNavigation',
@@ -50,7 +50,7 @@
       ...sync('tagsView', ['menuRouter', 'drawer']),
       mini: {
         get() {
-          return this.$store.getters.mini
+          return get('tagsView/mini').call(this)
         },
         set(val) {
           // 经过测试可以在sync里面加入mini,但是这样导致显示的效果

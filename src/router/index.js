@@ -32,7 +32,6 @@ export const constantRoutes = [
   {
     path: '/',
     redirect: '/login',
-    // TODO phone的主页要换
     component: HomePage,
     children: []
   },

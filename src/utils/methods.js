@@ -25,6 +25,7 @@ const methods = {
     store.dispatch('tagsView/clearCurrentRouter') // 清除当前路由
     store.dispatch('userInfo/resetRouter')// 重置路由,避免不刷新页面导致缓存
     store.dispatch('userInfo/clearSession')
+    store.dispatch('tagsView/setDrawer', null)
     const sessionKeys = Object.keys(sessionStorage)
     for (let i = 0; i < sessionKeys.length; i++) {
       sessionStorage.removeItem(sessionKeys[i])
