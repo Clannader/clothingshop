@@ -5,7 +5,7 @@
 'use strict'
 import { useUtils } from '../utils'
 import { useMeta } from './vue-meta'
-import { useVant } from './vant'
+// import { useVant } from './vant'
 import { useVuetify } from './vuetify'
 import { registerComponents } from './components'
 import './core/overrideObject'
@@ -14,6 +14,6 @@ export function registerPlugins(app) {
   registerComponents(app)
   useUtils(app)
   useMeta(app)
-  useVant(app)
+  // useVant(app)
   useVuetify(app)
 }
