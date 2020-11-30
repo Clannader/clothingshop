@@ -33,12 +33,12 @@
             itemName: 'home'
           },
           {
-            name: '消息',
+            name: ' 退出',
             icon: {
               active: 'chat',
               inactive: 'chat-o'
             },
-            path: '/user/chat',
+            path: '/login',
             itemName: 'chat'
           },
           {

@@ -24,13 +24,13 @@
       <template
         v-for="(menu, i) in menuRouter"
       >
-        <menu-group
+        <app-menu-group
           v-if="isShowGroupNav(menu)"
           :key="`group-${i}`"
           :item="menu"
         />
 
-        <menu-item
+        <app-menu-item
           v-else-if="isShowItemNav(menu)"
           :key="`item-${i}`"
           :item="menu"

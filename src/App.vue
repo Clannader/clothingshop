@@ -5,8 +5,11 @@
 </template>
 
 <script>
+  import ChangeMeta from '@/mixins/change-meta'
+
   export default {
-    name: 'App'
+    name: 'App',
+    mixins: [ChangeMeta]
   }
 </script>
 

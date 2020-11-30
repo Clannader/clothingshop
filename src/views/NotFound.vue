@@ -23,11 +23,16 @@
 </template>
 
 <script>
-  import ChangeMeta from '@/mixins/change-meta'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'NotFound',
-    mixins: [ChangeMeta],
+    computed: {
+      ...sync('tagsView', ['drawer'])
+    },
+    created() {
+      this.drawer = null
+    },
     methods: {
       gotoHome() {
         // 清空视图可能要重写一个方法,解决解锁资源

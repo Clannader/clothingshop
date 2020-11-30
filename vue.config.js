@@ -15,7 +15,7 @@ module.exports = {
   // 生产环境打包不产生map文件
   productionSourceMap: false,
   devServer: {
-    // host: 'localhost',
+    host: '192.168.1.6',
     port: '9800',
     // 尝试使用反向代理解决跨域问题
     proxy: {

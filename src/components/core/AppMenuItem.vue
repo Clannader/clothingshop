@@ -46,7 +46,7 @@
   import { get } from 'vuex-pathify'
 
   export default {
-    name: 'MenuItem',
+    name: 'AppMenuItem',
     props: {
       item: {
         type: Object,

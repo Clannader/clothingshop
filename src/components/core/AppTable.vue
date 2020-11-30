@@ -47,9 +47,14 @@
 </template>
 
 <script>
+  import { Table } from 'ant-design-vue'
+
   export default {
     inheritAttrs: true,
     name: 'AppTable',
+    components: {
+      ATable: Table
+    },
     // bind多值写法
     // v-bind="{...$attrs, ...$props, ...{dataSource: body, columns: header}}"
     data() {
