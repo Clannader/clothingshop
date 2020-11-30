@@ -1,7 +1,7 @@
 // import Vuetify from 'vuetify'
 import Vue from 'vue'
 // import AppAlertComponent from 'components/core/AppAlert'
-import AppSnackbarComponent from 'components/core/AppSnackbar'
+import AppSnackbarComponent from 'components/plugins/AppSnackbar'
 
 // 获取vuetify的版本
 // const version = Vuetify.version

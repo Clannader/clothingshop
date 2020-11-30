@@ -12,13 +12,13 @@
     </template>
 
     <template v-for="(child, i) in children">
-      <menu-sub-group
+      <app-menu-sub-group
         v-if="isShowGroupNav(child)"
         :key="`sub-group-${i}`"
         :item="child"
       />
 
-      <menu-item
+      <app-menu-item
         v-else-if="!child.meta.hidden && !child.children"
         :key="`sub-item-${i}`"
         :item="child"
@@ -30,7 +30,7 @@
 
 <script>
   export default {
-    name: 'MenuGroup',
+    name: 'AppMenuGroup',
     props: {
       item: {
         type: Object,

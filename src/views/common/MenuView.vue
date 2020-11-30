@@ -12,7 +12,7 @@
         <v-hover>
           <template v-slot="{ hover }">
             <v-card outlined :elevation="hover ? 10 : 3">
-              <menu-item
+              <app-menu-item
                 :item="item"
                 no-markdown
                 view-item
@@ -20,7 +20,7 @@
                 <v-list-item-action>
                   <v-icon>mdi-arrow-right</v-icon>
                 </v-list-item-action>
-              </menu-item>
+              </app-menu-item>
             </v-card>
           </template>
         </v-hover>

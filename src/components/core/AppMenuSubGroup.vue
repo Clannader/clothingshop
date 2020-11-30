@@ -1,14 +1,14 @@
 <template>
-  <menu-group
+  <app-menu-group
     :item="item"
     sub-group
   >
-  </menu-group>
+  </app-menu-group>
 </template>
 
 <script>
   export default {
-    name: 'MenuSubGroup',
+    name: 'AppMenuSubGroup',
     props: {
       item: {
         type: Object,
