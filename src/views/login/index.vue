@@ -86,11 +86,9 @@
   import CryptoJS from 'crypto-js'
   import DeleteUserDialog from './components/DeleteUserDialog'
   import { get } from 'vuex-pathify'
-  import ChangeMeta from '@/mixins/change-meta'
 
   export default {
     name: 'Login',
-    mixins: [ChangeMeta],
     components: {
       DeleteUserDialog
     },

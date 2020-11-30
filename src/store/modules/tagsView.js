@@ -51,7 +51,7 @@ const actions = {
   clearCurrentRouter: ({ commit }) => {
     commit('currentRouter', {})
   },
-  setAddViews: ({ commit, state }, router) => {
+  setAddViews: ({ commit, state, rootState }, router) => {
     // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来
     // 首先先申明加载顺序,进入路由,调用setAddViews方法,再进入组件,然后才调用setAddViews的then方法
     // 所以保存路由不能在setAddViews中保存,需要在then方法后面执行
@@ -68,7 +68,7 @@ const actions = {
 
     // 由于动态路由可能导致路由不存在,也加进了views里面
     // 如果没有text,则不加进去
-    if (!item.text) {
+    if (!item.text || rootState.userInfo.sessionSchema.mobile) {
       return
     }
 

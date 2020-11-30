@@ -14,11 +14,9 @@
   import AppContent from './components/AppContent'
   import AppNavigation from './components/AppNavigation'
   import AppToolbar from './components/AppToolbar'
-  import ChangeMeta from '@/mixins/change-meta'
 
   export default {
     name: 'HomePage',
-    mixins: [ChangeMeta],
     components: {
       AppFab,
       AppFooter,

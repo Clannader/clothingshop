@@ -3,7 +3,7 @@
  */
 'use strict'
 
-import vueQriously from 'vue-qriously'
+// import vueQriously from 'vue-qriously'
 // import vueHtmlToPaper from 'vue-html-to-paper'
 
 // Vue.use(vueQriously)
@@ -28,6 +28,6 @@ export function registerComponents(app) {
   app.component('app-table', () => import('@/components/core/AppTable'))
   app.component('app-date-picker', () => import('@/components/core/AppDatePicker'))
   app.component('app-dialog', () => import('@/components/core/AppDialog'))
-  app.use(vueQriously)
+  // app.use(vueQriously)
 }
 

@@ -7,14 +7,12 @@
 
 <script>
   import PhoneAppFooter from './components/PhoneAppFooter'
-  import ChangeMeta from '@/mixins/change-meta'
 
   export default {
     name: 'PhoneHomePage',
     components: {
       PhoneAppFooter
-    },
-    mixins: [ChangeMeta]
+    }
   }
 </script>
 
