@@ -198,7 +198,7 @@
           }
           localStorage.setItem('userNameList', JSON.stringify(this.userNameList))
           this.publicMethods.setUserSession({ ...data['session'], credential: data['credential'] })
-          document.onkeydown = undefined
+          // document.onkeydown = undefined
           if (data.expireMsg) {
             this.$toast.success(data.expireMsg, 6000)
           }
@@ -221,6 +221,9 @@
         this.children = DeleteUserDialog
         this.clickItem = item
       }
+    },
+    beforeDestroy() {
+      document.onkeydown = undefined
     }
   }
 </script>

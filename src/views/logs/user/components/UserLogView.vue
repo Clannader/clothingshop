@@ -3,7 +3,7 @@
     :visible="true"
     :title="$t('logs.userLogTitle')"
     v-resize="onResize"
-    :width="900"
+    :width="600"
   >
     <template slot="dialogContent">
       <v-virtual-scroll
@@ -49,13 +49,21 @@
       loadingLog() {
         // 这里还需要改样式的,需要把所有信息展示出来,content使用虚拟滚动条展示
         // 注意切割\r\n和<br>
-        this.logContent = this.userLogObject.content.split(/(<br>|\r\n)/)
+        this.logContent = this.userLogObject.content.split('\r\n')
       },
       close() {
         this.$emit('closeDialog')
       },
       onResize() {
-        this.tableY = window.innerHeight - 180
+        // 这里是先执行loadingLog() 方法再执行onResize
+        // 并且每一行的高度是25,可以设置的
+        // 判断如果日志超过屏幕宽度时才自适应
+        const orgHeight = window.innerHeight - 180
+        if (this.logContent.length * 25 > orgHeight) {
+          this.tableY = orgHeight
+        } else {
+          this.tableY = this.logContent.length * 25 + 13
+        }
       }
     }
   }
