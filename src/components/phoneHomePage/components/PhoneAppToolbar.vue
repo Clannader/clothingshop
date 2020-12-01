@@ -4,7 +4,7 @@
     dark
     flat
     fixed
-    height="60"
+    height="50"
     :src="require('@/assets/images/vbanner.jpg')"
     color="primary"
   >
@@ -43,7 +43,7 @@
     <template v-slot:extension>
       <v-btn
         text
-        style="margin-left: 28px"
+        style="margin-left: 30px"
       >
         <v-icon>
           person
@@ -56,20 +56,24 @@
 </template>
 
 <script>
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'PhoneAppToolbar',
     computed: {
-      ...get('userInfo', ['sessionSchema@adminName'])
+      ...get('userInfo', ['sessionSchema@adminName']),
+      ...sync('tagsView', ['drawer'])
     },
     methods: {
       changeSidebar() {
+        this.drawer = !this.drawer
       }
     }
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .v-list-item:hover{
+    background-color: transparent;
+  }
 </style>
