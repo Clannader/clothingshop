@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <router-view></router-view>
-    <phone-app-footer></phone-app-footer>
-  </div>
+  <v-app id="cmsApp">
+    <phone-app-toolbar></phone-app-toolbar>
+    <phone-app-content></phone-app-content>
+    <phone-app-navigation></phone-app-navigation>
+  </v-app>
 </template>
 
 <script>
-  import PhoneAppFooter from './components/PhoneAppFooter'
+  import PhoneAppToolbar from './components/PhoneAppToolbar'
+  import PhoneAppContent from './components/PhoneAppContent'
+  import PhoneAppNavigation from './components/PhoneAppNavigation'
 
   export default {
     name: 'PhoneHomePage',
     components: {
-      PhoneAppFooter
+      PhoneAppToolbar,
+      PhoneAppContent,
+      PhoneAppNavigation
     }
   }
 </script>

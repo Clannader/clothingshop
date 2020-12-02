@@ -9,7 +9,7 @@ module.exports = {
       style: true
     }, 'vant'],
     ['import', {
-      libraryName: 'antd',
-    }, 'antd']
+      libraryName: 'ant-design-vue'
+    }, 'ant-design-vue']
   ]
 }
