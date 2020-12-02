@@ -41,15 +41,12 @@
     </v-btn>
 
     <template v-slot:extension>
-      <v-btn
-        text
-        style="margin-left: 30px"
-      >
-        <v-icon>
-          person
-        </v-icon>
-        {{adminName}}
-      </v-btn>
+      <app-text-icon
+        style="margin-left: 46px"
+        :text="adminName"
+        icon="person"
+        @click="testClick"
+      ></app-text-icon>
     </template>
 
   </v-app-bar>
@@ -67,6 +64,9 @@
     methods: {
       changeSidebar() {
         this.drawer = !this.drawer
+      },
+      testClick() {
+        console.log('222')
       }
     }
   }

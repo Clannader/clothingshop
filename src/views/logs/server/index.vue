@@ -41,31 +41,50 @@
                   <div>{{log.name}}</div>
                 </v-tooltip>
                 <div class="box-icon">
-                  <i class="v-icon material-icons remove_red_eye"
+                  <!--<i class="v-icon material-icons remove_red_eye"
                      @click="viewAction(log.name)"
                   >
                   </i>
                   <div class="icon-text" @click="viewAction(log.name)">
                     {{$t('logs.view')}}
-                  </div>
-                  <i class="v-icon material-icons cloud_download"
+                  </div>-->
+                  <!--<i class="v-icon material-icons cloud_download"
                      @click="downLoadAction(log.name)"
                   >
                   </i>
                   <div class="icon-text" @click="downLoadAction(log.name)">
                     {{$t('logs.download')}}
-                  </div>
-                  <i class="v-icon material-icons highlight_off"
+                  </div>-->
+                  <!--<i class="v-icon material-icons highlight_off"
                      @click="deleteAction(log.name)"
                      v-if="isShowDelete(log.date)"
                   >
-                  </i>
-                  <div class="icon-text"
+                  </i>-->
+                  <!--<div class="icon-text"
                        @click="deleteAction(log.name)"
                        v-if="isShowDelete(log.date)"
                   >
                     {{$t('logs.deleteLog')}}
-                  </div>
+                  </div>-->
+                  <app-text-icon
+                    small
+                    icon="remove_red_eye"
+                    :text="$t('logs.view')"
+                    @click="viewAction(log.name)"
+                  ></app-text-icon>
+                  <app-text-icon
+                    small
+                    icon="cloud_download"
+                    :text="$t('logs.download')"
+                    @click="downLoadAction(log.name)"
+                  ></app-text-icon>
+                  <app-text-icon
+                    small
+                    v-if="isShowDelete(log.date)"
+                    icon="highlight_off"
+                    :text="$t('logs.deleteLog')"
+                    @click="deleteAction(log.name)"
+                  ></app-text-icon>
                   <v-spacer></v-spacer>
                   <span class="box-size">{{log.size}}</span>
                 </div>
@@ -230,19 +249,19 @@
           .box-icon {
             display: flex;
             flex-wrap: wrap;
+            color: #666;
+            /*i {*/
+            /*  margin-right: 4px;*/
+            /*  font-size: 16px;*/
+            /*  color: #666;*/
+            /*}*/
 
-            i {
-              margin-right: 4px;
-              font-size: 16px;
-              color: #666;
-            }
-
-            .icon-text {
-              margin-right: 16px;
-              font-weight: 400;
-              font-size: 12px;
-              color: #666;
-            }
+            /*.icon-text {*/
+            /*  margin-right: 16px;*/
+            /*  font-weight: 400;*/
+            /*  font-size: 12px;*/
+            /*  color: #666;*/
+            /*}*/
 
             .box-size {
               color: #333;

@@ -5,14 +5,17 @@
     width="230"
     fixed
     app
+    temporary
   >
     <template v-slot:prepend>
       <v-img
         :src="require('@/assets/images/vbanner.png')"
+        max-height="112"
       >
         <v-list-item
           two-line
           dark
+          class="nav-title"
         >
           <v-list-item-avatar>
             <img :src="require('@/assets/user/default.jpg')">
@@ -43,5 +46,10 @@
 <style lang="scss" scoped>
   .v-image .v-list-item:hover{
     background-color: transparent;
+  }
+
+  .nav-title {
+    position: fixed;
+    top: 35px; // 120px-72
   }
 </style>
