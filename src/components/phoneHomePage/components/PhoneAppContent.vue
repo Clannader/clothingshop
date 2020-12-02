@@ -18,6 +18,6 @@
   .main-content {
     height: 100%;
     padding: 0;
-    background-color: #ecf0f5;
+    background-color: #fff;
   }
 </style>

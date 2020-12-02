@@ -5,7 +5,7 @@
     flat
     fixed
     height="50"
-    :src="require('@/assets/images/vbanner.jpg')"
+    :src="require('@/assets/images/vbanner.png')"
     color="primary"
   >
     <v-app-bar-nav-icon
