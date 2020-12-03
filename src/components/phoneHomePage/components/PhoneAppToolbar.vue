@@ -45,7 +45,10 @@
         style="margin-left: 46px"
         :text="adminName"
         icon="person"
-        @click="testClick"
+      ></app-text-icon>
+      <app-text-icon
+        :text="new Date().format('YYYY年MM月DD日')"
+        icon="mdi-calendar-blank"
       ></app-text-icon>
     </template>
 
@@ -64,16 +67,13 @@
     methods: {
       changeSidebar() {
         this.drawer = !this.drawer
-      },
-      testClick() {
-        console.log('222')
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .v-list-item:hover{
+  .v-list-item:hover {
     background-color: transparent;
   }
 </style>

@@ -4,13 +4,6 @@
       <v-container fluid class="card-container">
         <div class="form-group">
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.cond"
-              :label="$t('users.searchCond')"
-              @keyup.enter="doSearch">
-            </v-text-field>
-          </div>
-          <div class="group-item">
             <app-date-picker
               :label="$t('logs.startDate')"
               :max="queryParams.endDate"
@@ -52,6 +45,14 @@
               </template>
             </v-select>
           </div>
+          <div class="group-item">
+            <v-text-field
+              v-model="queryParams.cond"
+              :label="$t('users.searchCond')"
+              @keyup.enter="doSearch">
+            </v-text-field>
+          </div>
+
         </div>
         <div class="form-group">
           <div class="group-item">
