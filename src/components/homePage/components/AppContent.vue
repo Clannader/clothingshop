@@ -2,7 +2,7 @@
   <v-main class="layout-content-box">
     <v-container fluid class="main-content">
       <app-breadcrumbs></app-breadcrumbs>
-      <v-fade-transition mode="out-in">
+      <v-fade-transition hide-on-leave="">
         <router-view></router-view>
       </v-fade-transition>
     </v-container>

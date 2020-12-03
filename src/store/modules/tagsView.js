@@ -147,7 +147,7 @@ const actions = {
     const mobile = rootState.userInfo.sessionSchema.mobile
     let router
     if (mobile) {
-      loginRoutes.component = () => import('components/phoneHomePage')
+      loginRoutes.component = () => import('@/phone/blank')
       router = filterAsyncRoutes(phoneRoutes, roles)
     } else {
       router = filterAsyncRoutes(menuRoutes, roles)

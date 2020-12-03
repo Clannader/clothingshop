@@ -41,31 +41,6 @@
                   <div>{{log.name}}</div>
                 </v-tooltip>
                 <div class="box-icon">
-                  <!--<i class="v-icon material-icons remove_red_eye"
-                     @click="viewAction(log.name)"
-                  >
-                  </i>
-                  <div class="icon-text" @click="viewAction(log.name)">
-                    {{$t('logs.view')}}
-                  </div>-->
-                  <!--<i class="v-icon material-icons cloud_download"
-                     @click="downLoadAction(log.name)"
-                  >
-                  </i>
-                  <div class="icon-text" @click="downLoadAction(log.name)">
-                    {{$t('logs.download')}}
-                  </div>-->
-                  <!--<i class="v-icon material-icons highlight_off"
-                     @click="deleteAction(log.name)"
-                     v-if="isShowDelete(log.date)"
-                  >
-                  </i>-->
-                  <!--<div class="icon-text"
-                       @click="deleteAction(log.name)"
-                       v-if="isShowDelete(log.date)"
-                  >
-                    {{$t('logs.deleteLog')}}
-                  </div>-->
                   <app-text-icon
                     small
                     icon="remove_red_eye"
