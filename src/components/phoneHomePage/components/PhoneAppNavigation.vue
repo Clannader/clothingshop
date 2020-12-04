@@ -43,17 +43,86 @@
       </v-img>-->
     </template>
 
-    <v-divider></v-divider>
+    <v-list
+      dense
+      expand
+      nav
+    >
+      <template
+        v-for="(menu, i) in items"
+      >
+        <v-divider
+          v-if="menu.divider"
+          :key="`divider-${i}`"
+        ></v-divider>
+        <nav-item
+          :key="`item-${i}`"
+          :item="menu"
+          :class="{'nav-margin-top':menu.divider}"
+        />
+      </template>
+    </v-list>
+
+    <v-list
+      dense
+      expand
+      nav
+      style="position: fixed; bottom: 0;width: 100%"
+    >
+      <v-divider></v-divider>
+      <v-list-item
+        class="nav-margin-top"
+      >
+        <v-list-item-content>
+          <v-list-item-title
+            style="color: #0055b8"><strong>ClothingShop Mobile</strong></v-list-item-title>
+          <v-list-item-subtitle>{{systemConfig.version}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
   </v-navigation-drawer>
 </template>
 
 <script>
-  import { sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
+  import NavItem from './NavItem'
 
   export default {
     name: 'PhoneAppNavigation',
+    components: {
+      NavItem
+    },
+    data() {
+      return {
+        items: [
+          {
+            icon: 'chat',
+            title: 'menu.pMessage',
+            path: 'home'
+          }, {
+            icon: 'mdi-apps',
+            title: 'menu.pHomePage',
+            path: 'home'
+          }, {
+            icon: 'settings',
+            title: 'menu.pSettings',
+            path: 'home'
+          }, {
+            icon: 'history',
+            title: 'menu.pOperation',
+            path: 'home'
+          }, {
+            icon: 'exit_to_app',
+            title: 'menu.pLogout',
+            divider: true
+          }
+        ]
+      }
+    },
     computed: {
-      ...sync('tagsView', ['menuRouter', 'drawer'])
+      ...sync('tagsView', ['menuRouter', 'drawer']),
+      ...get('userInfo', ['systemConfig'])
     }
   }
 </script>
@@ -66,5 +135,9 @@
   .nav-title {
     position: fixed;
     top: 26px; // 120px-72
+  }
+
+  .nav-margin-top {
+    margin-top: 4px;
   }
 </style>

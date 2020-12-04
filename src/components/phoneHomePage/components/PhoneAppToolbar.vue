@@ -48,6 +48,7 @@
       ></app-text-icon>
       <app-text-icon
         :text="new Date().format('YYYY年MM月DD日')"
+        style="margin-top: 2px"
         icon="mdi-calendar-blank"
       ></app-text-icon>
     </template>
