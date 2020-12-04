@@ -1,6 +1,7 @@
 <template>
   <v-list-item
     color="primary"
+    v-on="$listeners"
   >
     <v-list-item-icon>
       <v-icon v-text="item.icon"/>

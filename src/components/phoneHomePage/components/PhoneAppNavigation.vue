@@ -59,6 +59,7 @@
           :key="`item-${i}`"
           :item="menu"
           :class="{'nav-margin-top':menu.divider}"
+          @click="doAction(menu)"
         />
       </template>
     </v-list>
@@ -81,12 +82,14 @@
       </v-list-item>
     </v-list>
 
+    <component :is="children" @closeDialog="closeDialog()"></component>
   </v-navigation-drawer>
 </template>
 
 <script>
   import { get, sync } from 'vuex-pathify'
   import NavItem from './NavItem'
+  import LogoutDialog from '../../homePage/toolbar/LogoutDialog'
 
   export default {
     name: 'PhoneAppNavigation',
@@ -115,14 +118,34 @@
           }, {
             icon: 'exit_to_app',
             title: 'menu.pLogout',
-            divider: true
+            divider: true,
+            action: this.gotoLogout
           }
-        ]
+        ],
+        children: ''
       }
     },
     computed: {
       ...sync('tagsView', ['menuRouter', 'drawer']),
       ...get('userInfo', ['systemConfig'])
+    },
+    methods: {
+      doAction(item) {
+        this.drawer = false
+        if (item.path) {
+          this.$router.push({
+            path: item.path
+          })
+        } else {
+          item.action.call(this, item)
+        }
+      },
+      gotoLogout() {
+        this.children = LogoutDialog
+      },
+      closeDialog() {
+        this.children = ''
+      }
     }
   }
 </script>
