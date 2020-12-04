@@ -33,5 +33,10 @@ export default {
   databaseMonitor: '数据库性能',
   test: '功能测试 {num}',
   noFoundPage: '404 页面',
-  loginPage: 'Clothingshop'
+  loginPage: 'Clothingshop',
+  pMessage: '消息通知',
+  pHomePage: '自定义首页',
+  pSettings: '设置',
+  pOperation: '操作历史',
+  pLogout: '退出账号'
 }

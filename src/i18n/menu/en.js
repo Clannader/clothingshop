@@ -33,6 +33,11 @@ export default {
   databaseMonitor: 'Database monitor',
   test: 'Test {num}',
   noFoundPage: '404 Page',
-  loginPage: 'Clothingshop'
+  loginPage: 'Clothingshop',
+  pMessage: 'Notification',
+  pHomePage: 'Custom homepage',
+  pSettings: 'Settings',
+  pOperation: 'Operation history',
+  pLogout: 'Log out'
 }
 

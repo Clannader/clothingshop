@@ -21,7 +21,7 @@ const phoneHomeRouter = {
     title: 'menu.home',
     icon: 'iconfont icon-c-home'
   },
-  component: () => import('@/phone/home')
+  component: () => import('components/phoneHomePage')
 }
 
 export {

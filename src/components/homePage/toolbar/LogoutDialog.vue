@@ -32,8 +32,8 @@
     methods: {
       close() {
         // 提交触发外部组件的关闭方法
-        // TODO 这个不知道怎么注销指定按键的事件,这样注销会把全部按键的事件都注销了
-        document.onkeydown = undefined
+        // 这个不知道怎么注销指定按键的事件,这样注销会把全部按键的事件都注销了
+        // document.onkeydown = undefined
         this.$emit('closeDialog')
       },
       async quit() {
@@ -41,6 +41,10 @@
         await this.publicMethods.removeUserSession()
         this.$router.push({ path: '/login' })
       }
+    },
+    beforeDestroy() {
+      // TODO 以后看看如何取消指定事件名的event,不能直接全部取消
+      document.onkeydown = undefined
     }
   }
 </script>
