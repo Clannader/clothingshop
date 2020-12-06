@@ -3,7 +3,7 @@
  */
 'use strict'
 import RightsCode from '../utils/rightsCode'
-const otherSettingsRouter = {
+const settingsRouter = {
   path: 'settings',
   // name: 'Settings',
   to: 'settings',
@@ -100,4 +100,34 @@ const otherSettingsRouter = {
   ]
 }
 
-export default otherSettingsRouter
+const phoneSettingsRouter = {
+  path: 'settings',
+  meta: {
+    title: 'menu.settings'
+  },
+  redirect: {
+    path: '/settings/'
+  },
+  children: [
+    {
+      path: '/',
+      meta: {
+        title: 'menu.settings',
+        hidden: true
+      },
+      component: () => import('@/phone/settings')
+    },
+    {
+      path: 'user',
+      meta: {
+        title: 'menu.pSettingsUser'
+      },
+      component: () => import('@/phone/settings/user')
+    }
+  ]
+}
+
+export {
+  settingsRouter,
+  phoneSettingsRouter
+}
