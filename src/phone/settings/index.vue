@@ -1,7 +1,7 @@
 <template>
-  <v-app id="cmsApp">
+  <div class="v-application--wrap">
     <phone-toolbar></phone-toolbar>
-  </v-app>
+  </div>
 </template>
 
 <script>
