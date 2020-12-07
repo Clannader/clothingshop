@@ -38,5 +38,6 @@ export default {
   pHomePage: '自定义首页',
   pSettings: '设置',
   pOperation: '操作历史',
-  pLogout: '退出账号'
+  pLogout: '退出账号',
+  pSettingsUser: '用户设置'
 }

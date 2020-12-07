@@ -103,16 +103,17 @@ const settingsRouter = {
 const phoneSettingsRouter = {
   path: 'settings',
   meta: {
-    title: 'menu.settings'
+    title: 'menu.pSettings'
   },
   redirect: {
     path: '/settings/'
   },
+  component: () => import('@/phone/blank'),
   children: [
     {
       path: '/',
       meta: {
-        title: 'menu.settings',
+        title: 'menu.pSettings',
         hidden: true
       },
       component: () => import('@/phone/settings')

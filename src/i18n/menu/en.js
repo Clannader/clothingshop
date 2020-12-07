@@ -38,6 +38,7 @@ export default {
   pHomePage: 'Custom homepage',
   pSettings: 'Settings',
   pOperation: 'Operation history',
-  pLogout: 'Log out'
+  pLogout: 'Log out',
+  pSettingsUser: 'User settings'
 }
 

@@ -1,8 +1,8 @@
 <template>
   <v-app id="cmsApp">
     <phone-app-toolbar></phone-app-toolbar>
-    <phone-app-content></phone-app-content>
     <phone-app-navigation></phone-app-navigation>
+    <phone-app-content></phone-app-content>
   </v-app>
 </template>
 
