@@ -1,21 +1,19 @@
 <template>
   <div class="v-application--wrap">
-    <phone-toolbar>
-
-      <template v-slot:icon>
-        <v-btn
-          icon
-        >
-          <v-icon>
-            refresh
-          </v-icon>
-        </v-btn>
-      </template>
+    <phone-toolbar
+      moreVertIcon
+      replayIcon
+      refreshIcon
+      zoomInIcon
+      searchIcon
+      sortIcon
+      @refreshClick="refreshAction"
+      @zoomInClick="refreshAction"
+    >
 
       <template v-slot:extension>
         <app-text-icon
           :text="new Date().format('YYYY年MM月DD日')"
-          style="margin-top: 2px"
           icon="mdi-calendar-blank"
         ></app-text-icon>
       </template>
@@ -25,7 +23,15 @@
 
 <script>
   export default {
-    name: 'PhoneSettingsUser'
+    name: 'PhoneSettingsUser',
+    methods: {
+      refreshAction() {
+        console.log('refreshAction')
+      },
+      refresh2() {
+        console.log('refresh2')
+      }
+    }
   }
 </script>
 
