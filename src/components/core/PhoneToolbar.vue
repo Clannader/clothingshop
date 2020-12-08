@@ -17,6 +17,12 @@
     <v-spacer></v-spacer>
 
     <slot name="icon"></slot>
+    <template
+      v-slot:extension
+      v-if="$slots.extension"
+    >
+      <slot name="extension"></slot>
+    </template>
   </v-app-bar>
 </template>
 
