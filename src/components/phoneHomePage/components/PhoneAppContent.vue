@@ -5,12 +5,47 @@
         <router-view></router-view>
       </v-fade-transition>
     </v-container>
+
+    <change-password
+      :visible="showPwd"
+      @closeDialog="quit()"
+      @actionAfter="closePwdDialog()"
+    ></change-password>
   </v-main>
 </template>
 
 <script>
+  import ChangePassword from '@/views/common/ChangePassword'
+  import { get } from 'vuex-pathify'
+
   export default {
-    name: 'PhoneAppContent'
+    name: 'PhoneAppContent',
+    computed: {
+      ...get('userInfo', ['sessionSchema'])
+    },
+    components: {
+      ChangePassword
+    },
+    data() {
+      return {
+        showPwd: false
+      }
+    },
+    created() {
+      this.showPwd = this.sessionSchema.isFirstLogin
+    },
+    methods: {
+      async quit() {
+        await this.publicMethods.removeUserSession()
+        this.$router.push({ path: '/login' })
+      },
+      closePwdDialog() {
+        this.showPwd = false
+        this.$store.dispatch('userInfo/setSessionSchema', {
+          isFirstLogin: false
+        })
+      }
+    }
   }
 </script>
 
