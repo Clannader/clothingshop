@@ -6,7 +6,7 @@ import HomePage from 'components/homePage'
 import Frontdesk from './frontdesk'
 import { homeRouter, phoneHomeRouter } from './home'
 import Logs from './logs'
-import Settings from './settings'
+import { settingsRouter, phoneSettingsRouter } from './settings'
 import Statistics from './statistics'
 import Monitor from './monitor'
 import Miscellaneous from './miscellaneous'
@@ -18,13 +18,13 @@ Vue.use(VueRouter)
 
 // 有权限的路由列表
 export const menuRoutes = [
-  homeRouter, Frontdesk, Logs, Settings,
+  homeRouter, Frontdesk, Logs, settingsRouter,
   Statistics, Monitor, Miscellaneous
   // , FunctionTest
 ]
 
 export const phoneRoutes = [
-  phoneHomeRouter
+  phoneHomeRouter, phoneSettingsRouter
 ]
 
 // 无需权限的路由列表

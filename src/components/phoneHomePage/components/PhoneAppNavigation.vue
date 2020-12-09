@@ -110,7 +110,7 @@
           }, {
             icon: 'settings',
             title: 'menu.pSettings',
-            path: 'home'
+            path: '/settings/user'
           }, {
             icon: 'history',
             title: 'menu.pOperation',
@@ -136,7 +136,7 @@
           this.$router.push({
             path: item.path
           })
-        } else {
+        } else if (typeof item.action === 'function') {
           item.action.call(this, item)
         }
       },
