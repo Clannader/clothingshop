@@ -32,9 +32,25 @@
 
     <template
       v-slot:extension
-      v-if="$slots.extension"
+      v-if="$slots.extension && !extension"
     >
       <slot name="extension"></slot>
+    </template>
+    <template
+      v-slot:extension
+      v-else-if="extension"
+    >
+      <v-text-field
+        filled
+        dense
+        hide-details
+        clearable
+        rounded
+        append-outer-icon="search"
+        v-bind="$attrs"
+        v-on="$listeners"
+      >
+      </v-text-field>
     </template>
   </v-app-bar>
 </template>
@@ -42,6 +58,7 @@
 <script>
   import { get } from 'vuex-pathify'
   import snakeCase from 'lodash/snakeCase'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     name: 'PhoneToolbar',
@@ -53,7 +70,9 @@
       zoomInIcon: Boolean,
       replayIcon: Boolean,
       searchIcon: Boolean,
-      moreVertIcon: Boolean
+      moreVertIcon: Boolean,
+      // 是个显示自定义插槽
+      extension: Boolean
     },
     data() {
       return {
@@ -78,7 +97,7 @@
         this.$router.back(-1)
       },
       iconClick(eventName) {
-        this.$emit(eventName + 'Click')
+        this.$emit('click:' + kebabCase(eventName))
       },
       snakeCase() {
         return snakeCase.apply(this, arguments)
