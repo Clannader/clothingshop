@@ -47,7 +47,6 @@
         clearable
         rounded
         append-outer-icon="search"
-        v-bind="$attrs"
         v-on="$listeners"
       >
       </v-text-field>
