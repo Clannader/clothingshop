@@ -2,6 +2,7 @@
   <v-main>
     <v-container fluid class="main-content">
       <v-fade-transition mode="out-in">
+        <menu-carousel></menu-carousel>
       </v-fade-transition>
     </v-container>
 
@@ -15,6 +16,7 @@
 
 <script>
   import ChangePassword from '@/views/common/ChangePassword'
+  import MenuCarousel from '../content/MenuCarousel'
   import { get } from 'vuex-pathify'
 
   export default {
@@ -23,7 +25,8 @@
       ...get('userInfo', ['sessionSchema'])
     },
     components: {
-      ChangePassword
+      ChangePassword,
+      MenuCarousel
     },
     data() {
       return {
