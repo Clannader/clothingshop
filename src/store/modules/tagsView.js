@@ -49,7 +49,10 @@ const actions = {
     commit('mini', mini)
   },
   clearCurrentRouter: ({ commit }) => {
-    commit('currentRouter', {})
+    // 这里有点坑啊,手机版的退出,封装的toolbar用到了这个store,还没有退出时被清空会报错
+    commit('currentRouter', {
+      meta: {}
+    })
   },
   setAddViews: ({ commit, state, rootState }, router) => {
     // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来

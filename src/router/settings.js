@@ -108,7 +108,7 @@ const phoneSettingsRouter = {
   redirect: {
     path: '/settings/'
   },
-  component: () => import('@/phone/blank'),
+  component: () => import('@/phone/blank/ChildrenBlank'),
   children: [
     {
       path: '/',
