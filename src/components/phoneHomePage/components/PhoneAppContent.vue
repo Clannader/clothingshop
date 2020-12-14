@@ -1,48 +1,39 @@
 <template>
   <v-main>
     <v-container fluid class="main-content">
+      <van-notice-bar
+        left-icon="volume-o"
+        mode="closeable"
+        scrollable
+        @close="closeNotice"
+        text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。"
+      />
       <v-fade-transition mode="out-in">
+        <menu-carousel
+          :notice-height="noticeHeight"
+        ></menu-carousel>
       </v-fade-transition>
     </v-container>
-
-    <change-password
-      :visible="showPwd"
-      @closeDialog="quit()"
-      @actionAfter="closePwdDialog()"
-    ></change-password>
   </v-main>
 </template>
 
 <script>
-  import ChangePassword from '@/views/common/ChangePassword'
-  import { get } from 'vuex-pathify'
+  import MenuCarousel from '../content/MenuCarousel'
 
   export default {
     name: 'PhoneAppContent',
-    computed: {
-      ...get('userInfo', ['sessionSchema'])
-    },
-    components: {
-      ChangePassword
-    },
     data() {
       return {
-        showPwd: false
+        noticeHeight: 40
       }
     },
-    created() {
-      this.showPwd = this.sessionSchema.isFirstLogin
+    components: {
+      MenuCarousel
     },
     methods: {
-      async quit() {
-        await this.publicMethods.removeUserSession()
-        this.$router.push({ path: '/login' })
-      },
-      closePwdDialog() {
-        this.showPwd = false
-        this.$store.dispatch('userInfo/setSessionSchema', {
-          isFirstLogin: false
-        })
+      closeNotice() {
+        // 暂时不知道关闭之后,如何再次出现notice
+        this.noticeHeight = 0
       }
     }
   }

@@ -1,9 +1,9 @@
 <template>
-  <v-app id="cmsApp">
+  <div>
     <phone-app-toolbar></phone-app-toolbar>
     <phone-app-navigation></phone-app-navigation>
     <phone-app-content></phone-app-content>
-  </v-app>
+  </div>
 </template>
 
 <script>
