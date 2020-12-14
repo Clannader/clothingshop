@@ -33,6 +33,9 @@
 <script>
   export default {
     name: 'MenuCarousel',
+    props: {
+      noticeHeight: Number
+    },
     data: () => ({
       model: 0,
       colors: [
@@ -41,9 +44,16 @@
       ],
       tableY: 500
     }),
+    watch: {
+      noticeHeight: {
+        handler() {
+          this.onResize()
+        }
+      }
+    },
     methods: {
       onResize() {
-        this.tableY = window.innerHeight - 98
+        this.tableY = window.innerHeight - 98 - this.noticeHeight
       }
     }
   }
