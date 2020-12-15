@@ -185,7 +185,7 @@ module.exports = {
         // 注意：在 sass-loader v7 中，这个选项名是 "data"
         // 作用是全局引用这个scss
         // 这里最坑爹的是最后必须要有一个;号,否则编译报错
-        additionalData: `@import "@/style/color.scss";`
+        additionalData: `@import "@/styles/variables.scss";`
       }
     },
     //因为js会动态的加载出css，所以js文件包会比较大，那么需要提取css代码到文件. 这里我们只需要将css配置一下

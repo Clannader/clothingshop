@@ -157,7 +157,7 @@
 
   .nav-title {
     position: fixed;
-    top: 26px; // 120px-72
+    top: 26px;
   }
 
   .nav-margin-top {

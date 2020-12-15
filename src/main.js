@@ -4,12 +4,12 @@
 // import 'babel-polyfill'
 // import 'event-source-polyfill'
 
-import 'vuetify/dist/vuetify.min.css'
+// import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 // import 'ant-design-vue/dist/antd.min.css'
 // import 'roboto-npm-webfont' // 使用font-family: 'Roboto', sans-serif 字体
-import './style/icon/iconfont.css'
-import './style/style.scss'
+import './styles/icon/iconfont.css'
+import './styles/style.scss'
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
