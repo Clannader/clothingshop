@@ -1,9 +1,11 @@
 /**
  * Create by CC on 2020/11/29
+ * 自定义变量查看文档
+ * https://www.antdv.com/docs/vue/customize-theme-cn/
  */
 'use strict'
 
-import 'ant-design-vue/dist/antd.min.css'
+// import 'ant-design-vue/dist/antd.min.css'
 import { Spin } from 'ant-design-vue'
 
 export function useAntDesignVue(app) {

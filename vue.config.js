@@ -186,6 +186,17 @@ module.exports = {
         // 作用是全局引用这个scss
         // 这里最坑爹的是最后必须要有一个;号,否则编译报错
         additionalData: `@import "@/styles/variables.scss";`
+      },
+      less: {
+        lessOptions: {
+          modifyVars: {
+            // 参考antd官网给出的变量名重新修改
+            'primary-color': '#1DA57A'
+            // 'link-color': '#1DA57A',
+            // 'border-radius-base': '2px'
+          },
+          javascriptEnabled: true
+        }
       }
     },
     //因为js会动态的加载出css，所以js文件包会比较大，那么需要提取css代码到文件. 这里我们只需要将css配置一下
