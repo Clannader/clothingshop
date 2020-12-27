@@ -8,6 +8,8 @@
             <v-text-field
               v-model="queryParams.groupName"
               :label="$t('rights.searchName')"
+              clearable
+              @click:clear="clearGroupName"
               @keyup.enter="doSearch">
             </v-text-field>
           </div>
@@ -204,6 +206,10 @@
       },
       onResize() {
         this.tableY = window.innerHeight - 427 + 34 // 34 是分页的差额
+      },
+      clearGroupName() {
+        this.queryParams.groupName = null
+        this.doSearch()
       }
     },
     data() {
