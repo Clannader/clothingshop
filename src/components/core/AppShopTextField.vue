@@ -44,8 +44,8 @@
       ...get('userInfo', ['sessionSchema'])
     },
     created() {
-      if (this.sessionSchema.selfShop !== 'SYSTEM') {
-        this.shopId = this.sessionSchema.selfShop
+      if (this.sessionSchema.shopId !== 'SYSTEM') {
+        this.shopId = this.sessionSchema.shopId
         this.disabled = true
         this.returnShopId()
       }

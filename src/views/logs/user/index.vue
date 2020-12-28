@@ -24,26 +24,13 @@
             ></app-date-picker>
           </div>
           <div class="group-item">
-            <v-select
-              v-model="queryParams.type"
+            <app-select
+              :selected.sync="queryParams.type"
               :items="logTypeItem"
-              item-value="code"
-              item-text="desc"
               :label="$t('logs.logType')"
-              @change="doSearch"
+              @changeValue="doSearch"
             >
-              <template v-slot:item="{ item, attrs, on }">
-                <v-list-item
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-list-item-title
-                    v-text="item.desc + ' (' + item.code + ')'"
-                  >
-                  </v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-select>
+            </app-select>
           </div>
           <div class="group-item">
             <v-text-field
@@ -54,7 +41,6 @@
               @keyup.enter="doSearch">
             </v-text-field>
           </div>
-
         </div>
         <div class="form-group">
           <div class="group-item">
@@ -178,7 +164,9 @@
       }
     },
     created() {
-      this.doSearch()
+      this.$nextTick(() => {
+        this.doSearch()
+      })
     },
     methods: {
       doSearch() {

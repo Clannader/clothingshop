@@ -70,7 +70,7 @@
       replayIcon: Boolean,
       searchIcon: Boolean,
       moreVertIcon: Boolean,
-      // 是个显示自定义插槽
+      // 是否显示自定义插槽
       extension: Boolean
     },
     data() {
