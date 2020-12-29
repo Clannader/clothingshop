@@ -30,7 +30,12 @@
     inheritAttrs: true,
     name: 'AppSelect',
     props: {
-      slotItem: Boolean
+      slotItem: Boolean,
+      // 控件更新子组件字段值
+      updateValue: {
+        type: null,
+        default: undefined
+      }
     },
     data() {
       return {
@@ -39,9 +44,20 @@
     },
     methods: {
       change() {
-        this.$emit('update:selected', this.selectValue)
+        this.$emit('update:updateValue', this.selectValue)
         this.$emit('changeValue')
       }
+    },
+    created() {
+      this.selectValue = this.updateValue
+    },
+    watch: {
+      // updateValue: {
+      //   handler(newVal) {
+      //     this.selectValue = newVal
+      //   },
+      //   deep: true
+      // }
     }
   }
 </script>

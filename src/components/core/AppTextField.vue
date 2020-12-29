@@ -1,21 +1,47 @@
 <template>
   <v-text-field
-    v-model="shopId"
-    :label="$t('homePage.shopID')"
+    v-model="textValue"
+    v-bind="$attrs"
+    v-on="$listeners"
     clearable
-    @click:clear="clearShopId"
-    @keyup.enter="searchShopId"
-    append-icon="toc"
-    :disabled="disabled"
-    @input="returnShopId"
-    @click:append="openShopId()"
+    @click:clear="clearText"
+    @keyup.enter="changeValue"
+    @input="update"
   >
   </v-text-field>
 </template>
 
 <script>
   export default {
-    name: 'AppTextField'
+    inheritAttrs: true,
+    name: 'AppTextField',
+    props: {
+      updateValue: {
+        type: null,
+        default: undefined
+      }
+    },
+    data() {
+      return {
+        textValue: undefined
+      }
+    },
+    methods: {
+      update() {
+        this.$emit('update:updateValue', this.textValue)
+      },
+      clearText() {
+        this.textValue = undefined
+        this.update()
+        this.changeValue()
+      },
+      changeValue() {
+        this.$emit('changeValue')
+      }
+    },
+    created() {
+      this.textValue = this.updateValue
+    }
   }
 </script>
 

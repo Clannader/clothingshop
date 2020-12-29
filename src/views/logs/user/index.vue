@@ -25,7 +25,7 @@
           </div>
           <div class="group-item">
             <app-select
-              :selected.sync="queryParams.type"
+              :update-value.sync="queryParams.type"
               :items="logTypeItem"
               :label="$t('logs.logType')"
               @changeValue="doSearch"
@@ -33,13 +33,11 @@
             </app-select>
           </div>
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.cond"
+            <app-text-field
+              :update-value.sync="queryParams.cond"
               :label="$t('users.searchCond')"
-              clearable
-              @click:clear="clearQueryParams('cond')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
         </div>
         <div class="form-group">
