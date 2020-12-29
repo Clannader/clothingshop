@@ -5,13 +5,11 @@
         <div class="form-group">
           <!-- 权限组名 -->
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.groupName"
+            <app-text-field
+              :update-value.sync="queryParams.groupName"
               :label="$t('rights.searchName')"
-              clearable
-              @click:clear="clearGroupName"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
           <!-- 按钮 -->

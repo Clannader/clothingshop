@@ -48,13 +48,11 @@
             </app-shop-text-field>
           </div>
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.adminId"
+            <app-text-field
+              :update-value.sync="queryParams.adminId"
               :label="$t('logs.queryUserID')"
-              clearable
-              @click:clear="clearQueryParams('adminId')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
           <div class="card-search-btn">
@@ -223,10 +221,6 @@
       },
       closeDialog() {
         this.children = ''
-        this.doSearch()
-      },
-      clearQueryParams(key) {
-        this.queryParams[key] = null
         this.doSearch()
       }
     },
