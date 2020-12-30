@@ -73,7 +73,7 @@
               </v-list-item>
 
               <!-- 删除按钮-->
-              <v-list-item @click="openDelete(record)">
+              <v-list-item @click="openDelete(record)" v-rights="['DeleteSYSUser']">
                 <i class="material-icons highlight_off"></i>
                 <v-list-item-title>
                   {{$t('homePage.delete')}}

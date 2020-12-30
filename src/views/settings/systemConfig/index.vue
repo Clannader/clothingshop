@@ -9,6 +9,13 @@
               @searchShopId="doSearch"
             ></app-shop-text-field>
           </div>
+          <div class="group-item">
+            <app-text-field
+              :update-value.sync="queryParams.cond"
+              :label="$t('users.searchCond')"
+              @changeValue="doSearch">
+            </app-text-field>
+          </div>
           <v-spacer></v-spacer>
           <!-- 按钮 -->
           <div class="card-search-btn">
