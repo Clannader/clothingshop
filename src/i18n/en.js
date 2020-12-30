@@ -8,6 +8,7 @@ import menu from './menu/en'
 import rights from './rights/en'
 import users from './users/en'
 import logs from './logs/en'
+import systemConfig from './systemConfig/en'
 
 export default {
   login,
@@ -15,5 +16,6 @@ export default {
   menu,
   rights,
   users,
-  logs
+  logs,
+  systemConfig
 }

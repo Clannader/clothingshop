@@ -4,13 +4,20 @@
       <v-container fluid class="card-container">
         <div class="form-group">
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.cond"
+            <app-shop-text-field
+              :shopId.sync="queryParams.shopId"
+              @searchShopId="doSearch"
+            ></app-shop-text-field>
+          </div>
+          <div class="group-item">
+            <app-text-field
+              :update-value.sync="queryParams.cond"
               :label="$t('users.searchCond')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
+          <!-- 按钮 -->
           <div class="card-search-btn">
             <v-btn rounded dark @click="doSearch()">
               {{$t('homePage.search')}}
@@ -37,12 +44,6 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="adminType" slot-scope="{record}">
-          <div class="text-ellipsis">
-            {{getAdminTypeLabel(record)}}
-          </div>
-        </template>
-
         <template slot="action" slot-scope="{record}">
           <v-menu
             bottom
@@ -73,10 +74,18 @@
               </v-list-item>
 
               <!-- 删除按钮-->
-              <v-list-item @click="openDelete(record)" v-rights="['DeleteSYSUser']">
+              <v-list-item @click="openDelete(record)">
                 <i class="material-icons highlight_off"></i>
                 <v-list-item-title>
                   {{$t('homePage.delete')}}
+                </v-list-item-title>
+              </v-list-item>
+
+              <!-- 子集按钮 -->
+              <v-list-item @click="openChildren(record)">
+                <i class="material-icons list"></i>
+                <v-list-item-title>
+                  {{$t('systemConfig.subset')}}
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -93,29 +102,34 @@
 </template>
 
 <script>
-  import { getUsersList } from './api'
+  import { getSystemGroup } from './api.js'
 
   export default {
-    name: 'SettingsUsers',
+    name: 'SystemConfig',
     data() {
       const query = {
-        cond: undefined
+        cond: undefined,
+        shopId: undefined,
+        type: 'ONE'
       }
       return {
         tableData: [],
         tableY: 230,
-        offset: 1,
-        pageSize: 10,
         loading: false,
         queryParams: query,
         queryParamsCopy: query,
         tableTotal: 0,
         children: '',
+        offset: 1,
+        pageSize: 10,
+        recordScheam: undefined,
         isSelect: {}
       }
     },
     created() {
-      this.doSearch()
+      this.$nextTick(() => {
+        this.doSearch()
+      })
     },
     methods: {
       doSearch() {
@@ -123,12 +137,12 @@
         if (!this.publicMethods.compareObjects(this.queryParamsCopy, this.queryParams)) {
           this.offset = 1
         }
-        getUsersList({
+        getSystemGroup({
           ...this.queryParams,
           offset: this.offset,
           pageSize: this.pageSize
         }).then(result => {
-          this.tableData = result.users
+          this.tableData = result.group
           this.tableTotal = result.total
         }).catch(() => {
           this.tableData = []
@@ -145,6 +159,12 @@
         this.$router.back(-1)
       },
       openCreate() {
+      },
+      openModify() {
+      },
+      openDelete() {
+      },
+      openChildren() {
 
       },
       onResize() {
@@ -155,11 +175,10 @@
           return 'rowSelected'
         }
       },
-      rowClick(record/*, index 表格的下标,可以点击时获取点击的是第几行*/) {
+      rowClick(record) {
         return {
           on: {
             click: () => {
-              // 行单击事件
               this.selectedRow(record)
             },
             dblclick: () => {
@@ -171,29 +190,6 @@
       },
       selectedRow(record) {
         this.isSelect = record
-      },
-      openDelete(record) {
-
-      },
-      // initDoSearh() {
-      //   const usersTable = this.$refs.usersTable
-      //   if (usersTable) {
-      //     usersTable.pageIndex = 1
-      //   }
-      //   this.doSearch()
-      // },
-      openModify(record) {
-
-      },
-      getAdminTypeLabel(type) {
-        switch (type) {
-          case '3RD':
-            return this.$t('users.RD_Type')
-          case 'SYSTEM':
-            return this.$t('users.SYSTEM_Type')
-          case 'NORMAL':
-            return this.$t('users.NORMAL_Type')
-        }
       }
     },
     computed: {
@@ -202,41 +198,25 @@
         get() {
           return [
             {
-              title: `${this.$t('users.shopId')}`,
+              title: `${this.$t('systemConfig.shopId')}`,
               width: 150,
               dataIndex: 'shopId'
             },
             {
-              title: `${this.$t('users.adminId')}`,
-              width: 150,
-              dataIndex: 'adminId'
+              title: `${this.$t('systemConfig.key')}`,
+              width: 200,
+              dataIndex: 'key'
             },
             {
-              title: `${this.$t('users.adminName')}`,
-              width: 150,
-              dataIndex: 'adminName'
-            },
-            {
-              title: `${this.$t('users.rights')}`,
+              title: `${this.$t('systemConfig.value')}`,
+              width: 250,
               ellipsis: true,
-              dataIndex: 'rights',
-              width: 200
+              dataIndex: 'value'
             },
             {
-              title: `${this.$t('users.adminType')}`,
-              width: 100,
-              dataIndex: 'adminType',
-              scopedSlots: { customRender: 'adminType' }
-            },
-            {
-              title: `${this.$t('users.email')}`,
-              dataIndex: 'email',
-              width: 250
-            },
-            {
-              title: `${this.$t('users.supplierCode')}`,
+              title: `${this.$t('systemConfig.desc')}`,
               ellipsis: true,
-              dataIndex: 'supplierCode'
+              dataIndex: 'desc'
             },
             {
               title: `${this.$t('homePage.operation')}`,
@@ -257,7 +237,7 @@
 <style lang="scss" scoped>
   .group-item {
     padding-right: 24px;
-    width: 70.0%;
+    width: 30.0%;
   }
 
   .card-search-btn {

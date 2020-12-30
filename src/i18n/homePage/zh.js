@@ -43,5 +43,6 @@ export default {
   inputOldPwd: '请输入旧密码',
   inputNewPwd: '请输入新密码',
   inputNew2Pwd: '请再次输入新密码',
-  diffPwd: '两次密码不一样'
+  diffPwd: '两次密码不一样',
+  shopID: '店铺ID'
 }

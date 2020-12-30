@@ -73,9 +73,9 @@ const settingsRouter = {
       meta: {
         title: 'menu.systemList',
         icon: 'iconfont icon-c-system-setup',
-        right: '3005'
+        right: RightsCode.SystemSetup.code
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/settings/systemConfig')
     },
     {
       path: 'mail',

@@ -24,50 +24,35 @@
             ></app-date-picker>
           </div>
           <div class="group-item">
-            <v-select
-              v-model="queryParams.type"
+            <app-select
+              :update-value.sync="queryParams.type"
               :items="logTypeItem"
-              item-value="code"
-              item-text="desc"
               :label="$t('logs.logType')"
-              @change="doSearch"
+              @changeValue="doSearch"
             >
-              <template v-slot:item="{ item, attrs, on }">
-                <v-list-item
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-list-item-title
-                    v-text="item.desc + ' (' + item.code + ')'"
-                  >
-                  </v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-select>
+            </app-select>
           </div>
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.cond"
+            <app-text-field
+              :update-value.sync="queryParams.cond"
               :label="$t('users.searchCond')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
-
         </div>
         <div class="form-group">
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.shopId"
-              :label="$t('logs.queryShop')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+            <app-shop-text-field
+              :shopId.sync="queryParams.shopId"
+              @searchShopId="doSearch">
+            </app-shop-text-field>
           </div>
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.adminId"
+            <app-text-field
+              :update-value.sync="queryParams.adminId"
               :label="$t('logs.queryUserID')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
           <div class="card-search-btn">
@@ -175,7 +160,9 @@
       }
     },
     created() {
-      this.doSearch()
+      this.$nextTick(() => {
+        this.doSearch()
+      })
     },
     methods: {
       doSearch() {
@@ -200,16 +187,6 @@
           }
           this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
-      },
-      initDoSearh() {
-        // const userLogsTable = this.$refs.userLogsTable
-        // if (userLogsTable) {
-          // 这里的返回第一页还需要思考,因为数据不是很多,很多情况没办法测
-          // 这里的要检测条件和上次有改变时返回第一页,否则出现有总数,但是没有数据返回的情况
-          // userLogsTable.pageIndex = 1
-        // }
-        // this.offset = 1
-        // this.doSearch()
       },
       goBack() {
         this.$router.back(-1)

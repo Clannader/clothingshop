@@ -43,5 +43,6 @@ export default {
   inputOldPwd: 'Please enter your old password',
   inputNewPwd: 'Please enter your new password',
   inputNew2Pwd: 'Please again enter your new password',
-  diffPwd: 'The two passwords are different'
+  diffPwd: 'The two passwords are different',
+  shopID: 'Shop ID'
 }

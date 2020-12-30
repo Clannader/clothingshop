@@ -5,11 +5,11 @@
         <div class="form-group">
           <!-- 权限组名 -->
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.groupName"
+            <app-text-field
+              :update-value.sync="queryParams.groupName"
               :label="$t('rights.searchName')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
           <!-- 按钮 -->
@@ -204,6 +204,10 @@
       },
       onResize() {
         this.tableY = window.innerHeight - 427 + 34 // 34 是分页的差额
+      },
+      clearGroupName() {
+        this.queryParams.groupName = null
+        this.doSearch()
       }
     },
     data() {

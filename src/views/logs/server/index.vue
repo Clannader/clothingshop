@@ -6,6 +6,7 @@
           <div class="group-item">
             <v-text-field
               v-model="searchCond"
+              clearable
               :label="$t('users.searchCond')"
             >
             </v-text-field>
