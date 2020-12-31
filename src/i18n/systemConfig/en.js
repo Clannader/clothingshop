@@ -8,5 +8,10 @@ export default {
   key: 'Key',
   value: 'Value',
   desc: 'Desc',
-  subset: 'Subset'
+  subset: 'Subset',
+  createConfig: 'Create System Config',
+  modifyConfig: 'Modify System Config {name}',
+  inputShopId: 'Please enter shop id',
+  inputConfigKey: 'Please enter config key',
+  inputConfigValue: 'Please enter config value'
 }
