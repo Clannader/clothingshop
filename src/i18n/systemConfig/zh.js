@@ -8,5 +8,10 @@ export default {
   key: '参数KEY',
   value: '参数值',
   desc: '描述',
-  subset: '子集'
+  subset: '子集',
+  createConfig: '创建配置',
+  modifyConfig: '编辑配置 {name}',
+  inputShopId: '请输入店铺ID',
+  inputConfigKey: '请输入配置key',
+  inputConfigValue: '请输入配置值'
 }

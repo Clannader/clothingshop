@@ -98,11 +98,19 @@
       <v-btn rounded @click="openCreate()">{{$t('homePage.create')}}</v-btn>
       <v-btn rounded @click="goBack()">{{$t('homePage.goback')}}</v-btn>
     </div>
+
+    <component
+      :is="children"
+      type="ONE"
+      :recordScheam="recordScheam"
+      @closeDialog="closeDialog"
+    ></component>
   </div>
 </template>
 
 <script>
   import { getSystemGroup } from './api.js'
+  import ConfigDetails from './components/ConfigDetails'
 
   export default {
     name: 'SystemConfig',
@@ -159,6 +167,8 @@
         this.$router.back(-1)
       },
       openCreate() {
+        this.children = ConfigDetails
+        this.recordScheam = {}
       },
       openModify() {
       },
@@ -166,6 +176,10 @@
       },
       openChildren() {
 
+      },
+      closeDialog() {
+        this.children = ''
+        this.doSearch()
       },
       onResize() {
         this.tableY = window.innerHeight - 427
