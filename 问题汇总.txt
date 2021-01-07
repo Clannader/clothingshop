@@ -87,3 +87,8 @@
 40.drawer这个值在小屏幕登录的时候有问题,看看第一次初始化如何赋值,如果展开第一次无反应√
 41.写一个判断权限的指令
 42.显示key和描述的下拉封装成组件√
+
+2021-01-07
+2021第一个问题：如果node服务器加入contextPath,需要修改的文件如下：
+1.vue.config.js的publicPath,需要修改成绝对路径
+2.env.production的VUE_APP_BASE_API和VUE_APP_BASE_ROUTER
