@@ -59,7 +59,7 @@
         </v-form>
       </div>
       <div class="loginBtnBox">
-        <v-btn @click="submit()">{{$t('login.login')}}</v-btn>
+        <v-btn @click="submit()" :disabled="disabledLogin">{{$t('login.login')}}</v-btn>
       </div>
       <div class="bottomBtn">
         <div>
@@ -112,6 +112,7 @@
         userNameList: [],
         languageList: [],
         children: '',
+        disabledLogin: false,
         clickItem: ''// 当前点击用户名下拉框的值
       }
     },
@@ -179,7 +180,13 @@
           adminId: this.userName,
           adminPws: CryptoJS.SHA256(this.password).toString()
         }
-        const [err, data] = await this.publicMethods.getPromise(login(params))
+        this.disabledLogin = true
+        const [err, data] = await login(params)
+          .then(res => [null, res])
+          .catch(err => [err])
+          .finally(() => {
+            this.disabledLogin = false
+          })
         if (err) {
           // this.$toask.info('success', 'sss')
           // console.log(err)

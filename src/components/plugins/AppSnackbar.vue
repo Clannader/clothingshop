@@ -50,7 +50,7 @@
         activeTimeout: -1
       }
     },
-    created() {
+    beforeCreate() {
       // 2.3.x版本以上这里报undefined
       this.$vuetify.application = {
         bar: 0,
@@ -61,6 +61,8 @@
         right: 0,
         top: 0
       }
+    },
+    created() {
       // 如果判断已经弹了框,则后面的弹的框都不显示
       if (store.getters.showSnackbar) {
         return

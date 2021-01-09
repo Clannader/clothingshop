@@ -24,7 +24,7 @@ module.exports = {
       // 2.使用代理的情况就是API地址不支持跨域的时候使用,dev的时候,前端还是会启一个服务器
       // 然后页面通过访问同一个域名下的地址,然后通过服务器帮你访问另一个地址,才实现代理
       '^/api/*': {
-        target: 'http://cc:3000/clothingshop', // 要代理的域名
+        target: 'http://cc:3000', // 要代理的域名
         changeOrigin: true,//允许跨域
         pathRewrite: {
           '^/api': '/cms/h5/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
@@ -67,7 +67,7 @@ module.exports = {
   // vue 2.x版本的原先BASE_URL，vue 4.x改名为publicPath
   // 这里有个不好的地方就是无法设置多个环境的配置文件
   // 这个配置有问题,默认就是./
-  publicPath: '/clothingshop',/* 原值:./ */
+  // publicPath: '/clothingshop',/* 原值:./ */
   // 对应vue 2.x webpack.base.conf的配置
   chainWebpack: config => {
     // 设置路径名的别名引用

@@ -48,12 +48,6 @@ const actions = {
     localStorage.setItem('sidebarStatus', mini)
     commit('mini', mini)
   },
-  clearCurrentRouter: ({ commit }) => {
-    // 这里有点坑啊,手机版的退出,封装的toolbar用到了这个store,还没有退出时被清空会报错
-    commit('currentRouter', {
-      meta: {}
-    })
-  },
   setAddViews: ({ commit, state, rootState }, router) => {
     // 这个设置views真的很坑,需要很熟悉vue的加载顺序才能写得出来
     // 首先先申明加载顺序,进入路由,调用setAddViews方法,再进入组件,然后才调用setAddViews的then方法
@@ -133,10 +127,6 @@ const actions = {
     views.push(item)
     commit('addViews', views)
   },
-  clearViews: ({ commit }) => {
-    // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
-    commit('addViews', [])
-  },
   // 生成权限路由
   generateRoutes: ({ commit, rootState }, roles) => {
     // 首先找到登录页的路由在无权限路由的数组的位置,虽然定义的是在第0位,为了代码的准确性,自己找一遍
@@ -160,8 +150,21 @@ const actions = {
     commit('menuRouter', loginRoutes.children)
     return Promise.resolve(cloneRoutes)
   },
-  clearMenuRouter: ({ commit }) => {
-    commit('menuRouter', [])
+  clearViews: ({ commit }) => {
+    // TODO 这里应该不能直接这样删除,如果碰到锁资源路由需要解锁,所以这里还得遍历views才可以
+    commit('addViews', [])
+  },
+  clearTagsView: ({ commit, dispatch }) => {
+    commit('menuRouter', []) // 清除menuRouter
+
+    dispatch('clearViews') // 清除面包屑视图
+
+    // 这里有点坑啊,手机版的退出,封装的toolbar用到了这个store,还没有退出时被清空会报错
+    commit('currentRouter', {
+      meta: {}
+    }) // 清除当前路由
+
+    commit('drawer', null)
   }
 }
 
