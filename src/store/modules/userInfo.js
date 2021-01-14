@@ -34,9 +34,6 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  clearRoles: ({ commit }) => {
-    commit('roles', '')
-  },
   // 获取用户权限
   getRoles: async({ commit, dispatch }) => {
     const [err, data] = await request.post('/api/user/roles', {})
@@ -91,9 +88,6 @@ const actions = {
   userLogout: () => {
     router.push({ path: '/login' })
   },
-  resetRouter: () => {
-    resetRouter()
-  },
   setSessionSchema: ({ commit, state }, session = {}) => {
     router.app.publicMethods.setUserSession(session)
     // const orgSession = state.sessionSchema || {}
@@ -102,8 +96,10 @@ const actions = {
     // }
     commit('sessionSchema', { ...state.sessionSchema, ...session })
   },
-  clearSession: ({ commit }) => {
+  clearUserInfo: ({ commit }) => {
     commit('sessionSchema', {})
+    commit('roles', '')
+    resetRouter() // 重置路由,避免不刷新页面导致缓存
   }
 }
 

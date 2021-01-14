@@ -1,6 +1,10 @@
 <template>
   <div class="v-application--wrap">
-    <phone-toolbar>
+    <phone-toolbar
+      replay-icon
+      sort-icon
+      @click:replay="click"
+    >
       <template v-slot:icon>
         <app-text-icon
           icon="done"

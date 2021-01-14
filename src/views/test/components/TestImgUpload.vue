@@ -24,8 +24,15 @@
     reader.addEventListener('load', () => callback(reader.result))
     reader.readAsDataURL(img)
   }
+
+  import { Upload, Icon } from 'ant-design-vue'
+
   export default {
     name: 'TestImgUpload',
+    components: {
+      AUpload: Upload,
+      AIcon: Icon
+    },
     data() {
       return {
         loading: false,

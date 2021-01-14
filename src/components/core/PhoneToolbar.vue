@@ -98,9 +98,7 @@
       iconClick(eventName) {
         this.$emit('click:' + kebabCase(eventName))
       },
-      snakeCase() {
-        return snakeCase.apply(this, arguments)
-      }
+      snakeCase
     }
   }
 </script>

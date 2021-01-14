@@ -95,7 +95,7 @@ const settingsRouter = {
         icon: 'iconfont icon-c-repair',
         right: '3007'
       },
-      component: () => import('@/views/blank')
+      component: () => import('@/views/test/components/TestXlsx')
     }
   ]
 }

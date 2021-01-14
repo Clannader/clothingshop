@@ -10,7 +10,7 @@ import { settingsRouter, phoneSettingsRouter } from './settings'
 import Statistics from './statistics'
 import Monitor from './monitor'
 import Miscellaneous from './miscellaneous'
-// import FunctionTest from './funTest'
+import FunctionTest from './funTest'
 
 import store from '@/store'
 
@@ -19,8 +19,7 @@ Vue.use(VueRouter)
 // 有权限的路由列表
 export const menuRoutes = [
   homeRouter, Frontdesk, Logs, settingsRouter,
-  Statistics, Monitor, Miscellaneous
-  // , FunctionTest
+  Statistics, Monitor, Miscellaneous, FunctionTest
 ]
 
 export const phoneRoutes = [
