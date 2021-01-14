@@ -45,7 +45,7 @@
       }
     },
     created() {
-      this.load()
+      console.log('初始化')
     },
     methods: {
       doSearch() {

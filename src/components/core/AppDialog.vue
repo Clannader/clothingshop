@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="visible"
+    :value="visible"
     persistent
     :width="width"
   >

@@ -3,7 +3,7 @@
     <v-container fluid class="main-content">
       <app-breadcrumbs></app-breadcrumbs>
       <v-fade-transition hide-on-leave="">
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
       </v-fade-transition>
     </v-container>
     <change-password
