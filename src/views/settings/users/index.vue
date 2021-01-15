@@ -49,9 +49,9 @@
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on: menu }">
+            <template #activator="{ on }">
               <v-btn
-                v-on="menu"
+                v-on="on"
                 icon
                 small
                 @click="selectedRow(record)"

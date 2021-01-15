@@ -36,8 +36,8 @@
             <v-card class="box-card">
               <div class="box-item">
                 <v-tooltip bottom nudge-left="12">
-                  <template v-slot:activator="{ on : tip }">
-                    <div v-on="tip" class="box-name"><b>{{log.name}}</b></div>
+                  <template #activator="{ on }">
+                    <div v-on="on" class="box-name"><b>{{log.name}}</b></div>
                   </template>
                   <div>{{log.name}}</div>
                 </v-tooltip>

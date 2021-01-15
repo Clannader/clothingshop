@@ -8,12 +8,12 @@
     close-delay="100"
     open-on-hover
   >
-    <template v-slot:activator="{ on: menu }">
+    <template #activator="{ on }">
       <v-btn
         :aria-label="currentLanguage.desc"
         :title="$t('homePage.lang')"
         text
-        v-on="menu"
+        v-on="on"
       >
         {{currentLanguage.desc}}
         <v-icon

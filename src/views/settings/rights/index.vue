@@ -40,8 +40,8 @@
       >
         <template #groupDesc="{record}">
           <v-tooltip bottom>
-            <template v-slot:activator="{ on : tip }">
-              <div v-on="tip" class="text-ellipsis">
+            <template #activator="{ on }">
+              <div v-on="on" class="text-ellipsis">
                 {{record}}
               </div>
             </template>
@@ -55,9 +55,9 @@
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on: menu }">
+            <template #activator="{ on }">
               <v-btn
-                v-on="menu"
+                v-on="on"
                 icon
                 small
                 @click="selectedRow(record)"
