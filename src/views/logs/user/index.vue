@@ -81,13 +81,13 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="logDate" slot-scope="{record}">
+        <template #logDate="{record}">
           <div class="text-ellipsis">
             {{record.format('YYYY-MM-DD HH:mm:ss')}}
           </div>
         </template>
 
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left

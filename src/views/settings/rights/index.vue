@@ -38,7 +38,7 @@
         :customRow= "rowClick"
         @change="doSearch"
       >
-        <template slot="groupDesc" slot-scope="{record}">
+        <template #groupDesc="{record}">
           <v-tooltip bottom>
             <template v-slot:activator="{ on : tip }">
               <div v-on="tip" class="text-ellipsis">
@@ -49,7 +49,7 @@
           </v-tooltip>
         </template>
 
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left

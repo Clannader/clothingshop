@@ -32,24 +32,31 @@
       pageName: String
     },
     computed: {
-      children() {
-        const that = this
-        return function(resolve) {
-          require([`@/views/test/components/${that.pageName}`], resolve)
-        }
-      }
+      // children() {
+      //   const that = this
+      //   return function(resolve) {
+      //     require([`@/views/test/components/${that.pageName}`], resolve)
+      //   }
+      // }
     },
     data() {
       return {
-        cond: undefined
+        cond: undefined,
+        children: undefined
       }
     },
     created() {
       console.log('初始化')
+      this.children = this.getComponents(this.pageName)
     },
     methods: {
       doSearch() {
         this.$toast.success(this.pageName)
+      },
+      getComponents(name) {
+        return function(resolve) {
+          require([`@/views/test/components/${name}`], resolve)
+        }
       }
     }
   }

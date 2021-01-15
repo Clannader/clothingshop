@@ -44,7 +44,7 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left

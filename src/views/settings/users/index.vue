@@ -43,7 +43,7 @@
           </div>
         </template>
 
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left
