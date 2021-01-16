@@ -51,7 +51,7 @@
         const regex = /(SYSTEM)/gi
         // 判断shopId不能为空,并且没有权限,并且匹配system才会去校验
         if (!this.publicMethods.isEmpty(this.shopId) &&
-          !this.$store.commit('userInfo/isPermission', 'CreateSYSAny') &&
+          !this.publicMethods.isPermission('CreateSYSAny') &&
           this.shopId.match(regex)) {
           if (!isAlert) {
             // 判断是否弹出提示框

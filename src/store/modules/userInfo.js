@@ -7,7 +7,6 @@ import { make } from 'vuex-pathify'
 import request from '@/utils/request'
 import router, { resetRouter } from '../../router'
 import { ROOT_DISPATCH } from '@/store'
-import rightsCode from '@/utils/rightsCode'
 
 const state = {
   roles: null, // 用户权限
@@ -31,13 +30,7 @@ const state = {
   }
 }
 
-const mutations = {
-  ...make.mutations(state),
-  isPermission: (state, rights = '') => {
-    const userRoles = state.roles
-    return userRoles.indexOf(rightsCode[rights].code) !== -1
-  }
-}
+const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
