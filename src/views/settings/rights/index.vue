@@ -108,16 +108,11 @@
   import { getRightsList, findRightsById } from './api.js'
   import RightsDetails from './components/RightsDetails'
   import RightsDeleteDialog from './components/RightsDeleteDialog'
+  import tableInit from '@/mixins/table-init'
 
   export default {
     name: 'SettingsRights',
-    created() {
-      // 定义表格属性加上ref,为了获取封装后的表格的页码,和条数
-      this.doSearch()
-    },
-    mounted() {
-      // 初始化不放在这里,始终感觉不是很好的感觉
-    },
+    mixins: [tableInit],
     methods: {
       doSearch() {
         this.loading = true
@@ -154,35 +149,11 @@
           this.recordScheam = result.rights
         }).catch(() => {})
       },
-      // initDoSearh() {
-      //   const rightsTable = this.$refs.rightsTable
-      //   if (rightsTable) {
-      //     rightsTable.pageIndex = 1
-      //   }
-      //   this.doSearch()
-      // },
       // 选中行Class
       rowClass(record/*, index*/) {
         if (record.groupName === this.isSelect.groupName) {
           return 'rowSelected'
         }
-      },
-      rowClick(record/*, index 表格的下标,可以点击时获取点击的是第几行*/) {
-        return {
-          on: {
-            click: () => {
-              // 行单击事件
-              this.selectedRow(record)
-            },
-            dblclick: () => {
-              // 行双击事件
-              this.openModify(record)
-            }
-          }
-        }
-      },
-      selectedRow(record) {
-        this.isSelect = record
       },
       openDelete(record) {
         this.children = RightsDeleteDialog
@@ -191,37 +162,19 @@
           groupName: record.groupName
         }
       },
-      goBack() {
-        this.$router.back(-1)
-      },
       openCreate() {
         this.children = RightsDetails
         this.recordScheam = {}
       },
-      closeDialog() {
-        this.children = ''
-        this.doSearch()
-      },
       onResize() {
         this.tableY = window.innerHeight - 427 + 34 // 34 是分页的差额
-      },
-      clearGroupName() {
-        this.queryParams.groupName = null
-        this.doSearch()
       }
     },
     data() {
       return {
-        tableData: [],
-        tableY: 230,
-        loading: false,
         queryParams: {
           groupName: undefined
-        },
-        tableTotal: 0,
-        children: '',
-        recordScheam: undefined,
-        isSelect: {} // 点击选中时,获取当前记录的json
+        }
       }
     },
     computed: {

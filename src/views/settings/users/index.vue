@@ -4,11 +4,11 @@
       <v-container fluid class="card-container">
         <div class="form-group">
           <div class="group-item">
-            <v-text-field
-              v-model="queryParams.cond"
+            <app-text-field
+              :update-value.sync="queryParams.cond"
               :label="$t('users.searchCond')"
-              @keyup.enter="doSearch">
-            </v-text-field>
+              @changeValue="doSearch">
+            </app-text-field>
           </div>
           <v-spacer></v-spacer>
           <div class="card-search-btn">
@@ -94,28 +94,19 @@
 
 <script>
   import { getUsersList } from './api'
+  import tableInit from '@/mixins/table-init'
 
   export default {
     name: 'SettingsUsers',
+    mixins: [tableInit],
     data() {
       const query = {
         cond: undefined
       }
       return {
-        tableData: [],
-        tableY: 230,
-        offset: 1,
-        pageSize: 10,
-        loading: false,
         queryParams: query,
-        queryParamsCopy: query,
-        tableTotal: 0,
-        children: '',
-        isSelect: {}
+        queryParamsCopy: query
       }
-    },
-    created() {
-      this.doSearch()
     },
     methods: {
       doSearch() {
@@ -141,47 +132,12 @@
           this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
-      goBack() {
-        this.$router.back(-1)
-      },
       openCreate() {
 
-      },
-      onResize() {
-        this.tableY = window.innerHeight - 427
-      },
-      rowClass(record) {
-        if (record._id === this.isSelect._id) {
-          return 'rowSelected'
-        }
-      },
-      rowClick(record/*, index 表格的下标,可以点击时获取点击的是第几行*/) {
-        return {
-          on: {
-            click: () => {
-              // 行单击事件
-              this.selectedRow(record)
-            },
-            dblclick: () => {
-              // 行双击事件
-              this.openModify(record)
-            }
-          }
-        }
-      },
-      selectedRow(record) {
-        this.isSelect = record
       },
       openDelete(record) {
 
       },
-      // initDoSearh() {
-      //   const usersTable = this.$refs.usersTable
-      //   if (usersTable) {
-      //     usersTable.pageIndex = 1
-      //   }
-      //   this.doSearch()
-      // },
       openModify(record) {
 
       },
