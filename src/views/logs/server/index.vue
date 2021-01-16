@@ -36,8 +36,8 @@
             <v-card class="box-card">
               <div class="box-item">
                 <v-tooltip bottom nudge-left="12">
-                  <template v-slot:activator="{ on : tip }">
-                    <div v-on="tip" class="box-name"><b>{{log.name}}</b></div>
+                  <template #activator="{ on }">
+                    <div v-on="on" class="box-name"><b>{{log.name}}</b></div>
                   </template>
                   <div>{{log.name}}</div>
                 </v-tooltip>
@@ -94,7 +94,6 @@
   import { saveAs } from 'file-saver'
   import LogView from './components/LogView'
   import LogDeleteDialog from './components/LogDeleteDialog'
-  import { get } from 'vuex-pathify'
 
   export default {
     name: 'ServerLogs',
@@ -144,8 +143,6 @@
       },
       filterByFunction(logItem) {
         if (this.publicMethods.isEmpty(this.searchCond)) return true
-        // return logItem.name.indexOf(this.searchCond) !== -1 ||
-        //   logItem.date.indexOf(this.searchCond) !== -1
         return logItem.date.indexOf(this.searchCond) !== -1
       },
       closeDialog() {
@@ -158,8 +155,7 @@
       },
       isShowDelete(date) {
         // 判断用户是否有权限
-        const rightCode = this.staticVal.RightsCode.DeleteServerLog.code
-        const isRight = this.roles.indexOf(rightCode) !== -1
+        const isRight = this.publicMethods.isPermission('DeleteServerLog')
         const isAfter = new Date().todayMoment().diff(date.createMoment(), 'days')
         return isRight && isAfter > 30
       }
@@ -169,8 +165,7 @@
         return this.logsArr.filter(v => {
           return this.filterByFunction(v)
         })
-      },
-      ...get('userInfo', ['roles'])
+      }
     }
   }
 </script>

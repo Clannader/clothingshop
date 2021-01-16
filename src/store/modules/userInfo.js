@@ -90,10 +90,6 @@ const actions = {
   },
   setSessionSchema: ({ commit, state }, session = {}) => {
     router.app.publicMethods.setUserSession(session)
-    // const orgSession = state.sessionSchema || {}
-    // for (const key in session) {
-    //   orgSession[key] = session[key]
-    // }
     commit('sessionSchema', { ...state.sessionSchema, ...session })
   },
   clearUserInfo: ({ commit }) => {

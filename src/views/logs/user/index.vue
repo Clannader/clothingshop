@@ -81,21 +81,21 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="logDate" slot-scope="{record}">
+        <template #logDate="{record}">
           <div class="text-ellipsis">
             {{record.format('YYYY-MM-DD HH:mm:ss')}}
           </div>
         </template>
 
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on: menu }">
+            <template #activator="{ on }">
               <v-btn
-                v-on="menu"
+                v-on="on"
                 icon
                 small
                 @click="selectedRow(record)"
@@ -136,9 +136,11 @@
 <script>
   import { queryUserLog } from './api'
   import UserLogView from './components/UserLogView'
+  import tableInit from '@/mixins/table-init'
 
   export default {
     name: 'UserLogs',
+    mixins: [tableInit],
     data() {
       const query = {
         cond: undefined,
@@ -147,22 +149,9 @@
         type: 'ALL'
       }
       return {
-        tableData: [],
-        tableY: 230,
-        offset: 1,
-        pageSize: 10,
-        loading: false,
         queryParams: query,
-        queryParamsCopy: query,
-        tableTotal: 0,
-        children: '',
-        isSelect: {}
+        queryParamsCopy: query
       }
-    },
-    created() {
-      this.$nextTick(() => {
-        this.doSearch()
-      })
     },
     methods: {
       doSearch() {
@@ -188,40 +177,11 @@
           this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
-      goBack() {
-        this.$router.back(-1)
-      },
       onResize() {
         this.tableY = window.innerHeight - 427 - 70
       },
-      rowClass(record) {
-        if (record._id === this.isSelect._id) {
-          return 'rowSelected'
-        }
-      },
-      rowClick(record/*, index 表格的下标,可以点击时获取点击的是第几行*/) {
-        return {
-          on: {
-            click: () => {
-              // 行单击事件
-              this.selectedRow(record)
-            },
-            dblclick: () => {
-              // 行双击事件
-              this.viewLogs(record)
-            }
-          }
-        }
-      },
-      selectedRow(record) {
-        this.isSelect = record
-      },
       viewLogs() {
         this.children = UserLogView
-      },
-      closeDialog() {
-        this.children = ''
-        this.doSearch()
       }
     },
     computed: {

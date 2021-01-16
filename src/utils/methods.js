@@ -214,6 +214,11 @@ const methods = {
       }
     }
     return true
+  },
+
+  isPermission(rights = '') {
+    const userRoles = store.getters.roles
+    return userRoles.indexOf(staticVal.RightsCode[rights].code) !== -1
   }
 }
 

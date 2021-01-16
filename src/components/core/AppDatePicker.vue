@@ -9,7 +9,7 @@
       max-width="290px"
       min-width="290px"
     >
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-text-field
           v-model="dateText"
           v-on="on"

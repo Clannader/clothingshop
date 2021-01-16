@@ -44,15 +44,15 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="action" slot-scope="{record}">
+        <template #action="{record}">
           <v-menu
             bottom
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on: menu }">
+            <template #activator="{ on }">
               <v-btn
-                v-on="menu"
+                v-on="on"
                 icon
                 small
                 @click="selectedRow(record)"
@@ -111,9 +111,11 @@
 <script>
   import { getSystemGroup } from './api.js'
   import ConfigDetails from './components/ConfigDetails'
+  import tableInit from '@/mixins/table-init'
 
   export default {
     name: 'SystemConfig',
+    mixins: [tableInit],
     data() {
       const query = {
         cond: undefined,
@@ -121,23 +123,9 @@
         type: 'ONE'
       }
       return {
-        tableData: [],
-        tableY: 230,
-        loading: false,
         queryParams: query,
-        queryParamsCopy: query,
-        tableTotal: 0,
-        children: '',
-        offset: 1,
-        pageSize: 10,
-        recordScheam: undefined,
-        isSelect: {}
+        queryParamsCopy: query
       }
-    },
-    created() {
-      this.$nextTick(() => {
-        this.doSearch()
-      })
     },
     methods: {
       doSearch() {
@@ -163,9 +151,6 @@
           this.queryParamsCopy = Object.assign({}, this.queryParams)
         })
       },
-      goBack() {
-        this.$router.back(-1)
-      },
       openCreate() {
         this.children = ConfigDetails
         this.recordScheam = {}
@@ -176,34 +161,6 @@
       },
       openChildren() {
 
-      },
-      closeDialog() {
-        this.children = ''
-        this.doSearch()
-      },
-      onResize() {
-        this.tableY = window.innerHeight - 427
-      },
-      rowClass(record) {
-        if (record._id === this.isSelect._id) {
-          return 'rowSelected'
-        }
-      },
-      rowClick(record) {
-        return {
-          on: {
-            click: () => {
-              this.selectedRow(record)
-            },
-            dblclick: () => {
-              // 行双击事件
-              this.openModify(record)
-            }
-          }
-        }
-      },
-      selectedRow(record) {
-        this.isSelect = record
       }
     },
     computed: {

@@ -5,11 +5,11 @@
     :disabled="showTips && !viewItem"
   >
     <!--  v-tooltip的源码里面必须这样写才能绑定tip,并且是{on:value}这样的键值对-->
-    <template v-slot:activator="{ on : itemTip }">
+    <template #activator="{ on }">
       <v-list-item
         @click="gotoView(item)"
         color="primary"
-        v-on="itemTip"
+        v-on="on"
         :class="isActiveClass(item)"
       >
         <v-list-item-icon v-if="!subItem">

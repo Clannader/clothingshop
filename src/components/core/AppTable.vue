@@ -12,8 +12,8 @@
       <template
         v-for="(vue, slot) in $scopedSlots"
         :slot="slot"
-        slot-scope="row">
-        <slot :name="slot" :record="row"></slot>
+        slot-scope="record">
+        <slot :name="slot" v-bind="{ record }"></slot>
       </template>
     </a-table>
 
