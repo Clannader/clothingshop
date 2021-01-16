@@ -143,6 +143,10 @@ const RightsCode = {
   DeleteServerLog: {
     code: '9005',
     desc: '能否删除服务器日志'
+  },
+  CreateSYSAny: {
+    code: '9006',
+    desc: '能否新建SYSTEM店铺的数据'
   }
 }
 

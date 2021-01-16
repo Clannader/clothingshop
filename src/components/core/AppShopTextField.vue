@@ -10,6 +10,7 @@
     append-icon="toc"
     :disabled="disabled"
     @input="returnShopId"
+    @blur="validateShopId()"
     @click:append="openShopId()"
   >
   </v-text-field>
@@ -44,6 +45,21 @@
       },
       returnShopId() {
         this.$emit('update:shopId', this.shopId)
+      },
+      validateShopId(isAlert = false) {
+        // 如果没有权限,不能使用SYSTEM店铺
+        const regex = /(SYSTEM)/gi
+        // 判断shopId不能为空,并且没有权限,并且匹配system才会去校验
+        if (!this.publicMethods.isEmpty(this.shopId) &&
+          !this.$store.commit('userInfo/isPermission', 'CreateSYSAny') &&
+          this.shopId.match(regex)) {
+          if (!isAlert) {
+            // 判断是否弹出提示框
+            this.$toast.error(this.$t('homePage.invShopId'))
+          }
+          this.shopId = ''
+        }
+        this.returnShopId()
       }
     },
     computed: {
@@ -57,7 +73,8 @@
         this.shopId = this.sessionSchema.shopId
         this.disabled = true
       }
-      this.returnShopId()
+      // 如果没有权限,不能使用SYSTEM店铺
+      this.validateShopId(true)
     }
   }
 </script>

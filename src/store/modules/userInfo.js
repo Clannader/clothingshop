@@ -7,6 +7,7 @@ import { make } from 'vuex-pathify'
 import request from '@/utils/request'
 import router, { resetRouter } from '../../router'
 import { ROOT_DISPATCH } from '@/store'
+import rightsCode from '@/utils/rightsCode'
 
 const state = {
   roles: null, // 用户权限
@@ -30,7 +31,13 @@ const state = {
   }
 }
 
-const mutations = make.mutations(state)
+const mutations = {
+  ...make.mutations(state),
+  isPermission: (state, rights = '') => {
+    const userRoles = state.roles
+    return userRoles.indexOf(rightsCode[rights].code) !== -1
+  }
+}
 
 const actions = {
   ...make.actions(state),
@@ -90,10 +97,6 @@ const actions = {
   },
   setSessionSchema: ({ commit, state }, session = {}) => {
     router.app.publicMethods.setUserSession(session)
-    // const orgSession = state.sessionSchema || {}
-    // for (const key in session) {
-    //   orgSession[key] = session[key]
-    // }
     commit('sessionSchema', { ...state.sessionSchema, ...session })
   },
   clearUserInfo: ({ commit }) => {
