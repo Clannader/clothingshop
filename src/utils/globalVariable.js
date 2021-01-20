@@ -6,9 +6,9 @@ import RightsCode from './rightsCode'
 const staticVal = {
   // 接口响应状态码
   Code: {
-    Success: 1, // 成功
-    Fail: 0, // 失败
-    TableError: -1, // 表格数据返回错误
+    Success: 100, // 成功
+    Fail: 999, // 失败
+    // TableError: -1, // 表格数据返回错误
     NotFound: 404, // 地址不存在
     Error: 999, // 未知的异常
     Invalid: 901, // 无效的凭证
