@@ -47,7 +47,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const code = response.data.code
-    if (code === staticVal.Code.Success || code === 1000) {
+    if (code === staticVal.Code.Success) {
       return response.data
     } else {
       if (code === staticVal.Code.Invalid) {

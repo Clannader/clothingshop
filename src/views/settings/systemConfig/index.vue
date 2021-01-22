@@ -109,7 +109,7 @@
 </template>
 
 <script>
-  import { getSystemGroup } from './api.js'
+  import { getSystemGroup, getSystemInfo } from './api.js'
   import ConfigDetails from './components/ConfigDetails'
   import tableInit from '@/mixins/table-init'
 
@@ -155,7 +155,10 @@
         this.children = ConfigDetails
         this.recordScheam = {}
       },
-      openModify() {
+      openModify(record) {
+        getSystemInfo({ id: record._id }).then(result => {
+          console.log(result)
+        }).catch(() => {})
       },
       openDelete() {
       },
