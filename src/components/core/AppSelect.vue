@@ -10,7 +10,7 @@
   >
     <template
       v-slot:item="{ item, attrs, on }"
-      v-if="!slotItem"
+      v-if="customItem"
     >
       <v-list-item
         v-bind="attrs"
@@ -22,6 +22,14 @@
         </v-list-item-title>
       </v-list-item>
     </template>
+    <template
+      v-else
+      v-for="(vue, slot) in $scopedSlots"
+      :slot="slot"
+      slot-scope="record"
+    >
+      <slot :name="slot" v-bind="record"></slot>
+    </template>
   </v-select>
 </template>
 
@@ -30,7 +38,7 @@
     inheritAttrs: true,
     name: 'AppSelect',
     props: {
-      slotItem: Boolean,
+      customItem: Boolean, // 有值时才使用封装内的样式
       // 控件更新子组件字段值
       updateValue: {
         type: null,

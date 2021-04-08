@@ -70,11 +70,11 @@
       getAllItems(groupPath, items) {
         let temp = []
         items.map(item => {
-          const to = item.to ? item.to : groupPath
+          // const to = item.to ? item.to : groupPath
           if (this.isShowGroupNav(item)) {
-            temp = temp.concat(this.getAllItems(to, item.children))
+            temp = temp.concat(this.getAllItems(`${groupPath}/${item.path}`, item.children))
           } else if (this.isShowItemNav(item)) {
-            item.to = `${to}/${item.path}`
+            item.to = `${groupPath}/${item.path}`
             temp.push(item)
           }
         })

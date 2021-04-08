@@ -1,7 +1,7 @@
 <template>
   <v-list-group
     :group="group"
-    :prepend-icon="subGroup ? '' : item.meta.icon"
+    :prepend-icon="subGroup ? undefined : item.meta.icon"
     :sub-group="subGroup"
     no-action
   >

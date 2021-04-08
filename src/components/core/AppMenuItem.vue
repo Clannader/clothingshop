@@ -145,4 +145,12 @@
   /deep/ .v-list-item__action:last-of-type:not(:only-child){
     margin-left: 8px !important;
   }
+
+  /deep/ .v-list--item__action:last-of-type:not(:only-child) {
+    margin-left: 8px !important;
+  }
+
+  .v-list--nav .v-list-item{
+    padding: 0 10px;
+  }
 </style>

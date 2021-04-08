@@ -29,6 +29,7 @@
               :items="logTypeItem"
               :label="$t('logs.logType')"
               @changeValue="doSearch"
+              custom-item
             >
             </app-select>
           </div>
@@ -81,9 +82,9 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template #logDate="{record}">
+        <template #logDate="{text}">
           <div class="text-ellipsis">
-            {{record.format('YYYY-MM-DD HH:mm:ss')}}
+            {{text.format('YYYY-MM-DD HH:mm:ss')}}
           </div>
         </template>
 
