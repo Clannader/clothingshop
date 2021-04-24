@@ -152,7 +152,9 @@
       }
       return {
         queryParams: query,
-        queryParamsCopy: query
+        queryParamsCopy: query,
+        sortOrder: undefined,
+        pageSize: 30
       }
     },
     methods: {
@@ -164,7 +166,8 @@
         queryUserLog({
           ...this.queryParams,
           offset: this.offset,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          sortOrder: this.sortOrder
         }).then(result => {
           this.tableData = result.logs
           this.tableTotal = result.total
@@ -186,10 +189,16 @@
         this.children = UserLogView
       },
       changeData(pagination, filters, sorter) {
-        console.log(JSON.stringify(pagination))
-        console.log(JSON.stringify(filters))
-        console.log(JSON.stringify(sorter))
         // 可以获取当前分页数,过滤条件,排序条件内容,这里进行的是服务器端排序
+        if (!this.publicMethods.isEmpty(sorter.column) &&
+          typeof sorter.column.sorter === 'boolean' &&
+          sorter.column.sorter) {
+          this.sortOrder = {
+            sort: sorter.field,
+            order: sorter.order === 'descend' ? 'desc' : 'asc'
+          }
+          this.doSearch()
+        }
       }
     },
     computed: {
@@ -218,7 +227,8 @@
               dataIndex: 'date',
               width: 180,
               scopedSlots: { customRender: 'logDate' },
-              sorter: true
+              // sorter: (a, b) => this.publicMethods.tableSort(a.date, b.date) // 客户端排序
+              sorter: true // 服务器排序
             },
             {
               title: `${this.$t('logs.logType')}`,
