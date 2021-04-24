@@ -38,14 +38,14 @@
         :customRow= "rowClick"
         @change="doSearch"
       >
-        <template #groupDesc="{record}">
+        <template #groupDesc="{text}">
           <v-tooltip bottom>
             <template #activator="{ on }">
               <div v-on="on" class="text-ellipsis">
-                {{record}}
+                {{text}}
               </div>
             </template>
-            <div>{{record}}</div>
+            <div>{{text}}</div>
           </v-tooltip>
         </template>
 
