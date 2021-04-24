@@ -8,6 +8,7 @@ import api from './request'
 import store from '@/store'
 import CryptoJS from 'crypto-js'
 import staticVal from './globalVariable'
+import tableSort from './tableSort'
 
 const methods = {
   async removeUserSession() {
@@ -219,7 +220,9 @@ const methods = {
   isPermission(rights = '') {
     const userRoles = store.getters.roles
     return userRoles.indexOf(staticVal.RightsCode[rights].code) !== -1
-  }
+  },
+
+  tableSort: tableSort
 }
 
 // const methods = new Methods()

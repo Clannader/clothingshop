@@ -78,7 +78,8 @@
         :scroll="{ x:1000,y: tableY }"
         :rowClassName="rowClass"
         :customRow="rowClick"
-        @change="doSearch"
+        @change="changeData"
+        @doSearch="doSearch"
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
@@ -183,6 +184,12 @@
       },
       viewLogs() {
         this.children = UserLogView
+      },
+      changeData(pagination, filters, sorter) {
+        console.log(JSON.stringify(pagination))
+        console.log(JSON.stringify(filters))
+        console.log(JSON.stringify(sorter))
+        // 可以获取当前分页数,过滤条件,排序条件内容,这里进行的是服务器端排序
       }
     },
     computed: {
@@ -210,12 +217,15 @@
               title: `${this.$t('logs.date')}`,
               dataIndex: 'date',
               width: 180,
-              scopedSlots: { customRender: 'logDate' }
+              scopedSlots: { customRender: 'logDate' },
+              sorter: true
             },
             {
               title: `${this.$t('logs.logType')}`,
               dataIndex: 'type',
-              width: 120
+              width: 120,
+              sorter: (a, b) => this.publicMethods.tableSort(a.type, b.type)
+              // sortOrder: 'ascend' // descend, ascend 默认初始化排序
             },
             {
               title: `${this.$t('logs.requestIP')}`,

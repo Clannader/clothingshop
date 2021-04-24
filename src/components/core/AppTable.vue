@@ -108,13 +108,15 @@
         } else {
           // 这里进来的条件是在第一页来回切换tablePageSize的时候会触发
           this.getReturnValue()
-          this.$emit('change')
+          // 这里不能使用change,这样会和table里面的内置方法同名
+          // 2021-04-24 解决表格排序兼容客户端排序和服务器端排序问题
+          this.$emit('doSearch')
         }
       },
       tableOffset() {
         // 每页跳转的时候都需要刷新和改变子类的字段值
         this.getReturnValue()
-        this.$emit('change')
+        this.$emit('doSearch')
       },
       offset(newVal) {
         this.tableOffset = newVal
