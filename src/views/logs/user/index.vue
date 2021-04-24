@@ -154,7 +154,9 @@
         queryParams: query,
         queryParamsCopy: query,
         sortOrder: undefined,
-        pageSize: 30
+        pageSize: 30,
+        sortField: ['date'] // 这里很尴尬,排序的时候,清除排序那次点击并不知道那一列是客户端排序还是服务器的
+        // 所以这里标示一下,哪些字段是服务器排序的
       }
     },
     methods: {
@@ -190,12 +192,14 @@
       },
       changeData(pagination, filters, sorter) {
         // 可以获取当前分页数,过滤条件,排序条件内容,这里进行的是服务器端排序
-        if (!this.publicMethods.isEmpty(sorter.column) &&
-          typeof sorter.column.sorter === 'boolean' &&
-          sorter.column.sorter) {
-          this.sortOrder = {
-            sort: sorter.field,
-            order: sorter.order === 'descend' ? 'desc' : 'asc'
+        if (this.sortField.includes(sorter.field)) {
+          if (sorter.order) {
+            this.sortOrder = {
+              sort: sorter.field,
+              order: sorter.order === 'descend' ? 'desc' : 'asc'
+            }
+          } else {
+            this.sortOrder = undefined
           }
           this.doSearch()
         }
