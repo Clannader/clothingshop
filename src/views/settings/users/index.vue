@@ -33,7 +33,7 @@
         :scroll="{ x:1000,y: tableY }"
         :rowClassName="rowClass"
         :customRow="rowClick"
-        @change="doSearch"
+        @doSearch="doSearch"
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >

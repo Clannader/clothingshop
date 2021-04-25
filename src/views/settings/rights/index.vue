@@ -36,7 +36,7 @@
         :rowClassName="rowClass"
         :pagination="false"
         :customRow= "rowClick"
-        @change="doSearch"
+        @doSearch="doSearch"
       >
         <template #groupDesc="{text}">
           <v-tooltip bottom>

@@ -18,7 +18,7 @@
     </a-table>
 
     <v-row class="mr-24">
-      <v-col class="flex-center" :class="pagination ? '' : 'page-amount'">
+      <v-col class="flex-center" :class="{'page-amount':!pagination}">
         <span class="amount">{{$t('homePage.tableTotal')}}:
           <span class="table-total">{{total}}</span>
         </span>
@@ -30,7 +30,7 @@
             <v-select
               v-model="tablePageSize"
               :items="showNumber"
-              :label="showNumber[0]"
+              :label="tablePageSize+''"
               single-line
             ></v-select>
           </div>
@@ -108,15 +108,18 @@
         } else {
           // 这里进来的条件是在第一页来回切换tablePageSize的时候会触发
           this.getReturnValue()
-          this.$emit('change')
+          // 这里不能使用change,这样会和table里面的内置方法同名
+          // 2021-04-24 解决表格排序兼容客户端排序和服务器端排序问题
+          this.$emit('doSearch')
         }
       },
       tableOffset() {
         // 每页跳转的时候都需要刷新和改变子类的字段值
         this.getReturnValue()
-        this.$emit('change')
+        this.$emit('doSearch')
       },
       offset(newVal) {
+        // 这个是监控到子组件set值的时候,需要修改table组件内部的值
         this.tableOffset = newVal
       }
     },
@@ -125,6 +128,11 @@
         this.$emit('update:offset', this.tableOffset)
         this.$emit('update:pageSize', this.tablePageSize)
       }
+    },
+    created() {
+      // 这里如果组件传参重新修改值的话,会出现调用2遍接口
+      this.tablePageSize = this.pageSize
+      this.tableOffset = this.offset
     }
   }
 </script>

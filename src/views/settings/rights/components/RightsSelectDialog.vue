@@ -29,7 +29,7 @@
         :total="tableTotal"
         :scroll="{ x:300, y: tableY }"
         :pagination="false"
-        @change="doSearch"
+        @doSearch="doSearch"
         :row-selection="{ selectedRowKeys: rightsCode, onChange: onSelectChange }"
       >
       </app-table>

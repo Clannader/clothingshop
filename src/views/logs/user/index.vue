@@ -78,7 +78,8 @@
         :scroll="{ x:1000,y: tableY }"
         :rowClassName="rowClass"
         :customRow="rowClick"
-        @change="doSearch"
+        @change="changeData"
+        @doSearch="doSearch"
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
@@ -151,7 +152,11 @@
       }
       return {
         queryParams: query,
-        queryParamsCopy: query
+        queryParamsCopy: query,
+        sortOrder: undefined,
+        pageSize: 30,
+        sortField: ['date'] // 这里很尴尬,排序的时候,清除排序那次点击并不知道那一列是客户端排序还是服务器的
+        // 所以这里标示一下,哪些字段是服务器排序的
       }
     },
     methods: {
@@ -163,7 +168,8 @@
         queryUserLog({
           ...this.queryParams,
           offset: this.offset,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          sortOrder: this.sortOrder
         }).then(result => {
           this.tableData = result.logs
           this.tableTotal = result.total
@@ -183,6 +189,20 @@
       },
       viewLogs() {
         this.children = UserLogView
+      },
+      changeData(pagination, filters, sorter) {
+        // 可以获取当前分页数,过滤条件,排序条件内容,这里进行的是服务器端排序
+        if (this.sortField.includes(sorter.field)) {
+          if (sorter.order) {
+            this.sortOrder = {
+              sort: sorter.field,
+              order: sorter.order === 'descend' ? 'desc' : 'asc'
+            }
+          } else {
+            this.sortOrder = undefined
+          }
+          this.doSearch()
+        }
       }
     },
     computed: {
@@ -210,12 +230,16 @@
               title: `${this.$t('logs.date')}`,
               dataIndex: 'date',
               width: 180,
-              scopedSlots: { customRender: 'logDate' }
+              scopedSlots: { customRender: 'logDate' },
+              // sorter: (a, b) => this.publicMethods.tableSort(a.date, b.date) // 客户端排序
+              sorter: true // 服务器排序
             },
             {
               title: `${this.$t('logs.logType')}`,
               dataIndex: 'type',
-              width: 120
+              width: 120,
+              sorter: (a, b) => this.publicMethods.tableSort(a.type, b.type)
+              // sortOrder: 'ascend' // descend, ascend 默认初始化排序
             },
             {
               title: `${this.$t('logs.requestIP')}`,

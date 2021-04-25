@@ -5,5 +5,5 @@
 import api from '@/utils/request'
 
 export function queryUserLog(params) {
-  return api.get('/api/logs/user/search', { params })
+  return api.post('/api/logs/user/search', params)
 }
