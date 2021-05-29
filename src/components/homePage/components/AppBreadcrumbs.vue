@@ -29,7 +29,7 @@
       breadcrumbs() {
         // 是否第一次加载组件
         if (this.isFirst) {
-          // 其实这个第一次进来有点坑,如果是进入首页,由于不首页不加载该组件,导致不是第一次进来
+          // 其实这个第一次进来有点坑,如果是进入首页,由于不是首页不加载该组件,导致不是第一次进来
           let views = []
           try {
             views = sessionStorage.getItem('addViews')
@@ -61,6 +61,13 @@
           // if (!(views.length === 1 && views[0].name === 'Home')) {
           //   this.$store.commit('SetAddViews', views)
           // 我也忘记为什么调用commit了,这里居然不能调用dispatch
+          // 因为dispatch会走addViews的方法,这里只能是单纯的保存值,所以用commit
+
+          // 2021-05-04 这里发现一个很大很郁闷的bug啊,这个保存面包屑问题
+          // 流程是这样的,先进入router,进行设置当前路由,会先进入afterEach来setAddViews
+          // 然后setAddViews会进行commit addViews,然后再初始化页面AppBreadcrumbs
+          // 进入这里,获取sessionStorage的值,再次提交addViews
+          // 最后再进入router的setAddViews的then方法
           this.$store.commit('tagsView/addViews', views)
           // }
           // 这里的意思是computed方法里面不建议对变量赋值
