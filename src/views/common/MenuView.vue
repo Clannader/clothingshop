@@ -10,7 +10,7 @@
         lg="3"
       >
         <v-hover>
-          <template v-slot="{ hover }">
+          <template #default="{ hover }">
             <v-card outlined :elevation="hover ? 10 : 3">
               <app-menu-item
                 :item="item"

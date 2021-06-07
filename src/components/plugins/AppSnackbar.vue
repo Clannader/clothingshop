@@ -8,7 +8,7 @@
     rounded="pill"
     >
     {{message}}
-    <template v-slot:action="{ attrs }">
+    <template #action="{ attrs }">
       <v-btn
         v-bind="attrs"
         dark

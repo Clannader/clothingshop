@@ -7,7 +7,7 @@
     app
     temporary
   >
-    <template v-slot:prepend>
+    <template #prepend>
       <v-img
         :src="require('@/assets/images/vbanner.png')"
         max-height="98"

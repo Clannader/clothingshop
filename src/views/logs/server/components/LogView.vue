@@ -5,7 +5,7 @@
     v-resize="onResize"
     :width="900"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <v-text-field
         v-model="searchCond"
         :label="$t('users.searchCond')"
@@ -53,7 +53,7 @@
         </v-virtual-scroll>
       </a-spin>
     </template>
-    <template slot="footerLeft">
+    <template #footerLeft>
       <v-slider
         v-model="itemHeight"
         :label="$t('logs.logItemHeight')"
@@ -63,7 +63,7 @@
         hide-details
       ></v-slider>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn
         v-if="hasMore"
         depressed

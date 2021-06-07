@@ -3,7 +3,7 @@
     :items="breadcrumbs"
     class="bread-content"
   >
-    <template v-slot:item="{ item }">
+    <template #item="{ item }">
       <v-breadcrumbs-item
         :disabled="item.disabled"
         @click="gotoView(item)"

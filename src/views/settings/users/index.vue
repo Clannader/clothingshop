@@ -37,7 +37,7 @@
         :offset.sync="offset"
         :pageSize.sync="pageSize"
       >
-        <template slot="adminType" slot-scope="{text}">
+        <template #adminType="{text}">
           <div class="text-ellipsis">
             {{getAdminTypeLabel(text)}}
           </div>

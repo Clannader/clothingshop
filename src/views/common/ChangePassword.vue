@@ -3,7 +3,7 @@
     :visible="visible"
     :title="$t('homePage.changPwdTitle')"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <v-form ref="form" v-model="valid">
         <v-text-field
           v-model="oldPwd"
@@ -34,7 +34,7 @@
         </v-text-field>
       </v-form>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn depressed @click="action()">{{$t('homePage.confirm')}}</v-btn>
       <v-btn depressed @click="close()">{{$t('homePage.colse')}}</v-btn>
     </template>

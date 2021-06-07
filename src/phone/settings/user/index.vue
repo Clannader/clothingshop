@@ -5,7 +5,7 @@
       sort-icon
       @click:replay="click"
     >
-      <template v-slot:icon>
+      <template #icon>
         <app-text-icon
           icon="done"
           text="保存"
