@@ -16,7 +16,7 @@
               :placeholder="$t('login.userName')"
               prepend-inner-icon="iconfont icon-c-login-user"
             >
-              <template v-slot:item="{ item }">
+              <template #item="{ item }">
                 <v-list-item-content>
                   <v-list-item-title>
                     {{item}}

@@ -154,7 +154,7 @@
         queryParams: query,
         queryParamsCopy: query,
         sortOrder: undefined,
-        pageSize: 30,
+        // pageSize: 30,
         sortField: ['date'] // 这里很尴尬,排序的时候,清除排序那次点击并不知道那一列是客户端排序还是服务器的
         // 所以这里标示一下,哪些字段是服务器排序的
       }

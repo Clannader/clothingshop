@@ -5,28 +5,45 @@
     v-resize="onResize"
     :width="900"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
+      <v-text-field
+        v-model="searchCond"
+        :label="$t('users.searchCond')"
+      >
+      </v-text-field>
       <a-spin :spinning="loading">
-        <!-- <div
-          class="dialog-text"
-          :style="{ 'max-height' : tableY + 'px' }"
-        >
-          <v-textarea
-            v-model="logContent"
-            background-color="green accent-1"
-            filled
-            auto-grow
-            hide-details
-            readonly
-          ></v-textarea>
-        </div> -->
         <v-virtual-scroll
           :height="tableY"
           :items="logContent"
           :item-height="itemHeight"
           v-scroll.self="onScroll"
         >
-          <template v-slot:default="{ item }">
+          <template
+            v-slot:default="{ item }"
+            v-if="searchCond"
+          >
+            <div>
+              <p class="text-no-wrap" style="color: #333">
+                <template
+                  v-for="(fragment, i) in item
+                  .toString()
+                  .split(new RegExp(`(?<=${searchCond})|(?=${searchCond})`, 'i'))"
+                >
+                  <mark
+                    v-if="fragment.toLowerCase() === searchCond.toLowerCase()"
+                    :key="i"
+                    class="highlight"
+                  >{{ fragment }}</mark
+                  >
+                  <template v-else>{{ fragment }}</template>
+                </template>
+              </p>
+            </div>
+          </template>
+          <template
+            v-slot:default="{ item }"
+            v-else
+          >
             <div>
               <p class="text-no-wrap" style="color: #333">
                 {{item}}
@@ -36,7 +53,7 @@
         </v-virtual-scroll>
       </a-spin>
     </template>
-    <template slot="footerLeft">
+    <template #footerLeft>
       <v-slider
         v-model="itemHeight"
         :label="$t('logs.logItemHeight')"
@@ -46,7 +63,7 @@
         hide-details
       ></v-slider>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn
         v-if="hasMore"
         depressed
@@ -76,6 +93,7 @@
         // logTemp: '', // 这个是分隔数组的最后一行内容
         tableY: 230,
         itemHeight: 25,
+        searchCond: undefined, // 搜索条件
         startByte: 0, // 开始加载的字节位数
         endByte: 10 * 1024 // 最大加载1MB
       }
@@ -140,7 +158,7 @@
         this.$emit('closeDialog')
       },
       onResize() {
-        this.tableY = window.innerHeight - 180
+        this.tableY = window.innerHeight - 246
       },
       onScroll(e) {
         // 2个标识,阻止多次请求导致加载重复数据
@@ -161,5 +179,8 @@
   .dialog-text {
     min-height: 100px;
     overflow: scroll;
+  }
+  .highlight {
+    background-color: #ffc069;
   }
 </style>

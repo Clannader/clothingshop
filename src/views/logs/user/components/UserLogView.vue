@@ -5,13 +5,13 @@
     v-resize="onResize"
     :width="600"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <v-virtual-scroll
         :height="tableY"
         :items="logContent"
         item-height="25"
       >
-        <template v-slot:default="{ item }">
+        <template #default="{ item }">
           <div>
             <p class="text-no-wrap" style="color: #333">
               {{item}}
@@ -20,7 +20,7 @@
         </template>
       </v-virtual-scroll>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn depressed @click="close()">{{$t('homePage.colse')}}</v-btn>
     </template>
   </app-dialog>

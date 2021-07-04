@@ -11,7 +11,7 @@
               class="visible-selected"
               multiple
             >
-              <template v-slot:prepend-item>
+              <template #prepend-item>
                 <v-list-item
                   ripple
                   @click="toggle"
@@ -25,7 +25,7 @@
                 </v-list-item>
                 <v-divider class="mt-2"></v-divider>
               </template>
-              <template v-slot:append-item>
+              <template #append-item>
                 <v-divider class="mb-2"></v-divider>
                 <v-list-item disabled>
                   <v-list-item-avatar color="grey lighten-3">

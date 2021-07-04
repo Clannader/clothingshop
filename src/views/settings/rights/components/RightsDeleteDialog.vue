@@ -4,12 +4,12 @@
     :title="$t('rights.deleteGroup')"
     :width="400"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <div class="dialog-text">
         {{$t('rights.confirmDelete', {name: rightsSchema.groupName})}}
       </div>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn depressed @click="action()">{{$t('homePage.confirm')}}</v-btn>
       <v-btn depressed @click="close()">{{$t('homePage.colse')}}</v-btn>
     </template>

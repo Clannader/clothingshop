@@ -40,7 +40,7 @@
       </v-icon>
     </v-btn>
 
-    <template v-slot:extension>
+    <template #extension>
       <app-text-icon
         style="margin-left: 46px"
         :text="adminName"

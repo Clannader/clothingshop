@@ -5,7 +5,7 @@
     :sub-group="subGroup"
     no-action
   >
-    <template v-slot:activator>
+    <template #activator>
       <v-list-item-content>
         <v-list-item-title v-text="$t(item.meta.title, item.meta.i18nParams)"/>
       </v-list-item-content>

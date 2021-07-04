@@ -4,7 +4,7 @@
     :title="$t('rights.selectGroup')"
     v-resize="onResize"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <div class="pd-lr-12 form-group">
         <div class="group-item" :title="rightsCode.join(',')">
           <v-text-field
@@ -34,7 +34,7 @@
       >
       </app-table>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn depressed @click="action()">{{$t('homePage.confirm')}}</v-btn>
       <v-btn depressed @click="close()">{{$t('homePage.colse')}}</v-btn>
     </template>

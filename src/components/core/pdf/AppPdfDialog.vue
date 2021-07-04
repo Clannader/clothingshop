@@ -4,10 +4,10 @@
     :width="width"
     :title="title"
   >
-    <template slot="dialogContent">
+    <template #dialogContent>
       <app-pdf :pdf-content="pdfContent"></app-pdf>
     </template>
-    <template slot="dialogBtn">
+    <template #dialogBtn>
       <v-btn depressed @click="print()">{{$t('homePage.print')}}</v-btn>
       <v-btn depressed @click="download()">{{$t('homePage.download')}}</v-btn>
       <v-btn depressed @click="close()">{{$t('homePage.close')}}</v-btn>
