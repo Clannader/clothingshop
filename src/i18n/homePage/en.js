@@ -45,5 +45,6 @@ export default {
   inputNew2Pwd: 'Please again enter your new password',
   diffPwd: 'The two passwords are different',
   shopID: 'Shop ID',
-  invShopId: 'No permission to choose SYSTEM'
+  invShopId: 'No permission to choose SYSTEM',
+  selectAll2: 'Select All'
 }

@@ -17,6 +17,7 @@
     "core-js": "~3.6.5",
     "crypto-js": "~4.0.0",
     "file-saver": "~2.0.2",
+    "inputmask": "^3.3.11",
     "mammoth": "~1.4.13",
     "material-design-icons-iconfont": "~6.1.0",
     "moment": "~2.29.1",

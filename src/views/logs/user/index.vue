@@ -6,23 +6,43 @@
           <div class="group-item">
             <app-date-picker
               :label="$t('logs.startDate')"
-              :max="queryParams.endDate"
-              :update-value.sync="queryParams.startDate"
+              :max="endDate"
+              :update-value.sync="startDate"
               :close-on-content-click="false"
               readonly
               clearable
             ></app-date-picker>
           </div>
           <div class="group-item">
+            <app-time-picker
+              :label="$t('logs.startTime')"
+              :max="endTime"
+              :update-value.sync="startTime"
+              :close-on-content-click="false"
+              use-seconds
+            ></app-time-picker>
+          </div>
+          <div class="group-item">
             <app-date-picker
               :label="$t('logs.endDate')"
-              :min="queryParams.startDate"
-              :update-value.sync="queryParams.endDate"
+              :min="startDate"
+              :update-value.sync="endDate"
               :close-on-content-click="false"
               readonly
               clearable
             ></app-date-picker>
           </div>
+          <div class="group-item">
+            <app-time-picker
+              :label="$t('logs.endTime')"
+              :min="startTime"
+              :update-value.sync="endTime"
+              :close-on-content-click="false"
+              use-seconds
+            ></app-time-picker>
+          </div>
+        </div>
+        <div class="form-group">
           <div class="group-item">
             <app-select
               :update-value.sync="queryParams.type"
@@ -40,8 +60,6 @@
               @changeValue="doSearch">
             </app-text-field>
           </div>
-        </div>
-        <div class="form-group">
           <div class="group-item">
             <app-shop-text-field
               :shopId.sync="queryParams.shopId"
@@ -146,14 +164,16 @@
     data() {
       const query = {
         cond: undefined,
-        startDate: undefined,
-        endDate: undefined,
         type: 'ALL'
       }
       return {
         queryParams: query,
         queryParamsCopy: query,
         sortOrder: undefined,
+        startTime: undefined,
+        endTime: undefined,
+        startDate: undefined,
+        endDate: undefined,
         // pageSize: 30,
         sortField: ['date'] // 这里很尴尬,排序的时候,清除排序那次点击并不知道那一列是客户端排序还是服务器的
         // 所以这里标示一下,哪些字段是服务器排序的
@@ -161,6 +181,8 @@
     },
     methods: {
       doSearch() {
+        this.queryParams.startDate = this.startTotal
+        this.queryParams.endDate = this.endTotal
         this.loading = true
         if (!this.publicMethods.compareObjects(this.queryParamsCopy, this.queryParams)) {
           this.offset = 1
@@ -203,6 +225,17 @@
           }
           this.doSearch()
         }
+      },
+      getDatetime(date, time, isEnd) {
+        let temp
+        if (!this.publicMethods.isEmpty(date)) {
+          if (!this.publicMethods.isEmpty(time)) {
+            temp = new Date(date + ' ' + time).toISOString()
+          } else {
+            temp = new Date(date + ' ' + (isEnd ? '23:59:59' : '00:00:00')).toISOString()
+          }
+        }
+        return temp
       }
     },
     computed: {
@@ -274,7 +307,20 @@
             desc: `${this.$t('logs.userType')}`
           }]
         }
+      },
+      startTotal: {
+        get() {
+          return this.getDatetime(this.startDate, this.startTime, false)
+        }
+      },
+      endTotal: {
+        get() {
+          return this.getDatetime(this.endDate, this.endTime, true)
+        }
       }
+    },
+    watch: {
+
     }
   }
 </script>

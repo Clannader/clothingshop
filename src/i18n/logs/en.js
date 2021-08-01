@@ -24,5 +24,7 @@ export default {
   queryUserID: 'User ID',
   userType: 'User',
   logItemHeight: 'ItemHeight',
-  userLogTitle: 'User Log'
+  userLogTitle: 'User Log',
+  startTime: 'Start time',
+  endTime: 'End time'
 }

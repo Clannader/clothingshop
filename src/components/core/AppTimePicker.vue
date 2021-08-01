@@ -1,38 +1,40 @@
 <template>
   <div>
     <v-menu
-      v-model="menu"
-      v-bind="$attrs"
-      transition="scale-transition"
-      :nudge-top="20"
-      offset-y
-      max-width="290px"
-      min-width="290px"
+        v-model="menu"
+        v-bind="$attrs"
+        transition="scale-transition"
+        :nudge-top="20"
+        offset-y
+        :max-width="useSeconds && (validTime() || datePicker) ? '310px' : '290px'"
+        :min-width="useSeconds && (validTime() || datePicker) ? '310px' : '290px'"
     >
       <template #activator="{ on }">
         <v-text-field
-          v-model="dateText"
-          v-on="on"
-          v-bind="$attrs"
-          append-icon="mdi-calendar-blank"
-          :class="{'input-require':inputRequire}"
-          :readonly="readonly"
-          :clearable="clearable"
-          @click:append="menu = true"
-          @click:clear="clearDate"
-          @blur="validateDate()"
+            v-model="dateText"
+            v-on="on"
+            v-bind="$attrs"
+            append-icon="mdi-clock-time-four-outline"
+            :class="{'input-require':inputRequire}"
+            :readonly="readonly"
+            :clearable="clearable"
+            @click:append="menu = true"
+            @click:clear="clearDate"
+            @blur="validateDate()"
+            @input="timeInput"
         >
         </v-text-field>
       </template>
 
-      <v-date-picker
-        v-bind="$attrs"
-        v-model="datePicker"
-        :locale="locale"
-        @change="getReturnValue()"
-        scrollable
+      <v-time-picker
+          v-bind="$attrs"
+          v-model="datePicker"
+          :locale="locale"
+          @input="getReturnValue()"
+          scrollable
+          format="24hr"
       >
-      </v-date-picker>
+      </v-time-picker>
     </v-menu>
   </div>
 </template>
@@ -44,7 +46,7 @@
 
   export default {
     inheritAttrs: true,
-    name: 'AppDatePicker',
+    name: 'AppTimePicker',
     props: {
       // 是否必填项
       // require关键字会出现警告
@@ -68,28 +70,20 @@
         type: Boolean,
         default: false
       }
-      // 想了几天初始化赋值的办法,依然找不到什么有效的办法,只能让子组件传入初始值来初始化了
-      // 不明白为什么别人的就能初始化成功
-      // initValue: {
-      //   type: String,
-      //   default: ''
-      // }
     },
     data() {
-      // const format = 'yyyy.mm.dd'
+      const useSeconds = this.publicMethods.isEmpty(this.$attrs['use-seconds'])
+        ? (this.$attrs['use-seconds'] === '') : this.$attrs['use-seconds']
       return {
         menu: false,
         datePicker: '', // 日期选择控件
-        // format: format, // 日期格式化格式
+        useSeconds: useSeconds,
+        format: useSeconds ? 'HH:mm:ss' : 'HH:mm', // 日期格式化格式
         dateText: '', // 输入框日期显示
         maskConfig: {
           placeholder: '',
-          alias: 'yyyy-mm-dd', // 默认格式
-          inputFormat: 'yyyy-mm-dd',
-          yearrange: {
-            minyear: 1900,
-            maxyear: 3099
-          }
+          alias: useSeconds ? 'hh:mm:ss' : 'hh:mm', // 默认格式
+          inputFormat: useSeconds ? 'hh:mm:ss' : 'hh:mm'
         }
       }
     },
@@ -97,7 +91,7 @@
       updateValue: {
         handler(newVal) {
           if (!this.publicMethods.isEmpty(newVal)) {
-            this.dateText = newVal.format(this.format)
+            this.dateText = newVal
             this.datePicker = newVal
           } else {
             this.dateText = ''
@@ -108,18 +102,11 @@
       }
     },
     computed: {
-      locale: get('tagsView/language'),
-      format: get('userInfo/systemConfig@dateFormat')
-      // format: 'YYYY-MM-DD'
+      locale: get('tagsView/language')
     },
     created() {
-      // this.format = this.$store.state.userInfo.systemConfig.dateFormat
-      if (!this.publicMethods.isEmpty(this.format)) {
-        this.maskConfig.alias = this.format.replace(/M/g, 'm')
-        this.maskConfig.inputFormat = this.format.replace(/M/g, 'm')
-      }
       if (!this.publicMethods.isEmpty(this.updateValue)) {
-        this.dateText = this.updateValue.format(this.format)
+        this.dateText = this.updateValue
         this.datePicker = this.updateValue
       }
     },
@@ -140,19 +127,23 @@
           return
         }
         // 这里的日期格式和使用moment组件有差异
-        const isValid = Inputmask.isValid(this.dateText, this.maskConfig)
-        // const datePicker = this.dateText.createMoment(format).format('YYYY-MM-DD')
-        // 暂时这样校验日期吧,JS校验日期确实有点难
-        if (!isValid) {
-          this.$toast.error(this.$t('homePage.InvalidDate'))
-          this.datePicker = undefined
-          this.dateText = ''
-        } else {
-          // format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
-          const format = this.format.replace(/y/g, 'Y').replace(/d/g, 'D')
-          this.datePicker = this.dateText.createMoment(format).format('YYYY-MM-DD')
+        // TODO 新增判断区间大小,日期控件同理
+        if (!this.validTime()) {
+          this.$toast.error(this.$t('homePage.InvalidTime'))
+          // this.datePicker = this.useSeconds ? '00:00:00' : '00:00'
+          // this.dateText = this.useSeconds ? '00:00:00' : '00:00'
+          this.datePicker = this.dateText = undefined
         }
         this.getReturnValue()
+      },
+      timeInput() {
+        // TODO 新增判断区间大小
+        if (this.validTime()) {
+          this.datePicker = this.dateText
+        }
+      },
+      validTime() {
+        return Inputmask.isValid(this.dateText, this.maskConfig)
       }
     },
     mounted() {

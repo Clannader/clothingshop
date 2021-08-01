@@ -24,5 +24,7 @@ export default {
   queryUserID: '用户ID',
   userType: '用户',
   logItemHeight: '行高',
-  userLogTitle: '用户日志'
+  userLogTitle: '用户日志',
+  startTime: '开始时间',
+  endTime: '结束时间'
 }
