@@ -103,7 +103,7 @@
       >
         <template #logDate="{text}">
           <div class="text-ellipsis">
-            {{text.format('YYYY-MM-DD HH:mm:ss')}}
+            {{text.format('YYYY-MM-DD HH:mm:ss.SSS')}}
           </div>
         </template>
 
