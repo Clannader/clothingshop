@@ -15,7 +15,7 @@ module.exports = {
   // 生产环境打包不产生map文件
   productionSourceMap: false,
   devServer: {
-    port: '9800',
+    port: '9000',
     // 尝试使用反向代理解决跨域问题
     proxy: {
       // 1.按照我理解的代理设置,应该是这样的,首先baseUrl的设置必须是和启动的服务器同一个域名
@@ -24,7 +24,7 @@ module.exports = {
       // 2.使用代理的情况就是API地址不支持跨域的时候使用,dev的时候,前端还是会启一个服务器
       // 然后页面通过访问同一个域名下的地址,然后通过服务器帮你访问另一个地址,才实现代理
       '^/api/*': {
-        target: 'http://cc:3000', // 要代理的域名
+        target: 'http://cc:4000', // 要代理的域名
         changeOrigin: true,//允许跨域
         pathRewrite: {
           '^/api': '/cms/h5/api' // 其实我觉得这个就是把访问的路径某些地址进行替换而已,使用正则
