@@ -2,7 +2,7 @@
  * Create by CC on 2019/12/16
  */
 'use strict'
-
+import RightsCode from '../utils/rightsCode'
 const monitorRouter = {
   path: 'monitor',
   // name: 'Monitor',
@@ -22,7 +22,7 @@ const monitorRouter = {
       // name: 'MonitorSubMenu',
       meta: {
         title: 'menu.monitor',
-        right: '6001',
+        right: RightsCode.SystemMonitor.code,
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -33,7 +33,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.userMonitor',
         icon: 'iconfont icon-c-user-monitor',
-        right: '6002'
+        right: RightsCode.UserAccessMonitor.code
       },
       component: () => import('@/views/blank')
     },
@@ -43,7 +43,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.apiMonitor',
         icon: 'iconfont icon-c-api-monitor',
-        right: '6003'
+        right: RightsCode.InterfaceMonitor.code
       },
       component: () => import('@/views/blank')
     },
@@ -53,7 +53,7 @@ const monitorRouter = {
       meta: {
         title: 'menu.databaseMonitor',
         icon: 'iconfont icon-c-database',
-        right: '6004'
+        right: RightsCode.DBMonitor.code
       },
       component: () => import('@/views/blank')
     }

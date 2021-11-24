@@ -72,18 +72,18 @@ const RightsCode = {
     code: '3007',
     desc: '修复数据'
   },
-  Miscellaneous: {
-    code: '4000',
-    desc: '杂项设置'
-  },
-  AgileBoard: {
-    code: '4001',
-    desc: '敏捷看板'
-  },
-  PinBoard: {
-    code: '4002',
-    desc: '便利贴看板'
-  },
+  // Miscellaneous: {
+  //   code: '4000',
+  //   desc: '杂项设置'
+  // },
+  // AgileBoard: {
+  //   code: '4001',
+  //   desc: '敏捷看板'
+  // },
+  // PinBoard: {
+  //   code: '4002',
+  //   desc: '便利贴看板'
+  // },
   StatisticSetup: {
     code: '5000',
     desc: '数据统计模块'
@@ -122,7 +122,7 @@ const RightsCode = {
   },
   ChangeUserPws: {
     code: '9000',
-    desc: '能否修改用户密码'
+    desc: '能否修改其他用户的密码'
   },
   CreateIFCUser: {
     code: '9001',
@@ -146,7 +146,7 @@ const RightsCode = {
   },
   CreateSYSAny: {
     code: '9006',
-    desc: '能否新建SYSTEM店铺的数据'
+    desc: '能否新建SYSTEM的数据'
   }
 }
 

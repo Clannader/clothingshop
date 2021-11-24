@@ -22,7 +22,7 @@ const settingsRouter = {
       // name: 'SettingsSubMenu',
       meta: {
         title: 'menu.settings',
-        right: '3000',
+        right: RightsCode.OtherSetup.code,
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -33,7 +33,7 @@ const settingsRouter = {
       meta: {
         title: 'menu.supplierList',
         icon: 'iconfont icon-c-supplier',
-        right: '3001'
+        right: RightsCode.SupplierSetup.code
       },
       component: () => import('@/views/blank')
     },
@@ -43,7 +43,7 @@ const settingsRouter = {
       meta: {
         title: 'menu.shopList',
         icon: 'iconfont icon-c-shop-add',
-        right: '3002'
+        right: RightsCode.ShopSetup.code
       },
       component: () => import('@/views/blank')
     },
@@ -83,7 +83,7 @@ const settingsRouter = {
       meta: {
         title: 'menu.mailList',
         icon: 'iconfont icon-c-mail-setup',
-        right: '3006'
+        right: RightsCode.MailSetup.code
       },
       component: () => import('@/views/blank')
     },
@@ -93,7 +93,7 @@ const settingsRouter = {
       meta: {
         title: 'menu.repair',
         icon: 'iconfont icon-c-repair',
-        right: '3007'
+        right: RightsCode.RepairData.code
       },
       component: () => import('@/views/test/components/TestXlsx')
     }
