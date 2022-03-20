@@ -21,10 +21,10 @@ const staticVal = {
     code: 'en',
     desc: 'English'
   }],
-  tripleDES: {
-    key: 'ClothingShopClothingShopClothingShopClothingShopClothingShopAAAA',
-    iv: '8890880'
-  },
+  // tripleDES: {
+  //   key: 'ClothingShopClothingShopClothingShopClothingShopClothingShopAAAA',
+  //   iv: '8890880'
+  // },
   RightsCode: RightsCode
 }
 

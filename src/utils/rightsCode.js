@@ -45,44 +45,56 @@ const RightsCode = {
     desc: '其他设置'
   },
   SupplierSetup: {
-    code: '3001',
-    desc: '集团设置'
+    code: '3100',
+    desc: '集团设置' // 以后设计集团和店铺都属于同一个表,通过一个字段来区分,然后集团的信息可以应用至到对于绑定的店铺中去
   },
   ShopSetup: {
-    code: '3002',
+    code: '3200',
     desc: '店铺设置'
   },
   UserSetup: {
-    code: '3003',
+    code: '3300',
     desc: '用户设置'
   },
   RightsSetup: {
-    code: '3004',
+    code: '3400',
     desc: '权限设置'
   },
+  RightsGroupSetup: {
+    code: '3410',
+    desc: '权限组设置'
+  },
+  RightsGroupCreate: {
+    code: '3411',
+    desc: '新建权限组'
+  },
+  RightsGroupModify: {
+    code: '3412',
+    desc: '编辑权限组'
+  },
+  RightsGroupDelete: {
+    code: '3413',
+    desc: '删除权限组'
+  },
+  RightsCodeSetup: {
+    code: '3420',
+    desc: '权限代码设置' // 一般设置这个权限就是查看的权限,但是编辑新建还需要另外的权限控制
+  },
+  RightsCodeModify: {
+    code: '3421',
+    desc: '编辑权限代码'
+  },
   SystemSetup: {
-    code: '3005',
+    code: '3500',
     desc: '系统数据设置'
   },
   MailSetup: {
-    code: '3006',
+    code: '3600',
     desc: '邮件设置'
   },
   RepairData: {
-    code: '3007',
+    code: '3700',
     desc: '修复数据'
-  },
-  Miscellaneous: {
-    code: '4000',
-    desc: '杂项设置'
-  },
-  AgileBoard: {
-    code: '4001',
-    desc: '敏捷看板'
-  },
-  PinBoard: {
-    code: '4002',
-    desc: '便利贴看板'
   },
   StatisticSetup: {
     code: '5000',
@@ -122,7 +134,7 @@ const RightsCode = {
   },
   ChangeUserPws: {
     code: '9000',
-    desc: '能否修改用户密码'
+    desc: '能否修改其他用户的密码'
   },
   CreateIFCUser: {
     code: '9001',
@@ -146,7 +158,7 @@ const RightsCode = {
   },
   CreateSYSAny: {
     code: '9006',
-    desc: '能否新建SYSTEM店铺的数据'
+    desc: '能否新建SYSTEM的数据'
   }
 }
 

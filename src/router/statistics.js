@@ -2,7 +2,7 @@
  * Create by CC on 2019/12/16
  */
 'use strict'
-
+import RightsCode from '../utils/rightsCode'
 const statisticsRouter = {
   path: 'statistics',
   // name: 'Statistics',
@@ -22,7 +22,7 @@ const statisticsRouter = {
       // name: 'StatisticsSubMenu',
       meta: {
         title: 'menu.statistics',
-        right: '5001',
+        right: RightsCode.StatisticSetup.code,
         hidden: true
       },
       component: () => import('@/views/common/MenuView')
@@ -33,7 +33,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staShopOrder',
         icon: 'iconfont icon-c-shop-order',
-        right: '5002'
+        right: RightsCode.OrderStatistic.code
       },
       component: () => import('@/views/blank')
     },
@@ -43,7 +43,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staIncome',
         icon: 'iconfont icon-c-income',
-        right: '5003'
+        right: RightsCode.IncomeStatistic.code
       },
       component: () => import('@/views/blank')
     },
@@ -53,7 +53,7 @@ const statisticsRouter = {
       meta: {
         title: 'menu.staUserAccess',
         icon: 'iconfont icon-c-user-access',
-        right: '5004'
+        right: RightsCode.UserAccessStatistic.code
       },
       component: () => import('@/views/blank')
     }

@@ -139,7 +139,7 @@
   }
 
   .v-icon.v-icon{
-    font-size: 20px;
+    font-size: 24px;
   }
 
   /deep/ .v-list-item__action:last-of-type:not(:only-child){
@@ -150,7 +150,8 @@
     margin-left: 8px !important;
   }
 
-  .v-list--nav .v-list-item{
-    padding: 0 10px;
-  }
+  /*真是心烦啊,改变不了listGroup的padding,还是写死了8px,导致没办法居中图标,所以图标还是得设置成22px*/
+  /*.v-list--nav .v-list-item{*/
+  /*  padding: 0 10px;*/
+  /*}*/
 </style>

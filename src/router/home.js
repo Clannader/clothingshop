@@ -9,7 +9,7 @@ const homeRouter = {
   to: 'home',
   meta: {
     title: 'menu.home',
-    icon: 'iconfont icon-c-home'
+    icon: 'mdi-home-outline'
   },
   component: () => import('@/views/home')
 }

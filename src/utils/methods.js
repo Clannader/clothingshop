@@ -6,7 +6,6 @@
 'use strict'
 import api from './request'
 import store from '@/store'
-import CryptoJS from 'crypto-js'
 import staticVal from './globalVariable'
 import tableSort from './tableSort'
 
@@ -175,14 +174,8 @@ const methods = {
     return new Blob([u8arr], { type: type })
   },
 
-  tripleDESdecrypt(str = '') {
-    const key = CryptoJS.enc.Utf8.parse(staticVal.tripleDES.key)
-    const decryptAction = CryptoJS.TripleDES.decrypt(str, key, {
-      iv: CryptoJS.enc.Utf8.parse(staticVal.tripleDES.iv),
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7
-    })
-    return decryptAction.toString(CryptoJS.enc.Utf8)
+  async tripleDESdecrypt(str = '') {
+    return await store.dispatch('userInfo/tripleDESdecrypt', str).then(result => result)
   },
 
   compareObjects(objA, objB) {

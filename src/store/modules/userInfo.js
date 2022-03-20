@@ -7,6 +7,7 @@ import { make } from 'vuex-pathify'
 import request from '@/utils/request'
 import router, { resetRouter } from '../../router'
 import { ROOT_DISPATCH } from '@/store'
+import CryptoJS from 'crypto-js'
 
 const state = {
   roles: null, // 用户权限
@@ -27,6 +28,10 @@ const state = {
     // supplierCode: '',
     // shopName: '',
     // isFirstLogin: true
+  },
+  tripleDES: {
+    key: 'ClothingShopClothingShopClothingShopClothingShopClothingShopAAAA',
+    iv: '8890880'
   }
 }
 
@@ -47,7 +52,10 @@ const actions = {
     if (err) {
       return Promise.reject(err)
     }
-    const roles = data.roles.split(',')
+    commit('tripleDES', data.tripleDES) // 这里需要提交一遍,下面解密的方法需要用到
+    const tripleDES = await dispatch('tripleDESdecrypt', data.roles).then(result => result)
+    const base64Roles = Buffer.from(tripleDES, 'base64').toString()
+    const roles = base64Roles.split(',')
     // 这里遇到一个很奇怪的bug,如果在setSessionSchema之前去修改session
     // 则这个方法是不执行的,并且代码还不会往下执行
     // 应该说dispatch的参数进去后如果有修改,感觉就不会执行,不知道是不是这个现象
@@ -96,6 +104,15 @@ const actions = {
     commit('sessionSchema', {})
     commit('roles', '')
     resetRouter() // 重置路由,避免不刷新页面导致缓存
+  },
+  tripleDESdecrypt({ state }, str = '') {
+    const key = CryptoJS.enc.Utf8.parse(state.tripleDES.key)
+    const decryptAction = CryptoJS.TripleDES.decrypt(str, key, {
+      iv: CryptoJS.enc.Utf8.parse(state.tripleDES.iv),
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    })
+    return decryptAction.toString(CryptoJS.enc.Utf8)
   }
 }
 
