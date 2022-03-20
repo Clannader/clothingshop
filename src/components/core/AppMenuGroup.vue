@@ -92,6 +92,6 @@
   }
 
   /deep/ .v-icon.v-icon{
-    font-size: 20px;
+    font-size: 24px;
   }
 </style>

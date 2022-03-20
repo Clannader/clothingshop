@@ -9,7 +9,7 @@ const settingsRouter = {
   to: 'settings',
   meta: {
     title: 'menu.settings',
-    icon: 'iconfont icon-c-settings'
+    icon: 'mdi-cog'
   },
   redirect: {
     // name: 'SettingsSubMenu'
@@ -27,76 +27,96 @@ const settingsRouter = {
       },
       component: () => import('@/views/common/MenuView')
     },
+    // {
+    //   path: 'supplier',
+    //   // name: 'SupplierList',
+    //   meta: {
+    //     title: 'menu.supplierList',
+    //     icon: 'iconfont icon-c-supplier',
+    //     right: RightsCode.SupplierSetup.code
+    //   },
+    //   component: () => import('@/views/blank')
+    // },
+    // {
+    //   path: 'shop',
+    //   // name: 'ShopList',
+    //   meta: {
+    //     title: 'menu.shopList',
+    //     icon: 'iconfont icon-c-shop-add',
+    //     right: RightsCode.ShopSetup.code
+    //   },
+    //   component: () => import('@/views/blank')
+    // },
+    // {
+    //   path: 'user',
+    //   // name: 'UserList',
+    //   meta: {
+    //     title: 'menu.userList',
+    //     icon: 'iconfont icon-c-user-setup',
+    //     right: RightsCode.UserSetup.code
+    //   },
+    //   component: () => import('@/views/settings/users')
+    // },
     {
-      path: 'supplier',
-      // name: 'SupplierList',
-      meta: {
-        title: 'menu.supplierList',
-        icon: 'iconfont icon-c-supplier',
-        right: RightsCode.SupplierSetup.code
-      },
-      component: () => import('@/views/blank')
-    },
-    {
-      path: 'shop',
-      // name: 'ShopList',
-      meta: {
-        title: 'menu.shopList',
-        icon: 'iconfont icon-c-shop-add',
-        right: RightsCode.ShopSetup.code
-      },
-      component: () => import('@/views/blank')
-    },
-    {
-      path: 'user',
-      // name: 'UserList',
-      meta: {
-        title: 'menu.userList',
-        icon: 'iconfont icon-c-user-setup',
-        right: RightsCode.UserSetup.code
-      },
-      component: () => import('@/views/settings/users')
-    },
-    {
-      path: 'right',
+      path: 'rights',
       // name: 'RightList',
       meta: {
         title: 'menu.rightList',
-        icon: 'iconfont icon-c-right',
+        // icon: 'iconfont icon-c-right',
         right: RightsCode.RightsSetup.code
       },
-      component: () => import('@/views/settings/rights')
-    },
-    {
-      path: 'system',
-      // name: 'SystemList',
-      meta: {
-        title: 'menu.systemList',
-        icon: 'iconfont icon-c-system-setup',
-        right: RightsCode.SystemSetup.code
-      },
-      component: () => import('@/views/settings/systemConfig')
-    },
-    {
-      path: 'mail',
-      // name: 'MailList',
-      meta: {
-        title: 'menu.mailList',
-        icon: 'iconfont icon-c-mail-setup',
-        right: RightsCode.MailSetup.code
-      },
-      component: () => import('@/views/blank')
-    },
-    {
-      path: 'repair',
-      // name: 'Repair',
-      meta: {
-        title: 'menu.repair',
-        icon: 'iconfont icon-c-repair',
-        right: RightsCode.RepairData.code
-      },
-      component: () => import('@/views/test/components/TestXlsx')
+      component: () => import('@/views/settings/rights'),
+      children: [
+        {
+          path: 'group',
+          meta: {
+            title: 'menu.rightGroupList',
+            icon: 'mdi-account-lock',
+            right: RightsCode.RightsGroupSetup.code
+          },
+          component: () => import('@/views/settings/rights/rightsGroup')
+        },
+        {
+          path: 'code',
+          meta: {
+            title: 'menu.rightCodeList',
+            icon: 'mdi-shield-lock',
+            right: RightsCode.RightsCodeSetup.code
+          },
+          component: () => import('@/views/settings/rights/rightsCode')
+        }
+      ]
     }
+    // {
+    //   path: 'system',
+    //   // name: 'SystemList',
+    //   meta: {
+    //     title: 'menu.systemList',
+    //     icon: 'iconfont icon-c-system-setup',
+    //     right: RightsCode.SystemSetup.code
+    //   },
+    //   component: () => import('@/views/settings/systemConfig')
+    // },
+    // {
+    //   path: 'mail',
+    //   // name: 'MailList',
+    //   meta: {
+    //     title: 'menu.mailList',
+    //     icon: 'iconfont icon-c-mail-setup',
+    //     right: RightsCode.MailSetup.code
+    //   },
+    //   component: () => import('@/views/blank')
+    // },
+    // {
+    //   path: 'repair',
+    //   // name: 'Repair',
+    //   meta: {
+    //     title: 'menu.repair',
+    //     icon: 'iconfont icon-c-repair',
+    //     right: RightsCode.RepairData.code
+    //   },
+    //   component: () => import('@/views/test/components/TestXlsx')
+    // }
   ]
 }
 

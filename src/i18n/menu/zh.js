@@ -39,5 +39,7 @@ export default {
   pSettings: '设置',
   pOperation: '操作历史',
   pLogout: '退出账号',
-  pSettingsUser: '用户设置'
+  pSettingsUser: '用户设置',
+  rightGroupList: '权限组设置',
+  rightCodeList: '权限代码设置'
 }

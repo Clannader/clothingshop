@@ -3,14 +3,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/views/login'
 import HomePage from 'components/homePage'
-import Frontdesk from './frontdesk'
+// import Frontdesk from './frontdesk'
 import { homeRouter, phoneHomeRouter } from './home'
-import Logs from './logs'
+// import Logs from './logs'
 import { settingsRouter, phoneSettingsRouter } from './settings'
-import Statistics from './statistics'
-import Monitor from './monitor'
-import Miscellaneous from './miscellaneous'
-import FunctionTest from './funTest'
+// import Statistics from './statistics'
+// import Monitor from './monitor'
+// import Miscellaneous from './miscellaneous'
+// import FunctionTest from './funTest'
 
 import store from '@/store'
 
@@ -18,8 +18,7 @@ Vue.use(VueRouter)
 
 // 有权限的路由列表
 export const menuRoutes = [
-  homeRouter, Frontdesk, Logs, settingsRouter,
-  Statistics, Monitor, Miscellaneous, FunctionTest
+  homeRouter, settingsRouter
 ]
 
 export const phoneRoutes = [

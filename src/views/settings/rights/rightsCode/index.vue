@@ -1,15 +1,14 @@
 <template>
   <div>
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SettingsRights'
+    name: 'RightsCode'
   }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -41,7 +41,7 @@
               :placeholder="$t('login.password')"
               :type="showPassword ? 'text' : 'password'"
               prepend-inner-icon="iconfont icon-c-pws"
-              :append-icon="showPassword ?'visibility_off' : 'visibility'"
+              :append-icon="showPassword ?'visibility' : 'visibility_off'"
               name="input-10-1"
               @click:append="changeShowPassword()"
             ></v-text-field>

@@ -39,6 +39,8 @@ export default {
   pSettings: 'Settings',
   pOperation: 'Operation history',
   pLogout: 'Log out',
-  pSettingsUser: 'User settings'
+  pSettingsUser: 'User settings',
+  rightGroupList: 'Rights group',
+  rightCodeList: 'Rights code'
 }
 
