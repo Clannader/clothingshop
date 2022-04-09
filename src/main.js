@@ -15,6 +15,7 @@ import Vue from 'vue'
 import vuetify from './plugins/vuetify'
 import { registerPlugins } from './plugins'
 // 翻译资源文件
+
 import i18n from './i18n'
 import 'moment/locale/zh-cn'
 // 公共方法
