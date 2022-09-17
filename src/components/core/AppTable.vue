@@ -64,8 +64,6 @@
         showNumber: ['10', '30', '50', '100'] // 每页显示数量
       }
     },
-    create() {
-    },
     props: {
       total: {
         // type: [Object, Boolean, Function] 好像是定义2种类型的方式???

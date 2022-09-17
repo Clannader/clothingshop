@@ -86,7 +86,7 @@
         this.orgValue = v
       }
     },
-    create() {
+    created() {
     },
     mounted() {
       // 这里又发现一个顺序问题,如果是异步赋值的话,顺序如下

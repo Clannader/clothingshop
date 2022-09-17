@@ -8,6 +8,7 @@ import request from '@/utils/request'
 import router, { resetRouter } from '../../router'
 import { ROOT_DISPATCH } from '@/store'
 import CryptoJS from 'crypto-js'
+import Methods from '@/utils/methods'
 
 const state = {
   roles: null, // 用户权限
@@ -44,7 +45,7 @@ const actions = {
     const [err, data] = await request.post('/api/user/roles', {})
       .then(data => [null, data]).catch(err => [err])
     // 新增获取系统配置信息
-    const [configErr, configData] = await request.post('/api/system/config/search', {})
+    const [configErr, configData] = await request.get('/api/system/config/search')
       .then(data => [null, data]).catch(err => [err])
     if (configErr) {
       return Promise.reject(configErr)
@@ -52,7 +53,10 @@ const actions = {
     if (err) {
       return Promise.reject(err)
     }
-    commit('tripleDES', data.tripleDES) // 这里需要提交一遍,下面解密的方法需要用到
+    commit('tripleDES', {
+      iv: data.tripleIV,
+      key: Methods.getUserSession().substring(0, 64)
+    }) // 这里需要提交一遍,下面解密的方法需要用到
     const tripleDES = await dispatch('tripleDESdecrypt', data.roles).then(result => result)
     const base64Roles = Buffer.from(tripleDES, 'base64').toString()
     const roles = base64Roles.split(',')
